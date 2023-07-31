@@ -1,0 +1,195 @@
+fileFormatVersion: 2
+guid: e58e527f7e6131f44af7009e37e21181
+timeCreated: 1444208196
+licenseType: Store
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: BODY
+    100002: diving_rudder_L
+    100004: diving_rudder_L1
+    100006: effect_1
+    100008: //RootNode
+    100010: Gun
+    100012: horizontal_rudder_L
+    100014: horizontal_rudder_R
+    100016: Screw_L
+    100018: Screw_R
+    100020: Torpedo_Hatch_BL_1
+    100022: Torpedo_Hatch_BL_2
+    100024: Torpedo_Hatch_BR_1
+    100026: Torpedo_Hatch_BR_2
+    100028: Torpedo_Hatch_FL_1
+    100030: Torpedo_Hatch_FL_2
+    100032: Torpedo_Hatch_FL_3
+    100034: Torpedo_Hatch_FR_1
+    100036: Torpedo_Hatch_FR_2
+    100038: Torpedo_Hatch_FR_3
+    100040: Vertical_Rudder
+    100042: diving_rudder_R
+    100044: Gun_effect01
+    100046: Torpedo_B_effect01
+    100048: Torpedo_B_effect02
+    100050: Torpedo_B_effect03
+    100052: Torpedo_B_effect04
+    100054: Torpedo_F_effect01
+    100056: Torpedo_F_effect02
+    100058: Torpedo_F_effect03
+    100060: Torpedo_F_effect04
+    100062: Torpedo_F_effect05
+    100064: Torpedo_F_effect06
+    400000: BODY
+    400002: diving_rudder_L
+    400004: diving_rudder_L1
+    400006: effect_1
+    400008: //RootNode
+    400010: Gun
+    400012: horizontal_rudder_L
+    400014: horizontal_rudder_R
+    400016: Screw_L
+    400018: Screw_R
+    400020: Torpedo_Hatch_BL_1
+    400022: Torpedo_Hatch_BL_2
+    400024: Torpedo_Hatch_BR_1
+    400026: Torpedo_Hatch_BR_2
+    400028: Torpedo_Hatch_FL_1
+    400030: Torpedo_Hatch_FL_2
+    400032: Torpedo_Hatch_FL_3
+    400034: Torpedo_Hatch_FR_1
+    400036: Torpedo_Hatch_FR_2
+    400038: Torpedo_Hatch_FR_3
+    400040: Vertical_Rudder
+    400042: diving_rudder_R
+    400044: Gun_effect01
+    400046: Torpedo_B_effect01
+    400048: Torpedo_B_effect02
+    400050: Torpedo_B_effect03
+    400052: Torpedo_B_effect04
+    400054: Torpedo_F_effect01
+    400056: Torpedo_F_effect02
+    400058: Torpedo_F_effect03
+    400060: Torpedo_F_effect04
+    400062: Torpedo_F_effect05
+    400064: Torpedo_F_effect06
+    2300000: BODY
+    2300002: diving_rudder_L
+    2300004: diving_rudder_L1
+    2300006: Gun
+    2300008: horizontal_rudder_L
+    2300010: horizontal_rudder_R
+    2300012: Screw_L
+    2300014: Screw_R
+    2300016: Torpedo_Hatch_BL_1
+    2300018: Torpedo_Hatch_BL_2
+    2300020: Torpedo_Hatch_BR_1
+    2300022: Torpedo_Hatch_BR_2
+    2300024: Torpedo_Hatch_FL_1
+    2300026: Torpedo_Hatch_FL_2
+    2300028: Torpedo_Hatch_FL_3
+    2300030: Torpedo_Hatch_FR_1
+    2300032: Torpedo_Hatch_FR_2
+    2300034: Torpedo_Hatch_FR_3
+    2300036: Vertical_Rudder
+    2300038: diving_rudder_R
+    3300000: BODY
+    3300002: diving_rudder_L
+    3300004: diving_rudder_L1
+    3300006: Gun
+    3300008: horizontal_rudder_L
+    3300010: horizontal_rudder_R
+    3300012: Screw_L
+    3300014: Screw_R
+    3300016: Torpedo_Hatch_BL_1
+    3300018: Torpedo_Hatch_BL_2
+    3300020: Torpedo_Hatch_BR_1
+    3300022: Torpedo_Hatch_BR_2
+    3300024: Torpedo_Hatch_FL_1
+    3300026: Torpedo_Hatch_FL_2
+    3300028: Torpedo_Hatch_FL_3
+    3300030: Torpedo_Hatch_FR_1
+    3300032: Torpedo_Hatch_FR_2
+    3300034: Torpedo_Hatch_FR_3
+    3300036: Vertical_Rudder
+    3300038: diving_rudder_R
+    4300000: BODY
+    4300002: diving_rudder_L1
+    4300004: diving_rudder_L
+    4300006: Gun
+    4300008: horizontal_rudder_R
+    4300010: Screw_L
+    4300012: Screw_R
+    4300014: horizontal_rudder_L
+    4300016: Vertical_Rudder
+    4300018: Torpedo_Hatch_BL_2
+    4300020: Torpedo_Hatch_BR_1
+    4300022: Torpedo_Hatch_FL_3
+    4300024: Torpedo_Hatch_FR_2
+    4300026: Torpedo_Hatch_FR_3
+    4300028: Torpedo_Hatch_FL_2
+    4300030: Torpedo_Hatch_FL_1
+    4300032: Torpedo_Hatch_BR_2
+    4300034: Torpedo_Hatch_BL_1
+    4300036: Torpedo_Hatch_FR_1
+    4300038: diving_rudder_R
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
