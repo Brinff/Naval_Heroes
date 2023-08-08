@@ -24,8 +24,8 @@ public partial struct MergeGridPositionSystem : ISystemUpdate
 
         foreach (var (mergeGrid, mergeGridTransform, mergeGridEntity) in SystemAPI.Query<RefRO<MergeGrid>, GridTransformAspect>().WithEntityAccess())
         {
-            var gridNewPositionRects = SystemAPI.GetBuffer<GridRect>(mergeGrid.ValueRO.gridNewPosition);
-            gridNewPositionRects.Clear();
+            //var gridNewPositionRects = SystemAPI.GetBuffer<GridRect>(mergeGrid.ValueRO.gridNewPosition);
+            //gridNewPositionRects.Clear();
 
             foreach (var (mergeDragPointer, dragGridTrnasform, dragGridEntity) in SystemAPI.Query<RefRO<MergeDragPointer>, GridTransformAspect>().WithEntityAccess())
             {
@@ -49,7 +49,7 @@ public partial struct MergeGridPositionSystem : ISystemUpdate
                                 var projectRect = dragGridRects[i].GetClampRect(mergeGridRects[j]).GetRoundedRect();
                                 position = projectRect.position;
                                 isAnyOverlap = true;
-                                gridNewPositionRects.Add(projectRect);
+                                //gridNewPositionRects.Add(projectRect);
                             }
                         }    
                     }

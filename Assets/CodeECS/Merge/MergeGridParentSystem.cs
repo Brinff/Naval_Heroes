@@ -10,8 +10,8 @@ public partial struct MergeGridParentSystem : ISystemUpdate
     {
         foreach (var (mergeGrid, mergeGridTransform, mergeGridEntity) in SystemAPI.Query<RefRO<MergeGrid>, GridTransformAspect>().WithEntityAccess())
         {
-            var currentRects = SystemAPI.GetBuffer<GridRect>(mergeGrid.ValueRO.gridCurentPosition);
-            currentRects.Clear();
+            //var currentRects = SystemAPI.GetBuffer<GridRect>(mergeGrid.ValueRO.gridCurentPosition);
+            //currentRects.Clear();
 
             float4x4 projectMatrix = mergeGridTransform.GetGridWorldToLocal();
 
@@ -30,7 +30,7 @@ public partial struct MergeGridParentSystem : ISystemUpdate
 
                     for (int i = 0; i < projectRects.Length; i++)
                     {
-                        currentRects.Add(projectRects[i]);
+                        //currentRects.Add(projectRects[i]);
                     }
                 }
             }

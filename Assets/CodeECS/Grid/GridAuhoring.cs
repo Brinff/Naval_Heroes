@@ -33,18 +33,39 @@ public class GridBaker : Baker<GridAuhoring>
     public override void Bake(GridAuhoring authoring)
     {
         var entity = GetEntity(TransformUsageFlags.Dynamic);
+        AddComponents(authoring, entity, this, true);
+        //AddComponent(entity, new GridScale() { value = authoring.scale });
+        //AddComponent(entity, new GridCenter() { value = authoring.center });
 
-        AddComponent(entity, new GridScale() { value = authoring.scale });
-        AddComponent(entity, new GridCenter() { value = authoring.center });
+        //var gridBuffer = AddBuffer<GridRect>(entity);
+        //foreach (var item in authoring.rects)
+        //{
+        //    gridBuffer.Add(new GridRect() { position = new int2(item.position.x, item.position.y), size = new int2(item.size.x, item.size.y) });
+        //}
 
-        var gridBuffer = AddBuffer<GridRect>(entity);
-        foreach (var item in authoring.rects)
+        //quaternion rotation = quaternion.RotateX(math.radians(90));
+        //float4x4 gridMatrix = float4x4.TRS(math.rotate(rotation, new float3(authoring.center, 0)), rotation, new float3(authoring.scale, 0));
+        //AddComponent(entity, new GridMatrix() { value = gridMatrix });
+    }
+
+    public static void AddComponents(GridAuhoring authoring, Entity entity, IBaker baker, bool isAddRects)
+    {
+        baker.AddComponent(entity, new GridScale() { value = authoring.scale });
+        baker.AddComponent(entity, new GridCenter() { value = authoring.center });
+
+
+        var gridBuffer = baker.AddBuffer<GridRect>(entity);
+        if (isAddRects)
         {
-            gridBuffer.Add(new GridRect() { position = new int2(item.position.x, item.position.y), size = new int2(item.size.x, item.size.y) });
+            foreach (var item in authoring.rects)
+            {
+                gridBuffer.Add(new GridRect() { position = new int2(item.position.x, item.position.y), size = new int2(item.size.x, item.size.y) });
+            }
         }
-       
+
+
         quaternion rotation = quaternion.RotateX(math.radians(90));
         float4x4 gridMatrix = float4x4.TRS(math.rotate(rotation, new float3(authoring.center, 0)), rotation, new float3(authoring.scale, 0));
-        AddComponent(entity, new GridMatrix() { value = gridMatrix });
+        baker.AddComponent(entity, new GridMatrix() { value = gridMatrix });
     }
 }
