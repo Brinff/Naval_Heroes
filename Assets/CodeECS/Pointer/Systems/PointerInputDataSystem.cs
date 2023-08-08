@@ -1,0 +1,138 @@
+
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Mathematics;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+[UpdateInGroup(typeof(PointerGroup), OrderFirst = true)]
+public partial class PointerInputDataSystem : SystemBase
+{
+    protected override void OnStartRunning()
+    {
+        PointerInputHandler.OnDown += OnPointerDown;
+        PointerInputHandler.OnUp += OnPointerUp;
+    }
+
+    protected override void OnStopRunning()
+    {
+        PointerInputHandler.OnDown -= OnPointerDown;
+        PointerInputHandler.OnUp -= OnPointerUp;
+    }
+
+    private EntityQuery entityPointerDataQuery;
+    //private EntityQuery entityPointerDownQuery;
+    //private EntityQuery entityPointerUpQuery;
+
+    private BeginSimulationEntityCommandBufferSystem beginSimulationEntity;
+    private EndSimulationEntityCommandBufferSystem endSimulationEntity;
+
+    protected override void OnCreate()
+    {
+        beginSimulationEntity = World.GetOrCreateSystemManaged<BeginSimulationEntityCommandBufferSystem>();
+        endSimulationEntity = World.GetOrCreateSystemManaged<EndSimulationEntityCommandBufferSystem>();
+        entityPointerDataQuery = new EntityQueryBuilder(Allocator.Persistent).WithAll<PointerId>().Build(this);
+        //entityPointerDownQuery = new EntityQueryBuilder(Allocator.Persistent).WithAll<PointerDownEvent>().Build(this);
+        //entityPointerUpQuery = new EntityQueryBuilder(Allocator.Persistent).WithAll<PointerUpEvent>().Build(this);
+    }
+
+
+    private Entity GetOrCreatePointer(EntityCommandBuffer entityCommandBuffer, PointerEventData eventData)
+    {
+        var ids = entityPointerDataQuery.ToComponentDataArray<PointerId>(Allocator.Temp);
+        var entities = entityPointerDataQuery.ToEntityArray(Allocator.Temp);
+        for (int i = 0; i < ids.Length; i++)
+        {
+            if (ids[i].value == PointerHelper.GetPointerFromId(eventData.pointerId))
+            {
+                var pointerData = EntityManager.GetComponentObject<PointerData>(entities[i]);
+                pointerData.value = eventData;
+                return entities[i];
+            }
+        }
+        return CreatePointer(entityCommandBuffer, eventData);
+    }
+
+    
+
+    private Entity CreatePointer(EntityCommandBuffer entityCommandBuffer, PointerEventData eventData)
+    {
+        var entity = entityCommandBuffer.CreateEntity();
+        var id = PointerHelper.GetPointerFromId(eventData.pointerId);
+        entityCommandBuffer.SetName(entity, $"[Pointer Id {id}]");
+        entityCommandBuffer.AddComponent(entity, new PointerId() { value = id });
+        entityCommandBuffer.AddComponent(entity, new PointerData() { value = eventData });
+        entityCommandBuffer.AddComponent<PointerPosition>(entity);
+        entityCommandBuffer.AddComponent<PointerDelta>(entity);
+        entityCommandBuffer.AddComponent<PointerPressEntity>(entity);
+        entityCommandBuffer.AddComponent<PointerDragEntity>(entity);
+        entityCommandBuffer.AddComponent<PointerRay>(entity);
+        entityCommandBuffer.AddComponent<PointerFirstHoveredEntity>(entity);
+        entityCommandBuffer.AddBuffer<PointerHoveredEntity>(entity);
+        entityCommandBuffer.AddComponent<PointerDownEvent>(entity);
+        entityCommandBuffer.SetComponentEnabled<PointerDownEvent>(entity, false);
+        entityCommandBuffer.AddComponent<PointerUpEvent>(entity);
+        entityCommandBuffer.SetComponentEnabled<PointerUpEvent>(entity, false);
+        return entity;
+    }
+
+    private void OnPointerDown(PointerEventData eventData)
+    {
+        var beginEcb = beginSimulationEntity.CreateCommandBuffer();
+        var entity = GetOrCreatePointer(beginEcb, eventData);
+        beginEcb.SetComponentEnabled<PointerDownEvent>(entity, true);
+    }
+
+    private void OnPointerUp(PointerEventData eventData)
+    {
+        var beginEcb = beginSimulationEntity.CreateCommandBuffer();
+        var entity = GetOrCreatePointer(beginEcb, eventData);
+        beginEcb.SetComponentEnabled<PointerUpEvent>(entity, true);
+    }
+
+    protected override void OnUpdate()
+    {
+
+        var endEcb = endSimulationEntity.CreateCommandBuffer();
+
+        foreach(var (downEvent, entity) in SystemAPI.Query<PointerDownEvent>().WithEntityAccess())
+        {
+            endEcb.SetComponent(entity, new PointerDownEvent());
+            endEcb.SetComponentEnabled<PointerDownEvent>(entity, false);
+        }
+
+        foreach (var (upEvent, entity) in SystemAPI.Query<PointerUpEvent>().WithEntityAccess())
+        {
+            endEcb.SetComponent(entity, new PointerUpEvent());
+            endEcb.SetComponentEnabled<PointerUpEvent>(entity, false);
+        }
+
+        foreach (var (clickEvent, entity) in SystemAPI.Query<PointerClickEvent>().WithEntityAccess())
+        {
+            endEcb.SetComponent(entity, new PointerClickEvent());
+            endEcb.SetComponentEnabled<PointerClickEvent>(entity, false);
+        }
+
+        //using (var entities = entityPointerDownQuery.ToEntityArray(Allocator.Temp))
+        //{
+        //    foreach (var entity in entities)
+        //    {
+        //        endEcb.SetComponentEnabled<PointerDownEvent>(entity, false);
+        //    }
+        //}
+
+        //using (var entities = entityPointerUpQuery.ToEntityArray(Allocator.Temp))
+        //{
+        //    foreach (var entity in entities)
+        //    {
+        //        endEcb.SetComponentEnabled<PointerUpEvent>(entity, false);
+        //    }
+        //}
+
+        Camera camera = Camera.main;
+        foreach (var (dataAspect, data) in SystemAPI.Query<PointerDataAspect, PointerData>())
+        {
+            dataAspect.UpdateData(data.value, camera);
+        }
+    }
+}
