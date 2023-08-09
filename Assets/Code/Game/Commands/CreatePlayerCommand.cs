@@ -9,8 +9,8 @@ public class CreatePlayerCommand : MonoBehaviour, ICommand
     private EntityData entityData;
     public void Execute(EcsWorld world, IEcsSystems systems)
     {
-        var instance = Instantiate(entityData.prefab);
-        var entity = world.Bake(instance);
-        world.GetPool<PlayerTag>().Add(entity);
+        //var instance = Instantiate(entityData.prefab);
+        //var entity = world.Bake(instance);
+        //world.GetPool<PlayerTag>().Add(entity);
     }
 }

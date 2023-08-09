@@ -2,7 +2,7 @@
 using Unity.Burst;
 using Unity.Entities;
 
-[UpdateInGroup(typeof(PointerGroup)), UpdateAfter(typeof(PointerDownUpEventSystem))]
+[UpdateInGroup(typeof(PointerGroup)), UpdateAfter(typeof(PointerPressEventSystem))]
 [BurstCompile]
 public partial struct PointerClickEventSystem : ISystemUpdate
 {

@@ -1,13 +1,62 @@
-using System.Collections;
-using System.Collections.Generic;
+using Game.Pointer.Data;
+using Game.Pointer.Events;
 using Unity.Entities;
 using UnityEngine;
-using UnityEngine.UIElements;
 
+[DisableAutoCreation]
 public partial struct PointerTestSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
     {
+        foreach (var (pointerEvent, entity) in SystemAPI.Query<RefRO<PointerBeginDragEvent>>().WithAll<PointerHandlerTag>().WithEntityAccess())
+        {
+            Debug.Log($"Begin drag entity: {state.EntityManager.GetName(entity)}");
+            foreach (var (pointerId, pointerDragEntity) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerDragEntity>>())
+            {
+                if (PointerHelper.HasFlag(pointerEvent.ValueRO.value, pointerId.ValueRO.value))
+                {
+                    Debug.Log($"Drag data: {state.EntityManager.GetName(pointerDragEntity.ValueRO.value)}");
+                }
+            }
+        }
+
+
+        foreach (var (pointerEvent, entity) in SystemAPI.Query<RefRO<PointerUpdateDragEvent>>().WithAll<PointerHandlerTag>().WithEntityAccess())
+        {
+            Debug.Log($"Update drag on entity: {state.EntityManager.GetName(entity)}");
+            foreach (var (pointerId, pointerDragEntity) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerDragEntity>>())
+            {
+                if (PointerHelper.HasFlag(pointerEvent.ValueRO.value, pointerId.ValueRO.value))
+                {
+                    Debug.Log($"Drop data: {state.EntityManager.GetName(pointerDragEntity.ValueRO.value)}");
+                }
+            }
+        }
+
+        foreach (var (pointerEvent, entity) in SystemAPI.Query<RefRO<PointerEndDragEvent>>().WithAll<PointerHandlerTag>().WithEntityAccess())
+        {
+            Debug.Log($"End drag entity: {state.EntityManager.GetName(entity)}");
+            foreach (var (pointerId, pointerDragEntity) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerDragEntity>>())
+            {
+                if (PointerHelper.HasFlag(pointerEvent.ValueRO.value, pointerId.ValueRO.value))
+                {
+                    Debug.Log($"Drag data: {state.EntityManager.GetName(pointerDragEntity.ValueRO.value)}");
+                }
+            }
+        }
+
+        foreach (var (pointerEvent, entity) in SystemAPI.Query<RefRO<PointerDropEvent>>().WithAll<PointerHandlerTag>().WithEntityAccess())
+        {
+            Debug.Log($"Drop on entity: {state.EntityManager.GetName(entity)}");
+            foreach (var (pointerId, pointerDropEntity) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerDropEntity>>())
+            {
+                if (PointerHelper.HasFlag(pointerEvent.ValueRO.value, pointerId.ValueRO.value))
+                {
+                    Debug.Log($"Drop data: {state.EntityManager.GetName(pointerDropEntity.ValueRO.value)}");
+                }
+            }
+        }
+
         //foreach (var (pointerEvent, entity) in SystemAPI.Query<RefRO<PointerDownEvent>>().WithAll<PointerHandlerTag>().WithEntityAccess())
         //{
         //    //Debug.Log($"Down on entity: {state.EntityManager.GetName(entity)}");

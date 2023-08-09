@@ -1,110 +1,246 @@
 fileFormatVersion: 2
 guid: ab1340a9c28c42e4eae4ca2713dcc845
-timeCreated: 1433740077
-licenseType: Store
 ModelImporter:
-  serializedVersion: 18
-  fileIDToRecycleName:
-    100000: alpha_parts
-    100002: alpha_parts_2
-    100004: Body
-    100006: Body 1
-    100008: F4F_root
-    100010: pera
-    100012: rudder
-    100014: //RootNode
-    100016: sangamon_root
-    100018: screw_L
-    100020: screw_R
-    400000: alpha_parts
-    400002: alpha_parts_2
-    400004: Body
-    400006: Body 1
-    400008: F4F_root
-    400010: pera
-    400012: rudder
-    400014: //RootNode
-    400016: sangamon_root
-    400018: screw_L
-    400020: screw_R
-    2300000: alpha_parts
-    2300002: alpha_parts_2
-    2300004: Body
-    2300006: Body 1
-    2300008: pera
-    2300010: rudder
-    2300012: screw_L
-    2300014: screw_R
-    3300000: alpha_parts
-    3300002: alpha_parts_2
-    3300004: Body
-    3300006: Body 1
-    3300008: pera
-    3300010: rudder
-    3300012: screw_L
-    3300014: screw_R
-    4300000: screw_L
-    4300002: screw_R
-    4300004: Body
-    4300006: alpha_parts
-    4300008: alpha_parts_2
-    4300010: rudder
-    4300012: pera
-    4300014: Body
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: alpha_parts
+  - first:
+      1: 100002
+    second: alpha_parts_2
+  - first:
+      1: 100004
+    second: Body
+  - first:
+      1: 100006
+    second: Body 1
+  - first:
+      1: 100008
+    second: F4F_root
+  - first:
+      1: 100010
+    second: pera
+  - first:
+      1: 100012
+    second: rudder
+  - first:
+      1: 100014
+    second: //RootNode
+  - first:
+      1: 100016
+    second: sangamon_root
+  - first:
+      1: 100018
+    second: screw_L
+  - first:
+      1: 100020
+    second: screw_R
+  - first:
+      4: 400000
+    second: alpha_parts
+  - first:
+      4: 400002
+    second: alpha_parts_2
+  - first:
+      4: 400004
+    second: Body
+  - first:
+      4: 400006
+    second: Body 1
+  - first:
+      4: 400008
+    second: F4F_root
+  - first:
+      4: 400010
+    second: pera
+  - first:
+      4: 400012
+    second: rudder
+  - first:
+      4: 400014
+    second: //RootNode
+  - first:
+      4: 400016
+    second: sangamon_root
+  - first:
+      4: 400018
+    second: screw_L
+  - first:
+      4: 400020
+    second: screw_R
+  - first:
+      23: 2300000
+    second: alpha_parts
+  - first:
+      23: 2300002
+    second: alpha_parts_2
+  - first:
+      23: 2300004
+    second: Body
+  - first:
+      23: 2300006
+    second: Body 1
+  - first:
+      23: 2300008
+    second: pera
+  - first:
+      23: 2300010
+    second: rudder
+  - first:
+      23: 2300012
+    second: screw_L
+  - first:
+      23: 2300014
+    second: screw_R
+  - first:
+      33: 3300000
+    second: alpha_parts
+  - first:
+      33: 3300002
+    second: alpha_parts_2
+  - first:
+      33: 3300004
+    second: Body
+  - first:
+      33: 3300006
+    second: Body 1
+  - first:
+      33: 3300008
+    second: pera
+  - first:
+      33: 3300010
+    second: rudder
+  - first:
+      33: 3300012
+    second: screw_L
+  - first:
+      33: 3300014
+    second: screw_R
+  - first:
+      43: 4300000
+    second: screw_L
+  - first:
+      43: 4300002
+    second: screw_R
+  - first:
+      43: 4300004
+    second: Body
+  - first:
+      43: 4300006
+    second: alpha_parts
+  - first:
+      43: 4300008
+    second: alpha_parts_2
+  - first:
+      43: 4300010
+    second: rudder
+  - first:
+      43: 4300012
+    second: pera
+  - first:
+      43: 4300014
+    second: Body
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
-    animationRotationError: .5
-    animationPositionError: .5
-    animationScaleError: .5
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
-  importAnimation: 1
-  copyAvatar: 0
+    tangentImportMode: 4
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
   humanDescription:
+    serializedVersion: 3
     human: []
     skeleton: []
-    armTwist: .5
-    foreArmTwist: .5
-    upperLegTwist: .5
-    legTwist: .5
-    armStretch: .0500000007
-    legStretch: .0500000007
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

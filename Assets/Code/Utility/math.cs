@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace Unity.Mathematics
@@ -28,8 +29,48 @@ namespace Unity.Mathematics
         }
     }
 
+    public static partial class mathExtention
+    {
+        public static bool approximately(float a, float b)
+        {
+            return math.abs(b - a) < math.max(1E-06f * math.max(math.abs(a), math.abs(b)), math.EPSILON * 8f);
+        }
+    }
+
     public class geometry
     {
+        public static float3 getRayPoint(float3 orgin, float3 direction, float distance)
+        {
+            return orgin + direction * distance;
+        }
+
+        public static float planeDistance(float3 planePosition, float3 planeNormal)
+        {
+            planeNormal = math.normalize(planeNormal);
+            return 0f - math.dot(planeNormal, planePosition);
+        }
+
+        public static bool raycastOnPlane(float3 rOrgin, float3 rDirection, float3 pPosition, float3 pNormal, out float distance)
+        {
+            return raycastOnPlane(rOrgin, rDirection, pNormal, planeDistance(pPosition, pNormal), out distance);
+        }
+
+        public static bool raycastOnPlane(float3 rOrgin, float3 rDirection, float3 pNormal, float pDistance, out float distance)
+        {
+            float num = math.dot(rDirection, pNormal);
+            float num2 = 0f - math.dot(rOrgin, pNormal) - pDistance;
+
+            if (mathExtention.approximately(num, 0f))
+            {
+                distance = 0;
+                return false;
+            }
+
+            distance = num2 / num;
+
+            return distance > 0f;
+        }
+
         public static float2 projectPointAtLine(float2 point, float2 p0, float2 p1)
         {
             float2 relativePoint = point - p0;

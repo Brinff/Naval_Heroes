@@ -26,24 +26,24 @@ public class ScriptBehaviour : MonoBehaviour
         int index = 0;
         foreach (var item in spawnPointOthers)
         {
-            var instance = Instantiate(item.entityData.prefab, item.transform.position, item.transform.rotation);
-            instance.name = $"{item.entityData.prefab.name} {index}";
-            var entity = world.Bake(instance);
-            world.GetPool<AITag>().Add(entity);
-            ref var team = ref world.GetPool<TeamComponent>().Get(entity);
-            world.GetPool<AITargetComponent>().Add(entity);
-            world.GetPool<AIMoveToTargetComponent>().Add(entity);
-            world.GetPool<NewEntityTag>().Add(entity);
+            //var instance = Instantiate(item.entityData.prefab, item.transform.position, item.transform.rotation);
+            //instance.name = $"{item.entityData.prefab.name} {index}";
+            //var entity = world.Bake(instance);
+            //world.GetPool<AITag>().Add(entity);
+            //ref var team = ref world.GetPool<TeamComponent>().Get(entity);
+            //world.GetPool<AITargetComponent>().Add(entity);
+            //world.GetPool<AIMoveToTargetComponent>().Add(entity);
+            //world.GetPool<NewEntityTag>().Add(entity);
 
-            IEntityAuthoring[] entityAuthorings = item.GetComponents<IEntityAuthoring>();
-            foreach (var entityAuthoring in entityAuthorings)
-            {
-                entityAuthoring.Bake(entity, world);
-            }
+            //IEntityAuthoring[] entityAuthorings = item.GetComponents<IEntityAuthoring>();
+            //foreach (var entityAuthoring in entityAuthorings)
+            //{
+            //    entityAuthoring.Bake(entity, world);
+            //}
 
-            index++;
+            //index++;
 
-            team.id = item.team;
+            //team.id = item.team;
         }
     }
 

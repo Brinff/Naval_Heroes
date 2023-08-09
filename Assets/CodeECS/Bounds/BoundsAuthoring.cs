@@ -21,6 +21,5 @@ public class BoundsBaker : Baker<BoundsAuthoring>
     {
         var entity = GetEntity(TransformUsageFlags.Dynamic);
         AddComponent(entity, new LocalBounds() { min = authoring.bounds.min, max = authoring.bounds.max });
-        AddComponent(entity, new WorldBounds() { min = authoring.transform.TransformPoint(authoring.bounds.min), max = authoring.transform.TransformPoint(authoring.bounds.max) });
     }
 }

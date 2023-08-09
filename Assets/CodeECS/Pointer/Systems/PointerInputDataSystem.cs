@@ -1,4 +1,5 @@
 
+using Game.Pointer.Data;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -66,6 +67,7 @@ public partial class PointerInputDataSystem : SystemBase
         entityCommandBuffer.AddComponent<PointerDelta>(entity);
         entityCommandBuffer.AddComponent<PointerPressEntity>(entity);
         entityCommandBuffer.AddComponent<PointerDragEntity>(entity);
+        entityCommandBuffer.AddComponent<PointerDropEntity>(entity);
         entityCommandBuffer.AddComponent<PointerRay>(entity);
         entityCommandBuffer.AddComponent<PointerFirstHoveredEntity>(entity);
         entityCommandBuffer.AddBuffer<PointerHoveredEntity>(entity);
@@ -111,6 +113,24 @@ public partial class PointerInputDataSystem : SystemBase
         {
             endEcb.SetComponent(entity, new PointerClickEvent());
             endEcb.SetComponentEnabled<PointerClickEvent>(entity, false);
+        }
+
+        foreach (var (dragEvent, entity) in SystemAPI.Query<PointerBeginDragEvent>().WithEntityAccess())
+        {
+            endEcb.SetComponent(entity, new PointerBeginDragEvent());
+            endEcb.SetComponentEnabled<PointerBeginDragEvent>(entity, false);
+        }
+
+        foreach (var (endDragEvent, entity) in SystemAPI.Query<PointerEndDragEvent>().WithEntityAccess())
+        {
+            endEcb.SetComponent(entity, new PointerEndDragEvent());
+            endEcb.SetComponentEnabled<PointerEndDragEvent>(entity, false);
+        }
+
+        foreach (var (dropEvent, entity) in SystemAPI.Query<PointerDropEvent>().WithEntityAccess())
+        {
+            endEcb.SetComponent(entity, new PointerDropEvent());
+            endEcb.SetComponentEnabled<PointerDropEvent>(entity, false);
         }
 
         //using (var entities = entityPointerDownQuery.ToEntityArray(Allocator.Temp))
