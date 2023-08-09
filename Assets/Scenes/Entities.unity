@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 182629141}
   - component: {fileID: 182629136}
   m_Layer: 0
-  m_Name: MergeGrid
+  m_Name: Battle Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

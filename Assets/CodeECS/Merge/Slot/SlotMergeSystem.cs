@@ -12,7 +12,7 @@ using Game.Merge.Groups;
 
 using Game.Data.Systems;
 using Game.Data.Components;
-
+using Game.Merge.Events;
 
 namespace Game.Merge.Systems
 {
@@ -45,14 +45,16 @@ namespace Game.Merge.Systems
                                     if(mergeData.TryResult(aId.value, bId.value, out int resultId))
                                     {
                                         var database = SystemAPI.GetSingleton<EntityDatabaseSystem.Singleton>();
-                                        var endEcb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
+                                        //var endEcb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
 
-                                        endEcb.DestroyEntity(slotEntity.ValueRO.value);
-                                        endEcb.DestroyEntity(dragSlotEntity.ValueRO.value);
+                                        beginEcb.AddComponent(entity, new MergeApplyEvent() { a = slotEntity.ValueRO.value, b = dragSlotEntity.ValueRO.value, result = database.GetEntity(resultId) });
 
-                                        var newEntity = beginEcb.Instantiate(database.GetEntity(resultId));
-                                        beginEcb.AddComponent(newEntity, new SlotEntityPosition() { value = slotLocalTransform.ValueRO.Position });
-                                        beginEcb.SetComponent(entity, new SlotEntity() { value = newEntity });
+                                        //endEcb.DestroyEntity(slotEntity.ValueRO.value);
+                                        //endEcb.DestroyEntity(dragSlotEntity.ValueRO.value);
+
+                                        //var newEntity = beginEcb.Instantiate(database.GetEntity(resultId));
+                                        //beginEcb.AddComponent(newEntity, new SlotEntityPosition() { value = slotLocalTransform.ValueRO.Position });
+                                        //beginEcb.SetComponent(entity, new SlotEntity() { value = newEntity });
 
                                         dragSlotEntity.ValueRW.value = Entity.Null;
                                         //Debug.Log("Has Result");
