@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
-public partial struct BoundsSystem : ISystemUpdate
+[BurstCompile]
+public partial struct BoundsSystem : ISystem
 {
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         var beginECB = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);

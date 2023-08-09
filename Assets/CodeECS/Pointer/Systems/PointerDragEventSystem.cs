@@ -6,7 +6,7 @@ using Unity.Entities;
 
 [UpdateInGroup(typeof(PointerGroup)), UpdateAfter(typeof(PointerDropEventSystem))]
 [BurstCompile]
-public partial struct PointerDragEventSystem : ISystemUpdate
+public partial struct PointerDragEventSystem : ISystem
 {
     [BurstCompile]
     public void OnUpdate(ref SystemState state)

@@ -5,7 +5,7 @@ using Unity.Mathematics;
 
 [UpdateInGroup(typeof(PointerRaycastGroup))]
 [BurstCompile]
-public partial struct PointerRaycastBoundsSystem : ISystemUpdate
+public partial struct PointerRaycastBoundsSystem : ISystem
 {
     [BurstCompile]
     public void OnUpdate(ref SystemState state)

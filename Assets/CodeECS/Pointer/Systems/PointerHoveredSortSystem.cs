@@ -4,7 +4,7 @@ using Unity.Entities;
 
 [UpdateInGroup(typeof(PointerGroup)), UpdateAfter(typeof(PointerRaycastGroup))]
 [BurstCompile]
-public partial struct PointerHoveredSortSystem : ISystemUpdate
+public partial struct PointerHoveredSortSystem : ISystem
 {
     [BurstCompile]
     public void OnUpdate(ref SystemState state)

@@ -3,7 +3,7 @@ using Unity.Entities;
 
 [UpdateInGroup(typeof(PointerGroup)), UpdateAfter(typeof(PointerHoveredSortSystem))]
 [BurstCompile]
-public partial struct PointerPressEventSystem : ISystemUpdate
+public partial struct PointerPressEventSystem : ISystem
 {
     [BurstCompile]
     public void OnUpdate(ref SystemState state)

@@ -5,8 +5,6 @@ using Unity.Entities;
 
 using Game.Data.Components;
 using Game.Data.Groups;
-using System.Diagnostics;
-using static UnityEditor.Experimental.GraphView.Port;
 
 namespace Game.Data.Systems
 {
