@@ -22,14 +22,10 @@ MonoBehaviour:
     b: {fileID: 11400000, guid: 22bb4ce80266a754289315398776e334, type: 2}
     result: {fileID: 11400000, guid: 30619f76512b021489467c08ce5a2584, type: 2}
   - isEnable: 1
-    a: {fileID: 11400000, guid: 22bb4ce80266a754289315398776e334, type: 2}
-    b: {fileID: 11400000, guid: 942391044987b6d4d9ec2cbc44cb524e, type: 2}
-    result: {fileID: 11400000, guid: 75bf7d703d4577743a0051e3673dc7eb, type: 2}
-  - isEnable: 1
-    a: {fileID: 11400000, guid: 22bb4ce80266a754289315398776e334, type: 2}
-    b: {fileID: 11400000, guid: 22bb4ce80266a754289315398776e334, type: 2}
-    result: {fileID: 11400000, guid: 30619f76512b021489467c08ce5a2584, type: 2}
-  - isEnable: 1
     a: {fileID: 11400000, guid: 30619f76512b021489467c08ce5a2584, type: 2}
     b: {fileID: 11400000, guid: 30619f76512b021489467c08ce5a2584, type: 2}
     result: {fileID: 11400000, guid: 95e827ef307352749952a72c18b85559, type: 2}
+  - isEnable: 1
+    a: {fileID: 0}
+    b: {fileID: 0}
+    result: {fileID: 0}
