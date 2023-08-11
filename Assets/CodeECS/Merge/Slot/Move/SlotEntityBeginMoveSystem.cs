@@ -9,7 +9,7 @@ using Game.Merge.Components;
 namespace Game.Merge.Systems
 {
     [BurstCompile]
-    [UpdateInGroup(typeof(MoveGroup)), UpdateAfter(typeof(SlotMergeSystem))]
+    [UpdateInGroup(typeof(MoveGroup))]
     public partial struct SlotEntityBeginMoveSystem : ISystem
     {
         [BurstCompile]

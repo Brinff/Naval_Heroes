@@ -2,6 +2,7 @@
 
 using Game.Grid.Auhoring;
 using Game.Merge.Components;
+using Game.Pointer.Authoring;
 
 using UnityEngine;
 

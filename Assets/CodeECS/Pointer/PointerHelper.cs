@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
+using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Android;
@@ -52,5 +54,7 @@ public static class PointerHelper
     {
         return (target & value) == value;
     }
+
+
 }
 

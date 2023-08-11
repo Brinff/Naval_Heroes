@@ -17,7 +17,7 @@ using Game.Merge.Events;
 namespace Game.Merge.Systems
 {
     [BurstCompile]
-    [UpdateInGroup(typeof(MergeGroup))]
+    [UpdateInGroup(typeof(SlotGroup))]
     public partial struct SlotMergeSystem : ISystem
     {
         [BurstCompile]

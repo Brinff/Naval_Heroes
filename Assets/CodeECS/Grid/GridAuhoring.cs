@@ -38,8 +38,17 @@ namespace Game.Grid.Auhoring
             for (int i = 0; i < rects.Length; i++)
             {
                 var rect = rects[i];
-                Bounds bounds = new Bounds(new Vector3(rect.position.x * scale.x + center.x + rect.x * scale.x, 0, rect.position.y * scale.y + center.y + rect.y * scale.y), new Vector3(scale.x, height, scale.y));
-                localBounds.Encapsulate(bounds);
+
+                for (int y = 0; y < rect.size.y; y++)
+                {
+                    for (int x = 0; x < rect.size.x; x++)
+                    {
+                        Bounds bounds = new Bounds(new Vector3(rect.position.x * scale.x + center.x + x * scale.x, 0, rect.position.y * scale.y + center.y + y * scale.y), new Vector3(scale.x, height, scale.y));
+                        localBounds.Encapsulate(bounds);
+                    }
+                }
+
+               
             }
 
             return new LocalBounds() { min = localBounds.min, max = localBounds.max };

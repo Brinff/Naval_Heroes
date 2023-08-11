@@ -22,21 +22,28 @@ namespace Game.Merge.Systems
             {
                 if (slotEntity.ValueRO.value != Entity.Null)
                 {
-                    if (SystemAPI.HasComponent<SlotEntityPosition>(slotEntity.ValueRO.value))
+                    foreach (var (slotEntityPosition, entity) in SystemAPI.Query<RefRW<SlotEntityPosition>>().WithOptions(EntityQueryOptions.FilterWriteGroup).WithEntityAccess())
                     {
-                        foreach (var (pointerId, pointerRay) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerRay>>())
+                        if (slotEntity.ValueRO.value == entity)
                         {
-                            if (PointerHelper.HasFlag(pointerUpdateDragEvent.ValueRO.value, pointerId.ValueRO.value))
+                            foreach (var (pointerId, pointerRay) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerRay>>())
                             {
-                                if (geometry.raycastOnPlane(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, localToWorld.ValueRO.Position, localToWorld.ValueRO.Up, out float distance))
+                                if (PointerHelper.HasFlag(pointerUpdateDragEvent.ValueRO.value, pointerId.ValueRO.value))
                                 {
-                                    SystemAPI.GetComponentRW<SlotEntityPosition>(slotEntity.ValueRO.value).ValueRW.value = geometry.getRayPoint(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, distance);
+                                    if (geometry.raycastOnPlane(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, localToWorld.ValueRO.Position, localToWorld.ValueRO.Up, out float distance))
+                                    {
+                                        slotEntityPosition.ValueRW.value = geometry.getRayPoint(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, distance);
+                                    }
+                                    break;
                                 }
-                                break;
                             }
                         }
                     }
 
+                    //if (SystemAPI.HasComponent<SlotEntityPosition>(slotEntity.ValueRO.value))
+                    //{
+
+                    //}
                 }
             }
         }

@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using Unity.Entities;
-using UnityEngine;
+using Game.Pointer.Systems;
 
-[UpdateInGroup(typeof(PointerGroup)), UpdateAfter(typeof(PointerInputDataSystem))]
-public partial class PointerRaycastGroup : Component​System​Group
+namespace Game.Pointer.Groups
 {
+    [UpdateInGroup(typeof(PointerGroup)), UpdateAfter(typeof(PointerInputDataSystem))]
+    public partial class PointerRaycastGroup : Component​System​Group
+    {
 
+    }
 }
