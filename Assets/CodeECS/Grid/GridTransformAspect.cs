@@ -77,17 +77,15 @@ public readonly partial struct GridTransformAspect : IAspect
         return math.abs(b - a) < math.max(1E-06f * math.max(math.abs(a), math.abs(b)), math.EPSILON * 8f);
     }
 
-    public GridRect GetProjectRect(float3 point, float4x4 projectMatrix)
+    public GridRect GetProjectRect(float4x4 projectMatrix)
     {
         GridRect newGridRect = new GridRect();
+
+        float4x4 matrix = math.mul(localToWorld.ValueRO.Value, gridMatrix.ValueRO.value);
         for (int i = 0; i < gridRects.Length; i++)
         {
             GridRect gridRect = gridRects[i];
             GridRect projectGridRect = new GridRect();
-
-            
-
-            float4x4 matrix = math.mul(float4x4.Translate(point), gridMatrix.ValueRO.value);
 
             float3 worldPosition = matrix.TransformPoint(float3.zero);
             float3 worldSize = matrix.TransformDirection(new float3(gridRect.size.x, gridRect.size.y, 0));//math.mul(matrix, new float4(gridRect.size.x, gridRect.size.y, 0, 1)).xyz;
@@ -119,16 +117,96 @@ public readonly partial struct GridTransformAspect : IAspect
         return newGridRect;
     }
 
-    public NativeArray<GridRect> GetProjectRects(float3 point, float4x4 projectMatrix, out GridRect boundsRect)
+    public GridRect GetProjectRect(float3 point, float4x4 projectMatrix)
     {
-        NativeArray<GridRect> rects = new NativeArray<GridRect>(gridRects.Length, Allocator.Temp, NativeArrayOptions.ClearMemory);
-        boundsRect = new GridRect();
+        GridRect newGridRect = new GridRect();
+        float4x4 matrix = math.mul(float4x4.Translate(point), gridMatrix.ValueRO.value);
+
         for (int i = 0; i < gridRects.Length; i++)
         {
             GridRect gridRect = gridRects[i];
             GridRect projectGridRect = new GridRect();
 
-            float4x4 matrix = math.mul(float4x4.Translate(point), gridMatrix.ValueRO.value);
+            
+
+
+            float3 worldPosition = matrix.TransformPoint(float3.zero);
+            float3 worldSize = matrix.TransformDirection(new float3(gridRect.size.x, gridRect.size.y, 0));//math.mul(matrix, new float4(gridRect.size.x, gridRect.size.y, 0, 1)).xyz;
+
+            float3 localPosition = projectMatrix.TransformPoint(worldPosition);
+            float3 localSize = projectMatrix.TransformDirection(worldSize);//MultiplyVector(projectMatrix, worldSize);
+            localSize = math.round(localSize);
+
+            if (localSize.x < 0)
+            {
+                localPosition.x += (localSize.x + 1);
+            }
+            if (localSize.y < 0)
+            {
+                localPosition.y += (localSize.y + 1);
+            }
+
+            projectGridRect.position = new float2(localPosition.x, localPosition.y);
+            projectGridRect.size = new int2((int)math.abs(localSize.x), (int)math.abs(localSize.y));
+
+            if (i == 0)
+            {
+                newGridRect.position = projectGridRect.position;
+                newGridRect.size = projectGridRect.size;
+            }
+            else newGridRect.SetMinMax(math.min(newGridRect.position, projectGridRect.position), math.max(newGridRect.position + newGridRect.size, projectGridRect.position + projectGridRect.size));
+        }
+
+        return newGridRect;
+    }
+
+
+    public NativeArray<GridRect> GetProjectRects(float4x4 projectMatrix)
+    {
+        NativeArray<GridRect> rects = new NativeArray<GridRect>(gridRects.Length, Allocator.Temp, NativeArrayOptions.ClearMemory);
+        float4x4 matrix = math.mul(localToWorld.ValueRO.Value, gridMatrix.ValueRO.value);
+
+        for (int i = 0; i < gridRects.Length; i++)
+        {
+            GridRect gridRect = gridRects[i];
+            GridRect projectGridRect = new GridRect();
+
+
+            float3 worldPosition = matrix.TransformPoint(float3.zero);
+            float3 worldSize = matrix.TransformDirection(new float3(gridRect.size.x, gridRect.size.y, 0));//math.mul(matrix, new float4(gridRect.size.x, gridRect.size.y, 0, 1)).xyz;
+
+            float3 localPosition = projectMatrix.TransformPoint(worldPosition);
+            float3 localSize = projectMatrix.TransformDirection(worldSize);//MultiplyVector(projectMatrix, worldSize);
+            localSize = math.round(localSize);
+
+            if (localSize.x < 0)
+            {
+                localPosition.x += (localSize.x + 1);
+            }
+            if (localSize.y < 0)
+            {
+                localPosition.y += (localSize.y + 1);
+            }
+
+            projectGridRect.position = new float2(localPosition.x, localPosition.y);
+            projectGridRect.size = new int2((int)math.abs(localSize.x), (int)math.abs(localSize.y));
+            rects[i] = projectGridRect;
+        }
+
+        return rects;
+    }
+
+    public NativeArray<GridRect> GetProjectRects(float3 point, float4x4 projectMatrix, out GridRect boundsRect)
+    {
+        NativeArray<GridRect> rects = new NativeArray<GridRect>(gridRects.Length, Allocator.Temp, NativeArrayOptions.ClearMemory);
+        boundsRect = new GridRect();
+        float4x4 matrix = math.mul(float4x4.Translate(point), gridMatrix.ValueRO.value);
+
+        for (int i = 0; i < gridRects.Length; i++)
+        {
+            GridRect gridRect = gridRects[i];
+            GridRect projectGridRect = new GridRect();
+
 
             float3 worldPosition = matrix.TransformPoint(float3.zero);
             float3 worldSize = matrix.TransformDirection(new float3(gridRect.size.x, gridRect.size.y, 0));//math.mul(matrix, new float4(gridRect.size.x, gridRect.size.y, 0, 1)).xyz;

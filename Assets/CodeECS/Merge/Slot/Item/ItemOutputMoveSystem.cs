@@ -25,7 +25,7 @@ namespace Game.Merge.Systems
                 {
                     if (slotOutputData.ValueRO.itemEntity == itemEntity)
                     {
-                        itemPosition.ValueRW.value = slotOutputData.ValueRO.position;
+                        itemPosition.ValueRW.value = slotOutputData.ValueRO.position + new float3(0, 40, 0);
                     }
                 }
             }

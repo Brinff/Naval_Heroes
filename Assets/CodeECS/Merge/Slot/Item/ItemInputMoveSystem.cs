@@ -27,11 +27,12 @@ namespace Game.Merge.Systems
                     {
                         if (geometry.raycastOnPlane(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, float3.zero, new float3(0, 1, 0), out float distance))
                         {
-                            itemPosition.ValueRW.value = geometry.getRayPoint(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, distance) + new float3(0,10,0);
+                            var point = geometry.getRayPoint(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, distance);
+                            itemPosition.ValueRW.value = point + new float3(0, 40, 0);
 
                             foreach (var slotInputData in SystemAPI.Query<RefRW<SlotInputData>>().WithAll<Slot>())
                             {
-                                slotInputData.ValueRW.position = itemPosition.ValueRO.value;
+                                slotInputData.ValueRW.position = point;
                                 slotInputData.ValueRW.itemEntity = itemEntity;
                             }
                         }

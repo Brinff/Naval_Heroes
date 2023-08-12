@@ -976,11 +976,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
-  - {fileID: 792821842}
-  - {fileID: 792821838}
   - {fileID: 792821839}
-  - {fileID: 792821841}
   - {fileID: 792821843}
+  - {fileID: 792821838}
+  - {fileID: 792821841}
+  - {fileID: 792821842}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1913,15 +1913,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513259969}
-  m_LocalRotation: {x: 0.32276967, y: -0, z: -0, w: 0.94647753}
-  m_LocalPosition: {x: 0, y: 443.1, z: -484.7}
+  m_LocalRotation: {x: 0.40482238, y: 0, z: 0, w: 0.9143954}
+  m_LocalPosition: {x: 0, y: 532, z: -338}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 987582105}
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 37.661, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 47.76, y: 0, z: 0}
 --- !u!114 &1513259972
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,10 +38,10 @@ namespace Game.Merge.Systems
                                         var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
                                         beginEcb.AddComponent(slotEntity, new SlotAddItemEvent() { itemEntity = itemEntity, position = slotOutputData.targetPosition });
                                     }
-                                }
 
-                                position = slotOutputData.targetPosition;
-                                localTransform.ValueRW.Position = slotOutputData.targetPosition;
+                                    position = slotOutputData.targetPosition;
+                                    endEcb.SetComponent(itemEntity, new LocalTransform() { Position = slotOutputData.targetPosition, Rotation = quaternion.identity, Scale = 1 });
+                                }                            
                             }
 
                             endEcb.SetComponent<SlotInputData>(slotEntity, new SlotInputData());

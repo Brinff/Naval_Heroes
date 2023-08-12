@@ -10,6 +10,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using Game.Data.Components;
 using Game.Data.Systems;
+using Unity.Collections;
 
 namespace Game.Merge.Systems
 {
@@ -33,7 +34,7 @@ namespace Game.Merge.Systems
 
             foreach (var (slotInputData, slotOutputData, slotGridTransform, mergeGridRenderer, entity) in SystemAPI.Query<RefRO<SlotInputData>, RefRW<SlotOutputData>, GridTransformAspect, RefRO<MergeGridRenderer>>().WithAll<SlotGridTag, Slot>().WithEntityAccess())
             {
-                
+
                 if (slotInputData.ValueRO.itemEntity != Entity.Null && SystemAPI.HasComponent<ItemHandleEntity>(slotInputData.ValueRO.itemEntity))
                 {
                     var itemHandleEntity = SystemAPI.GetComponentRO<ItemHandleEntity>(slotInputData.ValueRO.itemEntity);
@@ -48,6 +49,9 @@ namespace Game.Merge.Systems
                     var newRectsPosition = SystemAPI.GetBuffer<GridRect>(mergeGridRenderer.ValueRO.newPosition);
                     newRectsPosition.Clear();
 
+                    var newRectsReject = SystemAPI.GetBuffer<GridRect>(mergeGridRenderer.ValueRO.reject);
+                    newRectsReject.Clear();
+
                     if (slotOutputData.ValueRO.itemEntity != Entity.Null)
                     {
                         var slotGridLocalToWorld = slotGridTransform.GetGridLocalToWorld();
@@ -55,7 +59,7 @@ namespace Game.Merge.Systems
                         projectBoundsRect = projectBoundsRect.GetRoundedRect();
                         slotOutputData.ValueRW.position = slotGridLocalToWorld.TransformPoint(new float3(projectBoundsRect.position, 0)) + itemHandleRectTransform.GetOffset();
 
-                        
+
 
                         for (int i = 0; i < projectRects.Length; i++)
                         {
@@ -63,7 +67,34 @@ namespace Game.Merge.Systems
                             newRectsPosition.Add(clampRoundedRect);
                         }
 
-                        slotOutputData.ValueRW.isPosible = true;
+                        NativeList<GridRect> overlapsGridRects = new NativeList<GridRect>(Allocator.Temp);
+
+                        foreach (var (otherItemParent, otherItemHandleEntity, otherItemEntity) in SystemAPI.Query<RefRO<ItemSlotParent>, RefRO<ItemHandleEntity>>().WithEntityAccess())
+                        {
+                            if (otherItemParent.ValueRO.value == entity && otherItemEntity != slotInputData.ValueRO.itemEntity)
+                            {
+                                var otherItemEntityGridTransform = SystemAPI.GetAspect<GridTransformAspect>(otherItemHandleEntity.ValueRO.value);
+                                var rects = otherItemEntityGridTransform.GetProjectRects(slotGridWorldToLocal);
+
+                                for (int i = 0; i < rects.Length; i++)
+                                {
+                                    var targetIntersect = rects[i].GetClampRect(slotRect).GetRoundedRect();
+                                    for (int j = 0; j < projectRects.Length; j++)
+                                    {
+                                        var clampRoundedRect = projectRects[j].GetClampRect(slotRect).GetRoundedRect();
+                                        if (clampRoundedRect.IsOverlap(targetIntersect))
+                                        {
+                                            overlapsGridRects.Add(targetIntersect.GetIntersectRect(clampRoundedRect));
+                                        }
+                                    }
+                                }
+                                //var itemHandleEntity = SystemAPI.GetComponentRO<ItemHandleEntity>(slotInputData.ValueRO.itemEntity);
+                            }
+                        }
+
+                        newRectsReject.AddRange(overlapsGridRects.AsArray());
+
+                        slotOutputData.ValueRW.isPosible = overlapsGridRects.Length == 0;
                         slotOutputData.ValueRW.targetPosition = slotOutputData.ValueRO.position;
                     }
                     else

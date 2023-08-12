@@ -108,6 +108,7 @@ namespace Game.Merge.Systems
                     beginEcb.SetComponent(slotMegrgeOutputData.ValueRO.itemEntityB, new ItemHandleEntity() { value = instance });
                     beginEcb.SetComponent(slotMegrgeOutputData.ValueRO.itemEntityB, SystemAPI.GetComponent<LocalBounds>(prefab));
                     beginEcb.SetSharedComponent(slotMegrgeOutputData.ValueRO.itemEntityB, new EntityDataId() { value = slotMegrgeOutputData.ValueRO.result });
+                    beginEcb.SetComponent(instance, SystemAPI.GetComponent<LocalTransform>(SystemAPI.GetComponentRO<ItemHandleEntity>(slotMegrgeOutputData.ValueRO.itemEntityB).ValueRO.value));
 
                     endEcb.DestroyEntity(SystemAPI.GetComponentRO<ItemHandleEntity>(slotMegrgeOutputData.ValueRO.itemEntityB).ValueRO.value);
                     endEcb.DestroyEntity(SystemAPI.GetComponentRO<ItemHandleEntity>(slotMegrgeOutputData.ValueRO.itemEntityA).ValueRO.value);

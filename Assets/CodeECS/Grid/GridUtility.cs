@@ -32,7 +32,7 @@ public static class GridUtility
         var min = math.max(rect.GetMin(), other.GetMin());
         var max = math.min(rect.GetMax(), other.GetMax());
         newRect.SetMinMax(min, max);
-        return rect;
+        return newRect;
     }
 
     public static bool IsOverlap(this GridRect rect, GridRect other)
