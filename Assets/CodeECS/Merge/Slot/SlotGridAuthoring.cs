@@ -7,24 +7,18 @@ using Game.Pointer.Authoring;
 
 namespace Game.Merge.Authoring
 {
-    [AddComponentMenu("Game/Merge/Slot Grid")]
-    [RequireComponent(typeof(GridAuhoring))]
-    public class SlotGridAuthoring : MonoBehaviour
+    [AddComponentMenu("Game/Merge/Slot Grid Tag")]
+    public class SlotGridTagAuthoring : MonoBehaviour
     {
 
     }
 
-    public class SlotGridBaker : Baker<SlotGridAuthoring>
+    public class SlotGridTagBaker : Baker<SlotGridTagAuthoring>
     {
-        public override void Bake(SlotGridAuthoring authoring)
+        public override void Bake(SlotGridTagAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.None);
-            AddComponent(entity, new SlotEntity());
-            AddComponent(entity, new SlotPosition());
-            PointerHandlerBaker.Bake(this, entity, PointerHandlerEvent.Drop | PointerHandlerEvent.Enter | PointerHandlerEvent.Exit);
-            var gridRectAuthorin = authoring.GetComponent<GridAuhoring>();
-            AddComponent(entity, gridRectAuthorin.GetBounds(5));
-            AddComponent(entity, new SlotGrid());
+            AddComponent(entity, new SlotGridTag());
         }
     }
 }

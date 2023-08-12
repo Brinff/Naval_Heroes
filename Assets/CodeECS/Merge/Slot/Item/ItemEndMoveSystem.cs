@@ -19,32 +19,36 @@ namespace Game.Merge.Systems
         public void OnUpdate(ref SystemState state)
         {
             var endEcb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
-            foreach (var (itemHandleEntity, itemPosition, itemSlotParent, localToWorld, pointerUpdateDragEvent, itemEntity) in SystemAPI.Query<RefRO<ItemHandleEntity>, RefRW<ItemPosition>, RefRW<ItemSlotParent>, RefRO<LocalToWorld>, RefRO<PointerEndDragEvent>>().WithEntityAccess())
+            foreach (var (itemHandleEntity, itemPosition, itemSlotParent, localTransform, pointerUpdateDragEvent, itemEntity) in SystemAPI.Query<RefRO<ItemHandleEntity>, RefRW<ItemPosition>, RefRW<ItemSlotParent>, RefRW<LocalTransform>, RefRO<PointerEndDragEvent>>().WithEntityAccess())
             {
                 foreach (var pointerId in SystemAPI.Query<RefRO<PointerId>>())
                 {
                     if (PointerHelper.HasFlag(pointerUpdateDragEvent.ValueRO.value, pointerId.ValueRO.value))
                     {
-                        float3 position = localToWorld.ValueRO.Position;
-                       
+                        float3 position = localTransform.ValueRO.Position;
+
                         foreach (var (slotOutputData, slotEntity) in SystemAPI.Query<SlotOutputData>().WithEntityAccess())
                         {
-                            if (itemSlotParent.ValueRO.value != slotEntity)
+                            if (slotOutputData.itemEntity == itemEntity)
                             {
-                                if (slotOutputData.itemEntity == itemEntity)
+                                if (slotOutputData.isPosible)
                                 {
-                                    if (slotOutputData.isPosible)
+                                    if (itemSlotParent.ValueRO.value != slotEntity)
                                     {
                                         var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
                                         beginEcb.AddComponent(slotEntity, new SlotAddItemEvent() { itemEntity = itemEntity, position = slotOutputData.targetPosition });
                                     }
                                 }
+
+                                position = slotOutputData.targetPosition;
+                                localTransform.ValueRW.Position = slotOutputData.targetPosition;
                             }
 
                             endEcb.SetComponent<SlotInputData>(slotEntity, new SlotInputData());
                         }
 
                         itemPosition.ValueRW.value = position;
+
 
                         break;
                     }

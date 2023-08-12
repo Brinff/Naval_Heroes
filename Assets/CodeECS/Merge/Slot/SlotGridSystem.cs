@@ -8,6 +8,8 @@ using Game.Pointer.Events;
 using Game.Grid;
 using Unity.Mathematics;
 using Unity.Transforms;
+using Game.Data.Components;
+using Game.Data.Systems;
 
 namespace Game.Merge.Systems
 {
@@ -28,6 +30,60 @@ namespace Game.Merge.Systems
         public void OnUpdate(ref SystemState state)
         {
             var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
+
+            foreach (var (slotInputData, slotOutputData, slotGridTransform, mergeGridRenderer, entity) in SystemAPI.Query<RefRO<SlotInputData>, RefRW<SlotOutputData>, GridTransformAspect, RefRO<MergeGridRenderer>>().WithAll<SlotGridTag, Slot>().WithEntityAccess())
+            {
+                
+                if (slotInputData.ValueRO.itemEntity != Entity.Null && SystemAPI.HasComponent<ItemHandleEntity>(slotInputData.ValueRO.itemEntity))
+                {
+                    var itemHandleEntity = SystemAPI.GetComponentRO<ItemHandleEntity>(slotInputData.ValueRO.itemEntity);
+                    var itemHandleRectTransform = SystemAPI.GetAspect<GridTransformAspect>(itemHandleEntity.ValueRO.value);
+
+                    var slotRect = slotGridTransform.GetRect();
+                    var slotGridWorldToLocal = slotGridTransform.GetGridWorldToLocal();
+                    var projectRects = itemHandleRectTransform.GetProjectRects(slotInputData.ValueRO.position, slotGridWorldToLocal, out GridRect projectBoundsRect);
+                    //Debug.DebugSystem.Log($"Project Rect: {projectRect.position} {projectRect.size}");
+                    slotOutputData.ValueRW.itemEntity = slotRect.IsOverlap(projectBoundsRect) ? slotInputData.ValueRO.itemEntity : Entity.Null;
+
+                    var newRectsPosition = SystemAPI.GetBuffer<GridRect>(mergeGridRenderer.ValueRO.newPosition);
+                    newRectsPosition.Clear();
+
+                    if (slotOutputData.ValueRO.itemEntity != Entity.Null)
+                    {
+                        var slotGridLocalToWorld = slotGridTransform.GetGridLocalToWorld();
+                        projectBoundsRect = projectBoundsRect.GetClampRect(slotRect);
+                        projectBoundsRect = projectBoundsRect.GetRoundedRect();
+                        slotOutputData.ValueRW.position = slotGridLocalToWorld.TransformPoint(new float3(projectBoundsRect.position, 0)) + itemHandleRectTransform.GetOffset();
+
+                        
+
+                        for (int i = 0; i < projectRects.Length; i++)
+                        {
+                            var clampRoundedRect = projectRects[i].GetClampRect(slotRect).GetRoundedRect();
+                            newRectsPosition.Add(clampRoundedRect);
+                        }
+
+                        slotOutputData.ValueRW.isPosible = true;
+                        slotOutputData.ValueRW.targetPosition = slotOutputData.ValueRO.position;
+                    }
+                    else
+                    {
+                        slotOutputData.ValueRW.isPosible = false;
+                        newRectsPosition.Clear();
+                    }
+                    //slotOutputData.ValueRW.itemEntity = geometry.containsPointInBounds(worldBounds.ValueRO.min, worldBounds.ValueRO.max, slotInputData.ValueRO.position) ? slotInputData.ValueRO.itemEntity : Entity.Null;
+                    //slotOutputData.ValueRW.targetPosition = localToWorld.ValueRO.Position;
+
+                    //if (slotOutputData.ValueRW.itemEntity != Entity.Null)
+                    //{
+
+                    //}
+                    //else
+                    //{
+
+                    //}
+                }
+            }
 
             //foreach (var (slotGrid, slotGridEnterEvent, entity) in SystemAPI.Query<SlotGrid, RefRO<PointerEnterEvent>>().WithEntityAccess())
             //{
@@ -64,12 +120,12 @@ namespace Game.Merge.Systems
             //            {
             //                if (dragEntity != dragSlot.ValueRO.value) continue;
 
-                            
+
             //                if (geometry.raycastOnPlane(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, localToWorld.ValueRO.Position, localToWorld.ValueRO.Up, out float distance))
             //                {
             //                    var point = geometry.getRayPoint(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, distance);
             //                    var matrix = gridTransfrom.GetGridWorldToLocal();
-                                
+
             //                    var rect = entityGridTransform.GetProjectRect(point, matrix);
             //                    Debug.DebugSystem.Log("Draw: " + rect.position + " " + rect.size);
 
@@ -82,7 +138,7 @@ namespace Game.Merge.Systems
             //                            isEnyOverlap = true;
             //                        }
             //                    }
-                               
+
             //                    if (isEnyOverlap)
             //                    {
             //                        slotEntityPosition.ValueRW.value = gridTransfrom.GetGridLocalToWorld().TransformPoint(new float3(rect.position, 0)) + entityGridTransform.GetOffset();
@@ -111,33 +167,33 @@ namespace Game.Merge.Systems
 
 
 
-            foreach (var (slotGrid, slotEntity, slotGridTransform, slotPosition, slotDropEvent, entity) in SystemAPI.Query<SlotGrid, RefRW<SlotEntity>, GridTransformAspect, RefRO<SlotPosition>, RefRO<PointerDropEvent>>().WithEntityAccess())
-            {
-                foreach (var (pointerId, pointerDragEntity) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerDragEntity>>())
-                {
-                    if (PointerHelper.HasFlag(slotDropEvent.ValueRO.value, pointerId.ValueRO.value))
-                    {
-                        if (SystemAPI.HasComponent<SlotEntity>(pointerDragEntity.ValueRO.value))
-                        {
-                            DebugSystem.Log("Drop");
-                            var dragSlotEntity = SystemAPI.GetComponentRW<SlotEntity>(pointerDragEntity.ValueRO.value);
+            //foreach (var (slotGrid, slotEntity, slotGridTransform, slotPosition, slotDropEvent, entity) in SystemAPI.Query<SlotGrid, RefRW<SlotEntity>, GridTransformAspect, RefRO<SlotPosition>, RefRO<PointerDropEvent>>().WithEntityAccess())
+            //{
+            //    foreach (var (pointerId, pointerDragEntity) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerDragEntity>>())
+            //    {
+            //        if (PointerHelper.HasFlag(slotDropEvent.ValueRO.value, pointerId.ValueRO.value))
+            //        {
+            //            if (SystemAPI.HasComponent<SlotEntity>(pointerDragEntity.ValueRO.value))
+            //            {
+            //                DebugSystem.Log("Drop");
+            //                var dragSlotEntity = SystemAPI.GetComponentRW<SlotEntity>(pointerDragEntity.ValueRO.value);
 
-                            if (slotEntity.ValueRO.value == Entity.Null)
-                            {
-                                if (dragSlotEntity.ValueRO.value != Entity.Null)
-                                {
-                                    if (SystemAPI.HasComponent<SlotEntityPosition>(dragSlotEntity.ValueRO.value)) SystemAPI.GetComponentRW<SlotEntityPosition>(dragSlotEntity.ValueRO.value).ValueRW.value = slotPosition.ValueRO.value;
-                                    else beginEcb.AddComponent(dragSlotEntity.ValueRO.value, new SlotEntityPosition() { value = slotPosition.ValueRO.value });
+            //                if (slotEntity.ValueRO.value == Entity.Null)
+            //                {
+            //                    if (dragSlotEntity.ValueRO.value != Entity.Null)
+            //                    {
+            //                        if (SystemAPI.HasComponent<SlotEntityPosition>(dragSlotEntity.ValueRO.value)) SystemAPI.GetComponentRW<SlotEntityPosition>(dragSlotEntity.ValueRO.value).ValueRW.value = slotPosition.ValueRO.value;
+            //                        else beginEcb.AddComponent(dragSlotEntity.ValueRO.value, new SlotEntityPosition() { value = slotPosition.ValueRO.value });
 
-                                    slotEntity.ValueRW.value = dragSlotEntity.ValueRO.value;
-                                    dragSlotEntity.ValueRW.value = Entity.Null;
-                                }
-                            }
-                        }
-                        break;
-                    }
-                }
-            }
+            //                        slotEntity.ValueRW.value = dragSlotEntity.ValueRO.value;
+            //                        dragSlotEntity.ValueRW.value = Entity.Null;
+            //                    }
+            //                }
+            //            }
+            //            break;
+            //        }
+            //    }
+            //}
         }
     }
 }

@@ -115,7 +115,6 @@ namespace Game.Merge.Systems
                     endEcb.DestroyEntity(slotMegrgeOutputData.ValueRO.itemEntityA);
                     endEcb.SetComponent(entity, new SlotMergeOutputData());
                 }
-                //Debug.DebugSystem.Log("Add");
             }
 
             //foreach (var (slotMerge, slotEntity, slotLocalTransform, slotDropEvent, entity) in SystemAPI.Query<SlotMerge, RefRW<SlotEntity>, RefRO<LocalTransform>, RefRO<PointerDropEvent>>().WithEntityAccess())

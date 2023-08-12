@@ -19,7 +19,7 @@ public static class GridUtility
         return rect.position + rect.size;
     }
 
-    public static void SetMinMax(this GridRect rect, float2 min, float2 max)
+    public static void SetMinMax(this ref GridRect rect, float2 min, float2 max)
     {
         rect.position = min;
         float2 size = math.round(max - min);

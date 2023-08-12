@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -17,6 +18,23 @@ public readonly partial struct GridTransformAspect : IAspect
     public NativeArray<GridRect> GetRects()
     {
         return gridRects.AsNativeArray();
+    }
+
+    public GridRect GetRect()
+    {
+        GridRect newGridRect = new GridRect();
+        for (int i = 0; i < gridRects.Length; i++)
+        {
+            GridRect gridRect = gridRects[i];
+
+            if (i == 0)
+            {
+                newGridRect.position = gridRect.position;
+                newGridRect.size = gridRect.size;
+            }
+            else newGridRect.SetMinMax(math.min(newGridRect.position, gridRect.position), math.max(newGridRect.position + newGridRect.size, gridRect.position + gridRect.size));
+        }
+        return newGridRect;
     }
 
     public float4x4 GetGridWorldToLocal()
@@ -67,6 +85,8 @@ public readonly partial struct GridTransformAspect : IAspect
             GridRect gridRect = gridRects[i];
             GridRect projectGridRect = new GridRect();
 
+            
+
             float4x4 matrix = math.mul(float4x4.Translate(point), gridMatrix.ValueRO.value);
 
             float3 worldPosition = matrix.TransformPoint(float3.zero);
@@ -88,17 +108,21 @@ public readonly partial struct GridTransformAspect : IAspect
             projectGridRect.position = new float2(localPosition.x, localPosition.y);
             projectGridRect.size = new int2((int)math.abs(localSize.x), (int)math.abs(localSize.y));
 
-
-            newGridRect.SetMinMax(math.min(newGridRect.position, projectGridRect.position), math.max(newGridRect.position + newGridRect.size, projectGridRect.position + projectGridRect.size));
+            if (i == 0)
+            {
+                newGridRect.position = projectGridRect.position;
+                newGridRect.size = projectGridRect.size;
+            }
+            else newGridRect.SetMinMax(math.min(newGridRect.position, projectGridRect.position), math.max(newGridRect.position + newGridRect.size, projectGridRect.position + projectGridRect.size));
         }
 
         return newGridRect;
     }
 
-    public NativeArray<GridRect> GetProjectRects(float3 point, float4x4 projectMatrix)
+    public NativeArray<GridRect> GetProjectRects(float3 point, float4x4 projectMatrix, out GridRect boundsRect)
     {
         NativeArray<GridRect> rects = new NativeArray<GridRect>(gridRects.Length, Allocator.Temp, NativeArrayOptions.ClearMemory);
-
+        boundsRect = new GridRect();
         for (int i = 0; i < gridRects.Length; i++)
         {
             GridRect gridRect = gridRects[i];
@@ -124,6 +148,13 @@ public readonly partial struct GridTransformAspect : IAspect
 
             projectGridRect.position = new float2(localPosition.x, localPosition.y);
             projectGridRect.size = new int2((int)math.abs(localSize.x), (int)math.abs(localSize.y));
+
+            if (i == 0)
+            {
+                boundsRect.position = projectGridRect.position;
+                boundsRect.size = projectGridRect.size;
+            }
+            else boundsRect.SetMinMax(math.min(boundsRect.position, projectGridRect.position), math.max(boundsRect.position + boundsRect.size, projectGridRect.position + projectGridRect.size));
 
             rects[i] = projectGridRect;
         }

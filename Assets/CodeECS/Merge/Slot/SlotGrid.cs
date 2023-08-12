@@ -2,7 +2,7 @@
 
 namespace Game.Merge.Components
 {
-    public struct SlotGrid : IComponentData
+    public struct SlotGridTag : IComponentData
     {
 
     }
