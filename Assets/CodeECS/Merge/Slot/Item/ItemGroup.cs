@@ -5,7 +5,7 @@ using Unity.Entities;
 namespace Game.Merge.Groups
 {
     [UpdateInGroup(typeof(MergeGroup)), UpdateAfter(typeof(MergeApplySystem))]
-    public partial class MoveGroup : ComponentSystemGroup
+    public partial class ItemGroup : ComponentSystemGroup
     {
 
     }

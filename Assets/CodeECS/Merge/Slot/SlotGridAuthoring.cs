@@ -21,7 +21,7 @@ namespace Game.Merge.Authoring
             var entity = GetEntity(TransformUsageFlags.None);
             AddComponent(entity, new SlotEntity());
             AddComponent(entity, new SlotPosition());
-            PointerHandlerBaker.Bake(this, entity, PointerHandlerEvent.BeginDrag | PointerHandlerEvent.UpdateDrag | PointerHandlerEvent.EndDrag | PointerHandlerEvent.Drop | PointerHandlerEvent.Enter | PointerHandlerEvent.Exit);
+            PointerHandlerBaker.Bake(this, entity, PointerHandlerEvent.Drop | PointerHandlerEvent.Enter | PointerHandlerEvent.Exit);
             var gridRectAuthorin = authoring.GetComponent<GridAuhoring>();
             AddComponent(entity, gridRectAuthorin.GetBounds(5));
             AddComponent(entity, new SlotGrid());

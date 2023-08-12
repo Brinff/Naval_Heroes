@@ -39,6 +39,11 @@ namespace Unity.Mathematics
 
     public class geometry
     {
+        public static bool containsPointInBounds(float3 min, float3 max, float3 point)
+        {
+            return !math.any((point < min) | (max < point));
+        }
+
         public static float3 getRayPoint(float3 orgin, float3 direction, float distance)
         {
             return orgin + direction * distance;

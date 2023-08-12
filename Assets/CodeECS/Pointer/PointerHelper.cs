@@ -46,7 +46,6 @@ public static class PointerHelper
     {
         if (id >= 0) id += 1;
         int abs = math.abs(id);
-        Debug.Log($"Pointer: {abs}");
         return s_Ids[abs];
     }
 

@@ -5,6 +5,7 @@ using Game.Merge.Components;
 using Game.Debug;
 using Game.Merge.Groups;
 using Game.Pointer.Events;
+using Game.Grid;
 using Unity.Mathematics;
 using Unity.Transforms;
 
@@ -14,6 +15,15 @@ namespace Game.Merge.Systems
     [UpdateInGroup(typeof(SlotGroup)), UpdateAfter(typeof(SlotMergeSystem))]
     public partial struct SlotGridSystem : ISystem
     {
+        //public bool IsOverlap(GridTransformAspect gridTransformAspect, float3 point)
+        //{
+        //    foreach (var item in SystemAPI.Query<GridTransformAspect>())
+        //    {
+
+        //    } 
+        //}
+
+
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
@@ -21,28 +31,82 @@ namespace Game.Merge.Systems
 
             //foreach (var (slotGrid, slotGridEnterEvent, entity) in SystemAPI.Query<SlotGrid, RefRO<PointerEnterEvent>>().WithEntityAccess())
             //{
-            //    Debug.DebugSystem.Log("Enter Grid");
+            //    foreach (var (pointerId, pointerDragEntity) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerDragEntity>>())
+            //    {
+            //        if(PointerHelper.HasFlag(slotGridEnterEvent.ValueRO.value, pointerId.ValueRO.value))
+            //        {
+            //            Debug.DebugSystem.Log("Enter Grid");
+            //            var slot = SystemAPI.GetComponent<SlotEntity>(pointerDragEntity.ValueRO.value);
+            //            beginEcb.AddComponent(slot.value, new SlotEntityGridPosition());
+            //            break;
+            //        }
+            //    }
+            //    //Debug.DebugSystem.Log("Enter Grid");
             //}
 
             //foreach (var (slotGrid, slotGridExitEvent, entity) in SystemAPI.Query<SlotGrid, RefRO<PointerExitEvent>>().WithEntityAccess())
             //{
-            //    Debug.DebugSystem.Log("Exit Grid");
+            //    //Debug.DebugSystem.Log("Exit Grid");
             //}
 
 
-            //foreach (var (pointerId, pointerRay) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerRay>>())
+            //foreach (var(pointerId, pointerRay, pointerDragEntity, pointerFirstHoveredEntity) in SystemAPI.Query<RefRO<PointerId>, RefRO<PointerRay>, RefRO<PointerDragEntity>, RefRO<PointerFirstHoveredEntity>>())
             //{
-            //    foreach (var (slotEntityPosition, entity) in SystemAPI.Query<RefRW<SlotEntityPosition>>().WithOptions(EntityQueryOptions.FilterWriteGroup).WithEntityAccess())
+            //    foreach (var (slotGrid, gridTransfrom, localToWorld, entity) in SystemAPI.Query<SlotGrid, GridTransformAspect, RefRO<LocalToWorld>>().WithEntityAccess())
             //    {
-            //        if (PointerHelper.HasFlag(pointerUpdateDragEvent.ValueRO.value, pointerId.ValueRO.value))
+            //        if (entity != pointerFirstHoveredEntity.ValueRO.value) continue;
+
+            //        if (pointerDragEntity.ValueRO.value != Entity.Null && SystemAPI.HasComponent<SlotEntity>(pointerDragEntity.ValueRO.value))
             //        {
-            //            if (geometry.raycastOnPlane(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, localToWorld.ValueRO.Position, localToWorld.ValueRO.Up, out float distance))
+            //            var dragSlot = SystemAPI.GetComponentRO<SlotEntity>(pointerDragEntity.ValueRO.value);
+
+            //            foreach (var (slotEntityPosition, entityGridTransform, dragEntity) in SystemAPI.Query<RefRW<SlotEntityPosition>, GridTransformAspect>().WithEntityAccess())
             //            {
-            //                slotEntityPosition.ValueRW.value = math.round(geometry.getRayPoint(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, distance) / 30) * 30;
+            //                if (dragEntity != dragSlot.ValueRO.value) continue;
+
+                            
+            //                if (geometry.raycastOnPlane(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, localToWorld.ValueRO.Position, localToWorld.ValueRO.Up, out float distance))
+            //                {
+            //                    var point = geometry.getRayPoint(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, distance);
+            //                    var matrix = gridTransfrom.GetGridWorldToLocal();
+                                
+            //                    var rect = entityGridTransform.GetProjectRect(point, matrix);
+            //                    Debug.DebugSystem.Log("Draw: " + rect.position + " " + rect.size);
+
+            //                    var projectRects = gridTransfrom.GetRects();
+            //                    bool isEnyOverlap = false;
+            //                    for (int i = 0; i < projectRects.Length; i++)
+            //                    {
+            //                        if (projectRects[i].IsOverlap(rect))
+            //                        {
+            //                            isEnyOverlap = true;
+            //                        }
+            //                    }
+                               
+            //                    if (isEnyOverlap)
+            //                    {
+            //                        slotEntityPosition.ValueRW.value = gridTransfrom.GetGridLocalToWorld().TransformPoint(new float3(rect.position, 0)) + entityGridTransform.GetOffset();
+            //                    }
+            //                }
             //            }
-            //            break;
             //        }
+
+            //        //foreach (var (slotEntityPosition, slotEntityGridPosition, entity) in SystemAPI.Query<RefRW<SlotEntityPosition>, RefRO<SlotEntityGridPosition>>().WithEntityAccess())
+            //        //{
+
+            //        //    //if (PointerHelper.HasFlag(pointerUpdateDragEvent.ValueRO.value, pointerId.ValueRO.value))
+            //        //    //{
+            //        //    if (geometry.raycastOnPlane(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, slotLocalToWorld.ValueRO.Position, slotLocalToWorld.ValueRO.Up, out float distance))
+            //        //    {
+            //        //        slotEntityPosition.ValueRW.value = math.round(geometry.getRayPoint(pointerRay.ValueRO.origin, pointerRay.ValueRO.direction, distance) / 30) * 30;
+            //        //    }
+
+            //        //    //}
+            //        //}
+
             //    }
+
+
             //}
 
 

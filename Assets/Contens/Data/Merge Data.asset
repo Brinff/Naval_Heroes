@@ -25,7 +25,3 @@ MonoBehaviour:
     a: {fileID: 11400000, guid: 30619f76512b021489467c08ce5a2584, type: 2}
     b: {fileID: 11400000, guid: 30619f76512b021489467c08ce5a2584, type: 2}
     result: {fileID: 11400000, guid: 95e827ef307352749952a72c18b85559, type: 2}
-  - isEnable: 1
-    a: {fileID: 0}
-    b: {fileID: 0}
-    result: {fileID: 0}

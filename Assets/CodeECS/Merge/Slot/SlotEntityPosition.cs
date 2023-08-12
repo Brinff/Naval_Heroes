@@ -5,7 +5,7 @@ using Unity.Mathematics;
 namespace Game.Merge.Components
 {
     [WriteGroup(typeof(SlotEntityPosition))]
-    public struct GridEntityPosition : IComponentData
+    public struct SlotEntityGridPosition : IComponentData
     {
         public float3 value;
     }

@@ -5,7 +5,7 @@ namespace Game.Merge.Events
     {
         public Entity a;
         public Entity b;
-        public Entity result;
+        public int result;
     }
 }
 

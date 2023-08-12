@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Game.Merge.Authoring
 {
-    [AddComponentMenu("Game/Merge/Slot Buy")]
+    [AddComponentMenu("Game/Merge/Slot Buy Tag")]
     public class SlotBuyAuthoring : MonoBehaviour
     {
         
@@ -22,11 +22,7 @@ namespace Game.Merge.Authoring
         public override void Bake(SlotBuyAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            PointerHandlerBaker.Bake(this, entity, PointerHandlerEvent.BeginDrag | PointerHandlerEvent.UpdateDrag | PointerHandlerEvent.EndDrag | PointerHandlerEvent.Drop | PointerHandlerEvent.Click);
-            var gridRectAuthorin = authoring.GetComponent<GridAuhoring>();
-            AddComponent(entity, gridRectAuthorin.GetBounds(5));
-            AddComponent(entity, new SlotBuy());
-            AddComponent(entity, new SlotEntity());
+            AddComponent(entity, new SlotBuyTag());
         }
     }
 }

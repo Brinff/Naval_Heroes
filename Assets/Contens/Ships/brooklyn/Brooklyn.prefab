@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1468786854299531543}
   - component: {fileID: 978869337506906784}
+  - component: {fileID: 243793433572536258}
   m_Layer: 0
   m_Name: Brooklyn
   m_TagString: Untagged
@@ -52,6 +53,21 @@ MonoBehaviour:
     y: 0
     width: 6
     height: 1
+--- !u!114 &243793433572536258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916594432077460907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f195da31246348bf0e6f17509faa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    m_Center: {x: -1.1, y: 18, z: 0}
+    m_Extent: {x: 90, y: 18, z: 15}
 --- !u!1001 &8597094492407599280
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -132,10 +132,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 143202750}
+  - component: {fileID: 143202753}
   - component: {fileID: 143202751}
   - component: {fileID: 143202748}
   - component: {fileID: 143202747}
   - component: {fileID: 143202746}
+  - component: {fileID: 143202752}
   m_Layer: 0
   m_Name: Slot Merge C
   m_TagString: Untagged
@@ -213,9 +215,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 143202745}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31de5907154874241a72ed588fd0092d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &143202752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143202745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f195da31246348bf0e6f17509faa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 30, y: 10, z: 30}
+--- !u!114 &143202753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143202745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0e29117e58017c4f8150d2bedf25698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  current: {r: 7.4642644, g: 6.7710876, b: 0, a: 1}
+  allow: {r: 0, g: 10.43295, b: 0, a: 1}
+  reject: {r: 5.278032, g: 0, b: 0, a: 1}
 --- !u!1 &182629135
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +260,7 @@ GameObject:
   - component: {fileID: 182629142}
   - component: {fileID: 182629141}
   - component: {fileID: 182629136}
+  - component: {fileID: 182629143}
   m_Layer: 0
   m_Name: Battle Grid
   m_TagString: Untagged
@@ -297,9 +330,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 182629135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e0496ef496d92a48982320b86f6c0c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 31de5907154874241a72ed588fd0092d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &182629143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182629135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f195da31246348bf0e6f17509faa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 150, y: 10, z: 150}
 --- !u!1 &508885694
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,10 +497,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1761755357}
   - component: {fileID: 1761755359}
-  - component: {fileID: 1761755358}
+  - component: {fileID: 1761755361}
+  - component: {fileID: 1761755360}
   - component: {fileID: 1761755355}
   - component: {fileID: 1761755354}
   - component: {fileID: 1761755353}
+  - component: {fileID: 1761755362}
   m_Layer: 0
   m_Name: Slot Buy
   m_TagString: Untagged
@@ -521,18 +571,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1761755358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761755352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ba5a0f546af5eb4f8d7c2e47a8c9cd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1761755359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +584,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 942391044987b6d4d9ec2cbc44cb524e, type: 2}
+--- !u!114 &1761755360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761755352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31de5907154874241a72ed588fd0092d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1761755361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761755352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba5a0f546af5eb4f8d7c2e47a8c9cd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1761755362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761755352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f195da31246348bf0e6f17509faa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 30, y: 10, z: 30}
 --- !u!1 &1941629110
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,10 +632,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1941629115}
+  - component: {fileID: 1941629121}
   - component: {fileID: 1941629119}
   - component: {fileID: 1941629118}
   - component: {fileID: 1941629117}
   - component: {fileID: 1941629116}
+  - component: {fileID: 1941629120}
   m_Layer: 0
   m_Name: Slot Merge A
   m_TagString: Untagged
@@ -636,9 +715,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 1941629110}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31de5907154874241a72ed588fd0092d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1941629120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941629110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f195da31246348bf0e6f17509faa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 30, y: 10, z: 30}
+--- !u!114 &1941629121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941629110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0e29117e58017c4f8150d2bedf25698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  current: {r: 7.4642644, g: 6.7710876, b: 0, a: 1}
+  allow: {r: 0, g: 10.43295, b: 0, a: 1}
+  reject: {r: 16, g: 0, b: 0, a: 1}
 --- !u!1 &2024595250
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,10 +757,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2024595255}
+  - component: {fileID: 2024595258}
   - component: {fileID: 2024595256}
   - component: {fileID: 2024595253}
   - component: {fileID: 2024595252}
   - component: {fileID: 2024595251}
+  - component: {fileID: 2024595257}
   m_Layer: 0
   m_Name: Slot Merge B
   m_TagString: Untagged
@@ -729,6 +840,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 2024595250}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31de5907154874241a72ed588fd0092d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2024595257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024595250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3f195da31246348bf0e6f17509faa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 30, y: 10, z: 30}
+--- !u!114 &2024595258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024595250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0e29117e58017c4f8150d2bedf25698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  current: {r: 7.4642644, g: 6.7710876, b: 0, a: 1}
+  allow: {r: 0, g: 10.43295, b: 0, a: 1}
+  reject: {r: 5.278032, g: 0, b: 0, a: 1}

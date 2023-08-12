@@ -11,15 +11,16 @@ namespace Game.Merge.Systems
 {
     [BurstCompile]
     [UpdateInGroup(typeof(MergeGroup))]
-    public partial struct SlotEntityTransformSystem : ISystem
+    public partial struct ItemEntityTransformSystem : ISystem
     {
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             float deltaTime = SystemAPI.Time.DeltaTime;
-            foreach (var (slotEntityPosition, localTransform) in SystemAPI.Query<RefRO<SlotEntityPosition>, RefRW<LocalTransform>>())
+            foreach (var (itemHandleEntity, itemPosition) in SystemAPI.Query<RefRO<ItemHandleEntity>, RefRO<ItemPosition>>())
             {
-                localTransform.ValueRW.Position = math.lerp(localTransform.ValueRW.Position, slotEntityPosition.ValueRO.value, deltaTime * 10);
+                var localTransform = SystemAPI.GetComponentRW<LocalTransform>(itemHandleEntity.ValueRO.value);
+                localTransform.ValueRW.Position = math.lerp(localTransform.ValueRW.Position, itemPosition.ValueRO.value, deltaTime * 10);
             }
         }
     }

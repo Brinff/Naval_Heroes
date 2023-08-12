@@ -12,7 +12,12 @@ namespace Game.Merge.Authoring
     [AddComponentMenu("Game/Merge/Slot Merge")]
     public class SlotMergeAuthoring : MonoBehaviour
     {
-
+        [ColorUsage(true, true)]
+        public Color current;
+        [ColorUsage(true, true)]
+        public Color allow;
+        [ColorUsage(true, true)]
+        public Color reject;
     }
 
     public class SlotMergeBaker : Baker<SlotMergeAuthoring>
@@ -20,11 +25,11 @@ namespace Game.Merge.Authoring
         public override void Bake(SlotMergeAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            PointerHandlerBaker.Bake(this, entity, PointerHandlerEvent.BeginDrag | PointerHandlerEvent.UpdateDrag | PointerHandlerEvent.EndDrag | PointerHandlerEvent.Drop);
             var gridRectAuthorin = authoring.GetComponent<GridAuhoring>();
-            AddComponent(entity, gridRectAuthorin.GetBounds(5));
-            AddComponent(entity, new SlotMerge());
-            AddComponent(entity, new SlotEntity());
+            AddComponent(entity, new SlotMergeTag());
+            AddComponent(entity, new SlotColors() { current = (Vector4)authoring.current, allow = (Vector4)authoring.allow, reject = (Vector4)authoring.reject });
+            AddComponent(entity, new GridColor() { value = (Vector4)authoring.current });
+            AddComponent(entity, new SlotMergeOutputData());
         }
     }
 }
