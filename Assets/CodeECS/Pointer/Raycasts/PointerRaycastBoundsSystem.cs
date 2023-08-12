@@ -46,6 +46,14 @@ namespace Game.Pointer.Systems
                         }
                     }
                 }
+
+                for (int i = 0; i < bufferHoveredEntity.Length; i++)
+                {
+                    if (!SystemAPI.Exists(bufferHoveredEntity[i].entity))
+                    {
+                        bufferHoveredEntity.RemoveAt(i);
+                    }
+                }
             }
 
 

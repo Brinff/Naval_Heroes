@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
-
+using Sirenix.OdinInspector;
 using Game.Data.Components;
 
 namespace Game.Data.Authoring
@@ -9,7 +9,7 @@ namespace Game.Data.Authoring
     [AddComponentMenu("Game/Data/Entity Database")]
     public class EntityDatabaseAuthoring : MonoBehaviour
     {
-        public List<EntityData> items = new List<EntityData>();
+        public List<EntityData> items = new List<EntityData>();   
     }
 
     public class EntityDatabaseBaker : Baker<EntityDatabaseAuthoring>
