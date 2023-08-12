@@ -34,23 +34,41 @@ namespace Game.Merge.Systems
 
             foreach (var (slotInputData, slotOutputData, slotGridTransform, mergeGridRenderer, entity) in SystemAPI.Query<RefRO<SlotInputData>, RefRW<SlotOutputData>, GridTransformAspect, RefRO<MergeGridRenderer>>().WithAll<SlotGridTag, Slot>().WithEntityAccess())
             {
+                var newRectsPosition = SystemAPI.GetBuffer<GridRect>(mergeGridRenderer.ValueRO.newPosition);
+                newRectsPosition.Clear();
+                var newRectsReject = SystemAPI.GetBuffer<GridRect>(mergeGridRenderer.ValueRO.reject);
+                newRectsReject.Clear();
+                var newRectsCurrent = SystemAPI.GetBuffer<GridRect>(mergeGridRenderer.ValueRO.curentPosition);
+                newRectsCurrent.Clear();
+                var slotGridWorldToLocal = slotGridTransform.GetGridWorldToLocal();
+                var slotRect = slotGridTransform.GetRect();
+
+                foreach (var (otherItemParent, otherItemHandleEntity, otherLocalTransform, otherItemEntity) in SystemAPI.Query<RefRO<ItemSlotParent>, RefRO<ItemHandleEntity>, RefRO<LocalTransform>>().WithEntityAccess())
+                {
+                    if (otherItemParent.ValueRO.value == entity)
+                    {
+                        var otherItemEntityGridTransform = SystemAPI.GetAspect<GridTransformAspect>(otherItemHandleEntity.ValueRO.value);
+                        var projectsRects = otherItemEntityGridTransform.GetProjectRects(otherLocalTransform.ValueRO.Position, slotGridWorldToLocal);
+                        for (int i = 0; i < projectsRects.Length; i++)
+                        {
+                            if (slotRect.IsOverlap(projectsRects[i])) newRectsCurrent.Add(projectsRects[i]);
+                        }
+                      
+                    }
+                }
 
                 if (slotInputData.ValueRO.itemEntity != Entity.Null && SystemAPI.HasComponent<ItemHandleEntity>(slotInputData.ValueRO.itemEntity))
                 {
                     var itemHandleEntity = SystemAPI.GetComponentRO<ItemHandleEntity>(slotInputData.ValueRO.itemEntity);
                     var itemHandleRectTransform = SystemAPI.GetAspect<GridTransformAspect>(itemHandleEntity.ValueRO.value);
 
-                    var slotRect = slotGridTransform.GetRect();
-                    var slotGridWorldToLocal = slotGridTransform.GetGridWorldToLocal();
+                   
+
                     var projectRects = itemHandleRectTransform.GetProjectRects(slotInputData.ValueRO.position, slotGridWorldToLocal, out GridRect projectBoundsRect);
                     //Debug.DebugSystem.Log($"Project Rect: {projectRect.position} {projectRect.size}");
                     slotOutputData.ValueRW.itemEntity = slotRect.IsOverlap(projectBoundsRect) ? slotInputData.ValueRO.itemEntity : Entity.Null;
 
-                    var newRectsPosition = SystemAPI.GetBuffer<GridRect>(mergeGridRenderer.ValueRO.newPosition);
-                    newRectsPosition.Clear();
 
-                    var newRectsReject = SystemAPI.GetBuffer<GridRect>(mergeGridRenderer.ValueRO.reject);
-                    newRectsReject.Clear();
 
                     if (slotOutputData.ValueRO.itemEntity != Entity.Null)
                     {
@@ -58,8 +76,6 @@ namespace Game.Merge.Systems
                         projectBoundsRect = projectBoundsRect.GetClampRect(slotRect);
                         projectBoundsRect = projectBoundsRect.GetRoundedRect();
                         slotOutputData.ValueRW.position = slotGridLocalToWorld.TransformPoint(new float3(projectBoundsRect.position, 0)) + itemHandleRectTransform.GetOffset();
-
-
 
                         for (int i = 0; i < projectRects.Length; i++)
                         {
@@ -100,7 +116,6 @@ namespace Game.Merge.Systems
                     else
                     {
                         slotOutputData.ValueRW.isPosible = false;
-                        newRectsPosition.Clear();
                     }
                     //slotOutputData.ValueRW.itemEntity = geometry.containsPointInBounds(worldBounds.ValueRO.min, worldBounds.ValueRO.max, slotInputData.ValueRO.position) ? slotInputData.ValueRO.itemEntity : Entity.Null;
                     //slotOutputData.ValueRW.targetPosition = localToWorld.ValueRO.Position;
