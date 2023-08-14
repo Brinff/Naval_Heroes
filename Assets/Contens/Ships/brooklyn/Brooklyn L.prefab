@@ -51,8 +51,8 @@ MonoBehaviour:
   rects:
   - x: 0
     y: 0
-    width: 6
-    height: 1
+    width: 7
+    height: 2
 --- !u!114 &243793433572536258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31e30b9a4a9cb4247ade9371d327fd49, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 14.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31e30b9a4a9cb4247ade9371d327fd49, type: 3}
       propertyPath: m_LocalPosition.y
@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31e30b9a4a9cb4247ade9371d327fd49, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 14.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 31e30b9a4a9cb4247ade9371d327fd49, type: 3}
       propertyPath: m_LocalRotation.w
