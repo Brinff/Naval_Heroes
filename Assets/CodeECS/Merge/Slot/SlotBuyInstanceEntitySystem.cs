@@ -8,6 +8,8 @@ using Game.Merge.Groups;
 
 using Game.Data.Components;
 using Game.Data.Systems;
+using System.Runtime.CompilerServices;
+using Game.Pointer.Events;
 
 namespace Game.Merge.Systems
 {
@@ -15,22 +17,56 @@ namespace Game.Merge.Systems
     [BurstCompile]
     public partial struct SlotBuyInstanceEntitySystem : ISystem
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [BurstCompile]
+        public bool HasItem(Entity slotEntity, ref SystemState state)
+        {
+            foreach (var slotItemParent in SystemAPI.Query<RefRO<ItemSlotParent>>())
+            {
+                if (slotEntity == slotItemParent.ValueRO.value) return true;
+            }
+            return false;
+        }
+
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            //var buffer = SystemAPI.GetSingletonBuffer<EntityDatabaseItem>(true);
-            var database = SystemAPI.GetSingleton<EntityDatabaseSystem.Singleton>();
 
-            var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
-
-            foreach (var (slotEntity, entityDataId, slotBuy, slotLocalTransform, entity) in SystemAPI.Query<RefRO<SlotEntity>, EntityDataId, RefRO<SlotBuy>, RefRO<LocalTransform>>().WithEntityAccess())
+            foreach(var (entityDataId, localToWorld, entity) in SystemAPI.Query<EntityDataId, RefRO<LocalToWorld>>().WithAll<SlotBuyTag>().WithEntityAccess())
             {
-
-                if (database.HasEntity(entityDataId.value) && slotEntity.ValueRO.value == Entity.Null)
+                if (!HasItem(entity, ref state))
                 {
-                    var instanceEntity = beginEcb.Instantiate(database.GetEntity(entityDataId));
-                    beginEcb.SetComponent(instanceEntity, new LocalTransform() { Position = slotLocalTransform.ValueRO.Position, Rotation = slotLocalTransform.ValueRO.Rotation, Scale = 1 });
-                    beginEcb.SetComponent(entity, new SlotEntity() { value = instanceEntity });
+                    var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
+                    var database = SystemAPI.GetSingleton<EntityDatabaseSystem.Singleton>();
+
+                    var prefabEntity = database.GetEntity(entityDataId);
+                    var handleEntity = beginEcb.Instantiate(prefabEntity);
+
+                    LocalTransform localTransform = new LocalTransform() { Position = localToWorld.ValueRO.Position, Rotation = localToWorld.ValueRO.Rotation, Scale = 1 };
+
+                    beginEcb.SetComponent(handleEntity, localTransform);
+
+                    var itemEntity = beginEcb.CreateEntity();
+                    beginEcb.AddComponent(itemEntity, new ItemSlotParent() { value = entity });
+                    beginEcb.AddComponent(itemEntity, new ItemPosition() { value = localToWorld.ValueRO.Position });
+                    beginEcb.AddComponent(itemEntity, new ItemHandleEntity() { value = handleEntity });
+
+                    beginEcb.AddSharedComponent(itemEntity, entityDataId);
+
+                    beginEcb.AddComponent<PointerHandlerTag>(itemEntity);
+
+                    beginEcb.AddComponent<PointerBeginDragEvent>(itemEntity);
+                    beginEcb.SetComponentEnabled<PointerBeginDragEvent>(itemEntity, false);
+
+                    beginEcb.AddComponent<PointerUpdateDragEvent>(itemEntity);
+                    beginEcb.SetComponentEnabled<PointerUpdateDragEvent>(itemEntity, false);
+
+                    beginEcb.AddComponent<PointerEndDragEvent>(itemEntity);
+                    beginEcb.SetComponentEnabled<PointerEndDragEvent>(itemEntity, false);
+
+                    beginEcb.AddComponent(itemEntity, localTransform);
+                    beginEcb.AddComponent<LocalToWorld>(itemEntity);
+                    beginEcb.AddComponent(itemEntity, SystemAPI.GetComponent<LocalBounds>(prefabEntity));
                 }
             }
         }

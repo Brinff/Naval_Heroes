@@ -15,21 +15,21 @@ namespace Game.Merge.Systems
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var (mergeApplyEvent, localToWorld, entity) in SystemAPI.Query<RefRO<MergeApplyEvent>, RefRO<LocalToWorld>>().WithEntityAccess())
-            {
-                var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
-                var endEcb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
+            //foreach (var (mergeApplyEvent, localToWorld, entity) in SystemAPI.Query<RefRO<MergeApplyEvent>, RefRO<LocalToWorld>>().WithEntityAccess())
+            //{
+            //    var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
+            //    var endEcb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
 
-                endEcb.DestroyEntity(mergeApplyEvent.ValueRO.a);
-                endEcb.DestroyEntity(mergeApplyEvent.ValueRO.b);
+            //    endEcb.DestroyEntity(mergeApplyEvent.ValueRO.handleItemEntityA);
+            //    endEcb.DestroyEntity(mergeApplyEvent.ValueRO.b);
 
-                var newEntity = beginEcb.Instantiate(mergeApplyEvent.ValueRO.result);
-                beginEcb.AddComponent(newEntity, new SlotEntityPosition() { value = localToWorld.ValueRO.Position });
-                beginEcb.SetComponent(newEntity, SystemAPI.GetComponent<LocalTransform>(mergeApplyEvent.ValueRO.b));
-                beginEcb.SetComponent(entity, new SlotEntity() { value = newEntity });
+            //    var newEntity = beginEcb.Instantiate(mergeApplyEvent.ValueRO.result);
+            //    beginEcb.AddComponent(newEntity, new SlotEntityPosition() { value = localToWorld.ValueRO.Position });
+            //    beginEcb.SetComponent(newEntity, SystemAPI.GetComponent<LocalTransform>(mergeApplyEvent.ValueRO.b));
+            //    beginEcb.SetComponent(entity, new SlotEntity() { value = newEntity });
 
-                endEcb.RemoveComponent<MergeApplyEvent>(entity);
-            }
+            //    endEcb.RemoveComponent<MergeApplyEvent>(entity);
+            //}
         }
     }
 }

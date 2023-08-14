@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 [BurstCompile]
@@ -21,8 +20,24 @@ public partial struct BoundsSystem : ISystem
 
         foreach (var (localTransform, localBounds, worldBounds) in SystemAPI.Query<RefRO<LocalToWorld>, RefRO<LocalBounds>, RefRW<WorldBounds>>())
         {
-            worldBounds.ValueRW.min = TransformHelpers.TransformPoint(localTransform.ValueRO.Value, localBounds.ValueRO.min);
-            worldBounds.ValueRW.max = TransformHelpers.TransformPoint(localTransform.ValueRO.Value, localBounds.ValueRO.max);
+            var min = TransformHelpers.TransformPoint(localTransform.ValueRO.Value, localBounds.ValueRO.min);
+            var max = TransformHelpers.TransformPoint(localTransform.ValueRO.Value, localBounds.ValueRO.max);
+            var center = math.lerp(min, max, 0.5f);
+
+            worldBounds.ValueRW.min = math.min(min, center);
+            worldBounds.ValueRW.max = math.max(max, center);
+
+
+
+
+            //worldBounds.ValueRW.max = TransformHelpers.TransformPoint(localTransform.ValueRO.Value, localBounds.ValueRO.max);
         }
     }
+
+    public void Encapsulte()
+    {
+
+    }
+
+
 }

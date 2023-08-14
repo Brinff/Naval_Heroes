@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
+using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Android;
@@ -44,7 +46,6 @@ public static class PointerHelper
     {
         if (id >= 0) id += 1;
         int abs = math.abs(id);
-        Debug.Log($"Pointer: {abs}");
         return s_Ids[abs];
     }
 
@@ -52,5 +53,7 @@ public static class PointerHelper
     {
         return (target & value) == value;
     }
+
+
 }
 

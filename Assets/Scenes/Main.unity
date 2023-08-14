@@ -976,11 +976,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
-  - {fileID: 792821838}
-  - {fileID: 792821839}
-  - {fileID: 792821842}
   - {fileID: 792821841}
+  - {fileID: 792821838}
+  - {fileID: 792821842}
   - {fileID: 792821843}
+  - {fileID: 792821839}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,6 +1174,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eaf8da9f39c63941a3209e10330ec0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &937426736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 937426737}
+  - component: {fileID: 937426738}
+  m_Layer: 0
+  m_Name: SlotA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &937426737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937426736}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 84.4, y: 82.48116, z: -214.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1152359458}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &937426738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937426736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087eafff3e978ec40bc27b4eb3d231c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 40, y: 28.28, z: 54.2}
+  parent: {fileID: 0}
 --- !u!1 &951454496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,6 +1704,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2f5e525a711234e9519cf5289f24b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1152359457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1152359458}
+  - component: {fileID: 1152359459}
+  m_Layer: 0
+  m_Name: SlotB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1152359458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152359457}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6799649, y: 0.6799649, z: 0.6799649}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 937426737}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1152359459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152359457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087eafff3e978ec40bc27b4eb3d231c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 79.71, y: 28.28, z: 40}
+  parent: {fileID: 937426738}
 --- !u!1 &1260451337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,15 +1975,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513259969}
-  m_LocalRotation: {x: 0.32276967, y: -0, z: -0, w: 0.94647753}
-  m_LocalPosition: {x: 0, y: 443.1, z: -484.7}
+  m_LocalRotation: {x: 0.5157069, y: -0, z: -0, w: 0.85676515}
+  m_LocalPosition: {x: 0, y: 623, z: -217}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 987582105}
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 37.661, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 62.089, y: 0, z: 0}
 --- !u!114 &1513259972
 MonoBehaviour:
   m_ObjectHideFlags: 0

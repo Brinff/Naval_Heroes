@@ -19,7 +19,7 @@ public static class GridUtility
         return rect.position + rect.size;
     }
 
-    public static void SetMinMax(this GridRect rect, float2 min, float2 max)
+    public static void SetMinMax(this ref GridRect rect, float2 min, float2 max)
     {
         rect.position = min;
         float2 size = math.round(max - min);
@@ -32,7 +32,7 @@ public static class GridUtility
         var min = math.max(rect.GetMin(), other.GetMin());
         var max = math.min(rect.GetMax(), other.GetMax());
         newRect.SetMinMax(min, max);
-        return rect;
+        return newRect;
     }
 
     public static bool IsOverlap(this GridRect rect, GridRect other)

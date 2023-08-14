@@ -2,23 +2,27 @@
 using Unity.Burst;
 using Unity.Entities;
 
-[UpdateInGroup(typeof(PointerGroup)), UpdateAfter(typeof(PointerPressEventSystem))]
-[BurstCompile]
-public partial struct PointerClickEventSystem : ISystem
+namespace Game.Pointer.Systems
 {
+
+    [UpdateInGroup(typeof(PointerGroup)), UpdateAfter(typeof(PointerPressEventSystem))]
     [BurstCompile]
-    public void OnUpdate(ref SystemState state)
+    public partial struct PointerClickEventSystem : ISystem
     {
-        var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
-        foreach (var (pressEntity, id, firstHoveredEntity) in SystemAPI.Query<RefRO<PointerPressEntity>, RefRO<PointerId>, RefRO<PointerFirstHoveredEntity>>().WithAll<PointerUpEvent>())
+        [BurstCompile]
+        public void OnUpdate(ref SystemState state)
         {
-            if (pressEntity.ValueRO.entity == firstHoveredEntity.ValueRO.value)
+            var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
+            foreach (var (pressEntity, id, firstHoveredEntity) in SystemAPI.Query<RefRO<PointerPressEntity>, RefRO<PointerId>, RefRO<PointerFirstHoveredEntity>>().WithAll<PointerUpEvent>())
             {
-                if (SystemAPI.HasComponent<PointerClickEvent>(pressEntity.ValueRO.entity))
+                if (pressEntity.ValueRO.entity == firstHoveredEntity.ValueRO.value)
                 {
-                    RefRW<PointerClickEvent> pointerClickEvent = SystemAPI.GetComponentRW<PointerClickEvent>(pressEntity.ValueRO.entity);
-                    if (!PointerHelper.HasFlag(pointerClickEvent.ValueRW.value, id.ValueRO.value)) pointerClickEvent.ValueRW.value |= id.ValueRO.value;
-                    beginEcb.SetComponentEnabled<PointerClickEvent>(pressEntity.ValueRO.entity, true);
+                    if (SystemAPI.HasComponent<PointerClickEvent>(pressEntity.ValueRO.entity))
+                    {
+                        RefRW<PointerClickEvent> pointerClickEvent = SystemAPI.GetComponentRW<PointerClickEvent>(pressEntity.ValueRO.entity);
+                        if (!PointerHelper.HasFlag(pointerClickEvent.ValueRW.value, id.ValueRO.value)) pointerClickEvent.ValueRW.value |= id.ValueRO.value;
+                        beginEcb.SetComponentEnabled<PointerClickEvent>(pressEntity.ValueRO.entity, true);
+                    }
                 }
             }
         }
