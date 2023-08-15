@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
-public struct PointerClickEvent : IComponentData, IEnableableComponent
+namespace Game.Pointer.Events
 {
-    public int value;
+    public struct PointerClickEvent : IComponentData, IEnableableComponent
+    {
+        public int value;
+    }
 }

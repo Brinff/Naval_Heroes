@@ -31,7 +31,10 @@ namespace Game.Merge.Systems
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            foreach (var item in SystemAPI.Query<EntityDataId>().WithAll<SlotBuyTag, PointerClickEvent>())
+            {
 
+            }
             foreach(var (entityDataId, localToWorld, entity) in SystemAPI.Query<EntityDataId, RefRO<LocalToWorld>>().WithAll<SlotBuyTag>().WithEntityAccess())
             {
                 if (!HasItem(entity, ref state))
