@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4258d1c069906844188927110d02de9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: -45.11, y: 0}
+  center: {x: -45.11, y: -15}
   scale: {x: 30, y: 30}
   rects:
   - x: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounds:
     m_Center: {x: 0, y: 10, z: 0}
-    m_Extent: {x: 60, y: 10, z: 15}
+    m_Extent: {x: 60, y: 10, z: 30}
 --- !u!1001 &5382823186930197188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7cf0d5f980f24e42ab489afea0e3728, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a7cf0d5f980f24e42ab489afea0e3728, type: 3}
       propertyPath: m_LocalRotation.w
