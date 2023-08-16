@@ -7,7 +7,7 @@ using Game.Data.Components;
 using Game.Pointer.Authoring;
 
 using UnityEngine;
-
+using Game.Pointer.Events;
 
 namespace Game.Merge.Authoring
 {

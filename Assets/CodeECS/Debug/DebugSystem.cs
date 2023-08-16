@@ -1,4 +1,4 @@
-﻿namespace Game.Debug
+﻿namespace Game.Diagnostic
 {
     public static class DebugSystem
     {

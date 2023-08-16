@@ -42,18 +42,22 @@ namespace Game.Pointer.Systems
 
         private Entity GetOrCreatePointer(EntityCommandBuffer entityCommandBuffer, PointerEventData eventData)
         {
-            var ids = entityPointerDataQuery.ToComponentDataArray<PointerId>(Allocator.Temp);
-            var entities = entityPointerDataQuery.ToEntityArray(Allocator.Temp);
-            for (int i = 0; i < ids.Length; i++)
+            using (var ids = entityPointerDataQuery.ToComponentDataArray<PointerId>(Allocator.Temp))
             {
-                if (ids[i].value == PointerHelper.GetPointerFromId(eventData.pointerId))
+                using (var entities = entityPointerDataQuery.ToEntityArray(Allocator.Temp))
                 {
-                    var pointerData = EntityManager.GetComponentObject<PointerData>(entities[i]);
-                    pointerData.value = eventData;
-                    return entities[i];
+                    for (int i = 0; i < ids.Length; i++)
+                    {
+                        if (ids[i].value == PointerHelper.GetPointerFromId(eventData.pointerId))
+                        {
+                            var pointerData = EntityManager.GetComponentObject<PointerData>(entities[i]);
+                            pointerData.value = eventData;
+                            return entities[i];
+                        }
+                    }
+                    return CreatePointer(entityCommandBuffer, eventData);
                 }
             }
-            return CreatePointer(entityCommandBuffer, eventData);
         }
 
 

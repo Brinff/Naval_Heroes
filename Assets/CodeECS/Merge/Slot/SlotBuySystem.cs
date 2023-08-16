@@ -8,36 +8,52 @@ using Game.Merge.Groups;
 
 using Game.Data.Components;
 using Game.Data.Systems;
-using System.Runtime.CompilerServices;
 using Game.Pointer.Events;
+using System.Runtime.CompilerServices;
 
 namespace Game.Merge.Systems
 {
     [UpdateInGroup(typeof(MergeGroup), OrderLast = true)]
     [BurstCompile]
-    public partial struct SlotBuyInstanceEntitySystem : ISystem
+    public partial struct SlotBuySystem : ISystem
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [BurstCompile]
-        public bool HasItem(Entity slotEntity, ref SystemState state)
+        public Entity HasItem(Entity slotEntity, ref SystemState state)
         {
-            foreach (var slotItemParent in SystemAPI.Query<RefRO<ItemSlotParent>>())
+            foreach (var (slotItemParent, entity) in SystemAPI.Query<RefRO<ItemSlotParent>>().WithEntityAccess())
             {
-                if (slotEntity == slotItemParent.ValueRO.value) return true;
+                if (slotEntity == slotItemParent.ValueRO.value)
+                {
+                    return entity;
+                }
             }
-            return false;
+            return Entity.Null;
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var item in SystemAPI.Query<EntityDataId>().WithAll<SlotBuyTag, PointerClickEvent>())
+            foreach (var (entityDataId, entity) in SystemAPI.Query<EntityDataId>().WithAll<SlotBuyTag, PointerClickEvent>().WithEntityAccess())
             {
-
+                var findEntity = HasItem(entity, ref state);
+                if (findEntity != Entity.Null)
+                {
+                    foreach (var (slotLocalToWorld, slotEntity) in SystemAPI.Query<LocalToWorld>().WithAll<SlotMergeTag>().WithEntityAccess())
+                    {
+                        if (HasItem(slotEntity, ref state) == Entity.Null)
+                        {
+                            var itemSlotEntity = SystemAPI.GetComponentRW<ItemSlotParent>(findEntity);
+                            itemSlotEntity.ValueRW.value = slotEntity;
+                            var itemPositon = SystemAPI.GetComponentRW<ItemPosition>(slotEntity);
+                            itemPositon.ValueRW.value = slotLocalToWorld.Position;
+                        }
+                    }
+                }
             }
-            foreach(var (entityDataId, localToWorld, entity) in SystemAPI.Query<EntityDataId, RefRO<LocalToWorld>>().WithAll<SlotBuyTag>().WithEntityAccess())
+
+            foreach (var (entityDataId, localToWorld, entity) in SystemAPI.Query<EntityDataId, RefRO<LocalToWorld>>().WithAll<SlotBuyTag>().WithEntityAccess())
             {
-                if (!HasItem(entity, ref state))
+                if (HasItem(entity, ref state) == Entity.Null)
                 {
                     var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
                     var database = SystemAPI.GetSingleton<EntityDatabaseSystem.Singleton>();

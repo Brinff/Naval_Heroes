@@ -2,7 +2,7 @@
 using Unity.Entities;
 
 using Game.Merge.Components;
-using Game.Debug;
+using Game.Diagnostic;
 using Game.Merge.Groups;
 using Game.Pointer.Events;
 using Game.Grid;
