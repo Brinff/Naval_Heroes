@@ -1,6 +1,7 @@
 
 using Unity.Burst;
 using Unity.Entities;
+using Game.Pointer.Events;
 
 namespace Game.Pointer.Systems
 {
