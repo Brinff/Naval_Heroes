@@ -11,7 +11,7 @@ public class LoseLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
-        m_Filter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Inc<HealthEndEvent>().End();
+        m_Filter = m_World.Filter<PlayerTagLeo>().Inc<ShipTag>().Inc<HealthEndEvent>().End();
     }
 
     public void Run(IEcsSystems systems)

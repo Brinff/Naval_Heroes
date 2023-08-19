@@ -92,7 +92,7 @@ public class OutputPlayerNotificationSystem : MonoBehaviour, IEcsInitSystem, IEc
         m_PlayerNotificationWidget = UISystem.Instance.GetElement<PlayerNotificationWidget>();
 
         m_World = systems.GetWorld();
-        m_Filter = m_World.Filter<HealthEndEvent>().Inc<TeamComponent>().Exc<PlayerTag>().End();
+        m_Filter = m_World.Filter<HealthEndEvent>().Inc<TeamComponent>().Exc<PlayerTagLeo>().End();
     }
 
     public void Run(IEcsSystems systems)

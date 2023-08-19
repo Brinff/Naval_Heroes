@@ -22,7 +22,7 @@ public class GoStageCommand : MonoBehaviour, ICommand<BattleData>, ICommand
         if (m_BattleData.stage < m_BattleData.levelData.stages.Count)
         {
             var instance = Instantiate(context.levelData.stages[context.stage]);
-            var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
+            var filter = world.Filter<PlayerTagLeo>().Inc<ShipTag>().End();
 
             foreach (var entity in filter)
             {
@@ -32,7 +32,7 @@ public class GoStageCommand : MonoBehaviour, ICommand<BattleData>, ICommand
         }
         else
         {
-            var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
+            var filter = world.Filter<PlayerTagLeo>().Inc<ShipTag>().End();
             foreach (var entity in filter)
             {
                 world.GetPool<OrbitViewActiveEvent>().Add(entity);

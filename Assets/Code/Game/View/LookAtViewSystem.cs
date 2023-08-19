@@ -58,12 +58,12 @@ public class LookAtViewSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IE
         m_World = systems.GetWorld();
 
 
-        m_FilterYesHelper = m_World.Filter<LookAtViewComponent>().Inc<PlayerAimHelperComponent>().Inc<PlayerTag>().End();
-        m_FilterNoHelper = m_World.Filter<LookAtViewComponent>().Exc<PlayerAimHelperComponent>().Inc<PlayerTag>().End();
+        m_FilterYesHelper = m_World.Filter<LookAtViewComponent>().Inc<PlayerAimHelperComponent>().Inc<PlayerTagLeo>().End();
+        m_FilterNoHelper = m_World.Filter<LookAtViewComponent>().Exc<PlayerAimHelperComponent>().Inc<PlayerTagLeo>().End();
         //m_FilterActive = m_World.Filter<OrbitViewComponent>().Inc<PlayerTag>().Inc<OrbitViewActiveEvent>().End();
-        m_AimBoundsFilter = m_World.Filter<AimBoundsComponent>().Exc<PlayerTag>().Exc<DeadTag>().End();
+        m_AimBoundsFilter = m_World.Filter<AimBoundsComponent>().Exc<PlayerTagLeo>().Exc<DeadTag>().End();
 
-        m_FilterEye = m_World.Filter<EyeComponent>().Inc<PlayerTag>().End();
+        m_FilterEye = m_World.Filter<EyeComponent>().Inc<PlayerTagLeo>().End();
 
         m_PoolEye = m_World.GetPool<EyeComponent>();
         m_PoolEyeRaycast = m_World.GetPool<EyeRaycastComponent>();

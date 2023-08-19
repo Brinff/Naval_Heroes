@@ -9,7 +9,6 @@ using Game.Merge.Groups;
 using Game.Data.Components;
 using Game.Data.Systems;
 using Game.Pointer.Events;
-using System.Runtime.CompilerServices;
 
 namespace Game.Merge.Systems
 {

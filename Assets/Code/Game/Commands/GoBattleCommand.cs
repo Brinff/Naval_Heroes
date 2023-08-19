@@ -9,7 +9,7 @@ public class GoBattleCommand : MonoBehaviour, ICommand
 {
     public void Execute(EcsWorld world, IEcsSystems systems)
     {
-        var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
+        var filter = world.Filter<PlayerTagLeo>().Inc<ShipTag>().End();
         var commandSystem = systems.GetSystem<CommandSystem>();
         var sharedData = systems.GetShared<SharedData>();
         foreach (var entity in filter)

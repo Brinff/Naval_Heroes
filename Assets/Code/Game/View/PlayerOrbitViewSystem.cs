@@ -37,8 +37,8 @@ public class PlayerOrbitViewSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyste
         m_World = systems.GetWorld();
 
 
-        m_Filter = m_World.Filter<OrbitViewComponent>().Inc<LookAtViewComponent>().Inc<PlayerTag>().End();
-        m_FilterActive = m_World.Filter<OrbitViewComponent>().Inc<LookAtViewComponent>().Inc<PlayerTag>().Inc<OrbitViewActiveEvent>().End();
+        m_Filter = m_World.Filter<OrbitViewComponent>().Inc<LookAtViewComponent>().Inc<PlayerTagLeo>().End();
+        m_FilterActive = m_World.Filter<OrbitViewComponent>().Inc<LookAtViewComponent>().Inc<PlayerTagLeo>().Inc<OrbitViewActiveEvent>().End();
 
 
         m_PoolOrbitView = m_World.GetPool<OrbitViewComponent>();

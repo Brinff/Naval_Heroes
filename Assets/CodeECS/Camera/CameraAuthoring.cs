@@ -5,30 +5,20 @@ using Unity.Entities;
 using Game.Eye.Components;
 using Unity.Transforms;
 using Unity.Entities.Content;
+using Sirenix.OdinInspector;
+using System;
 
 namespace Game.Eye.Authoring
 {
 
-    [AddComponentMenu("Game/Camera")]
+    [AddComponentMenu("Game/Eye/Camera")]
     public class CameraAuthoring : MonoBehaviour
     {
-        public WeakObjectSceneReference linkCamera;
-
-        public string cameraName;
-        public Camera GetCamera()
-        {
-            foreach (var item in Camera.allCameras)
-            {
-                if (item.name == cameraName) return item;
-            }
-            return null;
-        }
-
         private void OnDrawGizmosSelected()
         {
             using (new GizmosScope(transform.localToWorldMatrix))
             {
-                var camera = GetCamera();
+                var camera = Camera.main;
                 if (camera != null)
                 {
                     Gizmos.DrawFrustum(Vector3.zero, camera.fieldOfView, camera.farClipPlane, camera.nearClipPlane, camera.aspect);
@@ -46,15 +36,6 @@ namespace Game.Eye.Authoring
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent<CameraTag>(entity);
-            if (!string.IsNullOrEmpty(authoring.cameraName))
-            {
-                var camera = authoring.GetCamera();
-                if (camera != null)
-                {
-                    AddComponentObject(entity, new CameraLink() { value = camera });
-                    AddComponent(entity, new CameraFieldOfView() { value = camera.fieldOfView });
-                }
-            }
         }
     }
 }

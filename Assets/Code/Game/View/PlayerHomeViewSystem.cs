@@ -18,8 +18,8 @@ public class PlayerHomeViewSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem
     {
         m_World = systems.GetWorld();
 
-        m_Filter = m_World.Filter<HomeViewComponent>().Inc<PlayerTag>().End();
-        m_FilterActive = m_World.Filter<HomeViewComponent>().Inc<HomeViewActiveEvent>().Inc<PlayerTag>().End();
+        m_Filter = m_World.Filter<HomeViewComponent>().Inc<PlayerTagLeo>().End();
+        m_FilterActive = m_World.Filter<HomeViewComponent>().Inc<HomeViewActiveEvent>().Inc<PlayerTagLeo>().End();
 
         m_PoolEye = m_World.GetPool<EyeComponent>();
         m_PoolHomeView = m_World.GetPool<HomeViewComponent>();

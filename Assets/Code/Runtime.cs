@@ -26,7 +26,7 @@ public class Runtime : MonoBehaviour
         int playerEntity = EntityManager.Instance.world.Bake(m_Player);
 
         EntityManager.Instance.world.GetPool<HomeViewActiveEvent>().Add(playerEntity);
-        EntityManager.Instance.world.GetPool<PlayerTag>().Add(playerEntity);
+        EntityManager.Instance.world.GetPool<PlayerTagLeo>().Add(playerEntity);
 
         m_PlayerEntity = EntityManager.Instance.world.PackEntityWithWorld(playerEntity);
 

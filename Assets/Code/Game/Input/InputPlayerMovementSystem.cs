@@ -55,7 +55,7 @@ public class InputPlayerMovementSystem : MonoBehaviour, IEcsInitSystem, IEcsRunS
         m_InputWidget.OnChangeAxisValue += OnChangeAxisValue;
 
         var world = systems.GetWorld();
-        m_Filter = world.Filter<PlayerTag>().Inc<PropulsionComponent>().End();
+        m_Filter = world.Filter<PlayerTagLeo>().Inc<PropulsionComponent>().End();
         m_PoolPropulsionComponent = world.GetPool<PropulsionComponent>();
     }
 

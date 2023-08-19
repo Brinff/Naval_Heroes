@@ -7,7 +7,7 @@ public class SetupPlayerCommand : MonoBehaviour, ICommand
 {
     public void Execute(EcsWorld world, IEcsSystems systems)
     {
-        var filterPlayer = world.Filter<PlayerTag>().Inc<ShipTag>().Exc<DeadTag>().End();
+        var filterPlayer = world.Filter<PlayerTagLeo>().Inc<ShipTag>().Exc<DeadTag>().End();
         foreach (var entity in filterPlayer)
         {
             world.GetPool<HomeViewActiveEvent>().Add(entity);

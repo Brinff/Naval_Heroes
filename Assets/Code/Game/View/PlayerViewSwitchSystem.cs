@@ -55,7 +55,7 @@ public class PlayerViewSwitchSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupUp
         m_ZoomToggleWidget.OnToggle += OnToggleZoom;
 
         m_World = systems.GetWorld();
-        m_Filter = m_World.Filter<PlayerTag>().Inc<ShipTag>().End();
+        m_Filter = m_World.Filter<PlayerTagLeo>().Inc<ShipTag>().End();
     }
 
     public void Run(IEcsSystems systems)

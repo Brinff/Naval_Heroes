@@ -9,6 +9,6 @@ public class PlayerAuthoring : MonoBehaviour, IEntityAuthoring
 
     public void Bake(int entity, EcsWorld ecsWorld)
     {
-        ecsWorld.GetPool<PlayerTag>().Add(entity);
+        ecsWorld.GetPool<PlayerTagLeo>().Add(entity);
     }
 }

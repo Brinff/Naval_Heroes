@@ -1,6 +1,6 @@
 ﻿using Unity.Entities;
 
-public struct MergeGridRenderer : IComponentData
+public struct GridComposition : IComponentData
 {
     public Entity field;
     public Entity reject;

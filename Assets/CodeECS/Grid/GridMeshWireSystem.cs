@@ -127,6 +127,10 @@ public partial class GridMeshWireSystem : SystemBase
             mesh.SetColors(colors.AsArray());
             mesh.RecalculateBounds();
 
+            vertices.Dispose();
+            triangles.Dispose();
+            normals.Dispose();
+            colors.Dispose();
 
             return mesh;
         }

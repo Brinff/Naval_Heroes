@@ -5,7 +5,7 @@ using Game.Merge.Components;
 using Game.Pointer.Authoring;
 
 using UnityEngine;
-
+using Game.Rendering.Material.Components;
 
 namespace Game.Merge.Authoring
 {
@@ -28,7 +28,7 @@ namespace Game.Merge.Authoring
             var gridRectAuthorin = authoring.GetComponent<GridAuhoring>();
             AddComponent(entity, new SlotMergeTag());
             AddComponent(entity, new SlotColors() { current = (Vector4)authoring.current, allow = (Vector4)authoring.allow, reject = (Vector4)authoring.reject });
-            AddComponent(entity, new GridColor() { value = (Vector4)authoring.current });
+            AddComponent(entity, new MaterialColorProperty() { value = (Vector4)authoring.current });
             AddComponent(entity, new SlotMergeOutputData());
         }
     }

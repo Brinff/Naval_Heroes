@@ -20,9 +20,9 @@ public class PlayerAimSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
-        m_Filter = m_World.Filter<TurretAimComponent>().Inc<PlayerTag>().End();
+        m_Filter = m_World.Filter<TurretAimComponent>().Inc<PlayerTagLeo>().End();
 
-        m_PlayerFilter = m_World.Filter<PlayerAimPointComponent>().Inc<LookAtViewComponent>().Inc<PlayerTag>().Exc<AITag>().End();
+        m_PlayerFilter = m_World.Filter<PlayerAimPointComponent>().Inc<LookAtViewComponent>().Inc<PlayerTagLeo>().Exc<AITag>().End();
 
         m_PoolTurretAimComponent = m_World.GetPool<TurretAimComponent>();
         m_PoolRootComponent = m_World.GetPool<RootComponent>();

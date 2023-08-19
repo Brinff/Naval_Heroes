@@ -21,5 +21,16 @@ namespace Game.Merge.Data
 
         [TableList(ShowIndexLabels = true, ShowPaging = true)]
         public List<Item> items = new List<Item>();
+
+        public EntityData GetResult(EntityData a, EntityData b)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                var item = items[i];
+                if (!item.isValid) continue;
+                if (item.a == a && item.b == b) return item.result;
+            }
+            return null;
+        }
     }
 }

@@ -6,7 +6,7 @@ using Game.Eye.Authoring;
 
 namespace Game.Eye.Inspectors
 {
-    //[CustomEditor(typeof(CameraAuthoring))]
+    [CustomEditor(typeof(CameraAuthoring))]
     public class CameraAuthoringEditor : Editor
     {
         private static Dictionary<CameraAuthoring, Camera> s_Cameras = new Dictionary<CameraAuthoring, Camera>();

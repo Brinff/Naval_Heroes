@@ -1,0 +1,140 @@
+using Game.Grid.Auhoring;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using static UnityEngine.Networking.UnityWebRequest;
+
+public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag
+{
+    public GridAuhoring grid;
+    public SlotCollection collection { get; private set; }
+    public List<SlotItem> items = new List<SlotItem>();
+
+    public GridRendererAuthoring gridField;
+    public GridRendererAuthoring gridReject;
+    public GridRendererAuthoring gridAllow;
+    public GridRendererAuthoring gridCurrent;
+    public GridRendererAuthoring gridNew;
+
+    public void Prepare(SlotCollection collection)
+    {
+        this.collection = collection;
+
+        grid = GetComponent<GridAuhoring>();
+        gridField.BeginFill(grid.scale, grid.center);
+        foreach (var item in grid.rects)
+        {
+            gridField.AddRect(item.position, item.size);
+        }
+        gridField.EndFill();
+    }
+
+    public bool AddItem(SlotItem item, Vector3 position)
+    {
+        if (items.Contains(item)) return false;
+
+        item.parentSlot = this;
+        item.targetPosition = position;
+        item.transform.position = position;
+
+        items.Add(item);
+
+        UpdateCurrentGrid();
+
+        return true;
+    }
+
+    public bool RemoveItem(SlotItem slotItem)
+    {
+        if (items.Remove(slotItem))
+        {
+            UpdateCurrentGrid();
+            return true;
+        }
+        return false;
+    }
+
+    private void UpdateCurrentGrid()
+    {
+        gridCurrent.BeginFill(grid.scale, grid.center);
+        Matrix4x4 worldToLocal = grid.GetWorldToLocalMatrix();
+        foreach (var currentItem in items)
+        {
+            foreach (var itemRect in currentItem.grid.rects)
+            {
+                RectInt projectRect = currentItem.grid.GetProjectRect(itemRect, currentItem.grid.GetLocalToWorldMatrix(), worldToLocal).GetRoundedRect();
+                gridCurrent.AddRect(projectRect.position, projectRect.size);
+            }
+        }
+
+        gridCurrent.EndFill();
+    }
+
+    public bool Populate(Ray ray, SlotItem slotItem, out Vector3 position)
+    {
+        Plane plane = new Plane(Vector3.up, 0);
+        position = Vector3.zero;
+        if (plane.Raycast(ray, out float distance))
+        {
+            position = ray.GetPoint(distance);
+            gridNew.BeginFill(grid.scale, grid.center);
+            gridReject.BeginFill(grid.scale, grid.center);
+            bool isOverlap = false;
+            bool isIntersect = false;
+            Matrix4x4 worldToLocal = grid.GetWorldToLocalMatrix();
+            Matrix4x4 localToWorld = grid.GetLocalToWorldMatrix();
+
+            for (int i = 0; i < grid.rects.Length; i++)
+            {
+                Rect rect = grid.rects[i].GetSignleRect();
+
+                foreach (var itemRect in slotItem.grid.rects)
+                {
+                    Rect projectRect = slotItem.grid.GetProjectRect(itemRect, Matrix4x4.Translate(position) * slotItem.grid.GetMatrix(), worldToLocal);
+                    if (rect.Overlaps(projectRect))
+                    {
+                        var clampedRect = projectRect.GetClampRect(rect).GetRoundedRect();
+                        gridNew.AddRect(clampedRect.position, clampedRect.size);
+
+                        position = localToWorld.MultiplyPoint((Vector2)clampedRect.position) + slotItem.grid.GetOffset();
+
+                        foreach (var otherItem in items)
+                        {
+                            if (otherItem == slotItem) continue;
+                            foreach (var otherRect in otherItem.grid.rects)
+                            {
+                                RectInt projectOtherRect = otherItem.grid.GetProjectRect(otherRect, otherItem.grid.GetLocalToWorldMatrix(), worldToLocal).GetRoundedRect();
+                                if (clampedRect.Overlaps(projectOtherRect))
+                                {
+                                    var intersectRect = clampedRect.GetIntersectRect(projectOtherRect);
+                                    gridReject.AddRect(intersectRect.position, intersectRect.size);
+
+                                    isIntersect = true;
+                                }                               
+                            }
+                        }
+
+                        isOverlap = true;
+                    }
+                }
+            }
+
+            gridNew.EndFill();
+            gridReject.EndFill();
+
+            return isOverlap && !isIntersect;
+        }
+        return false;
+    }
+
+    public void ItemBeginDrag(SlotItem slotItem)
+    {
+
+    }
+
+    public void ItemEndDrag(SlotItem slotItem)
+    {
+        gridNew.Clear();
+        gridReject.Clear();
+    }
+}

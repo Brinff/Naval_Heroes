@@ -32,7 +32,7 @@ namespace Game.Merge.Systems
         {
             var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
 
-            foreach (var (slotInputData, slotOutputData, slotGridTransform, mergeGridRenderer, entity) in SystemAPI.Query<RefRO<SlotInputData>, RefRW<SlotOutputData>, GridTransformAspect, RefRO<MergeGridRenderer>>().WithAll<SlotGridTag, Slot>().WithEntityAccess())
+            foreach (var (slotInputData, slotOutputData, slotGridTransform, mergeGridRenderer, entity) in SystemAPI.Query<RefRO<SlotInputData>, RefRW<SlotOutputData>, GridTransformAspect, RefRO<GridComposition>>().WithAll<SlotGridTag, Slot>().WithEntityAccess())
             {
                 var newRectsPosition = SystemAPI.GetBuffer<GridRect>(mergeGridRenderer.ValueRO.newPosition);
                 newRectsPosition.Clear();
@@ -48,12 +48,11 @@ namespace Game.Merge.Systems
                     if (otherItemParent.ValueRO.value == entity)
                     {
                         var otherItemEntityGridTransform = SystemAPI.GetAspect<GridTransformAspect>(otherItemHandleEntity.ValueRO.value);
-                        var projectsRects = otherItemEntityGridTransform.GetProjectRects(otherLocalTransform.ValueRO.Position, slotGridWorldToLocal);
+                        using var projectsRects = otherItemEntityGridTransform.GetProjectRects(otherLocalTransform.ValueRO.Position, slotGridWorldToLocal);
                         for (int i = 0; i < projectsRects.Length; i++)
                         {
                             if (slotRect.IsOverlap(projectsRects[i])) newRectsCurrent.Add(projectsRects[i]);
-                        }
-                      
+                        }                     
                     }
                 }
 
@@ -62,9 +61,9 @@ namespace Game.Merge.Systems
                     var itemHandleEntity = SystemAPI.GetComponentRO<ItemHandleEntity>(slotInputData.ValueRO.itemEntity);
                     var itemHandleRectTransform = SystemAPI.GetAspect<GridTransformAspect>(itemHandleEntity.ValueRO.value);
 
-                   
+                    
 
-                    var projectRects = itemHandleRectTransform.GetProjectRects(slotInputData.ValueRO.position, slotGridWorldToLocal, out GridRect projectBoundsRect);
+                    using var projectRects = itemHandleRectTransform.GetProjectRects(slotInputData.ValueRO.position, slotGridWorldToLocal, out GridRect projectBoundsRect);
                     //Debug.DebugSystem.Log($"Project Rect: {projectRect.position} {projectRect.size}");
                     slotOutputData.ValueRW.itemEntity = slotRect.IsOverlap(projectBoundsRect) ? slotInputData.ValueRO.itemEntity : Entity.Null;
 
@@ -90,7 +89,7 @@ namespace Game.Merge.Systems
                             if (otherItemParent.ValueRO.value == entity && otherItemEntity != slotInputData.ValueRO.itemEntity)
                             {
                                 var otherItemEntityGridTransform = SystemAPI.GetAspect<GridTransformAspect>(otherItemHandleEntity.ValueRO.value);
-                                var rects = otherItemEntityGridTransform.GetProjectRects(slotGridWorldToLocal);
+                                using var rects = otherItemEntityGridTransform.GetProjectRects(slotGridWorldToLocal);
 
                                 for (int i = 0; i < rects.Length; i++)
                                 {

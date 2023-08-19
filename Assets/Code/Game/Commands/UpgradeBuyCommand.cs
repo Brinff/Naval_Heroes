@@ -24,7 +24,7 @@ public class UpgradeBuyCommand : MonoBehaviour, ICommand<UpgradeData>
 
         if (playerMoneySoftProvider.HasMoney(cost))
         {
-            var playerShip = world.Filter<PlayerTag>().Inc<ShipTag>().Inc<TransformComponent>().End();
+            var playerShip = world.Filter<PlayerTagLeo>().Inc<ShipTag>().Inc<TransformComponent>().End();
             var playerShipEntity = playerShip.GetSingleton();
             if (playerShipEntity != null)
             {

@@ -128,7 +128,7 @@ public readonly partial struct GridTransformAspect : IAspect
             GridRect projectGridRect = new GridRect();
 
             
-
+            
 
             float3 worldPosition = matrix.TransformPoint(float3.zero);
             float3 worldSize = matrix.TransformDirection(new float3(gridRect.size.x, gridRect.size.y, 0));//math.mul(matrix, new float4(gridRect.size.x, gridRect.size.y, 0, 1)).xyz;

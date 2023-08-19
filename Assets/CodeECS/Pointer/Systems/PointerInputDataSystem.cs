@@ -34,10 +34,15 @@ namespace Game.Pointer.Systems
         {
             beginSimulationEntity = World.GetOrCreateSystemManaged<BeginSimulationEntityCommandBufferSystem>();
             endSimulationEntity = World.GetOrCreateSystemManaged<EndSimulationEntityCommandBufferSystem>();
-            entityPointerDataQuery = new EntityQueryBuilder(Allocator.Persistent).WithAll<PointerId>().Build(this);
+            entityPointerDataQuery = SystemAPI.QueryBuilder().WithAll<PointerId>().Build();
             //entityPointerDownQuery = new EntityQueryBuilder(Allocator.Persistent).WithAll<PointerDownEvent>().Build(this);
             //entityPointerUpQuery = new EntityQueryBuilder(Allocator.Persistent).WithAll<PointerUpEvent>().Build(this);
         }
+
+        //protected override void OnDestroy()
+        //{
+        //    entityPointerDataQuery.Dispose();
+        //}
 
 
         private Entity GetOrCreatePointer(EntityCommandBuffer entityCommandBuffer, PointerEventData eventData)

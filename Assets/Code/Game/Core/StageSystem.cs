@@ -11,7 +11,7 @@ public class StageSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGro
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
-        m_Filter = m_World.Filter<PlayerTag>().Inc<LevelComponent>().Inc<StageComponent>().Inc<LoadStageEvent>().End();
+        m_Filter = m_World.Filter<PlayerTagLeo>().Inc<LevelComponent>().Inc<StageComponent>().Inc<LoadStageEvent>().End();
         m_PoolLoadStageEvent = m_World.GetPool<LoadStageEvent>();
     }
 

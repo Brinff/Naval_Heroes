@@ -19,7 +19,7 @@ public class PlayerEyeSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupFixedUpda
     {
         EcsWorld world = systems.GetWorld();
         var entity = world.Bake(m_Eye);
-        world.GetPool<PlayerTag>().AddOrGet(entity);
+        world.GetPool<PlayerTagLeo>().AddOrGet(entity);
 
         m_Filter = world.Filter<EyeComponent>().End();
         m_PoolEye = world.GetPool<EyeComponent>();

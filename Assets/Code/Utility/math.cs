@@ -31,6 +31,16 @@ namespace Unity.Mathematics
 
     public static partial class mathExtention
     {
+        public static int repeat(int t, int length)
+        {
+            return (int)math.clamp(t - math.floor(t / length) * length, 0f, length);
+        }
+
+        public static float repeat(float t, float length)
+        {
+            return math.clamp(t - math.floor(t / length) * length, 0f, length);
+        }
+
         public static bool approximately(float a, float b)
         {
             return math.abs(b - a) < math.max(1E-06f * math.max(math.abs(a), math.abs(b)), math.EPSILON * 8f);

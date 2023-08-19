@@ -20,7 +20,7 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         UISystem.Instance.compositionModule.Show<UIHomeComposition>();
         m_CommandSystem = systems.GetSystem<CommandSystem>();
 
-        var filterPlayer = world.Filter<PlayerTag>().Inc<ShipTag>().Exc<DeadTag>().End();
+        var filterPlayer = world.Filter<PlayerTagLeo>().Inc<ShipTag>().Exc<DeadTag>().End();
         var filterEnemy = world.Filter<AITag>().Inc<ShipTag>().Exc<DeadTag>().End();
 
         var poolDestroy = world.GetPool<DestroyComponent>();

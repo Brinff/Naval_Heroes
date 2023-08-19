@@ -13,8 +13,9 @@ using Game.Merge.Groups;
 using Game.Data.Systems;
 using Game.Data.Components;
 using Game.Merge.Events;
+using Game.Rendering.Material.Components;
+
 using Unity.Mathematics;
-using System.Runtime.CompilerServices;
 
 namespace Game.Merge.Systems
 {
@@ -22,7 +23,6 @@ namespace Game.Merge.Systems
     [UpdateInGroup(typeof(SlotGroup))]
     public partial struct SlotMergeSystem : ISystem
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [BurstCompile]
         public bool HasItem(Entity slotEntity, out Entity item, ref SystemState state)
         {
@@ -44,7 +44,7 @@ namespace Game.Merge.Systems
             var beginEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
             var endEcb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
 
-            foreach (var (slotInputData, slotOutputData, slotMegrgeOutputData, worldBounds, localToWorld, gridColor, slotColors, entity) in SystemAPI.Query<RefRO<SlotInputData>, RefRW<SlotOutputData>, RefRW<SlotMergeOutputData>, RefRO<WorldBounds>, RefRO<LocalToWorld>, RefRW<GridColor>, RefRO<SlotColors>>().WithAll<SlotMergeTag>().WithEntityAccess())
+            foreach (var (slotInputData, slotOutputData, slotMegrgeOutputData, worldBounds, localToWorld, gridColor, slotColors, entity) in SystemAPI.Query<RefRO<SlotInputData>, RefRW<SlotOutputData>, RefRW<SlotMergeOutputData>, RefRO<WorldBounds>, RefRO<LocalToWorld>, RefRW<MaterialColorProperty>, RefRO<SlotColors>>().WithAll<SlotMergeTag>().WithEntityAccess())
             {
                 if (slotInputData.ValueRO.itemEntity != Entity.Null)
                 {
