@@ -1,10 +1,9 @@
 using Game.Grid.Auhoring;
-using Game.Merge.Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Experimental.AI;
+using Game.Merge.Data;
 
 public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragHandler, IEndDragHandler
 {

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1468786854299531543}
-  - component: {fileID: 978869337506906784}
   - component: {fileID: 243793433572536258}
   m_Layer: 0
   m_Name: Brooklyn L
@@ -34,25 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &978869337506906784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7916594432077460907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4258d1c069906844188927110d02de9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  center: {x: -90, y: -15}
-  scale: {x: 30, y: 30}
-  rects:
-  - x: 0
-    y: 0
-    width: 7
-    height: 2
 --- !u!114 &243793433572536258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,12 +42,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7916594432077460907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f3f195da31246348bf0e6f17509faa7, type: 3}
+  m_Script: {fileID: 11500000, guid: 634fa4982cfe28c4189864e3579c9298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounds:
-    m_Center: {x: 0, y: 18, z: 0}
-    m_Extent: {x: 105, y: 18, z: 30}
+  center: {x: -90, y: -15}
+  scale: {x: 30, y: 30}
+  rects:
+  - x: 0
+    y: 0
+    width: 7
+    height: 2
 --- !u!1001 &7634240759523867399
 PrefabInstance:
   m_ObjectHideFlags: 0

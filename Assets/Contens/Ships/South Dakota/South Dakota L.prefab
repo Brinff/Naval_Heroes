@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7580955358338608258}
-  - component: {fileID: 5267574081164788435}
-  - component: {fileID: 3604291626724361342}
+  - component: {fileID: 4835109356343875864}
   m_Layer: 0
   m_Name: South Dakota L
   m_TagString: Untagged
@@ -34,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5267574081164788435
+--- !u!114 &4835109356343875864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,31 +42,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2274979080763799702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4258d1c069906844188927110d02de9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 634fa4982cfe28c4189864e3579c9298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: -105, y: -15}
+  center: {x: -90, y: -15}
   scale: {x: 30, y: 30}
   rects:
   - x: 0
     y: 0
-    width: 8
+    width: 7
     height: 2
---- !u!114 &3604291626724361342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2274979080763799702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f3f195da31246348bf0e6f17509faa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bounds:
-    m_Center: {x: 0, y: 20, z: 0}
-    m_Extent: {x: 120, y: 20, z: 30}
 --- !u!1001 &7681177810957280926
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8737292997426128731}
-  - component: {fileID: 5081929311199461562}
-  - component: {fileID: 4753788052821231714}
+  - component: {fileID: 147941709086757745}
   m_Layer: 0
   m_Name: Mahan S
   m_TagString: Untagged
@@ -34,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5081929311199461562
+--- !u!114 &147941709086757745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6931636924525723888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4258d1c069906844188927110d02de9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 634fa4982cfe28c4189864e3579c9298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   center: {x: -30, y: -15}
@@ -53,21 +52,6 @@ MonoBehaviour:
     y: 0
     width: 3
     height: 2
---- !u!114 &4753788052821231714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6931636924525723888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f3f195da31246348bf0e6f17509faa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bounds:
-    m_Center: {x: 0, y: 13, z: 0}
-    m_Extent: {x: 45, y: 13, z: 30}
 --- !u!1001 &6861643423560280489
 PrefabInstance:
   m_ObjectHideFlags: 0
