@@ -9,33 +9,45 @@ public class GoBattleCommand : MonoBehaviour, ICommand
 {
     public void Execute(EcsWorld world, IEcsSystems systems)
     {
-        var filter = world.Filter<PlayerTagLeo>().Inc<ShipTag>().End();
+        var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
         var commandSystem = systems.GetSystem<CommandSystem>();
-        var sharedData = systems.GetShared<SharedData>();
-        foreach (var entity in filter)
-        {
-            ref var playerAimPoint = ref world.GetPool<PlayerAimPointComponent>().AddOrGet(entity);
-            playerAimPoint.state = AimState.Aim;
+        var view = world.Filter<ViewComponent>().Inc<BattleTag>().End().GetSingleton();
+        ref var eye = ref world.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
+        eye.view = world.PackEntity(view.Value);
 
-            world.GetPool<OrbitViewActiveEvent>().Add(entity);
+        var playerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
+        playerSlotsSystem.Hide();
 
-            UISystem.Instance.compositionModule.Show<UIGameShipDefaultComposition>();
+        UISystem.Instance.compositionModule.Show<UIBattleComposition>();
 
-            var playerLevelData = sharedData.Get<PlayerLevelData>();
-            var playerLevelProvider = sharedData.Get<PlayerLevelProvider>();
+        var playerLevelData = systems.GetData<MissionDatabase>();
+        var playerLevelProvider = systems.GetSystem<PlayerMissionSystem>();
 
-            var levelData = playerLevelData.GetLevel(playerLevelProvider.level);
+        var levelData = playerLevelData.GetLevel(playerLevelProvider.level);
 
-            commandSystem.Execute<GoStageCommand, BattleData>(new BattleData() { levelData = levelData, stage = 0, level = playerLevelProvider.level });
+        commandSystem.Execute<GoStageCommand, BattleData>(new BattleData() { levelData = levelData, stage = 0, level = playerLevelProvider.level });
 
-            //ref var level = ref world.GetPool<LevelComponent>().Add(entity);
-            //level.data = levelData;
-            //level.value = playerLevelProvider.level;
 
-            //ref var stage = ref world.GetPool<StageComponent>().Add(entity);
-            //stage.value = 0;
+        //foreach (var entity in filter)
+        //{
+        //    //ref var playerAimPoint = ref world.GetPool<PlayerAimPointComponent>().AddOrGet(entity);
+        //    //playerAimPoint.state = AimState.Aim;
 
-            //world.GetPool<LoadStageEvent>().Add(entity);
-        }
+        //    //world.GetPool<OrbitViewActiveEvent>().Add(entity);
+
+            
+
+
+
+
+        //    //ref var level = ref world.GetPool<LevelComponent>().Add(entity);
+        //    //level.data = levelData;
+        //    //level.value = playerLevelProvider.level;
+
+        //    //ref var stage = ref world.GetPool<StageComponent>().Add(entity);
+        //    //stage.value = 0;
+
+        //    //world.GetPool<LoadStageEvent>().Add(entity);
+        //}
     }
 }

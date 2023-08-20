@@ -75,8 +75,8 @@ public class InputPlayerZoomSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyste
 
         m_World = systems.GetWorld();
 
-        m_Filter = m_World.Filter<ZoomViewComponent>().Inc<PlayerTagLeo>().End();
-        m_FilterActive = m_World.Filter<ZoomViewComponent>().Inc<ZoomViewActiveEvent>().Inc<PlayerTagLeo>().End();
+        m_Filter = m_World.Filter<ZoomViewComponent>().Inc<PlayerTag>().End();
+        m_FilterActive = m_World.Filter<ZoomViewComponent>().Inc<ZoomViewActiveEvent>().Inc<PlayerTag>().End();
 
         m_PoolEye = m_World.GetPool<EyeComponent>();
         m_PoolZoomView = m_World.GetPool<ZoomViewComponent>();

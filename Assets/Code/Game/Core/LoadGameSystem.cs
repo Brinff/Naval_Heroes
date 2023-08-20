@@ -4,10 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupUpdateSystem
+public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
 {
-    [SerializeField]
-    private EntityData m_EntityData;
+    //[SerializeField]
+    //private EntityData m_EntityData;
 
     private EcsWorld m_World;
 

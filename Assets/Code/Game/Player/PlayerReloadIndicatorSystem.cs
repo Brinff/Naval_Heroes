@@ -22,9 +22,9 @@ public class PlayerReloadIndicatorSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
-        m_FilterNew = m_World.Filter<PlayerTagLeo>().Inc<WeaponReloadComponent>().Exc<WeaponReloadIndicatorComponent>().Exc<AITag>().End();
-        m_Filter = m_World.Filter<PlayerTagLeo>().Inc<WeaponReloadComponent>().Inc<WeaponReloadIndicatorComponent>().Exc<AITag>().End();
-        m_FilterDestory = m_World.Filter<PlayerTagLeo>().Inc<DestroyComponent>().Inc<ChildsComponent>().End();
+        m_FilterNew = m_World.Filter<PlayerTag>().Inc<WeaponReloadComponent>().Exc<WeaponReloadIndicatorComponent>().Exc<AITag>().End();
+        m_Filter = m_World.Filter<PlayerTag>().Inc<WeaponReloadComponent>().Inc<WeaponReloadIndicatorComponent>().Exc<AITag>().End();
+        m_FilterDestory = m_World.Filter<PlayerTag>().Inc<DestroyComponent>().Inc<ChildsComponent>().End();
         m_WeaponReload = m_World.GetPool<WeaponReloadComponent>();
         m_WeaponReloadIndicator = m_World.GetPool<WeaponReloadIndicatorComponent>();
         m_Childs = m_World.GetPool<ChildsComponent>();

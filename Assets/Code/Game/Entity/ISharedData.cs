@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISharedData
+public interface IEcsData
 {
 
 }
 
-public interface ISharedInitalizeData : ISharedData
+public interface ISharedInitalizeData : IEcsData
 {
     void InitalizeData();
 }

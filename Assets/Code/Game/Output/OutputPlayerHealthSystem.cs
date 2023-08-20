@@ -43,7 +43,7 @@ public class OutputPlayerHealthSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSy
 
         m_PlayerHealthBarWidget = UISystem.Instance.GetElement<PlayerHealthBarWidget>();
 
-        m_Filter = world.Filter<PlayerTagLeo>().Inc<HealthComponent>().End();
+        m_Filter = world.Filter<PlayerTag>().Inc<HealthComponent>().End();
         m_PoolHealthComponent = world.GetPool<HealthComponent>();
         //m_PoolPlayerTag = world.GetPool<PlayerTag>();
         m_PoolHealthBarComponent = world.GetPool<HealthBarComponent>();

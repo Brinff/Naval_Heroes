@@ -9,7 +9,7 @@ public class MoneySpendCommand : MonoBehaviour, ICommand<int>
     public void Execute(EcsWorld world, IEcsSystems systems, int amount)
     {
         SoftMoneyCounterWidget softMoneyCounterWidget = UISystem.Instance.GetElement<SoftMoneyCounterWidget>();
-        PlayerMoneySoftProvider playerMoneySoftProvider = systems.GetShared<SharedData>().Get<PlayerMoneySoftProvider>();
-        if (playerMoneySoftProvider.SpendMoney(amount)) softMoneyCounterWidget.SetMoney(playerMoneySoftProvider.amount);
+        PlayerMoneySystem playerMoneySystem = systems.GetSystem<PlayerMoneySystem>();
+        if (playerMoneySystem.SpendMoney(amount)) softMoneyCounterWidget.SetMoney(playerMoneySystem.amount);
     }
 }

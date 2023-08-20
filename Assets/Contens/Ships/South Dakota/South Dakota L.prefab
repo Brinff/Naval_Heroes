@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7580955358338608258}
   - component: {fileID: 4835109356343875864}
+  - component: {fileID: 4677598557396393791}
   m_Layer: 0
   m_Name: South Dakota L
   m_TagString: Untagged
@@ -52,6 +53,18 @@ MonoBehaviour:
     y: 0
     width: 7
     height: 2
+--- !u!114 &4677598557396393791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274979080763799702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735d5377e15ce844ea13da0dd45c35fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7681177810957280926
 PrefabInstance:
   m_ObjectHideFlags: 0

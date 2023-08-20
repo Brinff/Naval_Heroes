@@ -1,5 +1,5 @@
 
-public struct PlayerTagLeo
+public struct PlayerTag : IEntityComponent
 {
 
 }

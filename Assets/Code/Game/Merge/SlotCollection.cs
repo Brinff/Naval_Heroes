@@ -7,6 +7,17 @@ public class SlotCollection : MonoBehaviour
 {
     private List<ISlot> slots = new List<ISlot>();
 
+    public delegate void ChangeDelegate(SlotCollection collection);
+
+    public event ChangeDelegate OnChange;
+
+    private bool m_IsDirty;
+
+    public void SetDirty()
+    {
+        m_IsDirty = true;
+    }
+
     public void RegisterSlot(ISlot slot)
     {
         if (!slots.Contains(slot))
@@ -16,7 +27,7 @@ public class SlotCollection : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    public void Prepare()
     {
         var slots = GetComponentsInChildren<ISlot>();
         foreach (var item in slots)
@@ -30,6 +41,13 @@ public class SlotCollection : MonoBehaviour
         return slots.Where(x => x is T).Select(x => (T)x).ToArray<T>();
     }
 
-
+    private void Update()
+    {
+        if (m_IsDirty)
+        {
+            OnChange?.Invoke(this);
+            m_IsDirty = false;
+        }
+    }
 
 }

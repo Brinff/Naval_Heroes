@@ -6,8 +6,8 @@ using UnityEditor;
 
 public class ScriptSpawnPointPlayer : ScriptSpawnPoint
 {
-    protected override Color GetColor()
-    {
-        return Color.green;
-    }
+    //protected override Color GetColor()
+    //{
+    //    return Color.green;
+    //}
 }

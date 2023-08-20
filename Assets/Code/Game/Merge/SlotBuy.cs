@@ -1,18 +1,23 @@
 using Game.Grid.Auhoring;
+using Game.Utility;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler
+public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler, ISlotRenderer
 {
     public EntityData entity;
 
-    public SlotItem item;
-
+    public List<SlotItem> items { get; private set; } = new List<SlotItem>();
+    public SlotItem item => items.Count > 0 ? items[0] : null;
     public SlotCollection collection { get; private set; }
 
+    [SerializeField]
+    private GridRendererAuthoring gridRenderer;
+
+    public int id => name.GetDeterministicHashCode();
 
     private BoxCollider[] colliders;
 
@@ -23,12 +28,12 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     public bool AddItem(SlotItem slotItem, Vector3 position)
     {
-        if (item == null)
+        if (items.Count == 0)
         {
-            item = slotItem;
-            item.parentSlot = this;
-            item.targetPosition = position;
-            item.transform.position = position;
+            items.Add(slotItem);
+            slotItem.parentSlot = this;
+            slotItem.targetPosition = position;
+            slotItem.transform.position = position;
             return true;
         }
         return false;
@@ -36,9 +41,8 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     public bool RemoveItem(SlotItem slotItem)
     {
-        if (slotItem == item)
+        if (items.Remove(slotItem))
         {
-            item = null;
             Spawn();
             return true;
         }
@@ -48,7 +52,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
     [Button]
     public void Spawn()
     {
-       AddItem(SlotItem.Create(entity, transform.position, transform.rotation), transform.position);
+        AddItem(SlotItem.Create(collection, entity, transform.position), transform.position);
     }
 
     public void Prepare(SlotCollection collection)
@@ -66,7 +70,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
             var sigleRect = grid.GetSingleRect(grid.rects[i]);
             BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
             boxCollider.center = new Vector3(sigleRect.center.x, 0, sigleRect.center.y);
-            boxCollider.size = new Vector3(sigleRect.size.x, 1, sigleRect.size.y);
+            boxCollider.size = new Vector3(sigleRect.size.x, 5, sigleRect.size.y);
             colliders[i] = boxCollider;
             gridRenderer.AddRect(grid.rects[i].position, grid.rects[i].size);
         }
@@ -100,5 +104,17 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
                 break;
             }
         }
+    }
+
+    public void Show(float duration)
+    {
+        item.Show();
+        gridRenderer.DoAlpha(1, duration);
+    }
+
+    public void Hide(float duration)
+    {
+        item.Hide();
+        gridRenderer.DoAlpha(0, duration);
     }
 }

@@ -13,10 +13,9 @@ public class UpgradeBuyCommand : MonoBehaviour, ICommand<UpgradeData>
     public void Execute(EcsWorld world, IEcsSystems systems, UpgradeData upgradeData)
     {
         var commandSystem = systems.GetSystem<CommandSystem>();
-        var sharedData = systems.GetShared<SharedData>();
-        var playerUpgradeData = sharedData.Get<PlayerUpgradeData>();
-        var playerUpgradeProvider = sharedData.Get<PlayerUpgradeProvider>();
-        var playerMoneySoftProvider = sharedData.Get<PlayerMoneySoftProvider>();
+        var playerUpgradeData = systems.GetData<UpgradeDatabase>();
+        var playerUpgradeProvider = systems.GetSystem<PlayerUpgradeSystem>();
+        var playerMoneySoftProvider = systems.GetSystem<PlayerMoneySystem>();
         int index = playerUpgradeData.upgrades.IndexOf(upgradeData);
         UpgradePlayerData upgradePlayerData = playerUpgradeProvider.upgrades[index];
         int cost = upgradeData.cost[upgradePlayerData.level - 1];
@@ -24,7 +23,7 @@ public class UpgradeBuyCommand : MonoBehaviour, ICommand<UpgradeData>
 
         if (playerMoneySoftProvider.HasMoney(cost))
         {
-            var playerShip = world.Filter<PlayerTagLeo>().Inc<ShipTag>().Inc<TransformComponent>().End();
+            var playerShip = world.Filter<PlayerTag>().Inc<ShipTag>().Inc<TransformComponent>().End();
             var playerShipEntity = playerShip.GetSingleton();
             if (playerShipEntity != null)
             {

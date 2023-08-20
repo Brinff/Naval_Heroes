@@ -11,9 +11,9 @@ public class PlayerViewSwitchSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupUp
     private EcsWorld m_World;
     private EcsFilter m_Filter;
 
-    private ViewType m_ViewType;
-    private EcsPool<LookAtViewComponent> m_PoolLookAtView;
-    private ViewType m_CheckViewType;
+    //private ViewType m_ViewType;
+    //private EcsPool<LookAtViewComponent> m_PoolLookAtView;
+    //private ViewType m_CheckViewType;
 
     [Button]
     public void Zoom()
@@ -34,7 +34,12 @@ public class PlayerViewSwitchSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupUp
     [Button]
     public void Home()
     {
-        m_ViewType = ViewType.Home;
+        var playerEye = m_World.Filter<PlayerTag>().Inc<EyeComponent>().End().GetSingleton();
+        if (playerEye != null)
+        {
+
+        }
+        //m_ViewType = ViewType.Home;
     }
 
     private void OnToggleZoom(bool value)
@@ -55,7 +60,7 @@ public class PlayerViewSwitchSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupUp
         m_ZoomToggleWidget.OnToggle += OnToggleZoom;
 
         m_World = systems.GetWorld();
-        m_Filter = m_World.Filter<PlayerTagLeo>().Inc<ShipTag>().End();
+        m_Filter = m_World.Filter<PlayerTag>().Inc<CommanderTag>().End();
     }
 
     public void Run(IEcsSystems systems)

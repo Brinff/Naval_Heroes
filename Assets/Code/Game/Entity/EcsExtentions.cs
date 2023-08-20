@@ -15,6 +15,23 @@ public static class EcsExtentions
         return Bake(world, gameObject.transform);
     }
 
+
+    public static T GetData<T>(this IEcsSystems systems)
+    {
+        var datas = systems.GetShared<IEcsData[]>();
+        for (int i = 0; i < datas.Length; i++)
+        {
+            if (datas[i] is T) return (T)datas[i];
+        }
+        return default(T);
+    }
+
+    public static ref T GetSingletonComponent<T>(this EcsFilter filter) where T : struct
+    {
+        var entity = GetSingleton(filter);  
+        return ref filter.GetWorld().GetPool<T>().Get(entity.Value);
+    }
+
     public static int? GetSingleton(this EcsFilter filter)
     {
         var enumerator = filter.GetEnumerator();
@@ -47,11 +64,14 @@ public static class EcsExtentions
         Bake(world, transform, poolRoot, null, ref entities);
         int root = entities.First();
 
-        ref var childs = ref poolChilds.Add(root);
-        childs.entities = new EcsPackedEntity[entities.Count - 1];
-        for (int i = 1; i < entities.Count; i++)
+        if (entities.Count > 1)
         {
-            childs.entities[i - 1] = world.PackEntity(entities[i]);
+            ref var childs = ref poolChilds.Add(root);
+            childs.entities = new EcsPackedEntity[entities.Count - 1];
+            for (int i = 1; i < entities.Count; i++)
+            {
+                childs.entities[i - 1] = world.PackEntity(entities[i]);
+            }
         }
 
         return root;

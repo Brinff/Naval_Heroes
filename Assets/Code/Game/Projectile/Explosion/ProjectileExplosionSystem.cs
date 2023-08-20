@@ -10,13 +10,12 @@ public abstract class ProjectileExplosionSystem<T> : MonoBehaviour, IEcsInitSyst
     private EcsWorld m_World;
     private EcsPool<ProjectileExplosionComponent> m_PoolProjectileExplosion;
 
-
-    private SharedData m_SharedData;
+    private PoolSystem m_PoolSystem;
 
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
-        m_SharedData = systems.GetShared<SharedData>();
+        m_PoolSystem = systems.GetSystem<PoolSystem>();
         m_Filter = m_World.Filter<ProjectileExplosionComponent>().Inc<ProjectileDestroyEvent>().Inc<T>().End();
         m_PoolProjectileExplosion = m_World.GetPool<ProjectileExplosionComponent>();
     }
@@ -26,9 +25,9 @@ public abstract class ProjectileExplosionSystem<T> : MonoBehaviour, IEcsInitSyst
         foreach (var entity in m_Filter)
         {
             ref var projectileExplosion = ref m_PoolProjectileExplosion.Get(entity);
-            Place(m_SharedData, projectileExplosion.position, projectileExplosion.direction);
+            Place(m_PoolSystem, projectileExplosion.position, projectileExplosion.direction);
         }
     }
 
-    protected abstract void Place(SharedData sharedData, Vector3 position, Vector3 direction);
+    protected abstract void Place(PoolSystem pools, Vector3 position, Vector3 direction);
 }

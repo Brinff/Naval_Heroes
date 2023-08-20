@@ -4,7 +4,7 @@ using UnityEngine;
 using Leopotam.EcsLite;
 using UnityEngine.Rendering;
 
-public class HealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsPostRunSystem, IEcsGroupUpdateSystem
+public class HealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsPostRunSystem, IEcsGroup<Update>
 {
     private EcsFilter m_FilterA;
     private EcsFilter m_FilterB;

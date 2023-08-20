@@ -1,18 +1,13 @@
+using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoneySoftProvider : MonoBehaviour, ISharedData, ISharedInitalizeData
+public class PlayerMoneySystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
 {
     [SerializeField]
     private int m_StartMoney = 2000;
     private PlayerPrefsData<int> m_MoneySoft;
-
-    public void InitalizeData()
-    {
-        m_MoneySoft = new PlayerPrefsData<int>(nameof(m_MoneySoft), m_StartMoney);
-    }
-
     public int amount => m_MoneySoft.Value;
 
     public void AddMoney(int amount)
@@ -30,5 +25,10 @@ public class PlayerMoneySoftProvider : MonoBehaviour, ISharedData, ISharedInital
         bool hasMoney = HasMoney(amount);
         m_MoneySoft.Value -= amount;
         return hasMoney;
+    }
+
+    public void Init(IEcsSystems systems)
+    {
+        m_MoneySoft = new PlayerPrefsData<int>(nameof(m_MoneySoft), m_StartMoney);
     }
 }

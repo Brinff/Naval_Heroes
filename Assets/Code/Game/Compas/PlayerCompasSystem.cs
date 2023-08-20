@@ -26,8 +26,8 @@ public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
     {
         m_CompassWidget = UISystem.Instance.GetElement<CompassWidget>();
         m_World = systems.GetWorld();
-        m_PlayerShipFilter = m_World.Filter<PlayerTagLeo>().Inc<ShipTag>().Inc<TransformComponent>().End();
-        m_PlayerEyeFilter = m_World.Filter<PlayerTagLeo>().Inc<EyeComponent>().End();
+        m_PlayerShipFilter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Inc<TransformComponent>().End();
+        m_PlayerEyeFilter = m_World.Filter<PlayerTag>().Inc<EyeComponent>().End();
         m_PoolTransform = m_World.GetPool<TransformComponent>();
         m_PoolEye = m_World.GetPool<EyeComponent>();
         m_CompassEnemyIndicator = m_World.GetPool<CompassEnemyIndicatorComponent>();

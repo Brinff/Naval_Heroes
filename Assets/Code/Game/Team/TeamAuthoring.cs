@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
-public struct TeamComponent
+public struct Team
 {
     public int id;
 }
@@ -17,7 +17,7 @@ public class TeamAuthoring : MonoBehaviour, IEntityAuthoring
 
     public void Bake(int entity, EcsWorld ecsWorld)
     {
-        ref var team = ref ecsWorld.GetPool<TeamComponent>().Add(entity);
+        ref var team = ref ecsWorld.GetPool<Team>().Add(entity);
         team.id = m_ID;
     }
 

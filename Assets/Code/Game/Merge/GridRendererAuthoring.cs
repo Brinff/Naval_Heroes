@@ -1,6 +1,6 @@
 
+using DG.Tweening;
 using System.Collections.Generic;
-using Unity.Entities;
 using UnityEngine;
 
 namespace Game.Grid.Auhoring
@@ -39,6 +39,16 @@ namespace Game.Grid.Auhoring
         {
             this.alpha = alpha;
             instanceMaterial.SetFloat("_Alpha", alpha);
+        }
+
+        private float GetAlpha()
+        {
+            return alpha;
+        }
+
+        public Tween DoAlpha(float alpha, float duration)
+        {
+           return DOTween.To(GetAlpha, SetAlpha, alpha, duration);
         }
 
         public float width = 1f;

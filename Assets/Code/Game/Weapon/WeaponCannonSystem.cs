@@ -27,7 +27,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
-        m_CannonShot = systems.GetShared<SharedData>().Get<VFXCannonShot>();
+        m_CannonShot = systems.GetSystem<PoolSystem>().GetPool<VFXCannonShot>();
 
         m_Filter = m_World.Filter<WeaponCannonComponent>().Inc<WeaponFireCompoment>().Inc<WeaponReloadComponent>().Inc<WeaponAmmoComponent>().End();
         m_PoolWeaponCannonComponent = m_World.GetPool<WeaponCannonComponent>();

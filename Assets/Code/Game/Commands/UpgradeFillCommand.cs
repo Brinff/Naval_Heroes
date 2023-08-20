@@ -15,9 +15,8 @@ public class UpgradeFillCommand : MonoBehaviour, ICommand
         if (!upgradeWidget.isFilled)
         {
             upgradeWidget.OnUpgrade += OnUpgrade;
-            var sharedData = systems.GetShared<SharedData>();
-            var playerUpgradeData = sharedData.Get<PlayerUpgradeData>();
-            var playerUpgradeProvider = sharedData.Get<PlayerUpgradeProvider>();
+            var playerUpgradeData = systems.GetData<UpgradeDatabase>();
+            var playerUpgradeProvider = systems.GetSystem<PlayerUpgradeSystem>();
             upgradeWidget.Fill(playerUpgradeData.upgrades, playerUpgradeProvider.upgrades);
         }
     }

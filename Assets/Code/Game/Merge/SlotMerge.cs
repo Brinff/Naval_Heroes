@@ -4,23 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Game.Merge.Data;
+using Game.Utility;
 
-public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragHandler, IEndDragHandler, ISlotRenderer
 {
     public MergeData data;
     public SlotCollection collection { get; private set; }
 
-    public SlotItem item;
+    public List<SlotItem> items { get; private set; } = new List<SlotItem>();
 
-    public BoxCollider[] colliders;
+    public SlotItem item => items.Count > 0 ? items[0] : null;
+    public int id => name.GetDeterministicHashCode();
 
-    public EntityData result;
+    private BoxCollider[] colliders;
 
-    public bool AddItem(SlotItem slotItem, Vector3 position)
+    private EntityData result;
+
+    [SerializeField]
+    private GridRendererAuthoring m_GridRenderer;
+
+    public bool AddItem(SlotItem item, Vector3 position)
     {
-        if (item == null)
+        if (items.Count == 0)
         {
-            item = slotItem;
+            items.Add(item);
+            collection.SetDirty();
             item.parentSlot = this;
             item.targetPosition = transform.position;
             item.transform.position = transform.position;
@@ -29,13 +37,21 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
         }
         else if (result)
         {
-            Destroy(item.entity);
-            Destroy(item.gameObject);
-            item = slotItem;
+            var firstItem = items[0];
+
+            RemoveItem(firstItem);
+
+            Destroy(firstItem.entity);
+            Destroy(firstItem.gameObject);
+
+            items.Add(item);
+
             item.parentSlot = this;
             item.targetPosition = transform.position;
             item.transform.position = transform.position;
             item.SetEntity(result);
+            collection.SetDirty();
+
             result = null;
 
             return true;
@@ -43,11 +59,11 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
         return false;
     }
 
-    public bool RemoveItem(SlotItem slotItem)
+    public bool RemoveItem(SlotItem item)
     {
-        if (slotItem == item)
+        if (items.Remove(item))
         {
-            item = null;
+            collection.SetDirty();
             return true;
         }
         return false;
@@ -115,5 +131,17 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
     public void OnEndDrag(PointerEventData eventData)
     {
         item.As<IEndDragHandler>()?.OnEndDrag(eventData);
+    }
+
+    public void Show(float duration)
+    {
+        item?.Show();
+        m_GridRenderer.DoAlpha(1, duration);
+    }
+
+    public void Hide(float duration)
+    {
+        item?.Hide();
+        m_GridRenderer.DoAlpha(0, duration);
     }
 }

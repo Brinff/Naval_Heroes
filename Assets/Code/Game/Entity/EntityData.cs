@@ -8,6 +8,4 @@ public class EntityData : ScriptableObject
 {
     public GameObject prefab;
     public int id => name.GetDeterministicHashCode();
-
-
 }

@@ -16,6 +16,6 @@ public class EyeAuthoring : MonoBehaviour, IEntityAuthoring
         ref var eye = ref ecsWorld.GetPool<EyeComponent>().AddOrGet(entity);
         eye.camera = m_Camera;
         eye.transform = m_Transform;
-        eye.fieldOfView = m_Camera.fieldOfView;
+        eye.fieldOfView = m_Camera.fieldOfView;   
     }
 }

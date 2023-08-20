@@ -1,0 +1,5 @@
+
+public struct CommanderTag : IEntityComponent
+{
+
+}

@@ -17,10 +17,10 @@ public class WinLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcs
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
-        m_NewFilter = m_World.Filter<NewEntityTag>().Inc<ShipTag>().Exc<PlayerTagLeo>().End();
-        m_KillFilter = m_World.Filter<DeadTag>().Inc<ShipTag>().Exc<PlayerTagLeo>().End();
-        m_PlayerAliveFilter = m_World.Filter<PlayerTagLeo>().Inc<ShipTag>().Exc<DeadTag>().End();
-        m_PlayerDeadFilter = m_World.Filter<PlayerTagLeo>().Inc<ShipTag>().Inc<DeadTag>().End();
+        m_NewFilter = m_World.Filter<NewEntityTag>().Inc<ShipTag>().Exc<PlayerTag>().End();
+        m_KillFilter = m_World.Filter<DeadTag>().Inc<ShipTag>().Exc<PlayerTag>().End();
+        m_PlayerAliveFilter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Exc<DeadTag>().End();
+        m_PlayerDeadFilter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Inc<DeadTag>().End();
     }
 
     public void Run(IEcsSystems systems)

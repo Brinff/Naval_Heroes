@@ -16,8 +16,8 @@ public class PlayerEyeRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupFi
     public void Init(IEcsSystems systems)
     {
         EcsWorld world = systems.GetWorld();
-        m_Filter = world.Filter<EyeComponent>().Inc<EyeRaycastComponent>().Inc<PlayerTagLeo>().End();
-        m_RaycastFilter = world.Filter<AimBoundsComponent>().Exc<PlayerTagLeo>().End();
+        m_Filter = world.Filter<EyeComponent>().Inc<EyeRaycastComponent>().Inc<PlayerTag>().End();
+        m_RaycastFilter = world.Filter<AimBoundsComponent>().Exc<PlayerTag>().End();
 
         m_PoolAimBounds = world.GetPool<AimBoundsComponent>();
         m_PoolEyeRaycast = world.GetPool<EyeRaycastComponent>();

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.VFX;
 
-public class VFXPoolProvider : MonoBehaviour, ISharedData, ISharedInitalizeData
+public class VFXPoolProvider : MonoBehaviour
 {
     public enum PoolType
     {

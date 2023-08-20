@@ -9,8 +9,8 @@ public class MoneyAddCommand : MonoBehaviour, ICommand<int>
     public void Execute(EcsWorld world, IEcsSystems systems, int amount)
     {
         SoftMoneyCounterWidget softMoneyCounterWidget = UISystem.Instance.GetElement<SoftMoneyCounterWidget>();
-        PlayerMoneySoftProvider playerMoneySoftProvider = systems.GetShared<SharedData>().Get<PlayerMoneySoftProvider>();
-        playerMoneySoftProvider.AddMoney(amount);
-        softMoneyCounterWidget.SetMoney(playerMoneySoftProvider.amount);
+        PlayerMoneySystem playerMoneySystem = systems.GetSystem<PlayerMoneySystem>();
+        playerMoneySystem.AddMoney(amount);
+        softMoneyCounterWidget.SetMoney(playerMoneySystem.amount);
     }
 }

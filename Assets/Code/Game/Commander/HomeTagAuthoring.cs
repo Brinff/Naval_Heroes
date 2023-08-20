@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAuthoring : MonoBehaviour, IEntityAuthoring
+public class HomeTagAuthoring : MonoBehaviour, IEntityAuthoring
 {
     public bool isEnable => gameObject.activeInHierarchy;
 
     public void Bake(int entity, EcsWorld ecsWorld)
     {
-        ecsWorld.GetPool<PlayerTagLeo>().Add(entity);
+        ecsWorld.GetPool<HomeTag>().Add(entity);
     }
 }

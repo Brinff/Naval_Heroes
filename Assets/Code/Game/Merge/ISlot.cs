@@ -1,12 +1,21 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 
 public interface ISlot
 {
+    public int id { get; }
+    public List<SlotItem> items { get; }
     public SlotCollection collection { get; }
     public void Prepare(SlotCollection collection);
     public bool AddItem(SlotItem slotItem, Vector3 position);
     public bool RemoveItem(SlotItem slotItem);
+}
+
+public interface ISlotRenderer : ISlot
+{
+    public void Show(float duration);
+    public void Hide(float duration);
 }
 
 public interface ISlotPopulate : ISlot

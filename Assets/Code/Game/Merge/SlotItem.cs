@@ -18,6 +18,18 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private float height;
 
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        entity.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+        entity.SetActive(false);
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         var otherSlots = parentSlot.collection.GetSlots<IItemBeginDrag>();
@@ -89,9 +101,7 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
 
         this.entityData = entityData;
-        entity = Instantiate(entityData.prefab);
-        entity.transform.position = m_CurrentPosition;
-        entity.transform.rotation = m_CurrentRotation;
+        entity = Instantiate(entityData.prefab, m_CurrentPosition, m_CurrentRotation);
 
         gameObject.name = $"Slot Item {entityData.name}";
 
@@ -152,17 +162,18 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public Vector3 currentPosition { get => m_CurrentPosition; set { m_TargetPosition = value; m_Velocity = Vector3.zero; m_CurrentPosition = value; } }
     public Vector3 targetPosition { get => m_TargetPosition; set => m_TargetPosition = value; }
+    public Vector3 position { get => transform.position; set => transform.position = value; }
 
-    public static SlotItem Create(EntityData entityData, Vector3 position, Quaternion rotation)
+    public static SlotItem Create(SlotCollection collection, EntityData entityData, Vector3 position)
     {
         GameObject gameObject = new GameObject($"Slot Item {entityData.name}");
         gameObject.layer = 9;
 
         var slotItem = gameObject.AddComponent<SlotItem>();
+        slotItem.transform.SetParent(collection.transform);
         slotItem.currentPosition = position;
-        //slotItem.transform.rotation = rotation;
         slotItem.targetPosition = position;
-        //slotItem.entityRotation = rotation;
+        slotItem.position = position;
         slotItem.SetEntity(entityData);
 
         return slotItem;

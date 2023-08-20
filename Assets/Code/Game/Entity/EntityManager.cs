@@ -7,6 +7,76 @@ using Sirenix.OdinInspector;
 using UnityEngine.UIElements;
 using System.Linq;
 using System;
+using Sirenix.Utilities;
+using UnityEngine.PlayerLoop;
+
+public class Update : Group<Update>
+{
+
+}
+
+public class FixedUpdate : Group<FixedUpdate>
+{
+
+}
+
+public class DrawGizmos : Group<FixedUpdate>
+{
+
+}
+
+public class Group<T> : IEcsGroup where T : IEcsGroup
+{
+    private EcsSystems m_EcsSystem;
+
+    public void Add(IEcsSystem system)
+    {
+        if (system is IEcsGroup<T>) m_EcsSystem.Add(system);
+    }
+
+    public void BeginInit(EcsWorld world, IEcsData[] data)
+    {
+        m_EcsSystem = new EcsSystems(world, data);
+    }
+
+    public void Dispose()
+    {
+        m_EcsSystem.Destroy();
+        m_EcsSystem = null;
+    }
+
+    public void EndInit(bool isEditor)
+    {
+        if (isEditor)
+        {
+#if UNITY_EDITOR
+            m_EcsSystem.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+            m_EcsSystem.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
+#endif
+        }
+
+        m_EcsSystem.Init();
+    }
+
+    public void Run()
+    {
+        m_EcsSystem.Run();
+    }
+}
+
+
+public interface IEcsGroup : IDisposable
+{
+    public void Run();
+    public void Add(IEcsSystem system);
+    public void BeginInit(EcsWorld world, IEcsData[] data);
+    public void EndInit(bool isEditor);
+}
+
+public interface IEcsGroup<T> where T : IEcsGroup
+{
+
+}
 
 public interface IEcsGroupUpdateSystem : IEcsSystem
 {
@@ -45,55 +115,63 @@ public struct ChildsComponent
 
 public class EntityManager : Singleton<EntityManager>, ISingletonSetup
 {
+    [SerializeField]
+    private bool m_IsEditor;
     private EcsWorld m_World;
-    private IEcsSystems m_UpdateSystems;
-    private IEcsSystems m_FixedUpdateSystems;
+    public EcsWorld world => m_World;
+    private List<IEcsGroup> m_Groups = new List<IEcsGroup>();
+
+    public void Run<T>() where T : IEcsGroup
+    {
+        for (int i = 0; i < m_Groups.Count; i++)
+        {
+            if (m_Groups[i] is T) m_Groups[i].Run();
+        }
+    }
+
+    //    private IEcsSystems m_UpdateSystems;
+    //    private IEcsSystems m_FixedUpdateSystems;
+
+    //#if UNITY_EDITOR
+    //    private IEcsSystems m_GizmosSystems;
+    //#endif
+
+
+
+    //public IEcsSystems systems => m_UpdateSystems;
+
+    //[SerializeField]
+    //private Transform[] m_BakeEntities;
+
+    private void Update()
+    {
+        Run<Update>();
+        //m_UpdateSystems?.Run();
+    }
+
+    private void FixedUpdate()
+    {
+        Run<FixedUpdate>();
+        //m_FixedUpdateSystems?.Run();
+    }
 
 #if UNITY_EDITOR
-    private IEcsSystems m_GizmosSystems;
+    private void OnDrawGizmos()
+    {
+        Run<DrawGizmos>();
+        //if (m_GizmosSystems != null) m_GizmosSystems.Run();
+    }
+
 #endif
-
-    public EcsWorld world => m_World;
-    public IEcsSystems systems => m_UpdateSystems;
-
-    [SerializeField]
-    private Transform[] m_BakeEntities;
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        m_UpdateSystems?.Run();
-    }
-
-    void FixedUpdate()
-    {
-        m_FixedUpdateSystems?.Run();
-    }
 
     void OnDestroy()
     {
-        if (m_UpdateSystems != null)
+        for (int i = 0; i < m_Groups.Count; i++)
         {
-            m_UpdateSystems.Destroy();
-            m_UpdateSystems = null;
+            m_Groups[i].Dispose();
         }
+        m_Groups.Clear();
 
-        if (m_FixedUpdateSystems != null)
-        {
-            m_FixedUpdateSystems.Destroy();
-            m_FixedUpdateSystems = null;
-        }
-#if UNITY_EDITOR
-        if (m_GizmosSystems != null)
-        {
-            m_GizmosSystems.Destroy();
-            m_GizmosSystems = null;
-        }
-#endif
         if (m_World != null)
         {
             m_World.Destroy();
@@ -105,47 +183,64 @@ public class EntityManager : Singleton<EntityManager>, ISingletonSetup
     {
         m_World = new EcsWorld();
 
-        SharedData sharedData = new SharedData(transform);
+        var datas = transform.GetComponentsInChildren<IEcsData>();
+        var systems = GetComponentsInChildren<IEcsSystem>();
 
-        m_UpdateSystems = new EcsSystems(m_World, sharedData);
-        m_FixedUpdateSystems = new EcsSystems(m_World);
-#if UNITY_EDITOR
-        m_GizmosSystems = new EcsSystems(m_World);
-#endif
-        var compontens = GetComponentsInChildren<IEcsSystem>();
-        foreach (var item in compontens)
+        m_Groups.Add(new Update());
+        m_Groups.Add(new FixedUpdate());
+        m_Groups.Add(new DrawGizmos());
+
+        foreach (var group in m_Groups)
         {
-            if (item is IEcsGroupUpdateSystem) m_UpdateSystems.Add(item);
-            if (item is IEcsGroupFixedUpdateSystem) m_FixedUpdateSystems.Add(item);
-#if UNITY_EDITOR
-            if (item is IEcsGroupGizmosSystem) m_GizmosSystems.Add(item);
-#endif
+            group.BeginInit(m_World, datas);
+
+            foreach (var system in systems)
+            {
+                group.Add(system);
+            }
         }
 
-#if UNITY_EDITOR
-        m_UpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
-        m_UpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
+        foreach (var group in m_Groups)
+        {
+            group.EndInit(m_IsEditor);
+        }
 
-        m_FixedUpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
-        m_FixedUpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
+        //SharedData sharedData = new SharedData(transform);
+
+        //        m_UpdateSystems = new EcsSystems(m_World, transform.GetComponentsInChildren<IEcsData>());
+        //        m_FixedUpdateSystems = new EcsSystems(m_World);
+        //#if UNITY_EDITOR
+        //        m_GizmosSystems = new EcsSystems(m_World);
+        //#endif
 
 
-#endif
 
-        m_UpdateSystems.Init();
-        m_FixedUpdateSystems.Init();
-#if UNITY_EDITOR
-        m_GizmosSystems.Init();
-#endif
+
+        //        foreach (var item in compontens)
+        //        {
+        //            if (item is IEcsGroupUpdateSystem) m_UpdateSystems.Add(item);
+        //            if (item is IEcsGroupFixedUpdateSystem) m_FixedUpdateSystems.Add(item);
+        //#if UNITY_EDITOR
+        //            if (item is IEcsGroupGizmosSystem) m_GizmosSystems.Add(item);
+        //#endif
+        //        }
+
+        //#if UNITY_EDITOR
+        //        m_UpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+        //        m_UpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
+
+        //        m_FixedUpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+        //        m_FixedUpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
+        //#endif
+
+        //        m_UpdateSystems.Init();
+        //        m_FixedUpdateSystems.Init();
+        //#if UNITY_EDITOR
+        //        m_GizmosSystems.Init();
+        //#endif
     }
 
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        if (m_GizmosSystems != null) m_GizmosSystems.Run();
-    }
 
-#endif
     //public int NewEntity(GameObject gameObject)
     //{
 

@@ -19,7 +19,7 @@ public class PlayerTest : MonoBehaviour
         if(player2) entityPlayer2 = EntityManager.Instance.world.Bake(player2);
 
         this.entity = entityPlayer1;
-        EntityManager.Instance.world.GetPool<PlayerTagLeo>().Add(entity);
+        EntityManager.Instance.world.GetPool<PlayerTag>().Add(entity);
     }
 
     [Button]
@@ -27,16 +27,16 @@ public class PlayerTest : MonoBehaviour
     {
         if(this.entity == entityPlayer1)
         {
-            EntityManager.Instance.world.GetPool<PlayerTagLeo>().Del(entityPlayer1);
-            EntityManager.Instance.world.GetPool<PlayerTagLeo>().Add(entityPlayer2);
+            EntityManager.Instance.world.GetPool<PlayerTag>().Del(entityPlayer1);
+            EntityManager.Instance.world.GetPool<PlayerTag>().Add(entityPlayer2);
             this.entity = entityPlayer2;
             return;
         }
 
         if (this.entity == entityPlayer2)
         {
-            EntityManager.Instance.world.GetPool<PlayerTagLeo>().Del(entityPlayer2);
-            EntityManager.Instance.world.GetPool<PlayerTagLeo>().Add(entityPlayer1);
+            EntityManager.Instance.world.GetPool<PlayerTag>().Del(entityPlayer2);
+            EntityManager.Instance.world.GetPool<PlayerTag>().Add(entityPlayer1);
             this.entity = entityPlayer1;
             return;
         }

@@ -41,7 +41,7 @@ public class WinSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup
             {
                 ref var reward = ref m_World.GetPool<RewardComponent>().Get(entity);
 
-                PlayerMoneySoftProvider playerMoneySoftProvider = systems.GetShared<SharedData>().Get<PlayerMoneySoftProvider>();
+                PlayerMoneySystem playerMoneySoftProvider = systems.GetSystem<PlayerMoneySystem>();
                 playerMoneySoftProvider.AddMoney(reward.amount);
 
                 m_World.GetPool<GoHomeEvent>().Add(entity);
@@ -56,11 +56,11 @@ public class WinSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup
 
             reward.amount = level.data.reward;
 
-            PlayerLevelProvider playerLevelProvider = systems.GetShared<SharedData>().Get<PlayerLevelProvider>();
+            PlayerMissionSystem playerMissionSystem = systems.GetShared<PlayerMissionSystem>();
 
             m_WinWidget.SetReward(reward.amount, false);
-            m_WinWidget.SetLevel(playerLevelProvider.level);
-            playerLevelProvider.CompleteLevel();
+            m_WinWidget.SetLevel(playerMissionSystem.level);
+            playerMissionSystem.CompleteLevel();
 
             UISystem.Instance.compositionModule.Show<UIWinCompositon>();
             m_World.GetPool<LevelComponent>().Del(entity);

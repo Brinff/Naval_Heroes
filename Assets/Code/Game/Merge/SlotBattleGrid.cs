@@ -1,18 +1,20 @@
 using Game.Grid.Auhoring;
+using Game.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Networking.UnityWebRequest;
 
-public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag
+public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag, ISlotRenderer
 {
     public GridAuhoring grid;
     public SlotCollection collection { get; private set; }
-    public List<SlotItem> items = new List<SlotItem>();
+    public List<SlotItem> items { get; private set; } = new List<SlotItem>();
+
+    public int id => name.GetDeterministicHashCode();
 
     public GridRendererAuthoring gridField;
     public GridRendererAuthoring gridReject;
-    public GridRendererAuthoring gridAllow;
     public GridRendererAuthoring gridCurrent;
     public GridRendererAuthoring gridNew;
 
@@ -38,7 +40,7 @@ public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag
         item.transform.position = position;
 
         items.Add(item);
-
+        collection.SetDirty();
         UpdateCurrentGrid();
 
         return true;
@@ -48,6 +50,7 @@ public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag
     {
         if (items.Remove(slotItem))
         {
+            collection.SetDirty();
             UpdateCurrentGrid();
             return true;
         }
@@ -136,5 +139,21 @@ public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag
     {
         gridNew.Clear();
         gridReject.Clear();
+    }
+
+    public void Show(float duration)
+    {
+        gridField.DoAlpha(1, duration);
+        gridCurrent.DoAlpha(1, duration);
+        gridNew.DoAlpha(1, duration);
+        gridReject.DoAlpha(1, duration);
+    }
+
+    public void Hide(float duration)
+    {
+        gridField.DoAlpha(0, duration);
+        gridCurrent.DoAlpha(0, duration);
+        gridNew.DoAlpha(0, duration);
+        gridReject.DoAlpha(0, duration);
     }
 }

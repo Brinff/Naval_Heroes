@@ -21,7 +21,7 @@ public class StartLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IE
     {
         m_StartGameWidget.OnClick += OnStartGame;
         m_World = systems.GetWorld();
-        m_Filter = m_World.Filter<PlayerTagLeo>().Inc<ShipTag>().Exc<PlayerAimPointComponent>().End();
+        m_Filter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Exc<PlayerAimPointComponent>().End();
     }
 
     private void OnStartGame()

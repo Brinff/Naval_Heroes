@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Paterns;
 using Leopotam.EcsLite;
-public class CommandSystem : Singleton<CommandSystem>, IEcsRunSystem, IEcsGroupUpdateSystem, IEcsDestroySystem
+public class CommandSystem : Singleton<CommandSystem>, IEcsRunSystem, IEcsDestroySystem, IEcsGroup<Update>
 {
 
     public delegate void Command(EcsWorld world, IEcsSystems systems);

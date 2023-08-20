@@ -22,23 +22,25 @@ public class GoStageCommand : MonoBehaviour, ICommand<BattleData>, ICommand
         if (m_BattleData.stage < m_BattleData.levelData.stages.Count)
         {
             var instance = Instantiate(context.levelData.stages[context.stage]);
-            var filter = world.Filter<PlayerTagLeo>().Inc<ShipTag>().End();
+            world.Bake(instance);
+            Destroy(instance);
+            //var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
 
-            foreach (var entity in filter)
-            {
-                instance.GetComponent<ScriptBehaviour>().Launch(world.PackEntityWithWorld(entity));
-                Destroy(instance);
-            }
+            //foreach (var entity in filter)
+            //{
+            //    instance.GetComponent<ScriptBehaviour>().Launch(world.PackEntityWithWorld(entity));
+            //    Destroy(instance);
+            //}
         }
         else
         {
-            var filter = world.Filter<PlayerTagLeo>().Inc<ShipTag>().End();
-            foreach (var entity in filter)
-            {
-                world.GetPool<OrbitViewActiveEvent>().Add(entity);
-                ref var playerAimPoint = ref world.GetPool<PlayerAimPointComponent>().Get(entity);
-                playerAimPoint.state = AimState.Idle;
-            }
+            //var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
+            //foreach (var entity in filter)
+            //{
+            //    world.GetPool<OrbitViewActiveEvent>().Add(entity);
+            //    ref var playerAimPoint = ref world.GetPool<PlayerAimPointComponent>().Get(entity);
+            //    playerAimPoint.state = AimState.Idle;
+            //}
             var commandSystem = systems.GetSystem<CommandSystem>();
             m_BattleData.reward = m_BattleData.levelData.reward;
             commandSystem.Execute<GoWinCommand, BattleData>(m_BattleData);

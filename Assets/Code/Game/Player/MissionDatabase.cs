@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLevelData : MonoBehaviour, ISharedData
+public class MissionDatabase : MonoBehaviour, IEcsData
 {
     [SerializeField]
     private List<LevelData> m_Levels = new List<LevelData>();

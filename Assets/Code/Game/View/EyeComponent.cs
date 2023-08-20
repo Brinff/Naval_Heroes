@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Leopotam.EcsLite;
 
 public struct EyeComponent
 {
@@ -9,4 +10,5 @@ public struct EyeComponent
     public Vector3 position;
     public Quaternion rotation;
     public float fieldOfView;
+    public EcsPackedEntity view;
 }

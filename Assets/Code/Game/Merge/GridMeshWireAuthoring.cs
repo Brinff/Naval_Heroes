@@ -1,5 +1,4 @@
 using UnityEngine;
-using Unity.Entities;
 using System.Collections.Generic;
 
 public class GridMeshWireAuthoring : MonoBehaviour

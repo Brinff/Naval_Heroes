@@ -29,7 +29,7 @@ public class ShipDestrorySystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
         {
             ref var destoryEntity = ref m_DestroyEntity.Add(entity);
             ref var transform = ref m_PoolTransform.Get(entity);
-            systems.GetShared<SharedData>().Get<VFXShipExplosion>().Play(transform.transform.position + Vector3.up * m_OffsetExplosion, Quaternion.identity);
+            systems.GetSystem<PoolSystem>().GetPool<VFXShipExplosion>().Play(transform.transform.position + Vector3.up * m_OffsetExplosion, Quaternion.identity);
             destoryEntity.delay = m_DelayDestory;
         }
     }
