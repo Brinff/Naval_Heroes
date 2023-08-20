@@ -853,11 +853,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultComposition: {fileID: 792821841}
   m_Compositions:
+  - {fileID: 792821839}
+  - {fileID: 792821843}
+  - {fileID: 792821842}
   - {fileID: 792821838}
   - {fileID: 792821841}
-  - {fileID: 792821842}
-  - {fileID: 792821843}
-  - {fileID: 792821839}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0

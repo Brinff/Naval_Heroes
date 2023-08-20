@@ -53,8 +53,6 @@ namespace Game.Grid.Auhoring
             Vector3 worldPosition = matrix.GetPosition();
             Vector3 worldSize = matrix.MultiplyVector((Vector2)rect.size);//math.mul(matrix, new float4(gridRect.size.x, gridRect.size.y, 0, 1)).xyz;
 
-            Debug.Log($"World Size: {worldSize}");
-
             Vector3 localPosition = projectMatrix.MultiplyPoint(worldPosition);
             Vector3 localSize = projectMatrix.MultiplyVector(worldSize);//MultiplyVector(projectMatrix, worldSize);
             
@@ -72,7 +70,6 @@ namespace Game.Grid.Auhoring
             projectGridRect.position = localPosition;
             projectGridRect.size = new Vector2((int)Mathf.Abs(localSize.x), (int)Mathf.Abs(localSize.y));
 
-            Debug.Log($"Local Size: {projectGridRect.size}");
             return projectGridRect;
         }
 
