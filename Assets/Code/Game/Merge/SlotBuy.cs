@@ -21,11 +21,6 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     private BoxCollider[] colliders;
 
-    private void OnEnable()
-    {
-        Spawn();
-    }
-
     public bool AddItem(SlotItem slotItem, Vector3 position)
     {
         if (items.Count == 0)
@@ -76,6 +71,8 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
         }
 
         gridRenderer.EndFill();
+
+        Spawn();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

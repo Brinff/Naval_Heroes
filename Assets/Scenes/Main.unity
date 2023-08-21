@@ -860,10 +860,10 @@ MonoBehaviour:
   m_Compositions:
   - {fileID: 792821839}
   - {fileID: 792821843}
-  - {fileID: 792821844}
+  - {fileID: 792821838}
   - {fileID: 792821841}
   - {fileID: 792821842}
-  - {fileID: 792821838}
+  - {fileID: 792821844}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,14 +1468,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576624646}
-  m_LocalRotation: {x: 0.38495484, y: -0, z: -0, w: 0.9229354}
-  m_LocalPosition: {x: 0, y: 504.7, z: -436.2}
+  m_LocalRotation: {x: 0.4579753, y: -0, z: -0, w: 0.88896495}
+  m_LocalPosition: {x: 0, y: 575, z: -371}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1560106712}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 45.282, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 54.513, y: 0, z: 0}
 --- !u!114 &1576624648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5131,6 +5131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e83b7d92c1074a2429d061ed552e5b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IsEditor: 0
 --- !u!114 &6673108037068813717
 MonoBehaviour:
   m_ObjectHideFlags: 0

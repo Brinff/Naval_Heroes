@@ -18,6 +18,8 @@ public class ViewAuthoring : MonoBehaviour, IEntityAuthoring
     [SerializeField]
     private float m_FieldOfView = 60;
 
+    public float fieldOfView => m_FieldOfView;
+
     public bool isEnable => gameObject.activeInHierarchy;
 
     public void Bake(int entity, EcsWorld ecsWorld)
