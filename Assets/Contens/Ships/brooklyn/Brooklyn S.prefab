@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 5244873884881125597}
   - component: {fileID: 4233839383041461096}
   - component: {fileID: 8720737492768609822}
+  - component: {fileID: -582718617523528292}
+  - component: {fileID: 8678292088571679658}
   m_Layer: 0
   m_Name: Brooklyn S
   m_TagString: Untagged
@@ -125,6 +127,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Orign: {fileID: 5624138126133955498}
+--- !u!114 &-582718617523528292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916594432077460907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8afa16d825e9bbf4186602038febc7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ClassData: {fileID: 11400000, guid: 2b8cca8d981e8fd4db5e1bc3001626a9, type: 2}
+--- !u!114 &8678292088571679658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916594432077460907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99743b220297d9f448ff1feb52e3986e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RareData: {fileID: 11400000, guid: b51bcdffb5229b5468660cb92f30cc74, type: 2}
 --- !u!1001 &8754942055616895294
 PrefabInstance:
   m_ObjectHideFlags: 0

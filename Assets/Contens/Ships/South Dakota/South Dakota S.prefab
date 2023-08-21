@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1148560645250358424}
   - component: {fileID: -334768464104072046}
   - component: {fileID: 7749591990082045157}
+  - component: {fileID: 1025957690649927472}
+  - component: {fileID: 138198533297211377}
   m_Layer: 0
   m_Name: South Dakota S
   m_TagString: Untagged
@@ -94,6 +96,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Orign: {fileID: 8416003060263173857}
+--- !u!114 &1025957690649927472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274979080763799702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8afa16d825e9bbf4186602038febc7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ClassData: {fileID: 11400000, guid: 47854fd6fcd8f664f997970124c2d5eb, type: 2}
+--- !u!114 &138198533297211377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274979080763799702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99743b220297d9f448ff1feb52e3986e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RareData: {fileID: 11400000, guid: b51bcdffb5229b5468660cb92f30cc74, type: 2}
 --- !u!1 &8133285016867852235
 GameObject:
   m_ObjectHideFlags: 0

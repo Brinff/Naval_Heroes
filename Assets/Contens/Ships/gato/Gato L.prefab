@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2819950202902782240}
   - component: {fileID: -3261147098204894148}
   - component: {fileID: 6162748770885370051}
+  - component: {fileID: 3518361469985363928}
+  - component: {fileID: -3790123406692679101}
   m_Layer: 0
   m_Name: Gato L
   m_TagString: Untagged
@@ -94,6 +96,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Orign: {fileID: 5036276069013525209}
+--- !u!114 &3518361469985363928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117897578878625422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99743b220297d9f448ff1feb52e3986e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RareData: {fileID: 11400000, guid: dc409b6e098a23a45a27ad24ff56b48d, type: 2}
+--- !u!114 &-3790123406692679101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117897578878625422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8afa16d825e9bbf4186602038febc7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ClassData: {fileID: 11400000, guid: 2abeffc8b7eaccc45ba45f52d5f6a942, type: 2}
 --- !u!1 &5334469785094045429
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 427366812066422394}
   - component: {fileID: 3826782571945261457}
   - component: {fileID: -8963363798705678983}
+  - component: {fileID: -1215661129221420763}
+  - component: {fileID: -4607644156375484622}
   m_Layer: 0
   m_Name: Mahan L
   m_TagString: Untagged
@@ -125,6 +127,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Orign: {fileID: 4975577843829658539}
+--- !u!114 &-1215661129221420763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931636924525723888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99743b220297d9f448ff1feb52e3986e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RareData: {fileID: 11400000, guid: dc409b6e098a23a45a27ad24ff56b48d, type: 2}
+--- !u!114 &-4607644156375484622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931636924525723888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8afa16d825e9bbf4186602038febc7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ClassData: {fileID: 11400000, guid: 2afb8b90fa8becc4cb8b7b0b86ba1f27, type: 2}
 --- !u!1001 &8233069240662179650
 PrefabInstance:
   m_ObjectHideFlags: 0
