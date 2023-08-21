@@ -27,6 +27,9 @@ public class HealthBar : MonoBehaviour
     private Tween m_FillCurrent;
 
     [SerializeField]
+    private Image m_ClassificationAndRareImage;
+
+    [SerializeField]
     private TextMeshProUGUI m_Label;
 
     private float m_NormalizeValue;
@@ -34,6 +37,17 @@ public class HealthBar : MonoBehaviour
     private RectTransform m_RectTransform;
 
     public RectTransform rectTransform => m_RectTransform ? m_RectTransform : m_RectTransform = GetComponent<RectTransform>();
+
+    public void SetClassification(Sprite sprite)
+    {
+        m_ClassificationAndRareImage.sprite = sprite;
+        m_ClassificationAndRareImage.SetNativeSize();
+    }
+
+    public void SetRare(Color color)
+    {
+        m_ClassificationAndRareImage.color = color;
+    }
 
     public void SetHealth(float health, float maxHealth)
     {

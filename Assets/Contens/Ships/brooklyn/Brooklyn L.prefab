@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 8094541797808103626}
   - component: {fileID: -2122920900787774404}
   - component: {fileID: 8664327949160449575}
+  - component: {fileID: 253169555597644879}
+  - component: {fileID: 7450538805012080149}
   m_Layer: 0
   m_Name: Brooklyn L
   m_TagString: Untagged
@@ -125,6 +127,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Orign: {fileID: 5202122192012414268}
+--- !u!114 &253169555597644879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916594432077460907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8afa16d825e9bbf4186602038febc7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ClassData: {fileID: 11400000, guid: 2b8cca8d981e8fd4db5e1bc3001626a9, type: 2}
+--- !u!114 &7450538805012080149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916594432077460907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99743b220297d9f448ff1feb52e3986e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RareData: {fileID: 11400000, guid: dc409b6e098a23a45a27ad24ff56b48d, type: 2}
 --- !u!1001 &7634240759523867399
 PrefabInstance:
   m_ObjectHideFlags: 0
