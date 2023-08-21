@@ -20,6 +20,8 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
     private EcsPool<HealthComponent> m_PoolHealthComponent;
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<HealthBarComponent> m_PoolHealthBarComponent;
+    private EcsPool<Classification> m_PoolClassification;
+    private EcsPool<Rare> m_PoolRare;
     private EcsPool<InfoComponent> m_PoolInfoComponent;
     private EcsPool<DestroyComponent> m_PoolDestroy;
 
@@ -35,7 +37,8 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
         m_PoolHealthBarComponent = ecsWorld.GetPool<HealthBarComponent>();
         m_PoolInfoComponent = ecsWorld.GetPool<InfoComponent>();
         m_PoolDestroy = ecsWorld.GetPool<DestroyComponent>();
-
+        m_PoolClassification = ecsWorld.GetPool<Classification>();
+        m_PoolRare = ecsWorld.GetPool<Rare>();
         m_WorldEnemyWidget = UISystem.Instance.GetElement<WorldEnemyWidget>();
         m_WorldEnemyWidget.SetWorldCamera(m_Camera);
     }
@@ -64,6 +67,23 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
 
                 healthBarComponent.bar = m_WorldEnemyWidget.Register(infoCompoenent.orgin, team.id == 0).GetComponent<HealthBar>();
                 healthBarComponent.bar.SetHealth(healthComponent.currentValue, healthComponent.maxValue);
+
+
+                if (m_PoolClassification.Has(entity))
+                {
+                    var classificationDatabase = systems.GetData<ClassificationDatabase>();
+                    ref var classification = ref m_PoolClassification.Get(entity);
+                    healthBarComponent.bar.SetClassification(classificationDatabase.GetClassificationById(classification.id).icon);
+                }
+
+                if (m_PoolRare.Has(entity))
+                {
+                    var rareDatabase = systems.GetData<RareDatabase>();
+                    ref var rare = ref m_PoolRare.Get(entity);
+                    healthBarComponent.bar.SetRare(rareDatabase.GetRareById(rare.id).color);
+                }
+
+
 
                 healthBarComponent.health = healthComponent.currentValue;
             }

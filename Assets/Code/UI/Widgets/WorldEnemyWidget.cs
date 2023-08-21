@@ -14,7 +14,8 @@ public class WorldEnemyWidget : MonoBehaviour, IUIElement
     private GameObject m_PrefabPlayer;
     [SerializeField]
     private GameObject m_PrefabEnemy;
-
+    [SerializeField]
+    private RectTransform m_View;
 
     public void SetWorldCamera(Camera camera)
     {
@@ -25,7 +26,10 @@ public class WorldEnemyWidget : MonoBehaviour, IUIElement
     {
         float dot = Vector3.Dot(m_WorldCamera.transform.forward, Vector3.Normalize(position - m_WorldCamera.transform.position));
         rectTransform.gameObject.SetActive(dot > 0);
-        rectTransform.anchoredPosition = m_WorldCamera.WorldToScreenPoint(position);
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(m_View, m_WorldCamera.WorldToScreenPoint(position), null, out Vector2 localPoint))
+        {
+            rectTransform.localPosition = localPoint;
+        }   
     }
 
     public GameObject Register(Transform target, bool isPlayer)

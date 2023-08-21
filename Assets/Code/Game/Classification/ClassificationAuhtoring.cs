@@ -7,7 +7,7 @@ public class ClassificationAuhtoring : MonoBehaviour, IEntityAuthoring
 {
     [SerializeField]
     private ClassificationData m_ClassData;
-    public bool isEnable => throw new System.NotImplementedException();
+    public bool isEnable => gameObject.activeInHierarchy;
 
     public void Bake(int entity, EcsWorld ecsWorld)
     {
