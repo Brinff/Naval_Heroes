@@ -46,98 +46,98 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
 
     public void Run(IEcsSystems systems)
     {
-        foreach (var entity in m_Filter)
-        {
-            ref var weaponFireComponent = ref m_PoolWeaponFireComponent.Get(entity);
-            ref var weaponReloadComponent = ref m_PoolWeaponReloadComponent.Get(entity);
-            ref var weaponAmmoComponent = ref m_PoolWeaponAmmoComponent.Get(entity);
+        //foreach (var entity in m_Filter)
+        //{
+        //    ref var weaponFireComponent = ref m_PoolWeaponFireComponent.Get(entity);
+        //    ref var weaponReloadComponent = ref m_PoolWeaponReloadComponent.Get(entity);
+        //    ref var weaponAmmoComponent = ref m_PoolWeaponAmmoComponent.Get(entity);
 
-            if (weaponAmmoComponent.projectile == null)
-            {
-                weaponAmmoComponent.projectile = new CannonProjectile()
-                {
-                    damage = weaponAmmoComponent.ammoData.Damage,
-                    timeFactor = 1,
-                    velocity = weaponAmmoComponent.ammoData.ProjectileSpeed,
-                    scatterAngleMin = weaponAmmoComponent.ammoData.scatterAngleMin,
-                    scatterAngleMax = weaponAmmoComponent.ammoData.scatterAngleMax,
-                    owner = m_PoolRootComponent.Get(entity).entity
-                };
+        //    if (weaponAmmoComponent.projectile == null)
+        //    {
+        //        weaponAmmoComponent.projectile = new CannonProjectile()
+        //        {
+        //            damage = weaponAmmoComponent.ammoData.Damage,
+        //            timeFactor = 1,
+        //            velocity = weaponAmmoComponent.ammoData.ProjectileSpeed,
+        //            scatterAngleMin = weaponAmmoComponent.ammoData.scatterAngleMin,
+        //            scatterAngleMax = weaponAmmoComponent.ammoData.scatterAngleMax,
+        //            owner = m_PoolRootComponent.Get(entity).entity
+        //        };
 
-                if (m_PoolRootComponent.Get(entity).entity.Unpack(m_World, out int ownerEntity))
-                {
-                    if (m_PoolStatScater.Has(ownerEntity))
-                    {
-                        ref var statScater = ref m_PoolStatScater.Get(ownerEntity);
-                        weaponAmmoComponent.projectile.scatterAngleMin *= statScater.factor;
-                        weaponAmmoComponent.projectile.scatterAngleMax *= statScater.factor;
-                    }
+        //        if (m_PoolRootComponent.Get(entity).entity.Unpack(m_World, out int ownerEntity))
+        //        {
+        //            if (m_PoolStatScater.Has(ownerEntity))
+        //            {
+        //                ref var statScater = ref m_PoolStatScater.Get(ownerEntity);
+        //                weaponAmmoComponent.projectile.scatterAngleMin *= statScater.factor;
+        //                weaponAmmoComponent.projectile.scatterAngleMax *= statScater.factor;
+        //            }
 
-                    if (m_PoolStatDamage.Has(ownerEntity))
-                    {
-                        ref var statDamage = ref m_PoolStatDamage.Get(ownerEntity);
-                        weaponAmmoComponent.projectile.damage *= statDamage.factor;
-                    }
+        //            if (m_PoolStatDamage.Has(ownerEntity))
+        //            {
+        //                ref var statDamage = ref m_PoolStatDamage.Get(ownerEntity);
+        //                weaponAmmoComponent.projectile.damage *= statDamage.factor;
+        //            }
 
-                    if (m_PoolStatProjectileTime.Has(ownerEntity))
-                    {
-                        ref var statProjectileTime = ref m_PoolStatProjectileTime.Get(ownerEntity);
-                        weaponAmmoComponent.projectile.timeFactor = Stat.Apply(weaponAmmoComponent.projectile.timeFactor, statProjectileTime.value, statProjectileTime.option);
-                    }
+        //            if (m_PoolStatProjectileTime.Has(ownerEntity))
+        //            {
+        //                ref var statProjectileTime = ref m_PoolStatProjectileTime.Get(ownerEntity);
+        //                weaponAmmoComponent.projectile.timeFactor = Stat.Apply(weaponAmmoComponent.projectile.timeFactor, statProjectileTime.value, statProjectileTime.option);
+        //            }
 
-                    if (m_PoolStatProjectileVelocity.Has(ownerEntity))
-                    {
-                        ref var statProjectileVelocity = ref m_PoolStatProjectileVelocity.Get(ownerEntity);
-                        weaponAmmoComponent.projectile.velocity = Stat.Apply(weaponAmmoComponent.projectile.velocity, statProjectileVelocity.value, statProjectileVelocity.option);
-                    }
-                }
+        //            if (m_PoolStatProjectileVelocity.Has(ownerEntity))
+        //            {
+        //                ref var statProjectileVelocity = ref m_PoolStatProjectileVelocity.Get(ownerEntity);
+        //                weaponAmmoComponent.projectile.velocity = Stat.Apply(weaponAmmoComponent.projectile.velocity, statProjectileVelocity.value, statProjectileVelocity.option);
+        //            }
+        //        }
 
-                if (m_PoolCannonBalisticComponent.Has(entity))
-                {
-                    ref var cannonBalisticComponent = ref m_PoolCannonBalisticComponent.Get(entity);
-                    cannonBalisticComponent.velocity = weaponAmmoComponent.projectile.velocity;
-                }
-            }
+        //        if (m_PoolCannonBalisticComponent.Has(entity))
+        //        {
+        //            ref var cannonBalisticComponent = ref m_PoolCannonBalisticComponent.Get(entity);
+        //            cannonBalisticComponent.velocity = weaponAmmoComponent.projectile.velocity;
+        //        }
+        //    }
 
-            if (weaponFireComponent.isFire && weaponFireComponent.isActive && weaponReloadComponent.isRedy)
-            {
-                if (!weaponFireComponent.isFireNow)
-                {
-                    float delay = m_RandomDelay;
-                    if (m_PoolRootComponent.Get(entity).entity.Unpack(m_World, out int ownerEntity))
-                    {
-                        if (m_PoolStatFireRandomDelay.Has(ownerEntity))
-                        {
-                            ref var statFireRandomDelay = ref m_PoolStatFireRandomDelay.Get(ownerEntity);
-                            delay = Stat.Apply(delay, statFireRandomDelay.value, statFireRandomDelay.option);
-                        }
-                    }
+        //    if (weaponFireComponent.isFire && weaponFireComponent.isActive && weaponReloadComponent.isRedy)
+        //    {
+        //        if (!weaponFireComponent.isFireNow)
+        //        {
+        //            float delay = m_RandomDelay;
+        //            if (m_PoolRootComponent.Get(entity).entity.Unpack(m_World, out int ownerEntity))
+        //            {
+        //                if (m_PoolStatFireRandomDelay.Has(ownerEntity))
+        //                {
+        //                    ref var statFireRandomDelay = ref m_PoolStatFireRandomDelay.Get(ownerEntity);
+        //                    delay = Stat.Apply(delay, statFireRandomDelay.value, statFireRandomDelay.option);
+        //                }
+        //            }
 
-                    weaponFireComponent.delay = Random.value * delay;
-                    weaponFireComponent.isFireNow = true;
-                }
-            }
+        //            weaponFireComponent.delay = Random.value * delay;
+        //            weaponFireComponent.isFireNow = true;
+        //        }
+        //    }
 
-            if (weaponFireComponent.isFireNow && weaponFireComponent.delay > 0) weaponFireComponent.delay -= Time.deltaTime;
+        //    if (weaponFireComponent.isFireNow && weaponFireComponent.delay > 0) weaponFireComponent.delay -= Time.deltaTime;
 
-            if (weaponFireComponent.isFireNow && weaponFireComponent.delay < 0 && weaponReloadComponent.isRedy)
-            {
-                weaponFireComponent.isFireNow = false;
+        //    if (weaponFireComponent.isFireNow && weaponFireComponent.delay < 0 && weaponReloadComponent.isRedy)
+        //    {
+        //        weaponFireComponent.isFireNow = false;
                 
 
-                var weaponCannonComponent = m_PoolWeaponCannonComponent.Get(entity);
+        //        var weaponCannonComponent = m_PoolWeaponCannonComponent.Get(entity);
 
-                for (int i = 0; i < weaponCannonComponent.barels.Length; i++)
-                {
-                    weaponAmmoComponent.projectile.Launch(m_World, weaponCannonComponent.barels[i].position, weaponCannonComponent.barels[i].forward);
-                }
+        //        for (int i = 0; i < weaponCannonComponent.barels.Length; i++)
+        //        {
+        //            weaponAmmoComponent.projectile.Launch(m_World, weaponCannonComponent.barels[i].position, weaponCannonComponent.barels[i].forward);
+        //        }
 
-                m_CannonShot.Play(weaponCannonComponent.visualEffect.position, weaponCannonComponent.visualEffect.rotation).transform.SetParent(weaponCannonComponent.visualEffect);
+        //        m_CannonShot.Play(weaponCannonComponent.visualEffect.position, weaponCannonComponent.visualEffect.rotation).transform.SetParent(weaponCannonComponent.visualEffect);
 
-                //weaponCannonComponent.visualEffect.Play();
+        //        //weaponCannonComponent.visualEffect.Play();
 
-                weaponReloadComponent.isReload = true;
-            }
-        }
+        //        weaponReloadComponent.isReload = true;
+        //    }
+        //}
     }
 }

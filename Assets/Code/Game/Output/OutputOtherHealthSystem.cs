@@ -73,14 +73,14 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
                 {
                     var classificationDatabase = systems.GetData<ClassificationDatabase>();
                     ref var classification = ref m_PoolClassification.Get(entity);
-                    healthBarComponent.bar.SetClassification(classificationDatabase.GetClassificationById(classification.id).icon);
+                    healthBarComponent.bar.SetClassification(classificationDatabase.GetById(classification.id).icon);
                 }
 
                 if (m_PoolRare.Has(entity))
                 {
                     var rareDatabase = systems.GetData<RareDatabase>();
                     ref var rare = ref m_PoolRare.Get(entity);
-                    healthBarComponent.bar.SetRare(rareDatabase.GetRareById(rare.id).color);
+                    healthBarComponent.bar.SetRare(rareDatabase.GetById(rare.id).color);
                 }
 
 

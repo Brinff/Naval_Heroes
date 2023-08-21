@@ -5,6 +5,9 @@ using Warships;
 
 public struct WeaponAmmoComponent
 {
-    public CannonAmmoData ammoData;
-    public CannonProjectile projectile;
+    public int count;
+    public int maxCount;
+    public int id;
+    //public CannonAmmoData ammoData;
+    //public CannonProjectile projectile;
 }
