@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Leopotam.EcsLite;
 
-public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroupUpdateSystem
+public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
 {
     [SerializeField]
     private Camera m_Camera;
@@ -18,15 +18,18 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
     private EcsFilter m_FilterDestroy;
 
     private EcsPool<HealthComponent> m_PoolHealthComponent;
+    private EcsPool<Team> m_PoolTeam;
     private EcsPool<HealthBarComponent> m_PoolHealthBarComponent;
     private EcsPool<InfoComponent> m_PoolInfoComponent;
     private EcsPool<DestroyComponent> m_PoolDestroy;
+
     public void Init(IEcsSystems systems)
     {
         EcsWorld ecsWorld = systems.GetWorld();
-        m_Filter = ecsWorld.Filter<HealthComponent>().Inc<InfoComponent>().Inc<AITag>().End();
-        m_FilterEndHealth = ecsWorld.Filter<HealthBarComponent>().Inc<InfoComponent>().Inc<HealthEndEvent>().Inc<AITag>().End();
-        m_FilterDestroy = ecsWorld.Filter<HealthBarComponent>().Inc<InfoComponent>().Inc<DestroyComponent>().Inc<AITag>().End();
+        m_PoolTeam = ecsWorld.GetPool<Team>();
+        m_Filter = ecsWorld.Filter<HealthComponent>().Inc<InfoComponent>().Inc<ShipTag>().End();
+        m_FilterEndHealth = ecsWorld.Filter<HealthBarComponent>().Inc<InfoComponent>().Inc<HealthEndEvent>().Inc<ShipTag>().End();
+        m_FilterDestroy = ecsWorld.Filter<HealthBarComponent>().Inc<InfoComponent>().Inc<DestroyComponent>().Inc<ShipTag>().End();
 
         m_PoolHealthComponent = ecsWorld.GetPool<HealthComponent>();
         m_PoolHealthBarComponent = ecsWorld.GetPool<HealthBarComponent>();
@@ -57,8 +60,9 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
                 ref var healthBarComponent = ref m_PoolHealthBarComponent.Add(entity);
 
                 ref var infoCompoenent = ref m_PoolInfoComponent.Get(entity);
+                ref var team = ref m_PoolTeam.Get(entity);
 
-                healthBarComponent.bar = m_WorldEnemyWidget.Register(infoCompoenent.orgin).GetComponent<HealthBar>();
+                healthBarComponent.bar = m_WorldEnemyWidget.Register(infoCompoenent.orgin, team.id == 0).GetComponent<HealthBar>();
                 healthBarComponent.bar.SetHealth(healthComponent.currentValue, healthComponent.maxValue);
 
                 healthBarComponent.health = healthComponent.currentValue;

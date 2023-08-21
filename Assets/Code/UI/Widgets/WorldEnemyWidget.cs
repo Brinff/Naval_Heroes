@@ -11,7 +11,10 @@ public class WorldEnemyWidget : MonoBehaviour, IUIElement
     private Camera m_WorldCamera;
 
     [SerializeField]
-    private GameObject m_Prefab;
+    private GameObject m_PrefabPlayer;
+    [SerializeField]
+    private GameObject m_PrefabEnemy;
+
 
     public void SetWorldCamera(Camera camera)
     {
@@ -25,9 +28,9 @@ public class WorldEnemyWidget : MonoBehaviour, IUIElement
         rectTransform.anchoredPosition = m_WorldCamera.WorldToScreenPoint(position);
     }
 
-    public GameObject Register(Transform target)
+    public GameObject Register(Transform target, bool isPlayer)
     {
-        var element = Instantiate(m_Prefab);
+        var element = Instantiate(isPlayer ? m_PrefabPlayer : m_PrefabEnemy);
         var rectTransform = element.GetComponent<RectTransform>();
 
         rectTransform.SetParent(transform);

@@ -4,6 +4,7 @@ using UnityEngine;
 using Leopotam.EcsLite;
 using Sirenix.OdinInspector;
 using System.Linq;
+using System;
 
 public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySystem, IEcsRunSystem, IEcsGroup<Update>
 {
@@ -20,8 +21,12 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     [SerializeField]
     private SlotCollection m_SlotCollection;
     private EntityDatabase m_EntityDatabase;
+    private EcsWorld m_World;
+    private EcsPool<Team> m_PoolTeam;
     public void Init(IEcsSystems systems)
     {
+        m_World = systems.GetWorld();
+        m_PoolTeam = m_World.GetPool<Team>();
         m_EntityDatabase = systems.GetData<EntityDatabase>();
         m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>());
         m_SlotCollection.Prepare();
@@ -89,5 +94,19 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     public void Destroy(IEcsSystems systems)
     {
         m_SlotCollection.OnChange -= Save;
+    }
+
+    public void Bake()
+    {
+        var slots = m_SlotCollection.GetSlots<SlotBattleGrid>();
+        foreach (var slot in slots)
+        {
+            foreach (var item in slot.items)
+            {
+                var entity = m_World.Bake(item.entity);
+                m_PoolTeam.Add(entity);
+            }
+
+        }
     }
 }

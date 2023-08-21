@@ -923,7 +923,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d79dd0e55cb6148892bd5ded0e5097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Elements: []
+  m_Elements:
+  - acitve: 1
+    element: {fileID: 519852207}
 --- !u!1 &893095678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1714,6 +1716,7 @@ GameObject:
   - component: {fileID: 1931311984}
   - component: {fileID: 1931311986}
   - component: {fileID: 1931311985}
+  - component: {fileID: 1931311987}
   m_Layer: 0
   m_Name: Commander
   m_TagString: Untagged
@@ -1760,6 +1763,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07e89c5746f2ae4896516c78bcb3795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1931311987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931311983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69bad346a83db404083259d33f258303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ID: 0
 --- !u!1 &1941629110
 GameObject:
   m_ObjectHideFlags: 0
@@ -5131,7 +5147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e83b7d92c1074a2429d061ed552e5b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsEditor: 0
+  m_IsEditor: 1
 --- !u!114 &6673108037068813717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6002,6 +6018,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 836186765998995988, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2252008657406510189, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6295702119565446756, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7347036904417360693, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}

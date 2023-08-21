@@ -18,12 +18,17 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         var playerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
         playerSlotsSystem.Hide();
 
+        playerSlotsSystem.Bake();
+
         UISystem.Instance.compositionModule.Show<UIBattleComposition>();
 
         var playerLevelData = systems.GetData<MissionDatabase>();
         var playerLevelProvider = systems.GetSystem<PlayerMissionSystem>();
 
         var levelData = playerLevelData.GetLevel(playerLevelProvider.level);
+
+
+
 
         commandSystem.Execute<GoStageCommand, BattleData>(new BattleData() { levelData = levelData, stage = 0, level = playerLevelProvider.level });
 
