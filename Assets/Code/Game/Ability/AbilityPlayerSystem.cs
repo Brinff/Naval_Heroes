@@ -110,12 +110,11 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
                             for (int i = 0; i < abilityAmmoAmount.max; i++)
                             {
                                 var ammoItem = abilityAmmoUI.abilityAmmoItem[i];
-                                
-                                if(abilityAmmoAmount.current == i) ammoItem.SetReload(abilityAmmoReload.progress);
-                                else
-                                {
-                                    ammoItem.SetReload(abilityAmmoAmount.current > i ? 1 : 0);
-                                }
+
+                                //ammoItem.SetReload(abilityAmmoReload.progress);
+                                //ammoItem.SetReload(abilityAmmoReload.progress);
+                                ammoItem.SetReload(abilityAmmoAmount.current > i ? 1 : abilityAmmoAmount.current == i ? abilityAmmoReload.progress : 0);
+
                             }
                         }
                     }

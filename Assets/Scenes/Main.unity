@@ -1595,8 +1595,8 @@ GameObject:
   - component: {fileID: 1530222203}
   - component: {fileID: 1530222205}
   - component: {fileID: 1530222207}
-  - component: {fileID: 1530222204}
   - component: {fileID: 1530222206}
+  - component: {fileID: 1530222204}
   - component: {fileID: 1530222202}
   m_Layer: 0
   m_Name: Ability

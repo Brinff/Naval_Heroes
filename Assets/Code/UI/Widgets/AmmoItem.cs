@@ -17,12 +17,13 @@ public class AmmoItem : MonoBehaviour, IDisposable
     }
 
 
-
-    public float reload => m_Fill.fillAmount;
+    private float m_Reload;
+    public float reload => m_Reload;
 
     public void SetReload(float amount)
     {
-        m_Fill.fillAmount = amount;
+        m_Reload = Mathf.Clamp01(amount);
+        m_Fill.fillAmount = m_Reload;
     }
 
     public void Dispose()

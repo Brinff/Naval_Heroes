@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using System.Linq;
 
 public class AbilityItem : MonoBehaviour, IDisposable, IPointerDownHandler, IPointerUpHandler
 {
@@ -53,7 +54,7 @@ public class AbilityItem : MonoBehaviour, IDisposable, IPointerDownHandler, IPoi
 
     public void SetReload(float amount)
     {
-        m_AbilityFillImage.fillAmount = 1 - amount;
+        m_AbilityFillImage.fillAmount = Mathf.Clamp01(1 - amount);
     }
 
     public void SetAbilityIcon(Sprite sprite)
@@ -74,7 +75,7 @@ public class AbilityItem : MonoBehaviour, IDisposable, IPointerDownHandler, IPoi
     {
         if (m_SortAmmo == null) m_SortAmmo = new SortAmmo();
         m_AmmoItems.Sort(m_SortAmmo);
-
+        //m_AmmoItems = m_AmmoItems.OrderBy(x => x.reload).ToList();
         foreach (var item in m_AmmoItems)
         {
             item.transform.SetAsLastSibling();
