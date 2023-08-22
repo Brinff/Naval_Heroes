@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 using UnityEngine.UI;
@@ -34,14 +35,20 @@ public class AbilityItem : MonoBehaviour, IDisposable
         m_Button.onClick.RemoveListener(OnClick);
     }
 
-    public delegate void ClickDelegate();
+    public delegate void ClickDelegate(int id);
 
     public event ClickDelegate OnPerform;
 
+    private int m_Id;
 
     private void OnClick()
     {
-        OnPerform?.Invoke();
+        OnPerform?.Invoke(m_Id);
+    }
+
+    public void SetId(int id)
+    {
+        m_Id = id;
     }
 
     public void SetReload(float amount)

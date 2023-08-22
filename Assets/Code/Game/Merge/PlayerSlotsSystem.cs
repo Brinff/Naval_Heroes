@@ -106,7 +106,6 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
                 var entity = m_World.Bake(item.entity);
                 m_PoolTeam.Add(entity);
             }
-
         }
     }
 }
