@@ -1,8 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 public struct AbilityAmmoUI
 {
-    private AmmoItem abilityAmmoItem;
+    public List<AmmoItem> abilityAmmoItem;
 }

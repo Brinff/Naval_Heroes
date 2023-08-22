@@ -1427,6 +1427,7 @@ GameObject:
   - component: {fileID: 5580487762209362119}
   - component: {fileID: 603934478309443423}
   - component: {fileID: 976497429950312227}
+  - component: {fileID: 2912285453477895233}
   m_Layer: 0
   m_Name: Artellery
   m_TagString: Untagged
@@ -1487,7 +1488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 1
+  m_Duration: 3
 --- !u!114 &976497429950312227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1501,7 +1502,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Current: 0
-  m_Max: 1
+  m_Max: 2
+--- !u!114 &2912285453477895233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6776118612721195950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0a5f398bb79b3439ba77cf2dad9183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7018795413467888324
 GameObject:
   m_ObjectHideFlags: 0

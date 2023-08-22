@@ -669,6 +669,7 @@ GameObject:
   - component: {fileID: 642797108}
   - component: {fileID: 642797107}
   - component: {fileID: 642797113}
+  - component: {fileID: 642797114}
   m_Layer: 0
   m_Name: Planes
   m_TagString: Untagged
@@ -777,6 +778,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f7e4ba4577e3f449a207e49f50bfc4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &642797114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642797105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0a5f398bb79b3439ba77cf2dad9183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &653260035
@@ -1029,11 +1042,11 @@ MonoBehaviour:
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
   - {fileID: 792821841}
+  - {fileID: 792821838}
+  - {fileID: 792821844}
   - {fileID: 792821843}
   - {fileID: 792821839}
-  - {fileID: 792821838}
   - {fileID: 792821842}
-  - {fileID: 792821844}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1580,8 +1593,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1530222201}
   - component: {fileID: 1530222203}
-  - component: {fileID: 1530222202}
+  - component: {fileID: 1530222205}
+  - component: {fileID: 1530222207}
   - component: {fileID: 1530222204}
+  - component: {fileID: 1530222206}
+  - component: {fileID: 1530222202}
   m_Layer: 0
   m_Name: Ability
   m_TagString: Untagged
@@ -1638,6 +1654,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f8cc5502d18d1f42817c0a99922ab60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1530222205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530222200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81925d5fe3dec554f84be4b805afe9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1530222206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530222200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d36ba9275d8a14998a3ba47eb20f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1530222207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530222200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce2845a6b08c3149bb3d5c3411b3f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1560106710
@@ -1804,7 +1856,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1651825909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 282a7e580f86089419df9d7ffbb06c2a, type: 3}
+  m_Script: {fileID: 11500000, guid: fa0ab042fdb258145ac61f8c9580a512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1727703950
@@ -1823,6 +1875,7 @@ GameObject:
   - component: {fileID: 1727703953}
   - component: {fileID: 1727703952}
   - component: {fileID: 1727703958}
+  - component: {fileID: 1727703959}
   m_Layer: 0
   m_Name: Torpedo
   m_TagString: Untagged
@@ -1931,6 +1984,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f7e4ba4577e3f449a207e49f50bfc4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1727703959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727703950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0a5f398bb79b3439ba77cf2dad9183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1752710326
@@ -2151,6 +2216,7 @@ GameObject:
   - component: {fileID: 1931311989}
   - component: {fileID: 1931311988}
   - component: {fileID: 1931311991}
+  - component: {fileID: 1931311992}
   m_Layer: 0
   m_Name: Artillery
   m_TagString: Untagged
@@ -2222,7 +2288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 5
+  m_Duration: 0.3
 --- !u!114 &1931311989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,6 +2325,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f7e4ba4577e3f449a207e49f50bfc4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1931311992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931311983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0a5f398bb79b3439ba77cf2dad9183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1941629110

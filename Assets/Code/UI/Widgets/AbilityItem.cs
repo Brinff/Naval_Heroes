@@ -2,12 +2,12 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using DG.Tweening;
 
-public class AbilityItem : MonoBehaviour, IDisposable
+public class AbilityItem : MonoBehaviour, IDisposable, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
     private Image m_AbilityIconImage;
@@ -18,7 +18,7 @@ public class AbilityItem : MonoBehaviour, IDisposable
     [SerializeField]
     private GridLayoutGroup m_AmmoGrid;
     [SerializeField]
-    private Button m_Button;
+    private RectTransform m_Button;
 
     private List<AmmoItem> m_AmmoItems = new List<AmmoItem>();
 
@@ -27,12 +27,12 @@ public class AbilityItem : MonoBehaviour, IDisposable
     private void OnEnable()
     {
         m_AmmoItem.gameObject.SetActive(false);
-        m_Button.onClick.AddListener(OnClick);
+        //m_Button.onClick.AddListener(OnClick);
     }
 
     private void OnDisable()
     {
-        m_Button.onClick.RemoveListener(OnClick);
+        //m_Button.onClick.RemoveListener(OnClick);
     }
 
     public delegate void ClickDelegate(int id);
@@ -41,10 +41,10 @@ public class AbilityItem : MonoBehaviour, IDisposable
 
     private int m_Id;
 
-    private void OnClick()
-    {
-        OnPerform?.Invoke(m_Id);
-    }
+    //private void OnClick()
+    //{
+        
+    //}
 
     public void SetId(int id)
     {
@@ -74,6 +74,11 @@ public class AbilityItem : MonoBehaviour, IDisposable
     {
         if (m_SortAmmo == null) m_SortAmmo = new SortAmmo();
         m_AmmoItems.Sort(m_SortAmmo);
+
+        foreach (var item in m_AmmoItems)
+        {
+            item.transform.SetAsLastSibling();
+        }
     }
 
     public class SortAmmo : IComparer<AmmoItem>
@@ -82,12 +87,10 @@ public class AbilityItem : MonoBehaviour, IDisposable
         {
             if (x.reload < y.reload)
             {
-                x.transform.SetAsLastSibling();
                 return 1;
             }
             if (x.reload > y.reload)
             {
-                y.transform.SetAsLastSibling();
                 return -1;
             }
             return 0;
@@ -111,5 +114,24 @@ public class AbilityItem : MonoBehaviour, IDisposable
     public void Dispose()
     {
         Destroy(gameObject);
+    }
+
+    private bool m_IsPerform;
+
+    private void Update()
+    {
+        if(m_IsPerform) OnPerform?.Invoke(m_Id);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        m_IsPerform = true;
+        m_Button.DOScale(0.8f, 0.2f).SetEase(Ease.OutCubic);
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        m_IsPerform = false;
+        m_Button.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
     }
 }
