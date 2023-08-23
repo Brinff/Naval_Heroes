@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Game.Merge.Data
 {
-    [CreateAssetMenu(menuName = "Data/Merge")]
-    public class MergeData : ScriptableObject
+    [CreateAssetMenu(menuName = "Data/Database/Merge")]
+    public class MergeDatabase : Database
     {
         [System.Serializable]
         public class Item

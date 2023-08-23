@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7f59926497b564ba2f218a0ac5a269, type: 3}
+  m_Name: _ProjectileDatabase
+  m_EditorClassIdentifier: 
+  m_Datas:
+  - {fileID: 11400000, guid: 07ed308b47e5d3b4e8ab07daa7c99781, type: 2}
+  - {fileID: 11400000, guid: aa5238d5d7fa697458d886f73abab0ef, type: 2}
+  - {fileID: 11400000, guid: b22ab6c3fb8fa1448bc098fa36cc41e4, type: 2}
+  - {fileID: 11400000, guid: 45c5a99bc7469b149a192cebe3624570, type: 2}

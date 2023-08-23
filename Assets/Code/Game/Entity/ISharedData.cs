@@ -7,7 +7,7 @@ public interface IEcsData
 
 }
 
-public interface ISharedInitalizeData : IEcsData
+public interface IEcsDataProvider
 {
-    void InitalizeData();
+    public IEcsData[] ProvideData();
 }

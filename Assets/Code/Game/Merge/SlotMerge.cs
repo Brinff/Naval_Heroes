@@ -8,7 +8,7 @@ using Game.Utility;
 
 public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragHandler, IEndDragHandler, ISlotRenderer
 {
-    public MergeData data;
+    public MergeDatabase data;
     public SlotCollection collection { get; private set; }
 
     public List<SlotItem> items { get; private set; } = new List<SlotItem>();

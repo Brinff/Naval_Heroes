@@ -3,16 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityDatabase : MonoBehaviour, IEcsData
+[CreateAssetMenu(menuName = "Data/Database/Entity")]
+public class EntityDatabase : Database<EntityData>
 {
-    public EntityData[] entities;
 
-    public EntityData GetEntityByID(int id)
-    {
-        for (int i = 0; i < entities.Length; i++)
-        {
-            if (entities[i].id == id) return entities[i];
-        }
-        return null;
-    }
 }

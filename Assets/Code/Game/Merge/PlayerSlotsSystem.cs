@@ -46,7 +46,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         {
             var slots = m_SlotCollection.GetSlots<ISlot>();
             var findSlot = slots.First(x => x.id == slotData.slotId);
-            var findEntity = m_EntityDatabase.GetEntityByID(slotData.entityId);
+            var findEntity = m_EntityDatabase.GetById(slotData.entityId);
             findSlot.AddItem(SlotItem.Create(m_SlotCollection, findEntity, slotData.position), slotData.position);
         }
     }

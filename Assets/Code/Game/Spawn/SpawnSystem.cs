@@ -27,7 +27,7 @@ public class SpawnSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGro
         foreach (var entity in m_Filter)
         {
             ref var spawn = ref m_PoolSpawner.Get(entity);
-            var entityData = entityDatabase.GetEntityByID(spawn.entityId);
+            var entityData = entityDatabase.GetById(spawn.entityId);
             var instance = Instantiate(entityData.prefab, spawn.position, spawn.rotation);
             var newEntity = m_World.Bake(instance);
             ref var team = ref m_PoolTeam.Add(newEntity);

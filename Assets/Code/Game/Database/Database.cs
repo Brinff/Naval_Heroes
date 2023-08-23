@@ -8,7 +8,12 @@ public interface IData
     int id { get; }
 }
 
-public class Database<T> : MonoBehaviour, IEcsData where T : IData
+public class Database : ScriptableObject, IEcsData
+{
+
+}
+
+public class Database<T> : Database where T : IData
 {
     [SerializeField]
     private T[] m_Datas;

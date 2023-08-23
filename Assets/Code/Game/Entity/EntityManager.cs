@@ -121,6 +121,8 @@ public class EntityManager : Singleton<EntityManager>, ISingletonSetup
     public EcsWorld world => m_World;
     private List<IEcsGroup> m_Groups = new List<IEcsGroup>();
 
+    private IEcsData[] m_Data;
+
     public void Run<T>() where T : IEcsGroup
     {
         for (int i = 0; i < m_Groups.Count; i++)
@@ -172,18 +174,31 @@ public class EntityManager : Singleton<EntityManager>, ISingletonSetup
         }
         m_Groups.Clear();
 
+       
+
         if (m_World != null)
         {
             m_World.Destroy();
             m_World = null;
         }
+
+        m_Data = null;
     }
 
     public void Setup()
     {
         m_World = new EcsWorld();
 
-        var datas = transform.GetComponentsInChildren<IEcsData>();
+        var datas = new List<IEcsData>(transform.GetComponentsInChildren<IEcsData>());
+        var dataProviders = transform.GetComponentsInChildren<IEcsDataProvider>();
+
+        foreach (var dataProvider in dataProviders)
+        {
+            datas.AddRange(dataProvider.ProvideData());
+        }
+
+        m_Data = datas.ToArray();
+
         var systems = GetComponentsInChildren<IEcsSystem>();
 
         m_Groups.Add(new Update());
@@ -192,7 +207,7 @@ public class EntityManager : Singleton<EntityManager>, ISingletonSetup
 
         foreach (var group in m_Groups)
         {
-            group.BeginInit(m_World, datas);
+            group.BeginInit(m_World, m_Data);
 
             foreach (var system in systems)
             {

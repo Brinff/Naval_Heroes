@@ -4,7 +4,7 @@ using UnityEngine;
 using Game.Utility;
 
 [CreateAssetMenu(menuName = "Data/Entity", order = 0)]
-public class EntityData : ScriptableObject
+public class EntityData : ScriptableObject, IData
 {
     public GameObject prefab;
     public int id => name.GetDeterministicHashCode();
