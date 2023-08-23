@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Current: 0
-  m_Max: 2
+  m_Max: 1
 --- !u!114 &2938878645174171818
 MonoBehaviour:
   m_ObjectHideFlags: 0
