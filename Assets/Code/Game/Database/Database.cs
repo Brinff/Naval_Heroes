@@ -18,6 +18,8 @@ public class Database<T> : Database where T : IData
     [SerializeField]
     private T[] m_Datas;
 
+    public T[] datas => m_Datas;
+
     private Dictionary<int, T> m_DatasMap;
 
     public T GetById(int id)

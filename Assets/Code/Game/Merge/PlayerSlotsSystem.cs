@@ -58,7 +58,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         var slots = collection.GetSlots<ISlot>();
         foreach (var slot in slots)
         {
-            if (slot is SlotBuy) continue;
+            if (slot is SlotBuy || slot is SlotTrash || slot is SlotDebug) continue;
 
             var items = slot.items;
             int slotId = slot.id;
