@@ -23,7 +23,7 @@ public struct ProjectilePhysic
     public float drag;
 }
 
-public class ProjectilePhysicSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroupUpdateSystem
+public class ProjectilePhysicSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
 {
     private EcsFilter m_Filter;
     private EcsFilter m_DestroyFilter;

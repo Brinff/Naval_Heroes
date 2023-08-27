@@ -38,7 +38,7 @@ public class VFXPoolProvider : MonoBehaviour
     private Stack<int> m_Unused;
 
     [Button]
-    public void InitalizeData()
+    public void Create()
     {
         m_Timers = new Timer[100];
         m_Unused = new Stack<int>(100);

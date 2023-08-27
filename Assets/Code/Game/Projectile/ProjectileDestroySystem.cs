@@ -8,7 +8,7 @@ public struct ProjectileDestroyEvent
 
 }
 
-public class ProjectileDestroySystem : MonoBehaviour, IEcsInitSystem, IEcsPostRunSystem, IEcsGroupUpdateSystem
+public class ProjectileDestroySystem : MonoBehaviour, IEcsInitSystem, IEcsPostRunSystem, IEcsGroup<Update>
 {
     private EcsFilter m_Filter;
 

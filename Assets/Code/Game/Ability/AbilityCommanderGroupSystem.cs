@@ -2,10 +2,9 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Schema;
 using UnityEngine;
 
-public class AbilityGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
+public class AbilityCommanderGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
 {
     //private AbilityWidget m_AbilityWidget;
     private EcsFilter m_AbilityCommanderFilter;
@@ -26,7 +25,7 @@ public class AbilityGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
         m_AbilityAmmoDatabase = systems.GetData<AbilityAmmoDatabase>();
 
         m_AbilityCommanderFilter = m_World.Filter<Ability>().Inc<AbilityGroup>().Inc<CommanderTag>().End();
-        m_AbilityOtherFilter = m_World.Filter<Ability>().Exc<CommanderTag>().End();
+        m_AbilityOtherFilter = m_World.Filter<Ability>().Inc<ShipTag>().End();
 
         m_PoolAbility = m_World.GetPool<Ability>();
         m_PoolGroupAbility = m_World.GetPool<AbilityGroup>();

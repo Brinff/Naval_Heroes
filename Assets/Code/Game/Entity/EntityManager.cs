@@ -113,6 +113,11 @@ public struct ChildsComponent
     public EcsPackedEntity[] entities;
 }
 
+public struct Link
+{
+    public Transform transform;
+}
+
 public class EntityManager : Singleton<EntityManager>, ISingletonSetup
 {
     [SerializeField]

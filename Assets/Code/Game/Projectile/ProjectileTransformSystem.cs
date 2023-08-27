@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Leopotam.EcsLite;
 
-public class ProjectileTransformSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroupUpdateSystem
+public class ProjectileTransformSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
 {
     private EcsFilter m_Filter;
     private EcsPool<ProjectileUnityTransform> m_PoolsUnityTransform;

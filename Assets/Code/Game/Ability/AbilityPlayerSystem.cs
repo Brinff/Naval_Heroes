@@ -77,6 +77,8 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
                             ref var abilityAmmoUI = ref m_PoolAbilityAmmoUI.Add(childAbility);
                             abilityAmmoUI.abilityAmmoItem = new List<AmmoItem>();
 
+                            Debug.Log(m_World.GetPool<Link>().Get(childAbility).transform);
+
                             ref var abilityAmmoAmount = ref m_PoolAbilityAmmoAmount.Get(childAbility);
 
                             for (int i = 0; i < abilityAmmoAmount.max; i++)

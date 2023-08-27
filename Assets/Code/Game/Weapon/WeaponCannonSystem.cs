@@ -3,21 +3,26 @@ using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Warships;
 
-public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroupUpdateSystem
+public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
 {
     private EcsFilter m_Filter;
-    private EcsPool<WeaponCannonComponent> m_PoolWeaponCannonComponent;
-    private EcsPool<WeaponReloadComponent> m_PoolWeaponReloadComponent;
-    private EcsPool<WeaponFireCompoment> m_PoolWeaponFireComponent;
-    private EcsPool<WeaponAmmoComponent> m_PoolWeaponAmmoComponent;
-    private EcsPool<RootComponent> m_PoolRootComponent;
-    private EcsPool<StatScaterComponent> m_PoolStatScater;
-    private EcsPool<StatDamageComponent> m_PoolStatDamage;
-    private EcsPool<StatProjectileTimeComponent> m_PoolStatProjectileTime;
-    private EcsPool<StatProjectileVelocityComponent> m_PoolStatProjectileVelocity;
-    private EcsPool<CannonBalisticComponent> m_PoolCannonBalisticComponent;
-    private EcsPool<StatFireRandomDelayComponent> m_PoolStatFireRandomDelay;
+    private EcsPool<WeaponCannon> m_PoolWeaponCannon;
+    private EcsPool<AbilityState> m_PoolAbilityState;
+    private EcsPool<AbilityAim> m_PoolAbilityAim;
+    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Team> m_PoolTeam;
+    //private EcsPool<WeaponReloadComponent> m_PoolWeaponReloadComponent;
+    //private EcsPool<WeaponFireCompoment> m_PoolWeaponFireComponent;
+    //private EcsPool<WeaponAmmoComponent> m_PoolWeaponAmmoComponent;
+    //private EcsPool<RootComponent> m_PoolRootComponent;
+    //private EcsPool<StatScaterComponent> m_PoolStatScater;
+    //private EcsPool<StatDamageComponent> m_PoolStatDamage;
+    //private EcsPool<StatProjectileTimeComponent> m_PoolStatProjectileTime;
+    //private EcsPool<StatProjectileVelocityComponent> m_PoolStatProjectileVelocity;
+    //private EcsPool<CannonBalisticComponent> m_PoolCannonBalisticComponent;
+    //private EcsPool<StatFireRandomDelayComponent> m_PoolStatFireRandomDelay;
     private EcsWorld m_World;
     [SerializeField]
     private float m_RandomDelay = 0.3f;
@@ -28,24 +33,68 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
     {
         m_World = systems.GetWorld();
         m_CannonShot = systems.GetSystem<PoolSystem>().GetPool<VFXCannonShot>();
+        m_Filter = m_World.Filter<WeaponCannon>().Inc<AbilityState>().Inc<AbilityAim>().End();
 
-        m_Filter = m_World.Filter<WeaponCannonComponent>().Inc<WeaponFireCompoment>().Inc<WeaponReloadComponent>().Inc<WeaponAmmoComponent>().End();
-        m_PoolWeaponCannonComponent = m_World.GetPool<WeaponCannonComponent>();
-        m_PoolWeaponFireComponent = m_World.GetPool<WeaponFireCompoment>();
-        m_PoolWeaponReloadComponent = m_World.GetPool<WeaponReloadComponent>();
-        m_PoolWeaponAmmoComponent = m_World.GetPool<WeaponAmmoComponent>();
-        m_PoolRootComponent = m_World.GetPool<RootComponent>();
-        m_PoolStatScater = m_World.GetPool<StatScaterComponent>();
-        m_PoolStatDamage = m_World.GetPool<StatDamageComponent>();
-        m_PoolStatProjectileTime = m_World.GetPool<StatProjectileTimeComponent>();
-        m_PoolStatProjectileVelocity = m_World.GetPool<StatProjectileVelocityComponent>();
-        m_PoolCannonBalisticComponent = m_World.GetPool<CannonBalisticComponent>();
-        m_PoolStatFireRandomDelay = m_World.GetPool<StatFireRandomDelayComponent>();
+        //m_Filter = m_World.Filter<WeaponCannonComponent>().Inc<WeaponFireCompoment>().Inc<WeaponReloadComponent>().Inc<WeaponAmmoComponent>().End();
+        m_PoolWeaponCannon = m_World.GetPool<WeaponCannon>();
+        m_PoolAbilityState = m_World.GetPool<AbilityState>();
+        m_PoolAbilityAim = m_World.GetPool<AbilityAim>();
+        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolTeam = m_World.GetPool<Team>();
+        //m_PoolWeaponFireComponent = m_World.GetPool<WeaponFireCompoment>();
+        //m_PoolWeaponReloadComponent = m_World.GetPool<WeaponReloadComponent>();
+        //m_PoolWeaponAmmoComponent = m_World.GetPool<WeaponAmmoComponent>();
+        //m_PoolRootComponent = m_World.GetPool<RootComponent>();
+        //m_PoolStatScater = m_World.GetPool<StatScaterComponent>();
+        //m_PoolStatDamage = m_World.GetPool<StatDamageComponent>();
+        //m_PoolStatProjectileTime = m_World.GetPool<StatProjectileTimeComponent>();
+        //m_PoolStatProjectileVelocity = m_World.GetPool<StatProjectileVelocityComponent>();
+        //m_PoolCannonBalisticComponent = m_World.GetPool<CannonBalisticComponent>();
+        //m_PoolStatFireRandomDelay = m_World.GetPool<StatFireRandomDelayComponent>();
 
     }
 
     public void Run(IEcsSystems systems)
     {
+        var poolSystem = systems.GetSystem<PoolSystem>();
+        var shotVfx = poolSystem.GetPool<VFXCannonShot>();
+        foreach (var entity in m_Filter)
+        {
+            ref var root = ref m_PoolRoot.Get(entity);
+            ref var weaponCannon = ref m_PoolWeaponCannon.Get(entity);
+            ref var abilityState = ref m_PoolAbilityState.Get(entity);
+            ref var abilityAim = ref m_PoolAbilityAim.Get(entity);
+            
+
+            Vector3 aimDirection = Ballistics.GetDirection(weaponCannon.orgrin.position, abilityAim.point + Vector3.up * 5, 0, 200);
+
+            weaponCannon.aimConstrain.Perfrom(weaponCannon.orgrin.position + aimDirection * 10);
+            weaponCannon.aimConstrain.SetState(AimState.Aim);
+
+            if (abilityState.isPerfrom)
+            {
+                int teamId = -1;
+                if(root.entity.Unpack(m_World, out int rootEntity))
+                {
+                    ref var team = ref m_PoolTeam.Get(rootEntity);
+                    teamId = team.id;
+                }
+                
+                CannonProjectile cannonProjectile = new CannonProjectile() { damage = 50, owner = root.entity, scatterAngleMin = 0.1f, scatterAngleMax = 0.5f, timeFactor = 2, velocity = 200, team = teamId };
+                for (int i = 0; i < weaponCannon.barels.Length; i++)
+                {
+                    var barrel = weaponCannon.barels[i];
+                    
+
+                    cannonProjectile.Launch(m_World, barrel.position, barrel.forward);
+                }
+
+                shotVfx.Play(weaponCannon.visualEffect.position, weaponCannon.visualEffect.rotation);
+
+                //Debug.Log("Weapon Cannon Perfrom: {}");
+                abilityState.isPerfrom = false;
+            }
+        }
         //foreach (var entity in m_Filter)
         //{
         //    ref var weaponFireComponent = ref m_PoolWeaponFireComponent.Get(entity);
@@ -123,7 +172,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
         //    if (weaponFireComponent.isFireNow && weaponFireComponent.delay < 0 && weaponReloadComponent.isRedy)
         //    {
         //        weaponFireComponent.isFireNow = false;
-                
+
 
         //        var weaponCannonComponent = m_PoolWeaponCannonComponent.Get(entity);
 

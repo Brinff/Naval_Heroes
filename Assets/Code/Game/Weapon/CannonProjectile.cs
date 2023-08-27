@@ -11,7 +11,7 @@ public class CannonProjectile : IProjectile
     public EcsPackedEntity owner;
     public float scatterAngleMin;
     public float scatterAngleMax;
-
+    public int team;
 
 
     public void Launch(EcsWorld world, Vector3 position, Vector3 direction)
@@ -22,7 +22,8 @@ public class CannonProjectile : IProjectile
         projectileTransform.position = position;
         projectileTransform.rotation = Quaternion.LookRotation(direction);
 
-
+        ref Team team = ref world.GetPool<Team>().Add(projectile);
+        team.id = this.team;
 
         ref ProjectilePhysic projectilePhysic = ref world.GetPool<ProjectilePhysic>().Add(projectile);
         float angleX = Random.Range(-1f, 1f) * Random.Range(scatterAngleMin, scatterAngleMax);

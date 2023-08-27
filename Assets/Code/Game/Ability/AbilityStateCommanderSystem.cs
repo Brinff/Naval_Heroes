@@ -62,18 +62,44 @@ public class AbilityStateCommanderSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
             {
 
                 if (abilityGroup.entities != null)
-                    for (int i = 0; i < abilityGroup.entities.Count; i++)
+                {
+                    if (abilityGroup.isSeparately)
                     {
-                        if (abilityGroup.entities[i].Unpack(m_World, out int childAbility))
+                        for (int i = 0; i < abilityGroup.entities.Count; i++)
                         {
-                            ref var childAbilityState = ref m_PoolAbilityPerfrom.Get(childAbility);
-                            if (childAbilityState.isAvailable)
+                            if (abilityGroup.entities[i].Unpack(m_World, out int childAbility))
                             {
-                                childAbilityState.isPerfrom = true;
-                                break;
+                                abilityGroup.selector = (int)Mathf.Repeat(abilityGroup.selector, abilityGroup.entities.Count);
+
+                                ref var childAbilityState = ref m_PoolAbilityPerfrom.Get(childAbility);
+                                if (childAbilityState.isAvailable)
+                                {
+                                    if (abilityGroup.selector == i)
+                                    {
+                                        childAbilityState.isPerfrom = true;
+                                        abilityGroup.selector++;
+                                        break;
+                                    }
+                                }
+                                else abilityGroup.selector++;
                             }
                         }
                     }
+                    else
+                    {
+                        for (int i = 0; i < abilityGroup.entities.Count; i++)
+                        {
+                            if (abilityGroup.entities[i].Unpack(m_World, out int childAbility))
+                            {
+                                ref var childAbilityState = ref m_PoolAbilityPerfrom.Get(childAbility);
+                                if (childAbilityState.isAvailable)
+                                {
+                                    childAbilityState.isPerfrom = true;
+                                }
+                            }
+                        }
+                    }
+                }
 
                 abilityState.isAvailable = false;
                 abilityReload.time = 0;

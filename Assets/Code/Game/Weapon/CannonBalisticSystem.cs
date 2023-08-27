@@ -30,20 +30,20 @@ public class CannonBalisticSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem
             cannonBalisticComponent.timeFlight = Ballistics.GetTime(cannonBalisticComponent.aimDirection, cannonBalisticComponent.velocity);
 
             bool isAngleReady = true;
-            if (cannonBalisticComponent.constrains != null)
-            {
-                Vector3 aimPoint = cannonBalisticComponent.orgin.position + cannonBalisticComponent.aimDirection;
-                foreach (var constrain in cannonBalisticComponent.constrains)
-                {
-                    constrain.SetState(turretAimComponent.state);
-                    constrain.SetAimPoint(aimPoint);
-                    constrain.Perform();
-                    if (!constrain.isReadyAngle)
-                    {
-                        isAngleReady = false;
-                    }
-                }
-            }
+            //if (cannonBalisticComponent.constrains != null)
+            //{
+            //    Vector3 aimPoint = cannonBalisticComponent.orgin.position + cannonBalisticComponent.aimDirection;
+            //    foreach (var constrain in cannonBalisticComponent.constrains)
+            //    {
+            //        constrain.SetState(turretAimComponent.state);
+            //        constrain.SetAimPoint(aimPoint);
+            //        constrain.Perform();
+            //        if (!constrain.isReadyAngle)
+            //        {
+            //            isAngleReady = false;
+            //        }
+            //    }
+            //}
 
             weaponFire.isActive = isAngleReady;
         }

@@ -5,5 +5,7 @@ using Leopotam.EcsLite;
 
 public struct AbilityGroup
 {
+    public bool isSeparately;
+    public int selector;
     public List<EcsPackedEntity> entities;
 }

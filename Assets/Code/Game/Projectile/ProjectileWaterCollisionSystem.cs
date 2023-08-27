@@ -8,7 +8,7 @@ public struct ProjectileWaterCollision
 
 }
 
-public class ProjectileWaterCollisionSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroupUpdateSystem
+public class ProjectileWaterCollisionSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
 {
     private EcsFilter m_Filter;
     private EcsPool<ProjectileTransform> m_PoolTransform;

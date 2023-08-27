@@ -59,9 +59,10 @@ public static class EcsExtentions
         var poolParentComponent = world.GetPool<ParentComponent>();
         var poolChilds = world.GetPool<ChildsComponent>();
         var poolRoot = world.GetPool<RootComponent>();
+        var poolLink = world.GetPool<Link>();
 
         List<int> entities = new List<int>();
-        Bake(world, transform, poolRoot, null, ref entities);
+        Bake(world, transform, poolRoot, poolLink, null, ref entities);
         int root = entities.First();
 
         if (entities.Count > 1)
@@ -74,14 +75,17 @@ public static class EcsExtentions
             }
         }
 
+
+
         return root;
     }
 
-    private static void Bake(EcsWorld world, Transform transform, EcsPool<RootComponent> poolRoot, Nullable<EcsPackedEntity> root, ref List<int> entities)
+    private static void Bake(EcsWorld world, Transform transform, EcsPool<RootComponent> poolRoot, EcsPool<Link> poolLink, Nullable<EcsPackedEntity> root, ref List<int> entities)
     {
         IEntityAuthoring[] entityAuthorings = transform.GetComponents<IEntityAuthoring>();
         if (entityAuthorings.Length > 0)
         {
+
             bool isAnyEnable = false;
             for (int i = 0; i < entityAuthorings.Length; i++)
             {
@@ -91,6 +95,10 @@ public static class EcsExtentions
             if (isAnyEnable)
             {
                 int entity = world.NewEntity();
+
+                ref var link = ref poolLink.Add(entity);
+                link.transform = transform;
+
                 if (root != null)
                 {
                     ref var rootComponent = ref poolRoot.AddOrGet(entity);
@@ -116,7 +124,7 @@ public static class EcsExtentions
         for (int i = 0; i < transform.childCount; i++)
         {
             var child = transform.GetChild(i);
-            Bake(world, child, poolRoot, root, ref entities);
+            Bake(world, child, poolRoot, poolLink, root, ref entities);
         }
     }
 

@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ShipDestrorySystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroupUpdateSystem
+public class ShipDestrorySystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup<Update>
 {
     private EcsWorld m_World;
     private EcsFilter m_Filter;

@@ -10,7 +10,7 @@ public struct ProjectileRenderer
     public Transform transform;
 }
 
-public class ProjectileRenderSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroupUpdateSystem
+public class ProjectileRenderSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
 {
     private EcsFilter m_Filter;
     private EcsFilter m_DestroyFilter;

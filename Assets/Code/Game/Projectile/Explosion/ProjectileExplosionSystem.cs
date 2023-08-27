@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Android;
 
-public abstract class ProjectileExplosionSystem<T> : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroupUpdateSystem where T : struct
+public abstract class ProjectileExplosionSystem<T> : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update> where T : struct
 {
     private EcsFilter m_Filter;
     private EcsWorld m_World;

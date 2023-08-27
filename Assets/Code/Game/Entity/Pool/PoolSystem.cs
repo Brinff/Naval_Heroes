@@ -10,6 +10,10 @@ public class PoolSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
     public void Init(IEcsSystems systems)
     {
         m_Pools = GetComponentsInChildren<VFXPoolProvider>();
+        foreach (var item in m_Pools)
+        {
+            item.Create();
+        }
     }
     public T GetPool<T>() where T : VFXPoolProvider
     {

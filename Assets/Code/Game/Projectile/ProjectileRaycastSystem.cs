@@ -7,6 +7,7 @@ using UnityEngine.Experimental.AI;
 using Sirenix.OdinInspector;
 using System;
 using System.Net;
+using Sirenix.OdinInspector.Editor.ValueResolvers;
 
 public struct ProjectileHit
 {
@@ -44,7 +45,7 @@ public interface IProjectileRaycastExit : IProjectileRaycast
     void OnProjectileRaycastExit(EcsWorld world, int enitity, RaycastHit hit);
 }
 
-public class ProjectileRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroupUpdateSystem
+public class ProjectileRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
 {
     private EcsFilter m_FilterProjectile;
     private EcsFilter m_FilterCollider;
@@ -52,7 +53,7 @@ public class ProjectileRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
     private EcsPool<ProjectileTransform> m_PoolTransform;
     private EcsPool<ProjectileColliderComponent> m_PoolProjectileColliderComponent;
     private EcsPool<RootComponent> m_PoolRootComponent;
-    private EcsPool<ProjectileOwnerComponent> m_PoolProjectileOwnerComponent;
+    private EcsPool<Team> m_PoolTeam;
     private EcsPool<ProjectileColliderHitComponent> m_PoolProjectileColliderHitComponent;
 
     private EcsWorld m_World;
@@ -82,7 +83,7 @@ public class ProjectileRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
         m_PoolRaycast = m_World.GetPool<ProjectileRaycast>();
         m_PoolTransform = m_World.GetPool<ProjectileTransform>();
         m_PoolProjectileColliderComponent = m_World.GetPool<ProjectileColliderComponent>();
-        m_PoolProjectileOwnerComponent = m_World.GetPool<ProjectileOwnerComponent>();
+        m_PoolTeam = m_World.GetPool<Team>();
         m_PoolRootComponent = m_World.GetPool<RootComponent>();
         m_PoolProjectileColliderHitComponent = m_World.GetPool<ProjectileColliderHitComponent>();
     }
@@ -119,7 +120,7 @@ public class ProjectileRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
         {
             ref var transform = ref m_PoolTransform.Get(projectileEntity);
             ref var raycast = ref m_PoolRaycast.Get(projectileEntity);
-
+            ref var team = ref m_PoolTeam.Get(projectileEntity);
 
 
             Vector3 delta = transform.position - raycast.previusPosition;
@@ -130,22 +131,29 @@ public class ProjectileRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
             ray.direction = direction;
             ray.origin = raycast.previusPosition;
 
-            Nullable<EcsPackedEntity> ownerEntity = null;
-            if (m_PoolProjectileOwnerComponent.Has(projectileEntity))
-            {
-                ref var projectileOwnerComponent = ref m_PoolProjectileOwnerComponent.Get(projectileEntity);
-                ownerEntity = projectileOwnerComponent.entity;
-            }
+            //Nullable<EcsPackedEntity> ownerEntity = null;
+            //if (m_PoolTeam.Has(projectileEntity))
+            //{
+            //    ref var projectileOwnerComponent = ref m_PoolTeam.Get(projectileEntity);
+            //    ownerEntity = projectileOwnerComponent.entity;
+            //}
 
 
 
             foreach (var colliderEntity in m_FilterCollider)
             {
                 ref var rootComponent = ref m_PoolRootComponent.Get(colliderEntity);
-                if (ownerEntity != null)
+
+                if(rootComponent.entity.Unpack(m_World, out int rootEntity))
                 {
-                    if (ownerEntity.Value.EqualsTo(in rootComponent.entity)) continue;
+                    ref var colliderTeam = ref m_PoolTeam.Get(rootEntity);
+                    if (team.id == colliderTeam.id) continue;
                 }
+
+                //if (ownerEntity != null)
+                //{
+                //    if (ownerEntity.Value.EqualsTo(in rootComponent.entity)) continue;
+                //}
 
                 ref var colliderComponent = ref m_PoolProjectileColliderComponent.Get(colliderEntity);
 
