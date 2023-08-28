@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: _MissionDatabase
   m_EditorClassIdentifier: 
   m_Levels:
-  - {fileID: 11400000, guid: 3c7df7f5fc9a8b1459bc8598df3e69b8, type: 2}
   - {fileID: 11400000, guid: e2bb79465e0c2e649bffc64d6d65ff6d, type: 2}
+  - {fileID: 11400000, guid: 3c7df7f5fc9a8b1459bc8598df3e69b8, type: 2}
   - {fileID: 11400000, guid: 8074fb8400cbe3749b164320369d4aff, type: 2}
   - {fileID: 11400000, guid: 5de50236565dd6443bd9dd4163fa0b55, type: 2}
   - {fileID: 11400000, guid: 911a8e9513c1dc643bd55a8d14d943b1, type: 2}
