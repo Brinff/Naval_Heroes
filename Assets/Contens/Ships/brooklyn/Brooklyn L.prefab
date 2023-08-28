@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 1513754629870675652}
   - component: {fileID: 7049489630705071890}
   - component: {fileID: 4583717821325008739}
+  - component: {fileID: 4156009441705846005}
   m_Layer: 0
   m_Name: Artellery
   m_TagString: Untagged
@@ -304,6 +305,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4156009441705846005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242836348094605012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &266991749400213259
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,6 +2143,7 @@ GameObject:
   - component: {fileID: 2546675101927417874}
   - component: {fileID: 7630941526409956364}
   - component: {fileID: 6405610581931526228}
+  - component: {fileID: 8640666501828719870}
   m_Layer: 0
   m_Name: Front_Cannon (4)
   m_TagString: Untagged
@@ -2252,6 +2268,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8640666501828719870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4401612915332867026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &4441603713121333490
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,6 +2463,7 @@ GameObject:
   - component: {fileID: 1870322988102878063}
   - component: {fileID: 7678194766375727272}
   - component: {fileID: 3645914329028500228}
+  - component: {fileID: 1628895374063037360}
   m_Layer: 0
   m_Name: Front_Cannon (3)
   m_TagString: Untagged
@@ -2557,6 +2588,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1628895374063037360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4768624077156402356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &4814550257986541912
 GameObject:
   m_ObjectHideFlags: 0
@@ -2739,6 +2784,7 @@ GameObject:
   - component: {fileID: 1404413131349817523}
   - component: {fileID: 3531697196264181563}
   - component: {fileID: 2109512936040966061}
+  - component: {fileID: 6830077416126931510}
   m_Layer: 0
   m_Name: Front_Cannon (2)
   m_TagString: Untagged
@@ -2863,6 +2909,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6830077416126931510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5117875593701973025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &5119955793253878917
 GameObject:
   m_ObjectHideFlags: 0
@@ -3075,6 +3135,7 @@ GameObject:
   - component: {fileID: 6091904863872431837}
   - component: {fileID: 1492477424183149543}
   - component: {fileID: 5614724820894442695}
+  - component: {fileID: 6709064039898343502}
   m_Layer: 0
   m_Name: Front_Cannon
   m_TagString: Untagged
@@ -3199,6 +3260,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6709064039898343502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5526294361533380198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &5607101732843221986
 GameObject:
   m_ObjectHideFlags: 0
@@ -4135,6 +4210,7 @@ GameObject:
   - component: {fileID: 8664327949160449575}
   - component: {fileID: 253169555597644879}
   - component: {fileID: 7450538805012080149}
+  - component: {fileID: -3164377083669502449}
   m_Layer: 0
   m_Name: Brooklyn L
   m_TagString: Untagged
@@ -4244,6 +4320,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RareData: {fileID: 11400000, guid: b51bcdffb5229b5468660cb92f30cc74, type: 2}
+--- !u!114 &-3164377083669502449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916594432077460907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a332b629add141926fe1ee5fddf4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Transform: {fileID: 0}
 --- !u!1 &7962384179946999224
 GameObject:
   m_ObjectHideFlags: 0
@@ -4527,6 +4616,7 @@ GameObject:
   - component: {fileID: 5404353483806377743}
   - component: {fileID: 1575222886962993124}
   - component: {fileID: 6936540310320819537}
+  - component: {fileID: 3469126508302675185}
   m_Layer: 0
   m_Name: Front_Cannon (1)
   m_TagString: Untagged
@@ -4651,6 +4741,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3469126508302675185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8633412882051061087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &8645504030476432567
 GameObject:
   m_ObjectHideFlags: 0

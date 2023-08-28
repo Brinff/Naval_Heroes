@@ -673,6 +673,7 @@ GameObject:
   - component: {fileID: 642797113}
   - component: {fileID: 642797114}
   - component: {fileID: 642797115}
+  - component: {fileID: 642797116}
   m_Layer: 0
   m_Name: Planes
   m_TagString: Untagged
@@ -809,6 +810,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsActive: 0
+--- !u!114 &642797116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642797105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 3
+  m_Value: 1
 --- !u!1 &643096402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,11 +1245,11 @@ MonoBehaviour:
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
   - {fileID: 792821841}
-  - {fileID: 792821842}
-  - {fileID: 792821843}
-  - {fileID: 792821839}
   - {fileID: 792821838}
+  - {fileID: 792821842}
+  - {fileID: 792821839}
   - {fileID: 792821844}
+  - {fileID: 792821843}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2224,6 +2239,7 @@ GameObject:
   - component: {fileID: 1727703958}
   - component: {fileID: 1727703959}
   - component: {fileID: 1727703960}
+  - component: {fileID: 1727703961}
   m_Layer: 0
   m_Name: Torpedo
   m_TagString: Untagged
@@ -2360,6 +2376,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsActive: 0
+--- !u!114 &1727703961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727703950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 3
+  m_Value: 1
 --- !u!1 &1752710326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,6 +2731,7 @@ GameObject:
   - component: {fileID: 1931311992}
   - component: {fileID: 1931311993}
   - component: {fileID: 1931311994}
+  - component: {fileID: 1931311995}
   m_Layer: 0
   m_Name: Artillery
   m_TagString: Untagged
@@ -2849,6 +2880,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsActive: 0
+--- !u!114 &1931311995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931311983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 3
+  m_Value: 1
 --- !u!1 &1941629110
 GameObject:
   m_ObjectHideFlags: 0
@@ -3462,11 +3507,6 @@ PrefabInstance:
 --- !u!4 &555440436717702780 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2431508718619525511, guid: be4e5c527b4858341a9ae7a8f294d886, type: 3}
-  m_PrefabInstance: {fileID: 555440436717702779}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &555440436717702781 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4347834266683861477, guid: be4e5c527b4858341a9ae7a8f294d886, type: 3}
   m_PrefabInstance: {fileID: 555440436717702779}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &630431834083115506
@@ -4083,11 +4123,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7658856997002518135, guid: b1b31029de4a6234e99390382b3b20e0, type: 3}
   m_PrefabInstance: {fileID: 2102953242469794100}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2102953242469794102 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8021461114884420046, guid: b1b31029de4a6234e99390382b3b20e0, type: 3}
-  m_PrefabInstance: {fileID: 2102953242469794100}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2141984070817461630
 Transform:
   m_ObjectHideFlags: 0
@@ -4440,7 +4475,7 @@ MonoBehaviour:
   m_PoolType: 1
   m_Checks: 1
   m_MaxPoolSize: 10
-  m_Prefab: {fileID: 4435066078872672053}
+  m_Prefab: {fileID: 4979395488606938756, guid: e74c4729e884dda4692a445b45178da8, type: 3}
   m_Lifetime: 3
 --- !u!1001 &3406293649609288118
 PrefabInstance:
@@ -4902,11 +4937,6 @@ PrefabInstance:
 --- !u!4 &4435066078872672052 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4397801853795307389, guid: c4a47bec9f7bbcd439dee88fb126706f, type: 3}
-  m_PrefabInstance: {fileID: 4435066078872672051}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4435066078872672053 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9168680404122917905, guid: c4a47bec9f7bbcd439dee88fb126706f, type: 3}
   m_PrefabInstance: {fileID: 4435066078872672051}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &4463153719301284576
@@ -5627,7 +5657,7 @@ MonoBehaviour:
   m_PoolType: 0
   m_Checks: 1
   m_MaxPoolSize: 10
-  m_Prefab: {fileID: 7140125797922033650}
+  m_Prefab: {fileID: 3734000418392496471, guid: 845e430fb52627d40a6c5d5aa3f48ba3, type: 3}
   m_Lifetime: 3
 --- !u!4 &5052154996862499475
 Transform:
@@ -6131,7 +6161,7 @@ MonoBehaviour:
   m_PoolType: 0
   m_Checks: 1
   m_MaxPoolSize: 10
-  m_Prefab: {fileID: 2102953242469794102}
+  m_Prefab: {fileID: 8021461114884420046, guid: 191617c007621b349aeaa71539a39ba4, type: 3}
   m_Lifetime: 4
 --- !u!114 &6600480110275924345
 MonoBehaviour:
@@ -6465,11 +6495,6 @@ PrefabInstance:
 --- !u!4 &7140125797922033649 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2258003353368593259, guid: f7a47d8521f183c4cb4feefea5dd3c54, type: 3}
-  m_PrefabInstance: {fileID: 7140125797922033648}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7140125797922033650 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3734000418392496471, guid: f7a47d8521f183c4cb4feefea5dd3c54, type: 3}
   m_PrefabInstance: {fileID: 7140125797922033648}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7152810583305937466
@@ -7044,7 +7069,7 @@ MonoBehaviour:
   m_PoolType: 1
   m_Checks: 1
   m_MaxPoolSize: 10
-  m_Prefab: {fileID: 555440436717702781}
+  m_Prefab: {fileID: 4347834266683861477, guid: 96b0b8cefc7d85d4599455f7355e03ba, type: 3}
   m_Lifetime: 2.3
 --- !u!114 &8285520438621817737
 MonoBehaviour:
@@ -7341,7 +7366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8810937261457171356, guid: 8f5386f6256976248bba14fb0df42167, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -116.25891
+      value: -116.25879
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

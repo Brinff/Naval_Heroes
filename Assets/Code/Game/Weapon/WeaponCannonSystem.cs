@@ -13,6 +13,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
     private EcsPool<AbilityAim> m_PoolAbilityAim;
     private EcsPool<RootComponent> m_PoolRoot;
     private EcsPool<Team> m_PoolTeam;
+    private EcsPool<StatDamageComponent> m_StatDamage;
     //private EcsPool<WeaponReloadComponent> m_PoolWeaponReloadComponent;
     //private EcsPool<WeaponFireCompoment> m_PoolWeaponFireComponent;
     //private EcsPool<WeaponAmmoComponent> m_PoolWeaponAmmoComponent;
@@ -41,6 +42,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
         m_PoolAbilityAim = m_World.GetPool<AbilityAim>();
         m_PoolRoot = m_World.GetPool<RootComponent>();
         m_PoolTeam = m_World.GetPool<Team>();
+        m_StatDamage = m_World.GetPool<StatDamageComponent>();
         //m_PoolWeaponFireComponent = m_World.GetPool<WeaponFireCompoment>();
         //m_PoolWeaponReloadComponent = m_World.GetPool<WeaponReloadComponent>();
         //m_PoolWeaponAmmoComponent = m_World.GetPool<WeaponAmmoComponent>();
@@ -79,13 +81,12 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
                     ref var team = ref m_PoolTeam.Get(rootEntity);
                     teamId = team.id;
                 }
-                
-                CannonProjectile cannonProjectile = new CannonProjectile() { damage = 50, owner = root.entity, scatterAngleMin = 0.1f, scatterAngleMax = 0.5f, timeFactor = 2, velocity = 200, team = teamId };
+
+                ref var statDamage = ref m_StatDamage.Get(entity);
+                CannonProjectile cannonProjectile = new CannonProjectile() { damage = statDamage.value / weaponCannon.barels.Length, owner = root.entity, scatterAngleMin = 0.1f, scatterAngleMax = 0.5f, timeFactor = 2, velocity = 200, team = teamId };
                 for (int i = 0; i < weaponCannon.barels.Length; i++)
                 {
                     var barrel = weaponCannon.barels[i];
-                    
-
                     cannonProjectile.Launch(m_World, barrel.position, barrel.forward);
                 }
 

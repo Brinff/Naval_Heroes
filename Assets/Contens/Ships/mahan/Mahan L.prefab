@@ -380,6 +380,7 @@ GameObject:
   - component: {fileID: 6573495092904441400}
   - component: {fileID: 7974174910193268571}
   - component: {fileID: 7223265711176334637}
+  - component: {fileID: 3104766683464429971}
   m_Layer: 0
   m_Name: Front_Cannon
   m_TagString: Untagged
@@ -502,6 +503,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3104766683464429971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383782156913933827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &1704658387143189754
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +534,7 @@ GameObject:
   - component: {fileID: 217939353012793898}
   - component: {fileID: 2995558597129918152}
   - component: {fileID: 8415490340384279025}
+  - component: {fileID: 6157586782722019757}
   m_Layer: 0
   m_Name: Artellery
   m_TagString: Untagged
@@ -643,6 +659,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6157586782722019757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704658387143189754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &2334597561583762025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,6 +1776,7 @@ GameObject:
   - component: {fileID: 6980535657193101760}
   - component: {fileID: 5998138439049841786}
   - component: {fileID: 7182913362312277833}
+  - component: {fileID: 5962521919739124260}
   m_Layer: 0
   m_Name: Front_Cannon (2)
   m_TagString: Untagged
@@ -1868,6 +1899,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5962521919739124260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6437810696346535786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &6611632536722702906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,6 +1928,7 @@ GameObject:
   - component: {fileID: 7578349246537690040}
   - component: {fileID: 8707441933406552701}
   - component: {fileID: 6572163304723465409}
+  - component: {fileID: 1070443832600216294}
   m_Layer: 0
   m_Name: Front_Cannon (1)
   m_TagString: Untagged
@@ -2005,6 +2051,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1070443832600216294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6611632536722702906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &6931636924525723888
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,6 +2080,7 @@ GameObject:
   - component: {fileID: -8963363798705678983}
   - component: {fileID: -1215661129221420763}
   - component: {fileID: -4607644156375484622}
+  - component: {fileID: 7117423083205511172}
   m_Layer: 0
   m_Name: Mahan L
   m_TagString: Untagged
@@ -2129,6 +2190,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ClassData: {fileID: 11400000, guid: 2afb8b90fa8becc4cb8b7b0b86ba1f27, type: 2}
+--- !u!114 &7117423083205511172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931636924525723888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a332b629add141926fe1ee5fddf4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Transform: {fileID: 0}
 --- !u!1 &7000977264580592347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2292,6 +2366,7 @@ GameObject:
   - component: {fileID: 6881886967716470758}
   - component: {fileID: 2494979620098067437}
   - component: {fileID: 892016016300352466}
+  - component: {fileID: 2608504286186820513}
   m_Layer: 0
   m_Name: Front_Cannon (3)
   m_TagString: Untagged
@@ -2414,6 +2489,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2608504286186820513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7639658059268458469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &8163607418154223852
 GameObject:
   m_ObjectHideFlags: 0
