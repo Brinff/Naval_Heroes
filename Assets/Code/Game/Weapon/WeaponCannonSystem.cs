@@ -14,6 +14,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
     private EcsPool<RootComponent> m_PoolRoot;
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<StatDamageComponent> m_StatDamage;
+    private EcsPool<DeadTag> m_PoolDeadTag;
     //private EcsPool<WeaponReloadComponent> m_PoolWeaponReloadComponent;
     //private EcsPool<WeaponFireCompoment> m_PoolWeaponFireComponent;
     //private EcsPool<WeaponAmmoComponent> m_PoolWeaponAmmoComponent;
@@ -43,6 +44,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
         m_PoolRoot = m_World.GetPool<RootComponent>();
         m_PoolTeam = m_World.GetPool<Team>();
         m_StatDamage = m_World.GetPool<StatDamageComponent>();
+        m_PoolDeadTag = m_World.GetPool<DeadTag>();
         //m_PoolWeaponFireComponent = m_World.GetPool<WeaponFireCompoment>();
         //m_PoolWeaponReloadComponent = m_World.GetPool<WeaponReloadComponent>();
         //m_PoolWeaponAmmoComponent = m_World.GetPool<WeaponAmmoComponent>();
@@ -67,6 +69,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
             ref var abilityState = ref m_PoolAbilityState.Get(entity);
             ref var abilityAim = ref m_PoolAbilityAim.Get(entity);
             
+            
 
             Vector3 aimDirection = Ballistics.GetDirection(weaponCannon.orgrin.position, abilityAim.point + Vector3.up * 5, 0, 200);
 
@@ -80,6 +83,8 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
                 {
                     ref var team = ref m_PoolTeam.Get(rootEntity);
                     teamId = team.id;
+
+                    if (m_PoolDeadTag.Has(rootEntity)) continue;
                 }
 
                 ref var statDamage = ref m_StatDamage.Get(entity);
