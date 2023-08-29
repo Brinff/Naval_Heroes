@@ -40,9 +40,9 @@ public class VFXPoolProvider : MonoBehaviour
     [Button]
     public void Create()
     {
-        m_Timers = new Timer[100];
-        m_Unused = new Stack<int>(100);
-        for (int i = 0; i < 100; i++)
+        m_Timers = new Timer[200];
+        m_Unused = new Stack<int>(200);
+        for (int i = 0; i < 200; i++)
         {
             m_Unused.Push(i);
         }

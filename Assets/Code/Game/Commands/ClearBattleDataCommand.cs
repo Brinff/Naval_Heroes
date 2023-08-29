@@ -1,3 +1,4 @@
+using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ public class ClearBattleDataCommand : MonoBehaviour, ICommand
 
     public void Execute(EcsWorld world, IEcsSystems systems)
     {
+
+
         var battleDataFilter = world.Filter<BattleData>().End();
         if (battleDataFilter.IsAny())
         {
@@ -23,5 +26,8 @@ public class ClearBattleDataCommand : MonoBehaviour, ICommand
         {
             world.DelEntity(entity);
         }
+
+        UISystem.Instance.GetElement<AbilityWidget>().Clear();
+        UISystem.Instance.GetElement<WorldEnemyWidget>().Clear();
     }
 }

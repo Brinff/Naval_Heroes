@@ -32,6 +32,8 @@ public class WorldEnemyWidget : MonoBehaviour, IUIElement
         }   
     }
 
+    private List<GameObject> m_Elemets = new List<GameObject>();
+
     public GameObject Register(Transform target, bool isPlayer)
     {
         var element = Instantiate(isPlayer ? m_PrefabPlayer : m_PrefabEnemy);
@@ -42,12 +44,26 @@ public class WorldEnemyWidget : MonoBehaviour, IUIElement
         rectTransform.anchoredPosition = m_WorldCamera.WorldToScreenPoint(target.position);
         element.SetActive(true);
 
+        m_Elemets.Add(element);
+
         return element;
     }
 
     public void Unregister(GameObject gameObject)
     {
-        Destroy(gameObject, 1);
+        if (m_Elemets.Remove(gameObject))
+        {
+            Destroy(gameObject, 1);
+        }
+    }
+
+    public void Clear()
+    {
+        for (int i = 0; i < m_Elemets.Count; i++)
+        {
+            Destroy(m_Elemets[i]);
+        }
+        m_Elemets.Clear();
     }
 
     public void Hide(bool immediately)

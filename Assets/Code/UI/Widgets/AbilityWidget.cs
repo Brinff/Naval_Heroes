@@ -34,6 +34,14 @@ public class AbilityWidget : MonoBehaviour, IUIElement
         }
     }
 
+    public void Clear()
+    {
+        for (int i = 0; i < m_AbilityItems.Count; i++)
+        {
+            Dispose(m_AbilityItems[i]);
+        }
+    }
+
     public void Hide(bool immediately)
     {
         gameObject.SetActive(false);
