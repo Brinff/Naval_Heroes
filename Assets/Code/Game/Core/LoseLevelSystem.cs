@@ -11,7 +11,7 @@ public class LoseLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
-        m_Filter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Inc<HealthEndEvent>().End();
+        m_Filter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Exc<DeadTag>().End();
         m_BattleDataFilter = m_World.Filter<BattleData>().End();
     }
 
@@ -23,7 +23,7 @@ public class LoseLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
 
         if (!battleData.isStarted) return;
 
-        if (m_Filter.IsAny())
+        if (!m_Filter.IsAny())
         {
             var commandSystem = systems.GetSystem<CommandSystem>();
             commandSystem.Execute<GoLoseCommand, BattleData>(m_World.Filter<BattleData>().End().GetSingletonComponent<BattleData>());
