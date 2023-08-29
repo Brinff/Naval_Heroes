@@ -4,5 +4,6 @@ using UnityEngine;
 
 public struct StatDamageComponent
 {
-    public float factor;
+    public StatOperation oprtion;
+    public float value;
 }

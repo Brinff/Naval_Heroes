@@ -244,6 +244,7 @@ GameObject:
   - component: {fileID: 8392950466406844557}
   - component: {fileID: 2021207207766013308}
   - component: {fileID: 2154357155454998074}
+  - component: {fileID: 6891484108378231279}
   m_Layer: 0
   m_Name: Back_Cannon
   m_TagString: Untagged
@@ -368,6 +369,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6891484108378231279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008711666062655462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &1328270193476309504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,6 +1161,7 @@ GameObject:
   - component: {fileID: 2254227050186554123}
   - component: {fileID: 877712493271950569}
   - component: {fileID: 1984661974741955988}
+  - component: {fileID: 8600785859310814013}
   m_Layer: 0
   m_Name: Artellery
   m_TagString: Untagged
@@ -1270,6 +1286,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8600785859310814013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902979033163595794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &3341757186976157272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,6 +1647,7 @@ GameObject:
   - component: {fileID: 1752650000113353886}
   - component: {fileID: 4016064415105658887}
   - component: {fileID: 3775436489127351773}
+  - component: {fileID: 8852754515156873733}
   m_Layer: 0
   m_Name: Front_Cannon
   m_TagString: Untagged
@@ -1741,6 +1772,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8852754515156873733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4398858415506626643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &4417257346890189702
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,6 +3076,7 @@ GameObject:
   - component: {fileID: 8720737492768609822}
   - component: {fileID: -582718617523528292}
   - component: {fileID: 8678292088571679658}
+  - component: {fileID: -6558613171859109424}
   m_Layer: 0
   m_Name: Brooklyn S
   m_TagString: Untagged
@@ -3140,6 +3186,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RareData: {fileID: 11400000, guid: dc409b6e098a23a45a27ad24ff56b48d, type: 2}
+--- !u!114 &-6558613171859109424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916594432077460907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a332b629add141926fe1ee5fddf4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Transform: {fileID: 0}
 --- !u!1 &8484399858497709167
 GameObject:
   m_ObjectHideFlags: 0

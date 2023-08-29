@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3643995265351544251}
   - component: {fileID: 3041285429194907762}
   - component: {fileID: 2420943652630809809}
+  - component: {fileID: 1475817981015659062}
   m_Layer: 0
   m_Name: Front_Cannon
   m_TagString: Untagged
@@ -139,6 +140,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1475817981015659062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54169240054949253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &170386708472816736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,6 +1035,7 @@ GameObject:
   - component: {fileID: 7749591990082045157}
   - component: {fileID: 1025957690649927472}
   - component: {fileID: 138198533297211377}
+  - component: {fileID: 1471005363043824139}
   m_Layer: 0
   m_Name: South Dakota S
   m_TagString: Untagged
@@ -1129,6 +1145,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RareData: {fileID: 11400000, guid: dc409b6e098a23a45a27ad24ff56b48d, type: 2}
+--- !u!114 &1471005363043824139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274979080763799702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a332b629add141926fe1ee5fddf4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Transform: {fileID: 0}
 --- !u!1 &2454875872360308599
 GameObject:
   m_ObjectHideFlags: 0
@@ -2654,6 +2683,7 @@ GameObject:
   - component: {fileID: 1513118399907347947}
   - component: {fileID: 8526387208455337513}
   - component: {fileID: 2347858457878319055}
+  - component: {fileID: 7930603171207484171}
   m_Layer: 0
   m_Name: Artellery
   m_TagString: Untagged
@@ -2778,6 +2808,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d030470786b6d4eb542ba6e5571a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7930603171207484171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8279033069012944322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19cf479d9e446c429941a71ef329542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Option: 0
+  m_Value: 200
 --- !u!1 &8351821353607476638
 GameObject:
   m_ObjectHideFlags: 0

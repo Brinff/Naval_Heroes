@@ -17,6 +17,7 @@ public class AbilityCommanderGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
     private EcsPool<AbilityGroup> m_PoolGroupAbility;
     private EcsPool<RootComponent> m_PoolRoot;
     private EcsPool<Team> m_TeamPool;
+    private EcsPool<StatDamageComponent> m_PoolStatDamage;
 
     public void Init(IEcsSystems systems)
     {
@@ -31,6 +32,7 @@ public class AbilityCommanderGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
         m_PoolGroupAbility = m_World.GetPool<AbilityGroup>();
         m_PoolRoot = m_World.GetPool<RootComponent>();
         m_TeamPool = m_World.GetPool<Team>();
+        m_PoolStatDamage = m_World.GetPool<StatDamageComponent>();
     }
 
     public void Run(IEcsSystems systems)
@@ -40,6 +42,8 @@ public class AbilityCommanderGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
             ref var commanderTeam = ref m_TeamPool.Get(commanderAbilityEntity);
             ref var commanderAbility = ref m_PoolAbility.Get(commanderAbilityEntity);
             ref var commanderAbilityGroup = ref m_PoolGroupAbility.Get(commanderAbilityEntity);
+            ref var commanderStatDamage = ref m_PoolStatDamage.Get(commanderAbilityEntity);
+
             var abilityData = m_AbilityDatabase.GetById(commanderAbility.id);
 
             foreach (var otherAbilityEntity in m_AbilityOtherFilter)
@@ -47,6 +51,8 @@ public class AbilityCommanderGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
                 ref var otherAbility = ref m_PoolAbility.Get(otherAbilityEntity);
 
                 if (abilityData.id != otherAbility.id) continue;
+
+
 
                 ref var root = ref m_PoolRoot.Get(otherAbilityEntity);
                 if (root.entity.Unpack(m_World, out int rootEntity))
@@ -60,8 +66,13 @@ public class AbilityCommanderGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
                             var abilityEntityPack = m_World.PackEntity(otherAbilityEntity);
                             if (!commanderAbilityGroup.entities.Contains(abilityEntityPack))
                             {
+                                ref var abilityStatDamage = ref m_PoolStatDamage.Get(otherAbilityEntity);
+                                abilityStatDamage.value *= commanderStatDamage.value;
+
                                 commanderAbilityGroup.entities.Add(abilityEntityPack);
                             }
+
+
                         }
                     }
                 }

@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 7202579248670398202}
   - component: {fileID: 7345718106268516644}
   - component: {fileID: -2603536020758496684}
+  - component: {fileID: 8241422490463537094}
   m_Layer: 0
   m_Name: Sangamon S
   m_TagString: Untagged
@@ -369,6 +370,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RareData: {fileID: 11400000, guid: dc409b6e098a23a45a27ad24ff56b48d, type: 2}
+--- !u!114 &8241422490463537094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6778801472794295917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f91a332b629add141926fe1ee5fddf4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Transform: {fileID: 0}
 --- !u!1 &7339000119796958887
 GameObject:
   m_ObjectHideFlags: 0
