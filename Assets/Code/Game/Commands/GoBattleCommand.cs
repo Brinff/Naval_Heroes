@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class GoBattleCommand : MonoBehaviour, ICommand
 {
+    [SerializeField]
+    private GameObject m_CommanderPrefab;
+
     public void Execute(EcsWorld world, IEcsSystems systems)
     {
         var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
@@ -21,6 +24,17 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         playerSlotsSystem.Bake();
 
         UISystem.Instance.compositionModule.Show<UIBattleComposition>();
+
+        var commanderInstance = GameObject.Instantiate(m_CommanderPrefab);
+        world.Bake(commanderInstance, out List<int> entities);
+
+        Destroy(commanderInstance);
+
+        var poolCrearBattleTag = world.GetPool<ClearBattleTag>();
+        foreach (var item in entities)
+        {
+            poolCrearBattleTag.Add(item);
+        }
 
         var playerLevelData = systems.GetData<MissionDatabase>();
         var playerLevelProvider = systems.GetSystem<PlayerMissionSystem>();

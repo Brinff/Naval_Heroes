@@ -24,6 +24,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     private EcsWorld m_World;
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<PlayerTag> m_PoolPlayerTag;
+    private EcsPool<ClearBattleTag> m_PoolClearBattleTag;
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
@@ -32,6 +33,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         m_EntityDatabase = systems.GetData<EntityDatabase>();
         m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>());
         m_SlotCollection.Prepare();
+        m_PoolClearBattleTag = m_World.GetPool<ClearBattleTag>();
         Load();
         m_SlotCollection.OnChange += Save;
     }
@@ -105,9 +107,14 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         {
             foreach (var item in slot.items)
             {
-                var entity = m_World.Bake(item.entity);
+                var entity = m_World.Bake(item.entity, out List<int> entities);
                 m_PoolTeam.Add(entity);
                 m_PoolPlayerTag.Add(entity);
+
+                foreach (var childEntity in entities)
+                {
+                    m_PoolClearBattleTag.Add(childEntity);
+                }
             }
         }
     }
