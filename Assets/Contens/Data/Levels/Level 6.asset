@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reward: 100
   stages:
-  - {fileID: 8483572887083098724, guid: 86e05306c7aca454498d6fc1e0868e67, type: 3}
+  - {fileID: 8483572887083098724, guid: 15783548b2a38ad4ba7cfc7dddb74125, type: 3}

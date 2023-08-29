@@ -15,6 +15,3 @@ MonoBehaviour:
   reward: 100
   stages:
   - {fileID: 8483572887083098724, guid: 89ab773e35f1240469d7da5c6389748b, type: 3}
-  - {fileID: 8483572887083098724, guid: 2b8b6ea3e8936924f864867bc888b193, type: 3}
-  - {fileID: 8483572887083098724, guid: c65fe734443dbf3469d721400bda6343, type: 3}
-  - {fileID: 8483572887083098724, guid: 02a59ab8deafe2c4b8d4d5df470a719c, type: 3}

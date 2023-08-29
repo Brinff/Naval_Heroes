@@ -88,7 +88,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
                 }
 
                 ref var statDamage = ref m_StatDamage.Get(entity);
-                CannonProjectile cannonProjectile = new CannonProjectile() { damage = statDamage.value / weaponCannon.barels.Length, owner = root.entity, scatterAngleMin = 0f, scatterAngleMax = 0.1f, timeFactor = 2, velocity = 200, team = teamId };
+                CannonProjectile cannonProjectile = new CannonProjectile() { damage = statDamage.value / weaponCannon.barels.Length, owner = root.entity, scatterAngleMin = 0f, scatterAngleMax = 0f, timeFactor = 2, velocity = 200, team = teamId };
                 for (int i = 0; i < weaponCannon.barels.Length; i++)
                 {
                     var barrel = weaponCannon.barels[i];
