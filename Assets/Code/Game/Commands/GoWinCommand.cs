@@ -18,13 +18,13 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
         m_PlayerLevelPovider = systems.GetSystem<PlayerMissionSystem>();
 
         m_PlayerLevelPovider.CompleteLevel();
-        m_Reward = battleData.reward;
+        m_Reward = battleData.winReward;
 
         //m_PlayerMoneyProvider = systems.GetSystem<PlayerMoneySystem>();
 
         m_WinWidget = UISystem.Instance.GetElement<WinWidget>();
         m_WinWidget.OnClaim += OnClaimReward;
-        m_WinWidget.SetReward(battleData.reward, false);
+        m_WinWidget.SetReward(battleData.winReward, false);
         m_WinWidget.SetLevel(battleData.level);
         UISystem.Instance.compositionModule.Show<UIWinCompositon>();
     }

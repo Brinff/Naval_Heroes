@@ -27,12 +27,24 @@ public class GoBattleCommand : MonoBehaviour, ICommand
 
         var levelData = playerLevelData.GetLevel(playerLevelProvider.level);
 
+        var battleDataEntity = world.NewEntity();
+        ref var battleData = ref world.GetPool<BattleData>().Add(battleDataEntity);
+        battleData.levelData = levelData;
+        battleData.stage = 0;
+        battleData.level = playerLevelProvider.level;
+        battleData.winReward = levelData.reward;
+        battleData.loseReward = levelData.loseReward;
+        world.GetPool<ClearBattleTag>().Add(battleDataEntity);
 
+        
 
+        commandSystem.Execute<GoStageCommand, BattleData>(battleData);
 
-        commandSystem.Execute<GoStageCommand, BattleData>(new BattleData() { levelData = levelData, stage = 0, level = playerLevelProvider.level });
+        var buffer = systems.GetSystem<BeginEntityCommandSystem>().CreateBuffer();
 
-
+        var startBattleData = battleData;
+        startBattleData.isStarted = true;
+        buffer.SetComponent(battleDataEntity, startBattleData);
         //foreach (var entity in filter)
         //{
         //    //ref var playerAimPoint = ref world.GetPool<PlayerAimPointComponent>().AddOrGet(entity);
@@ -40,7 +52,7 @@ public class GoBattleCommand : MonoBehaviour, ICommand
 
         //    //world.GetPool<OrbitViewActiveEvent>().Add(entity);
 
-            
+
 
 
 

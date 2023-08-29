@@ -1,6 +1,7 @@
 using Game.UI;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ public class LoseWidget : MonoBehaviour, IUIElement
 {
     [SerializeField]
     private Button m_RetryButtion;
+    [SerializeField]
+    private TextMeshProUGUI m_RewardLabel;
 
     private void OnEnable()
     {
@@ -26,6 +29,11 @@ public class LoseWidget : MonoBehaviour, IUIElement
     private void OnRetryClick()
     {
         OnRetry?.Invoke();
+    }
+
+    public void SetReward(int amount)
+    {
+        m_RewardLabel.text = amount.ToString();
     }
 
     public void Hide(bool immediately)

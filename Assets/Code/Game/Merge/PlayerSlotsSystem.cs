@@ -23,10 +23,12 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     private EntityDatabase m_EntityDatabase;
     private EcsWorld m_World;
     private EcsPool<Team> m_PoolTeam;
+    private EcsPool<PlayerTag> m_PoolPlayerTag;
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
         m_PoolTeam = m_World.GetPool<Team>();
+        m_PoolPlayerTag = m_World.GetPool<PlayerTag>();
         m_EntityDatabase = systems.GetData<EntityDatabase>();
         m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>());
         m_SlotCollection.Prepare();
@@ -105,6 +107,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
             {
                 var entity = m_World.Bake(item.entity);
                 m_PoolTeam.Add(entity);
+                m_PoolPlayerTag.Add(entity);
             }
         }
     }

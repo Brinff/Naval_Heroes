@@ -29,7 +29,7 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
     {
         EcsWorld ecsWorld = systems.GetWorld();
         m_PoolTeam = ecsWorld.GetPool<Team>();
-        m_Filter = ecsWorld.Filter<HealthComponent>().Inc<InfoComponent>().Inc<ShipTag>().End();
+        m_Filter = ecsWorld.Filter<HealthComponent>().Inc<InfoComponent>().Inc<ShipTag>().Inc<Team>().End();
         m_FilterEndHealth = ecsWorld.Filter<HealthBarComponent>().Inc<InfoComponent>().Inc<HealthEndEvent>().Inc<ShipTag>().End();
         m_FilterDestroy = ecsWorld.Filter<HealthBarComponent>().Inc<InfoComponent>().Inc<DestroyComponent>().Inc<ShipTag>().End();
 

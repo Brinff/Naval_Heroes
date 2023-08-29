@@ -15,6 +15,11 @@ public static class EcsExtentions
         return Bake(world, gameObject.transform);
     }
 
+    public static int Bake(this EcsWorld world, GameObject gameObject, out List<int> entities)
+    {
+        return Bake(world, gameObject.transform, out entities);
+    }
+
 
     public static T GetData<T>(this IEcsSystems systems)
     {
@@ -74,9 +79,29 @@ public static class EcsExtentions
                 childs.entities[i - 1] = world.PackEntity(entities[i]);
             }
         }
+        return root;
+    }
 
+    public static int Bake(this EcsWorld world, Transform transform, out List<int> entities)
+    {
+        var poolParentComponent = world.GetPool<ParentComponent>();
+        var poolChilds = world.GetPool<ChildsComponent>();
+        var poolRoot = world.GetPool<RootComponent>();
+        var poolLink = world.GetPool<Link>();
 
+        entities = new List<int>();
+        Bake(world, transform, poolRoot, poolLink, null, ref entities);
+        int root = entities.First();
 
+        if (entities.Count > 1)
+        {
+            ref var childs = ref poolChilds.Add(root);
+            childs.entities = new EcsPackedEntity[entities.Count - 1];
+            for (int i = 1; i < entities.Count; i++)
+            {
+                childs.entities[i - 1] = world.PackEntity(entities[i]);
+            }
+        }
         return root;
     }
 

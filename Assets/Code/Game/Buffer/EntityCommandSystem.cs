@@ -33,6 +33,18 @@ public class EntityCommandBuffer : IDisposable
         });
     }
 
+    public void AddComponent<T>(int entity) where T : struct
+    {
+        var packEntity = m_World.PackEntity(entity);
+        m_Commands.Enqueue((EcsWorld world) =>
+        {
+            if (packEntity.Unpack(world, out int targetEntity))
+            {
+                world.GetPool<T>().Add(targetEntity);
+            }
+        });
+    }
+
     public void SetComponent<T>(int entity, T value) where T : struct
     {
         var type = typeof(T);

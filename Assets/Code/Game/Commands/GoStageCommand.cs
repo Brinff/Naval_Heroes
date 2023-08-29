@@ -3,27 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleData
+public struct ClearBattleTag
 {
+
+}
+
+public struct BattleData
+{
+    public bool isStarted;
+    public bool isEnded;
     public int level;
     public LevelData levelData;
     public int stage;
-    public int reward;
+    public int winReward;
+    public int loseReward;
+    public List<GameObject> enemies;
 }
 
 public class GoStageCommand : MonoBehaviour, ICommand<BattleData>, ICommand
 {
-    private BattleData m_BattleData;
-
-    public void Execute(EcsWorld world, IEcsSystems systems, BattleData context)
+    public void Execute(EcsWorld world, IEcsSystems systems, BattleData battleData)
     {
-        m_BattleData = context;
-
-        if (m_BattleData.stage < m_BattleData.levelData.stages.Count)
+        Debug.Log("Launch " + battleData.stage);
+        //m_BattleData = context;
+        //ref var battleData = ref world.Filter<BattleData>().End().GetSingletonComponent<BattleData>();
+        if (battleData.stage < battleData.levelData.stages.Count)
         {
-            var instance = Instantiate(context.levelData.stages[context.stage]);
-            world.Bake(instance);
+            Debug.Log("Instance");
+            var instance = Instantiate(battleData.levelData.stages[battleData.stage]);
+            world.Bake(instance, out List<int> entitieas);
             Destroy(instance);
+
+            var poolClearBattleTag = world.GetPool<ClearBattleTag>();
+            foreach (var item in entitieas)
+            {
+                poolClearBattleTag.Add(item);
+            }
+
+
             //var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
 
             //foreach (var entity in filter)
@@ -42,15 +59,15 @@ public class GoStageCommand : MonoBehaviour, ICommand<BattleData>, ICommand
             //    playerAimPoint.state = AimState.Idle;
             //}
             var commandSystem = systems.GetSystem<CommandSystem>();
-            m_BattleData.reward = m_BattleData.levelData.reward;
-            commandSystem.Execute<GoWinCommand, BattleData>(m_BattleData);
+            commandSystem.Execute<GoWinCommand, BattleData>(battleData);
         }
     }
 
     public void Execute(EcsWorld world, IEcsSystems systems)
     {
         var commandSystem = systems.GetSystem<CommandSystem>();
-        m_BattleData.stage++;
-        commandSystem.Execute<GoStageCommand, BattleData>(m_BattleData);
+        ref var battleData = ref world.Filter<BattleData>().End().GetSingletonComponent<BattleData>();
+        battleData.stage++;
+        commandSystem.Execute<GoStageCommand, BattleData>(battleData);
     }
 }
