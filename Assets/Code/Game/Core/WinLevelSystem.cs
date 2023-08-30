@@ -13,8 +13,8 @@ public class WinLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcs
     private EcsFilter m_PlayerAliveFilter;
     private EcsFilter m_PlayerDeadFilter;
 
-    [SerializeField]
-    private List<EcsPackedEntity> m_Enemies = new List<EcsPackedEntity>();
+    //[SerializeField]
+    //private List<EcsPackedEntity> m_Enemies = new List<EcsPackedEntity>();
 
     public void Init(IEcsSystems systems)
     {
@@ -32,35 +32,32 @@ public class WinLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcs
 
         ref var battleData = ref m_BattleDataFilter.GetSingletonComponent<BattleData>();
 
-        if (!battleData.isStarted) return;
+        if (!battleData.isStarted || battleData.isEnded) return;
 
-        if (m_PlayerDeadFilter.IsAny() && m_Enemies.Count > 0)
-        {
-            m_Enemies.Clear();
-        }
+        //if (m_PlayerDeadFilter.IsAny() && m_Enemies.Count > 0)
+        //{
+        //    m_Enemies.Clear();
+        //}
 
-        foreach (var entity in m_KillFilter)
+
+
+        if (m_KillFilter.GetEntitiesCount() == battleData.enemies.Count)
         {
-            var packEntity = m_World.PackEntity(entity);
-            if (m_Enemies.Contains(packEntity))
+            Debug.Log("Killed all: end game!");
+            if (m_PlayerAliveFilter.IsAny())
             {
-                m_Enemies.Remove(packEntity);
-                if (m_Enemies.Count <= 0)
-                {
-                    Debug.Log("Killed all: end game!");
-                    if (m_PlayerAliveFilter.IsAny())
-                    {
-                        Debug.Log("Try no next stage");
-                        systems.GetSystem<CommandSystem>().Execute<GoStageCommand>();
-                    }
-                }
+                Debug.Log("Try no next stage");
+                battleData.isEnded = true;
+                systems.GetSystem<CommandSystem>().Execute<GoStageCommand>();
             }
         }
 
-        foreach (var entity in m_NewFilter)
-        {
-            Debug.Log($"Add entity: {entity}");
-            m_Enemies.Add(m_World.PackEntity(entity));
-        }
+
+
+        //foreach (var entity in m_NewFilter)
+        //{
+        //    Debug.Log($"Add entity: {entity}");
+        //    m_Enemies.Add(m_World.PackEntity(entity));
+        //}
     }
 }
