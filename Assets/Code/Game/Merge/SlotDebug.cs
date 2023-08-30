@@ -138,4 +138,9 @@ public class SlotDebug : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandle
         item.Hide();
         gameObject.SetActive(false);
     }
+
+    public bool AddItemPossible(SlotItem slotItem, Vector3 position)
+    {
+        return false;
+    }
 }

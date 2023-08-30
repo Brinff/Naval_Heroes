@@ -17,7 +17,10 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     }
 
     private PlayerPrefsData<List<Slot>> m_PlayerSlots;
+    private PlayerPrefsData<int> m_PlayerAmountBuyShip;
 
+    [SerializeField]
+    private ProgressionData m_CostShip;
     [SerializeField]
     private SlotCollection m_SlotCollection;
     private EntityDatabase m_EntityDatabase;
@@ -25,6 +28,8 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<PlayerTag> m_PoolPlayerTag;
     private EcsPool<ClearBattleTag> m_PoolClearBattleTag;
+    private PlayerMoneySystem m_PlayerMoneySystem;
+    private CommandSystem m_CommandSystem;
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
@@ -32,10 +37,43 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         m_PoolPlayerTag = m_World.GetPool<PlayerTag>();
         m_EntityDatabase = systems.GetData<EntityDatabase>();
         m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>());
+        m_PlayerAmountBuyShip = new PlayerPrefsData<int>(nameof(m_PlayerAmountBuyShip), 0);
+        m_PlayerMoneySystem = systems.GetSystem<PlayerMoneySystem>();
+        m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_SlotCollection.Prepare();
         m_PoolClearBattleTag = m_World.GetPool<ClearBattleTag>();
         Load();
         m_SlotCollection.OnChange += Save;
+
+        var slotBuys = m_SlotCollection.GetSlots<SlotBuy>();
+        var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+        foreach (var item in slotBuys)
+        {
+            item.SetCost((int)value);
+            item.spendMoney = SpendMoney;
+        }
+    }
+
+    public bool SpendMoney(EntityData entityData)
+    {
+        var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+        if (m_PlayerMoneySystem.HasMoney((int)value))
+        {
+            m_CommandSystem.Execute<MoneySpendCommand, int>((int)value);
+
+            m_PlayerAmountBuyShip.Value++;
+
+            var slotBuys = m_SlotCollection.GetSlots<SlotBuy>();
+            var newValue = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+            foreach (var item in slotBuys)
+            {
+                item.SetCost((int)newValue);
+            }
+
+            m_PlayerAmountBuyShip.Save();
+            return true;
+        }
+        return false;
     }
 
     public void Run(IEcsSystems systems)

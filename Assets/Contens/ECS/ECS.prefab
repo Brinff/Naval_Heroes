@@ -1064,6 +1064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a79a0d692bef24392cbe9ebd4db678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_CostShip: {fileID: 11400000, guid: fe79498eccb136f498657fa3c14a6b08, type: 2}
   m_SlotCollection: {fileID: 0}
 --- !u!1 &4618973819097015538
 GameObject:
@@ -1973,6 +1974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0648fb6544b864282a1795972445ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_CommanderPrefab: {fileID: 1027094743976128327, guid: c458c9a783b96334f8d041c7e154a310, type: 3}
 --- !u!114 &2056293765318914388
 MonoBehaviour:
   m_ObjectHideFlags: 0

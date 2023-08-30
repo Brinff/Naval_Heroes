@@ -1,8 +1,11 @@
+using DG.Tweening;
 using Game.Grid.Auhoring;
 using Game.Utility;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,11 +18,24 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
     public SlotCollection collection { get; private set; }
 
     [SerializeField]
-    private GridRendererAuthoring gridRenderer;
+    private TextMeshPro m_CostLabel;
+
+    [SerializeField]
+    private SpriteRenderer[] spriteRenderer;
 
     public int id => name.GetDeterministicHashCode();
 
     private BoxCollider[] colliders;
+
+
+    public delegate bool SpendMoney(EntityData entity);
+
+    public SpendMoney spendMoney;
+
+    public void SetCost(int amount)
+    {
+        m_CostLabel.text = amount.KiloFormat();
+    }
 
     public bool AddItem(SlotItem slotItem, Vector3 position)
     {
@@ -34,12 +50,18 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
         return false;
     }
 
+
+
+
     public bool RemoveItem(SlotItem slotItem)
     {
-        if (items.Remove(slotItem))
+        if (spendMoney.Invoke(entity))
         {
-            Spawn();
-            return true;
+            if (items.Remove(slotItem))
+            {
+                Spawn();
+                return true;
+            }
         }
         return false;
     }
@@ -56,8 +78,8 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
         GridAuhoring grid = gameObject.GetComponent<GridAuhoring>();
 
-        var gridRenderer = GetComponent<GridRendererAuthoring>();
-        gridRenderer.BeginFill(grid.scale, grid.center);
+        //var gridRenderer = GetComponent<GridRendererAuthoring>();
+        //gridRenderer.BeginFill(grid.scale, grid.center);
 
         colliders = new BoxCollider[grid.rects.Length];
         for (int i = 0; i < grid.rects.Length; i++)
@@ -67,10 +89,10 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
             boxCollider.center = new Vector3(sigleRect.center.x, 0, sigleRect.center.y);
             boxCollider.size = new Vector3(sigleRect.size.x, 5, sigleRect.size.y);
             colliders[i] = boxCollider;
-            gridRenderer.AddRect(grid.rects[i].position, grid.rects[i].size);
+            //gridRenderer.AddRect(grid.rects[i].position, grid.rects[i].size);
         }
 
-        gridRenderer.EndFill();
+        //gridRenderer.EndFill();
 
         Spawn();
     }
@@ -95,10 +117,12 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
         var mergeSlots = collection.GetSlots<SlotMerge>();
         foreach (var slot in mergeSlots)
         {
-            if (slot.AddItem(item, slot.transform.position))
+            if (slot.AddItemPossible(item, slot.transform.position) && RemoveItem(item))
             {
-                RemoveItem(item);
-                break;
+                if (slot.AddItem(item, slot.transform.position))
+                {
+                    break;
+                }
             }
         }
     }
@@ -106,12 +130,27 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
     public void Show(float duration)
     {
         item.Show();
-        gridRenderer.DoAlpha(1, duration);
+        m_CostLabel.DOFade(1, duration);
+        foreach (var item in spriteRenderer)
+        {
+            item.DOFade(1, duration);
+        }
+        //gridRenderer.DoAlpha(1, duration);
     }
 
     public void Hide(float duration)
     {
         item.Hide();
-        gridRenderer.DoAlpha(0, duration);
+        m_CostLabel.DOFade(0, duration);
+        foreach (var item in spriteRenderer)
+        {
+            item.DOFade(0, duration);
+        }
+        //gridRenderer.DoAlpha(0, duration);
+    }
+
+    public bool AddItemPossible(SlotItem slotItem, Vector3 position)
+    {
+        return false;
     }
 }

@@ -71,7 +71,10 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         else
         {
             if (parentSlot.RemoveItem(this))
+            {
                 populateSlot.AddItem(this, targetPosition);
+            }
+            else targetPosition = transform.position;
         }
 
         var otherSlots = parentSlot.collection.GetSlots<IItemEndDrag>();

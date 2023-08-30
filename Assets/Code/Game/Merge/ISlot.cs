@@ -8,6 +8,8 @@ public interface ISlot
     public List<SlotItem> items { get; }
     public SlotCollection collection { get; }
     public void Prepare(SlotCollection collection);
+
+    public bool AddItemPossible(SlotItem slotItem, Vector3 position);
     public bool AddItem(SlotItem slotItem, Vector3 position);
     public bool RemoveItem(SlotItem slotItem);
 }

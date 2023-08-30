@@ -156,4 +156,10 @@ public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag, ISlotR
         gridNew.DoAlpha(0, duration);
         gridReject.DoAlpha(0, duration);
     }
+
+    public bool AddItemPossible(SlotItem item, Vector3 position)
+    {
+        if (items.Contains(item)) return false;
+        return true;
+    }
 }

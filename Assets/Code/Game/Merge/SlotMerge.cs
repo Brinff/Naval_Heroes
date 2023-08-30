@@ -144,4 +144,10 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
         item?.Hide();
         m_GridRenderer.DoAlpha(0, duration);
     }
+
+    public bool AddItemPossible(SlotItem slotItem, Vector3 position)
+    {
+        if (items.Count == 0) return true;
+        return false;
+    }
 }
