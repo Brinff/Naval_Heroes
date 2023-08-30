@@ -145,14 +145,18 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         {
             foreach (var item in slot.items)
             {
-                var entity = m_World.Bake(item.entity, out List<int> entities);
-                m_PoolTeam.Add(entity);
-                m_PoolPlayerTag.Add(entity);
-
-                foreach (var childEntity in entities)
+                if (item != null && item.entity != null)
                 {
-                    m_PoolClearBattleTag.Add(childEntity);
+                    var entity = m_World.Bake(item.entity, out List<int> entities);
+                    m_PoolTeam.Add(entity);
+                    m_PoolPlayerTag.Add(entity);
+
+                    foreach (var childEntity in entities)
+                    {
+                        m_PoolClearBattleTag.Add(childEntity);
+                    }
                 }
+                else Debug.Log("Null Item or Entity!");
             }
         }
     }
