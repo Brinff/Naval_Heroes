@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e152558fc6a46d4b92ab9f0c2dc4b99, type: 3}
   m_Name: Level 8
   m_EditorClassIdentifier: 
-  reward: 100
+  reward: 200
+  loseReward: 150
   stages:
   - {fileID: 8483572887083098724, guid: b3a7a9f7fcc97b94a821efc6d34fb376, type: 3}
