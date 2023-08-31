@@ -117,11 +117,15 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
         var mergeSlots = collection.GetSlots<SlotMerge>();
         foreach (var slot in mergeSlots)
         {
-            if (slot.AddItemPossible(item, slot.transform.position) && RemoveItem(item))
+            if (slot.AddItemPossible(item, slot.transform.position))
             {
-                if (slot.AddItem(item, slot.transform.position))
+                var tempItem = item;
+                if (RemoveItem(tempItem))
                 {
-                    break;
+                    if (slot.AddItem(tempItem, slot.transform.position))
+                    {
+                        break;
+                    }
                 }
             }
         }
