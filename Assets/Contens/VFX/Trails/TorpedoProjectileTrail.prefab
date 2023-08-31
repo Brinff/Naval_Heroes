@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6779727637112458074}
   - component: {fileID: 1899972709727418207}
   m_Layer: 0
-  m_Name: CannonProjectileTrail
+  m_Name: TorpedoProjectileTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013994549265140254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.59, y: 0, z: 18.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53,7 +53,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 757d7b334368f4148880f87857bf0bbd, type: 2}
+  - {fileID: 2100000, guid: 8293fda86c9e53442ad9ccb1f27ddca2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -74,31 +74,31 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.4
+    widthMultiplier: 20
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0.50239456
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.44305378
+        outSlope: 0.44305378
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.06332702
       - serializedVersion: 3
         time: 1
-        value: 0.9182693
-        inSlope: -0.62510115
-        outSlope: -0.62510115
+        value: 1
+        inSlope: 0.07698533
+        outSlope: 0.07698533
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.05383736
+        inWeight: 0.051039815
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -136,11 +136,11 @@ TrailRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
-    textureScale: {x: 1, y: 1}
+    textureMode: 1
+    textureScale: {x: 0.2, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 1
+  m_MinVertexDistance: 2
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
