@@ -6,6 +6,7 @@ using Leopotam.EcsLite;
 public struct ProjectileRenderer
 {
     public bool isRender;
+    public int id;
     public GameObject gameObject;
     public Transform transform;
 }
@@ -19,7 +20,7 @@ public class ProjectileRenderSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyst
     private EcsPool<ProjectileTransform> m_PoolTransform;
 
     [SerializeField]
-    private GameObject m_ProjectilePrefab;
+    private GameObject[] m_ProjectilePrefabs = new GameObject[0];
 
     private Transform m_ProjectileRoot;
 
@@ -47,7 +48,7 @@ public class ProjectileRenderSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyst
             var transform = m_PoolTransform.Get(item);
             if (renderer.gameObject == null)
             {
-                var go = Instantiate(m_ProjectilePrefab, m_ProjectileRoot);
+                var go = Instantiate(m_ProjectilePrefabs[renderer.id], m_ProjectileRoot);
                 renderer.gameObject = go;
                 renderer.transform = go.transform;
             }

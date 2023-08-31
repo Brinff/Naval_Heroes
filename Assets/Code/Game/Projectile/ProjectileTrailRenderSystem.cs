@@ -6,6 +6,7 @@ using Leopotam.EcsLite;
 public struct ProjectileTrailRenderer
 {
     public bool isRender;
+    public int id;
     public GameObject gameObject;
     public Transform transform;
 }
@@ -20,8 +21,7 @@ public class ProjectileTrailRenderSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
     private EcsPool<ProjectileTransform> m_PoolTransform;
 
     [SerializeField]
-    private GameObject m_ProjectilePrefab;
-
+    private GameObject[] m_ProjectilePrefabs = new GameObject[0];
 
     public void Init(IEcsSystems systems)
     {
@@ -51,7 +51,7 @@ public class ProjectileTrailRenderSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
             var transform = m_PoolTransform.Get(item);
             if (trailRenderer.gameObject == null)
             {
-                var go = Instantiate(m_ProjectilePrefab, m_ProjectileRoot);
+                var go = Instantiate(m_ProjectilePrefabs[trailRenderer.id], m_ProjectileRoot);
                 trailRenderer.gameObject = go;
                 trailRenderer.transform = go.transform;
             }
@@ -64,7 +64,8 @@ public class ProjectileTrailRenderSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
         {
             var trailRenderer = m_PoolTrailRenderer.Get(item);
             var unityTrailRenderer = trailRenderer.gameObject.GetComponent<TrailRenderer>();
-            Destroy(trailRenderer.gameObject, unityTrailRenderer.time);
+            if (unityTrailRenderer != null) Destroy(trailRenderer.gameObject, unityTrailRenderer.time);
+            else Destroy(trailRenderer.gameObject, 10);
             m_PoolTrailRenderer.Del(item);
         }
     }
