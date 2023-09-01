@@ -697,7 +697,7 @@ GameObject:
   - component: {fileID: 5207617396914026368}
   - component: {fileID: 4145472425513972386}
   m_Layer: 0
-  m_Name: Artellery
+  m_Name: Planes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

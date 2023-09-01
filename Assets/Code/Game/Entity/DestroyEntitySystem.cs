@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyEntitySystem : MonoBehaviour, IEcsPostRunSystem, IEcsInitSystem, IEcsGroupUpdateSystem
+public class DestroyEntitySystem : MonoBehaviour, IEcsPostRunSystem, IEcsInitSystem, IEcsGroup<Update>
 {
     private EcsWorld m_World;
     private EcsFilter m_FilterA;

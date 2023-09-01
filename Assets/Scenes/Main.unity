@@ -1657,6 +1657,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64db42fc7647464dafc147116eed194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1104226290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1104226291}
+  - component: {fileID: 1104226292}
+  m_Layer: 0
+  m_Name: Planes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1104226291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104226290}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6665489754784729613}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1104226292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104226290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c15a986ed9625458c89cd352ce4fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedPlane: 100
 --- !u!4 &1126884820 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2258003353368593259, guid: f7a47d8521f183c4cb4feefea5dd3c54, type: 3}
@@ -3423,6 +3468,7 @@ GameObject:
   - component: {fileID: 9182043858626079419}
   - component: {fileID: 2042734673991397574}
   - component: {fileID: 9182043858626079420}
+  - component: {fileID: 9182043858626079421}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -5774,6 +5820,7 @@ Transform:
   - {fileID: 7274341496803963708}
   - {fileID: 3153855468338588945}
   - {fileID: 1923648770849801341}
+  - {fileID: 1104226291}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7469,3 +7516,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c88958f38a8a7f46b51ced6dca6b863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9182043858626079421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108990659384990252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e3697af15895e47964abfc8d813d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Plane: {fileID: 2275356249207996775, guid: fa09160767127414eb87afa9f7e52210, type: 3}
