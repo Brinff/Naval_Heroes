@@ -154,7 +154,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.Mushroom.NavalLegends
+    Android: com.Mushroom.NavalHeroes
     Standalone: com.DefaultCompany.Ocean-URP
     iPhone: com.Mushroom.NavalLegends
   buildNumber:
