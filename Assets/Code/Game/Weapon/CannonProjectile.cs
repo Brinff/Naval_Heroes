@@ -19,6 +19,9 @@ public class TorpedoProjectile : IProjectile
     {
         var projectile = world.NewEntity();
 
+        ref ProjectileTimerDestroy timer = ref world.GetPool<ProjectileTimerDestroy>().Add(projectile);
+        timer.timer = 20;
+
         ref ProjectileTransform projectileTransform = ref world.GetPool<ProjectileTransform>().Add(projectile);
         projectileTransform.position = position;
         projectileTransform.rotation = Quaternion.LookRotation(direction);
