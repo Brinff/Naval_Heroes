@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4050301802452180590}
   - component: {fileID: 1070306296197307499}
+  - component: {fileID: 377655773267717970}
   m_Layer: 5
   m_Name: StartGameWidget
   m_TagString: Untagged
@@ -52,6 +53,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LevelLabel: {fileID: 3900247363309570597}
   m_Button: {fileID: 5672506907350617059}
+  m_Group: {fileID: 377655773267717970}
+--- !u!225 &377655773267717970
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443936123719817902}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4998803824022356739
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +229,7 @@ RectTransform:
   m_GameObject: {fileID: 8364572517059421328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2932492035412437548}

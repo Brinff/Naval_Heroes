@@ -30,6 +30,9 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     private EcsPool<ClearBattleTag> m_PoolClearBattleTag;
     private PlayerMoneySystem m_PlayerMoneySystem;
     private CommandSystem m_CommandSystem;
+
+    public SlotCollection slotCollection => m_SlotCollection;
+
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
@@ -136,6 +139,19 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     public void Destroy(IEcsSystems systems)
     {
         m_SlotCollection.OnChange -= Save;
+    }
+
+
+    public bool IsAnyRadyBattle()
+    {
+        var slots = m_SlotCollection.GetSlots<SlotBattleGrid>();
+
+        foreach (var slot in slots)
+        {
+            if (slot.items.Count > 0) return true;
+        }
+
+        return false;
     }
 
     public void Bake()
