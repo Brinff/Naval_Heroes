@@ -14,6 +14,8 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
     private EcsWorld m_World;
     private AbilityDatabase m_AbilityDatabase;
     private AbilityAmmoDatabase m_AbilityAmmoDatabase;
+    private EcsFilter m_BattleDataFilter;
+
 
     private EcsPool<Ability> m_PoolAbility;
     private EcsPool<AbilityGroup> m_PoolAbilityGroup;
@@ -43,10 +45,16 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
         m_PoolAbilityState = m_World.GetPool<AbilityState>();
         m_PoolAbilityAmmoUI = m_World.GetPool<AbilityAmmoUI>();
         m_PoolAbilityAmmoAmount = m_World.GetPool<AbilityAmmoAmount>();
+
+        m_BattleDataFilter = m_World.Filter<BattleData>().End();
     }
 
     public void Run(IEcsSystems systems)
     {
+        if (!m_BattleDataFilter.IsAny()) return;
+        ref var battleData = ref m_BattleDataFilter.GetSingletonComponent<BattleData>();
+        if (!battleData.isStarted || battleData.isEnded) return;
+
         foreach (var abilityEntity in m_AbilityFilter)
         {
             ref var ability = ref m_PoolAbility.Get(abilityEntity);
@@ -56,6 +64,7 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
             {
                 if (!m_PoolAbilityUI.Has(abilityEntity))
                 {
+                    Debug.Log($"Create ability: {battleData}");
                     ref var abilityAmmo = ref m_PoolAbilityAmmo.Get(abilityEntity);
                     var abilityData = m_AbilityDatabase.GetById(ability.id);
                     var abilityAmmoData = m_AbilityAmmoDatabase.GetById(abilityAmmo.id);

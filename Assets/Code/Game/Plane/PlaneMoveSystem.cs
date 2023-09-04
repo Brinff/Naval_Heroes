@@ -4,6 +4,7 @@ using UnityEngine;
 using Leopotam.EcsLite;
 using UnityEngine.Splines;
 using Unity.Mathematics;
+using Warships;
 
 public class PlaneMoveSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
 {
@@ -46,8 +47,9 @@ public class PlaneMoveSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
                     if (Vector3.Distance(movePath.target, new Vector3(position.x, movePath.target.y, position.z)) < 50 && !movePath.isFire)
                     {
                         ref var team = ref m_PoolTeam.Get(entity);
+                        Vector3 direction = Ballistics.GetDirection(transform.transform.position, movePath.target, 0, 50); 
                         CannonProjectile cannonProjectile = new CannonProjectile() { damage = movePath.damage, team = team.id, timeFactor = 1, velocity = 50 };
-                        cannonProjectile.Launch(m_World, transform.transform.position, Vector3.Normalize(movePath.target - transform.transform.position));
+                        cannonProjectile.Launch(m_World, transform.transform.position, direction /*Vector3.Normalize(movePath.target - transform.transform.position)*/);
                         movePath.isFire = true;
                     }
                 }

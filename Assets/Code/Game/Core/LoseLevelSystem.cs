@@ -25,9 +25,9 @@ public class LoseLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
 
         if (!m_Filter.IsAny())
         {
+            battleData.isEnded = true;
             var commandSystem = systems.GetSystem<CommandSystem>();
             commandSystem.Execute<GoLoseCommand, BattleData>(m_World.Filter<BattleData>().End().GetSingletonComponent<BattleData>());
-            battleData.isEnded = true;
         }
     }
 }

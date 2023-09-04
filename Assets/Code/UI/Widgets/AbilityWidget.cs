@@ -19,6 +19,7 @@ public class AbilityWidget : MonoBehaviour, IUIElement
 
     public AbilityItem CreateAbility()
     {
+        Debug.Log($"Create ability:");
         var instance = Instantiate(m_AbilityItem);
         instance.transform.SetParent(m_View);
         instance.gameObject.SetActive(true);
@@ -38,8 +39,9 @@ public class AbilityWidget : MonoBehaviour, IUIElement
     {
         for (int i = 0; i < m_AbilityItems.Count; i++)
         {
-            Dispose(m_AbilityItems[i]);
+            Destroy(m_AbilityItems[i].gameObject);
         }
+        m_AbilityItems.Clear();
     }
 
     public void Hide(bool immediately)

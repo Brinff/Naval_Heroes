@@ -146,8 +146,11 @@ public class ProjectileRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
 
                 if(rootComponent.entity.Unpack(m_World, out int rootEntity))
                 {
-                    ref var colliderTeam = ref m_PoolTeam.Get(rootEntity);
-                    if (team.id == colliderTeam.id) continue;
+                    if (m_PoolTeam.Has(rootEntity))
+                    {
+                        ref var colliderTeam = ref m_PoolTeam.Get(rootEntity);
+                        if (team.id == colliderTeam.id) continue;
+                    }
                 }
 
                 //if (ownerEntity != null)

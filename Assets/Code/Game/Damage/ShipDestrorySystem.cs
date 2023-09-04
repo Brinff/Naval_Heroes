@@ -9,7 +9,7 @@ public class ShipDestrorySystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
 {
     private EcsWorld m_World;
     private EcsFilter m_Filter;
-    private EcsPool<DestroyComponent> m_DestroyEntity;
+    //private EcsPool<DestroyComponent> m_DestroyEntity;
     private EcsPool<TransformComponent> m_PoolTransform;
     [SerializeField]
     private float m_DelayDestory;
@@ -19,7 +19,7 @@ public class ShipDestrorySystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
     {
         m_World = systems.GetWorld();
         m_Filter = m_World.Filter<HealthEndEvent>().Inc<ShipTag>().Inc<TransformComponent>().End();
-        m_DestroyEntity = m_World.GetPool<DestroyComponent>();
+        //m_DestroyEntity = m_World.GetPool<DestroyComponent>();
         m_PoolTransform = m_World.GetPool<TransformComponent>();
     }
 
@@ -27,10 +27,10 @@ public class ShipDestrorySystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
     {
         foreach (var entity in m_Filter)
         {
-            ref var destoryEntity = ref m_DestroyEntity.Add(entity);
+            //ref var destoryEntity = ref m_DestroyEntity.Add(entity);
             ref var transform = ref m_PoolTransform.Get(entity);
             systems.GetSystem<PoolSystem>().GetPool<VFXShipExplosion>().Play(transform.transform.position + Vector3.up * m_OffsetExplosion, Quaternion.identity);
-            destoryEntity.delay = m_DelayDestory;
+            //destoryEntity.delay = m_DelayDestory;
         }
     }
 }

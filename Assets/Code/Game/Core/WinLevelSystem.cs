@@ -34,12 +34,6 @@ public class WinLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcs
 
         if (!battleData.isStarted || battleData.isEnded) return;
 
-        //if (m_PlayerDeadFilter.IsAny() && m_Enemies.Count > 0)
-        //{
-        //    m_Enemies.Clear();
-        //}
-
-
 
         if (m_KillFilter.GetEntitiesCount() == battleData.enemies.Count)
         {
@@ -51,13 +45,5 @@ public class WinLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcs
                 systems.GetSystem<CommandSystem>().Execute<GoStageCommand>();
             }
         }
-
-
-
-        //foreach (var entity in m_NewFilter)
-        //{
-        //    Debug.Log($"Add entity: {entity}");
-        //    m_Enemies.Add(m_World.PackEntity(entity));
-        //}
     }
 }
