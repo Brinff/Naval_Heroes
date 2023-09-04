@@ -21,7 +21,7 @@ public class AbilityWidget : MonoBehaviour, IUIElement
     {
         Debug.Log($"Create ability:");
         var instance = Instantiate(m_AbilityItem);
-        instance.transform.SetParent(m_View);
+        instance.transform.SetParent(m_View, false);
         instance.gameObject.SetActive(true);
         m_AbilityItems.Add(instance);
         return instance;

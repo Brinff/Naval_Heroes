@@ -65,7 +65,7 @@ public class AbilityItem : MonoBehaviour, IDisposable, IPointerDownHandler, IPoi
     public AmmoItem CreateAmmoItem()
     {
         var instance = Instantiate(m_AmmoItem);
-        instance.transform.SetParent(m_AmmoGrid.transform);
+        instance.transform.SetParent(m_AmmoGrid.transform, false);
         instance.gameObject.SetActive(true);
         m_AmmoItems.Add(instance);
         return instance;
