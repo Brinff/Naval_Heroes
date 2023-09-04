@@ -4947,7 +4947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5189905971964720771, guid: cb04c0c0ac0085f45beb11979355181b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.5999756
+      value: 4.5998535
       objectReference: {fileID: 0}
     - target: {fileID: 5189905971964720771, guid: cb04c0c0ac0085f45beb11979355181b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5307,6 +5307,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2040863457}
     m_Modifications:
+    - target: {fileID: 5236785744870144308, guid: 8494a31ec4ff0c64d8d47a30fe627e94, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236785744870144308, guid: 8494a31ec4ff0c64d8d47a30fe627e94, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236785744870144308, guid: 8494a31ec4ff0c64d8d47a30fe627e94, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236785744870144308, guid: 8494a31ec4ff0c64d8d47a30fe627e94, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -99
+      objectReference: {fileID: 0}
+    - target: {fileID: 5236785744870144308, guid: 8494a31ec4ff0c64d8d47a30fe627e94, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 476
+      objectReference: {fileID: 0}
     - target: {fileID: 5505010219597915360, guid: 8494a31ec4ff0c64d8d47a30fe627e94, type: 3}
       propertyPath: m_Name
       value: AutoFightWidget
