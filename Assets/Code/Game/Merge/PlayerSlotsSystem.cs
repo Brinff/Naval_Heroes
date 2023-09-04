@@ -120,20 +120,34 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     [Button]
     public void Show()
     {
+        if (coroutine != null) StopCoroutine(coroutine);
+
+        m_SlotCollection.gameObject.SetActive(true);
         var slots = m_SlotCollection.GetSlots<ISlotRenderer>();
         foreach (var item in slots)
         {
             item.Show(0.3f);
         }
     }
+
+    private Coroutine coroutine;
+
+    private IEnumerator WaitHide()
+    {
+        yield return new WaitForSeconds(0.3f);
+        m_SlotCollection.gameObject.SetActive(false);
+    }
+
     [Button]
     public void Hide()
     {
+        if (coroutine != null) StopCoroutine(coroutine);
         var slots = m_SlotCollection.GetSlots<ISlotRenderer>();
         foreach (var item in slots)
         {
             item.Hide(0.3f);
         }
+        coroutine = StartCoroutine(WaitHide());
     }
 
     public void Destroy(IEcsSystems systems)
@@ -175,5 +189,6 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
                 else Debug.Log("Null Item or Entity!");
             }
         }
+        
     }
 }

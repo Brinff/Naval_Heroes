@@ -4498,6 +4498,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DelayDestory: 5
   m_OffsetExplosion: 3
+  m_CurvePosition:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.9747646
+      outSlope: -0.9747646
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.08587696
+    - serializedVersion: 3
+      time: 0.10829921
+      value: -0.05924282
+      inSlope: 0.6440085
+      outSlope: 0.6440085
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.65526086
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4623708
+      value: 0.018846765
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 3.8694143
+      outSlope: 3.8694143
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.047549307
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_CurveRotation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speedDown: 0.3
 --- !u!114 &4474410311836280216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6958,19 +7025,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8810937261457171356, guid: 8f5386f6256976248bba14fb0df42167, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8810937261457171356, guid: 8f5386f6256976248bba14fb0df42167, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8810937261457171356, guid: 8f5386f6256976248bba14fb0df42167, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 540
       objectReference: {fileID: 0}
     - target: {fileID: 8810937261457171356, guid: 8f5386f6256976248bba14fb0df42167, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -139.695
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
