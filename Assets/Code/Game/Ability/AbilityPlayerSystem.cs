@@ -64,11 +64,12 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
             {
                 if (!m_PoolAbilityUI.Has(abilityEntity))
                 {
-                    Debug.Log($"Create ability: {battleData}");
+                   
                     ref var abilityAmmo = ref m_PoolAbilityAmmo.Get(abilityEntity);
                     var abilityData = m_AbilityDatabase.GetById(ability.id);
                     var abilityAmmoData = m_AbilityAmmoDatabase.GetById(abilityAmmo.id);
                     var abilityItem = m_AbilityWidget.CreateAbility();
+
                     abilityItem.SetAbilityIcon(abilityData.icon);
                     abilityItem.SetId(abilityData.id);
                     abilityItem.SetReload(0);

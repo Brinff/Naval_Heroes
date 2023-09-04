@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    private static string[] s_Levels = new string[]
+    {
+        "I","II","III","IV","V","VI","VII","VIII","IX","X"
+    };
+
     [SerializeField]
     private CanvasGroup m_Group;
     [SerializeField]
@@ -31,6 +36,8 @@ public class HealthBar : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI m_Label;
+    [SerializeField]
+    private TextMeshProUGUI m_LevelLabel;
 
     private float m_NormalizeValue;
 
@@ -44,9 +51,17 @@ public class HealthBar : MonoBehaviour
         m_ClassificationAndRareImage.SetNativeSize();
     }
 
+
+
+    public void SetLevel(int level)
+    {
+        m_LevelLabel.text = s_Levels[level];
+    }
+
     public void SetRare(Color color)
     {
         m_ClassificationAndRareImage.color = color;
+        m_LevelLabel.color = color;
     }
 
     public void SetHealth(float health, float maxHealth)
