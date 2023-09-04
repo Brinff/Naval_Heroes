@@ -17,6 +17,8 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_PlayerLevelPovider = systems.GetSystem<PlayerMissionSystem>();
 
+        TinySauce.OnGameFinished(true, 0, battleData.level);
+
         m_PlayerLevelPovider.CompleteLevel();
         m_Reward = battleData.winReward;
 
@@ -27,6 +29,8 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
         m_WinWidget.SetReward(battleData.winReward, false);
         m_WinWidget.SetLevel(battleData.level);
         UISystem.Instance.compositionModule.Show<UIWinCompositon>();
+
+        
     }
 
     private void OnClaimReward()

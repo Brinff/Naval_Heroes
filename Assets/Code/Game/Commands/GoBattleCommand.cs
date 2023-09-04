@@ -50,7 +50,8 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         battleData.loseReward = levelData.loseReward;
         world.GetPool<ClearBattleTag>().Add(battleDataEntity);
 
-        
+
+        TinySauce.OnGameStarted(battleData.level);
 
         commandSystem.Execute<GoStageCommand, BattleData>(battleData);
 
