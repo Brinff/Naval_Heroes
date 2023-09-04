@@ -477,7 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 0
-  color: {r: 0.023718417, g: 0.20525545, b: 0.38679248, a: 0.5019608}
+  color: {r: 0.025186857, g: 0.07227186, b: 0.27889434, a: 0.5019608}
   alpha: 1
   width: 1
   tails: 30
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 2
-  color: {r: 7.999999, g: 6.425549, b: 0, a: 1}
+  color: {r: 6.422234, g: 5.158298, b: 0, a: 1}
   alpha: 1
   width: 1
   tails: 0
@@ -762,7 +762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 0
-  color: {r: 0, g: 1, b: 1, a: 1}
+  color: {r: 0, g: 0.7960903, b: 6.883181, a: 1}
   alpha: 1
   width: 1
   tails: 0
@@ -1657,7 +1657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 1
-  color: {r: 0, g: 4.269324, b: 0, a: 0.92156863}
+  color: {r: 0, g: 6.792453, b: 1.3821915, a: 1}
   alpha: 1
   width: 1
   tails: 0
@@ -1805,7 +1805,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 3
-  color: {r: 11.984315, g: 0, b: 0, a: 1}
+  color: {r: 6.422235, g: 0, b: 0, a: 1}
   alpha: 1
   width: 1
   tails: 0
@@ -2476,7 +2476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 0
-  color: {r: 0, g: 1, b: 1, a: 1}
+  color: {r: 0, g: 0.7960903, b: 6.883181, a: 1}
   alpha: 1
   width: 1
   tails: 0
