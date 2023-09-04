@@ -41,6 +41,7 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
 
             RemoveItem(firstItem);
 
+            Destroy(firstItem.info.gameObject);
             Destroy(firstItem.entity);
             Destroy(firstItem.gameObject);
 

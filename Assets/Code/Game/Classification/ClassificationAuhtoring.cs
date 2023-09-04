@@ -9,6 +9,8 @@ public class ClassificationAuhtoring : MonoBehaviour, IEntityAuthoring
     private ClassificationData m_ClassData;
     public bool isEnable => gameObject.activeInHierarchy;
 
+    public ClassificationData classData => m_ClassData;
+
     public void Bake(int entity, EcsWorld ecsWorld)
     {
         ref var classEntity = ref ecsWorld.GetPool<Classification>().Add(entity);

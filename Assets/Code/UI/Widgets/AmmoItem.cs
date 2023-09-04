@@ -10,6 +10,11 @@ public class AmmoItem : MonoBehaviour, IDisposable
     private Image m_Background;
     [SerializeField]
     private Image m_Fill;
+    [SerializeField]
+    private Gradient m_ReloadColor;
+    [SerializeField]
+    private AnimationCurve m_SizeCurve;
+
     public void SetSprite(Sprite sprite)
     {
         m_Background.sprite = sprite;
@@ -24,6 +29,8 @@ public class AmmoItem : MonoBehaviour, IDisposable
     {
         m_Reload = Mathf.Clamp01(amount);
         m_Fill.fillAmount = m_Reload;
+        m_Fill.color = m_ReloadColor.Evaluate(amount);
+        transform.localScale = Vector3.one * m_SizeCurve.Evaluate(amount);
     }
 
     public void Dispose()

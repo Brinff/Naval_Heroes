@@ -35,7 +35,7 @@ public class SlotDebug : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandle
         {
             var toRemove = item;
             RemoveItem(item);
-
+            Destroy(toRemove.info.gameObject);
             Destroy(toRemove.entity);
             Destroy(toRemove.gameObject);
         }

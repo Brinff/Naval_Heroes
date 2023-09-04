@@ -1,4 +1,5 @@
 using Game.Grid.Auhoring;
+using Game.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public EntityData entityData;
     public GameObject entity;
     public GridAuhoring grid;
+    [HideInInspector]
+    public SlotItemInfoItem info;
 
     public ISlot parentSlot;
     public ISlot populateSlot;
@@ -121,7 +124,10 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             boxColliders[i] = boxCollider;
         }
 
-        
+        info.SetRare(entity.GetComponent<RareAuthoring>().rareData.color);
+        info.SetClassification(entity.GetComponent<ClassificationAuhtoring>().classData.icon);
+        info.SetLevel(entity.GetComponent<GradeLevelAuthoring>().amount);
+        info.UpdatePosition(entity.GetComponent<InfoAuthoring>().orgin.position);
     }
 
     //[SerializeField]
@@ -145,6 +151,8 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         var distance = Vector3.Distance(m_CurrentPosition, target);
 
 
+
+
         m_Velocity += direction * gameSettings.merge.moveItem.force * distance * Time.deltaTime;
         m_Velocity -= m_Velocity * gameSettings.merge.moveItem.damper * Time.deltaTime;
 
@@ -157,9 +165,14 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         m_CurrentPosition += m_Velocity * Time.deltaTime;
         m_CurrentRotation = Quaternion.AngleAxis(angle, right);
         if (entity)
-        {    
+        {
             entity.transform.rotation = m_CurrentRotation;
             entity.transform.position = m_CurrentPosition;
+        }
+
+        if (info)
+        {
+            info.UpdatePosition(entity.GetComponent<InfoAuthoring>().orgin.position);
         }
     }
 
@@ -172,12 +185,18 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         GameObject gameObject = new GameObject($"Slot Item {entityData.name}");
         gameObject.layer = 9;
 
+
         var slotItem = gameObject.AddComponent<SlotItem>();
+        var widget = UISystem.Instance.GetElement<SlotItemInfoWidget>();
+
+        slotItem.info = widget.Create();
         slotItem.transform.SetParent(collection.transform);
         slotItem.currentPosition = position;
         slotItem.targetPosition = position;
         slotItem.position = position;
         slotItem.SetEntity(entityData);
+
+        
 
         return slotItem;
     }

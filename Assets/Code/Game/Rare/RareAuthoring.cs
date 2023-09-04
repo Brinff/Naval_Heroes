@@ -9,6 +9,8 @@ public class RareAuthoring : MonoBehaviour, IEntityAuthoring
     private RareData m_RareData;
     public bool isEnable => gameObject.activeInHierarchy;
 
+    public RareData rareData => m_RareData;
+
     public void Bake(int entity, EcsWorld ecsWorld)
     {
         ref var rare = ref ecsWorld.GetPool<Rare>().Add(entity);

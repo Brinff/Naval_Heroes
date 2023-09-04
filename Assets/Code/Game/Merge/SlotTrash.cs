@@ -23,6 +23,7 @@ public class SlotTrash : MonoBehaviour, ISlotPopulate, ISlotRenderer
 
     public bool AddItem(SlotItem slotItem, Vector3 position)
     {
+        Destroy(slotItem.info.gameObject);
         Destroy(slotItem.entity);
         Destroy(slotItem.gameObject);
         return true;

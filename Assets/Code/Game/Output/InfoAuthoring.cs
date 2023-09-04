@@ -12,6 +12,8 @@ public class InfoAuthoring : MonoBehaviour, IEntityAuthoring
 {
     [SerializeField]
     private Transform m_Orign;
+
+    public Transform orgin => m_Orign;
     public bool isEnable => gameObject.activeInHierarchy;
 
     public void Bake(int entity, EcsWorld ecsWorld)
