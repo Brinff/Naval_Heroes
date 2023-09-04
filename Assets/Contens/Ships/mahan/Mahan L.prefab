@@ -451,7 +451,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 6943858788679407517}
     m_Transform: {fileID: 2411464858190477909}
     m_AxisRotate: {x: 0, y: 1, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -160, y: 160}
@@ -460,7 +460,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 2411464858190477909}
     m_Transform: {fileID: 7881584319975102255}
     m_AxisRotate: {x: 1, y: 0, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -10, y: 60}
@@ -1847,7 +1847,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 7563073868056151997}
     m_Transform: {fileID: 6309411401223506018}
     m_AxisRotate: {x: 0, y: 1, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -160, y: 160}
@@ -1856,7 +1856,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 6309411401223506018}
     m_Transform: {fileID: 5284474066096860885}
     m_AxisRotate: {x: 1, y: 0, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -10, y: 60}
@@ -1999,7 +1999,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 4761434932472243067}
     m_Transform: {fileID: 9039629775956522048}
     m_AxisRotate: {x: 0, y: 1, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -160, y: 160}
@@ -2008,7 +2008,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 9039629775956522048}
     m_Transform: {fileID: 850328001020751725}
     m_AxisRotate: {x: 1, y: 0, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -10, y: 60}
@@ -2081,6 +2081,7 @@ GameObject:
   - component: {fileID: -1215661129221420763}
   - component: {fileID: -4607644156375484622}
   - component: {fileID: 7117423083205511172}
+  - component: {fileID: 8213117716435639428}
   m_Layer: 0
   m_Name: Mahan L
   m_TagString: Untagged
@@ -2203,6 +2204,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Transform: {fileID: 0}
+--- !u!114 &8213117716435639428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931636924525723888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e8fa47dc1aa0e40b2e54e5397e71c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Amount: 2
 --- !u!1 &7000977264580592347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2437,7 +2451,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 7629696964362633444}
     m_Transform: {fileID: 9164508086614255496}
     m_AxisRotate: {x: 0, y: 1, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -160, y: 160}
@@ -2446,7 +2460,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 9164508086614255496}
     m_Transform: {fileID: 2914823269351061882}
     m_AxisRotate: {x: 1, y: 0, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -10, y: 60}

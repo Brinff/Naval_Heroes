@@ -88,7 +88,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 7468543340911341909}
     m_Transform: {fileID: 8664633992258757975}
     m_AxisRotate: {x: 0, y: 1, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -160, y: 160}
@@ -97,7 +97,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 8664633992258757975}
     m_Transform: {fileID: 2318212794588843735}
     m_AxisRotate: {x: 1, y: 0, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -10, y: 60}
@@ -344,7 +344,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677397441502448572}
-  m_LocalRotation: {x: -0.04160292, y: -0, z: 0.0000000018626449, w: 0.99913424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.00000010917455, y: 1.7645344, z: 4.0892024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -355,7 +355,7 @@ Transform:
   - {fileID: 7355118770992779353}
   m_Father: {fileID: 8664633992258757975}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -4.769, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &771260054704684734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 6361905700042196168}
     m_Transform: {fileID: 7589508049249271321}
     m_AxisRotate: {x: 0, y: 1, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -160, y: 160}
@@ -1284,7 +1284,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 7589508049249271321}
     m_Transform: {fileID: 6905022787247858901}
     m_AxisRotate: {x: 1, y: 0, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -10, y: 60}
@@ -1441,6 +1441,7 @@ GameObject:
   - component: {fileID: 2245233074157956619}
   - component: {fileID: -8249719495683826994}
   - component: {fileID: 3489344002986352074}
+  - component: {fileID: 5928409770672873787}
   m_Layer: 0
   m_Name: South Dakota L
   m_TagString: Untagged
@@ -1563,6 +1564,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Transform: {fileID: 0}
+--- !u!114 &5928409770672873787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274979080763799702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e8fa47dc1aa0e40b2e54e5397e71c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Amount: 8
 --- !u!1 &2282847331539686944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,7 +1716,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2410527188985689790}
-  m_LocalRotation: {x: -0.04160292, y: -0, z: 0.0000000018626449, w: 0.99913424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.00000010917455, y: 1.7645344, z: 4.0892024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1713,7 +1727,7 @@ Transform:
   - {fileID: 944659881219586471}
   m_Father: {fileID: 3282096761954243303}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -4.769, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2502517962912957775
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,7 +2150,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 2789035989316274985}
     m_Transform: {fileID: 3282096761954243303}
     m_AxisRotate: {x: 0, y: 1, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -160, y: 160}
@@ -2145,7 +2159,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 3282096761954243303}
     m_Transform: {fileID: 1253189799486458632}
     m_AxisRotate: {x: 1, y: 0, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -10, y: 60}
@@ -5443,7 +5457,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9071388990576650902}
-  m_LocalRotation: {x: -0.04160292, y: -0, z: 0.0000000018626449, w: 0.99913424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.00000010917455, y: 1.7645344, z: 4.0892024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5454,4 +5468,4 @@ Transform:
   - {fileID: 8740414430826495204}
   m_Father: {fileID: 7589508049249271321}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -4.769, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

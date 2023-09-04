@@ -114,6 +114,9 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        transform.DOScale(Vector3.one * 0.8f, 0.1f);
+        transform.DOScale(Vector3.one * 1, 0.1f).SetDelay(0.1f);
+
         var mergeSlots = collection.GetSlots<SlotMerge>();
         foreach (var slot in mergeSlots)
         {

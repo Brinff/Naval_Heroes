@@ -12,6 +12,13 @@ public class StartGameWidget : MonoBehaviour, IUIElement
     private TextMeshProUGUI m_LevelLabel;
     [SerializeField]
     private Button m_Button;
+    [SerializeField]
+    private CanvasGroup m_Group;
+    public void SetBlock(bool isBlock)
+    {
+        m_Group.alpha = isBlock ? 0.5f : 1;
+    }
+
     private void OnDisable()
     {
         m_Button.onClick.RemoveAllListeners();

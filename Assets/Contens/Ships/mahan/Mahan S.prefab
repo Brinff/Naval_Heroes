@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 4252794217656083838}
   - component: {fileID: 8766069828626611416}
   - component: {fileID: 1057930038630494678}
+  - component: {fileID: 6223746093861069539}
   m_Layer: 0
   m_Name: Mahan S
   m_TagString: Untagged
@@ -561,6 +562,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RareData: {fileID: 11400000, guid: dc409b6e098a23a45a27ad24ff56b48d, type: 2}
+--- !u!114 &6223746093861069539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562863938313241148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e8fa47dc1aa0e40b2e54e5397e71c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Amount: 1
 --- !u!1 &2379347521647707848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1980,7 +1994,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 9210072238096725360}
     m_Transform: {fileID: 7072456519128869659}
     m_AxisRotate: {x: 0, y: 1, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -160, y: 160}
@@ -1989,7 +2003,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 7072456519128869659}
     m_Transform: {fileID: 374843137015948284}
     m_AxisRotate: {x: 1, y: 0, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -10, y: 60}

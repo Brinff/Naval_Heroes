@@ -22,6 +22,7 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
     private EcsPool<HealthBarComponent> m_PoolHealthBarComponent;
     private EcsPool<Classification> m_PoolClassification;
     private EcsPool<Rare> m_PoolRare;
+    private EcsPool<GradeLevel> m_PoolGradeLevel;
     private EcsPool<InfoComponent> m_PoolInfoComponent;
     private EcsPool<DestroyComponent> m_PoolDestroy;
 
@@ -39,6 +40,7 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
         m_PoolDestroy = ecsWorld.GetPool<DestroyComponent>();
         m_PoolClassification = ecsWorld.GetPool<Classification>();
         m_PoolRare = ecsWorld.GetPool<Rare>();
+        m_PoolGradeLevel = ecsWorld.GetPool<GradeLevel>();
         m_WorldEnemyWidget = UISystem.Instance.GetElement<WorldEnemyWidget>();
         m_WorldEnemyWidget.SetWorldCamera(m_Camera);
     }
@@ -83,7 +85,11 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
                     healthBarComponent.bar.SetRare(rareDatabase.GetById(rare.id).color);
                 }
 
-
+                if (m_PoolGradeLevel.Has(entity))
+                {
+                    ref var gradeLevel = ref m_PoolGradeLevel.Get(entity);
+                    healthBarComponent.bar.SetLevel(gradeLevel.amount);
+                }
 
                 healthBarComponent.health = healthComponent.currentValue;
             }

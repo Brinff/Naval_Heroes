@@ -7,14 +7,16 @@ using UnityEngine;
 public class GoHomeCommand : MonoBehaviour, ICommand
 {
     private StartGameWidget m_StartGameWidget;
+    private PlayerSlotsSystem m_PlayerSlotsSystem;
     private CommandSystem m_CommandSystem;
     
     public void Execute(EcsWorld world, IEcsSystems systems)
     {
         PlayerMissionSystem playerMissionSystem = systems.GetSystem<PlayerMissionSystem>();
 
-        
 
+        m_PlayerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
+        m_PlayerSlotsSystem.slotCollection.OnChange += OnChangeSlotCollection;
 
         m_StartGameWidget = UISystem.Instance.GetElement<StartGameWidget>();
         m_StartGameWidget.SetLevel(playerMissionSystem.level);
@@ -51,9 +53,19 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         m_CommandSystem.Execute<MoneyUpdateCommand>();
     }
 
+    private void OnChangeSlotCollection(SlotCollection collection)
+    {
+        m_StartGameWidget.SetBlock(!m_PlayerSlotsSystem.IsAnyRadyBattle());
+    }
+
     private void OnClickBattle()
     {
+        if (!m_PlayerSlotsSystem.IsAnyRadyBattle())
+        {
+            return;
+        }
         m_StartGameWidget.OnClick -= OnClickBattle;
+        m_PlayerSlotsSystem.slotCollection.OnChange -= OnChangeSlotCollection;
         m_CommandSystem.Execute<GoBattleCommand>();
     }
 }
