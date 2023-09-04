@@ -6,10 +6,11 @@ using System.Xml.Schema;
 using UnityEditor.Playables;
 using UnityEngine;
 
-public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
+public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>, IEcsDestroySystem
 {
     private AbilityWidget m_AbilityWidget;
     private EcsFilter m_AbilityFilter;
+    private EcsFilter m_AbilityAutoFightFilter;
     private EcsFilter m_AbilityOtherFilter;
     private EcsWorld m_World;
     private AbilityDatabase m_AbilityDatabase;
@@ -26,7 +27,10 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
     private EcsPool<AbilityAmmoAmount> m_PoolAbilityAmmoAmount;
     private EcsPool<AbilityAmmo> m_PoolAbilityAmmo;
     private BeginEntityCommandSystem m_BeginEntityCommandSystem;
+    private AutoFightToggleWidget m_AutoFightToggleWidget;
 
+    private PlayerPrefsData<bool> m_AutoFightToggle;
+    private EcsPool<AbilityAutoUse> m_PoolAutoUse;
     public void Init(IEcsSystems systems)
     {
         m_BeginEntityCommandSystem = systems.GetSystem<BeginEntityCommandSystem>();
@@ -35,7 +39,13 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
         m_AbilityAmmoDatabase = systems.GetData<AbilityAmmoDatabase>();
         m_AbilityWidget = UISystem.Instance.GetElement<AbilityWidget>();
 
+        m_AutoFightToggle = new PlayerPrefsData<bool>(nameof(m_AutoFightToggle), false);
+        m_AutoFightToggleWidget = UISystem.Instance.GetElement<AutoFightToggleWidget>();
+        m_AutoFightToggleWidget.isToggle = m_AutoFightToggle.Value;
+        m_AutoFightToggleWidget.OnToggle += OnToggleAutoFight;
+
         m_AbilityFilter = m_World.Filter<Ability>().Inc<AbilityGroup>().Inc<PlayerTag>().Inc<CommanderTag>().End();
+        m_AbilityAutoFightFilter = m_World.Filter<AbilityAutoUse>().Inc<PlayerTag>().Inc<CommanderTag>().End();
 
         m_PoolAbilityGroup = m_World.GetPool<AbilityGroup>();
         m_PoolAbility = m_World.GetPool<Ability>();
@@ -45,8 +55,26 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
         m_PoolAbilityState = m_World.GetPool<AbilityState>();
         m_PoolAbilityAmmoUI = m_World.GetPool<AbilityAmmoUI>();
         m_PoolAbilityAmmoAmount = m_World.GetPool<AbilityAmmoAmount>();
+        m_PoolAutoUse = m_World.GetPool<AbilityAutoUse>();
 
         m_BattleDataFilter = m_World.Filter<BattleData>().End();
+
+
+    }
+
+    private void OnToggleAutoFight(bool isToggle)
+    {
+        m_AutoFightToggleWidget.isToggle = isToggle;
+        m_AutoFightToggle.Value = isToggle;
+
+        //if (m_AbilityAutoFightFilter.IsAny())
+        //{
+        //    var buffer = m_BeginEntityCommandSystem.CreateBuffer();
+        //    foreach (var entity in m_AbilityAutoFightFilter)
+        //    {
+        //        buffer.SetComponent(entity, new AbilityAutoUse() { isActive = isToggle });
+        //    }
+        //}
     }
 
     public void Run(IEcsSystems systems)
@@ -54,6 +82,12 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
         if (!m_BattleDataFilter.IsAny()) return;
         ref var battleData = ref m_BattleDataFilter.GetSingletonComponent<BattleData>();
         if (!battleData.isStarted || battleData.isEnded) return;
+
+        foreach (var entity in m_AbilityAutoFightFilter)
+        {
+            ref var autoUse = ref m_PoolAutoUse.Get(entity);
+            autoUse.isActive = m_AutoFightToggleWidget.isToggle;
+        }
 
         foreach (var abilityEntity in m_AbilityFilter)
         {
@@ -64,7 +98,7 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
             {
                 if (!m_PoolAbilityUI.Has(abilityEntity))
                 {
-                   
+
                     ref var abilityAmmo = ref m_PoolAbilityAmmo.Get(abilityEntity);
                     var abilityData = m_AbilityDatabase.GetById(ability.id);
                     var abilityAmmoData = m_AbilityAmmoDatabase.GetById(abilityAmmo.id);
@@ -153,5 +187,11 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
             }
         }
 
+    }
+
+    public void Destroy(IEcsSystems systems)
+    {
+        m_AutoFightToggleWidget.OnToggle -= OnToggleAutoFight;
+        m_AutoFightToggleWidget = null;
     }
 }
