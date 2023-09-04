@@ -55,7 +55,7 @@ public class HealthBar : MonoBehaviour
 
     public void SetLevel(int level)
     {
-        m_LevelLabel.text = s_Levels[level];
+        m_LevelLabel.text = s_Levels[level - 1];
     }
 
     public void SetRare(Color color)

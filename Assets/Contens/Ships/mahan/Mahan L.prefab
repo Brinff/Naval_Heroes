@@ -2081,6 +2081,7 @@ GameObject:
   - component: {fileID: -1215661129221420763}
   - component: {fileID: -4607644156375484622}
   - component: {fileID: 7117423083205511172}
+  - component: {fileID: 8213117716435639428}
   m_Layer: 0
   m_Name: Mahan L
   m_TagString: Untagged
@@ -2203,6 +2204,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Transform: {fileID: 0}
+--- !u!114 &8213117716435639428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931636924525723888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e8fa47dc1aa0e40b2e54e5397e71c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Amount: 2
 --- !u!1 &7000977264580592347
 GameObject:
   m_ObjectHideFlags: 0

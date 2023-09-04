@@ -6811,6 +6811,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2252008657406510189, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7347036904417360693, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}
       propertyPath: m_Name
       value: WorldEnemyWidget
@@ -6818,6 +6822,22 @@ PrefabInstance:
     - target: {fileID: 7347036904417360693, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790525569933179527, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 134c98c153b51ea4cae4932ac22f3398, type: 2}
+    - target: {fileID: 7790525569933179527, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160865934348879412, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 134c98c153b51ea4cae4932ac22f3398, type: 2}
+    - target: {fileID: 9160865934348879412, guid: 84913ed31ceb4b54abf0840a4eb2e62f, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
