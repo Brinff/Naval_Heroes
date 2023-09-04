@@ -147,27 +147,27 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         var gameSettings = GameSettings.Instance;
         var target = m_TargetPosition + Vector3.up * height;
-        var direction = Vector3.Normalize(target - m_CurrentPosition);
-        var distance = Vector3.Distance(m_CurrentPosition, target);
+        //var direction = Vector3.Normalize(target - m_CurrentPosition);
+        //var distance = Vector3.Distance(m_CurrentPosition, target);
 
 
 
 
-        m_Velocity += direction * gameSettings.merge.moveItem.force * distance * Time.deltaTime;
-        m_Velocity -= m_Velocity * gameSettings.merge.moveItem.damper * Time.deltaTime;
+        //m_Velocity += direction * gameSettings.merge.moveItem.force * distance * Time.deltaTime;
+        //m_Velocity -= m_Velocity * gameSettings.merge.moveItem.damper * Time.deltaTime;
 
 
-        Vector3 localVelocity = transform.InverseTransformVector(m_Velocity);
-        localVelocity = Vector3.Scale(localVelocity, gameSettings.merge.moveItem.rotationByLocalVelocty);
-        Vector3 velocity = transform.TransformVector(localVelocity);
-        Vector3 right = Vector3.Cross(velocity, Vector3.up);
-        float angle = Mathf.Clamp(velocity.magnitude, 0, gameSettings.merge.moveItem.clampRotationByVelocity);
-        m_CurrentPosition += m_Velocity * Time.deltaTime;
-        m_CurrentRotation = Quaternion.AngleAxis(angle, right);
+        //Vector3 localVelocity = transform.InverseTransformVector(m_Velocity);
+        //localVelocity = Vector3.Scale(localVelocity, gameSettings.merge.moveItem.rotationByLocalVelocty);
+        //Vector3 velocity = transform.TransformVector(localVelocity);
+        //Vector3 right = Vector3.Cross(velocity, Vector3.up);
+        //float angle = Mathf.Clamp(velocity.magnitude, 0, gameSettings.merge.moveItem.clampRotationByVelocity);
+        //m_CurrentPosition += m_Velocity * Time.deltaTime;
+        //m_CurrentRotation = Quaternion.AngleAxis(angle, right);
         if (entity)
         {
-            entity.transform.rotation = m_CurrentRotation;
-            entity.transform.position = m_CurrentPosition;
+            entity.transform.rotation = Quaternion.identity;
+            entity.transform.position = target;
         }
 
         if (info)
