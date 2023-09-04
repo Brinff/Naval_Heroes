@@ -88,7 +88,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 5284450879491036980}
     m_Transform: {fileID: 8358285798435728878}
     m_AxisRotate: {x: 0, y: 1, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -160, y: 160}
@@ -97,7 +97,7 @@ MonoBehaviour:
   - m_Parent: {fileID: 8358285798435728878}
     m_Transform: {fileID: 4239346549463212415}
     m_AxisRotate: {x: 1, y: 0, z: 0}
-    m_AngleSpeed: 0
+    m_AngleSpeed: 100
     m_IsClamp: 1
     m_ClampAxisDirection: {x: 0, y: 0, z: 1}
     m_ClampAngle: {x: -10, y: 60}

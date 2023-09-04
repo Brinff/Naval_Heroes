@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Collections;
-using System;
 using DG.Tweening;
 
 public class SpawnSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
@@ -45,7 +44,7 @@ public class SpawnSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGro
 
             battleData.enemies.Add(instance);
 
-            instance.transform.DOMove(spawn.position, 5);
+            instance.transform.DOMove(spawn.position, Random.Range(3f,4f));
             var newEntity = m_World.Bake(instance, out List<int> entities);
 
             var buffer = m_BeginEntityCommandSystem.CreateBuffer();

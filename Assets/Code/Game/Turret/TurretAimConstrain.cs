@@ -49,7 +49,7 @@ public class TurretAimConstrain : MonoBehaviour
             m_IdleRotation = m_Transform.localRotation;
         }
 
-        public bool isReadyAngle => m_DeltaAngle < m_ReadyAngleThreshold;
+        public bool isReadyAngle => m_DeltaAngle < 0.5f; //m_ReadyAngleThreshold;
 
         private float m_DeltaAngle;
 
@@ -131,6 +131,18 @@ public class TurretAimConstrain : MonoBehaviour
     [SerializeField]
     private List<Constrain> m_ConstrainChain = new List<Constrain>();
 
+    public bool isReadyAngle
+    {
+        get
+        {
+            foreach (var item in m_ConstrainChain)
+            {
+                if (!item.isReadyAngle) return false;
+            }
+
+            return true;
+        }
+    }
 
     public void SetState(AimState aimState)
     {

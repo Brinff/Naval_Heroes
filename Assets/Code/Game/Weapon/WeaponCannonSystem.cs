@@ -76,7 +76,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
             weaponCannon.aimConstrain.Perfrom(weaponCannon.orgrin.position + aimDirection * 10);
             weaponCannon.aimConstrain.SetState(AimState.Aim);
 
-            if (abilityState.isPerfrom)
+            if (abilityState.isPerfrom && weaponCannon.aimConstrain.isReadyAngle)
             {
                 int teamId = -1;
                 if(root.entity.Unpack(m_World, out int rootEntity))
