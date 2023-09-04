@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa11ec82e9746928e211e7f096812ca, type: 3}
+  m_Name: Settings
+  m_EditorClassIdentifier: 
+  gameAnalyticsIosGameKey: 092f7ec16d217fd6c4a5f532859848c9
+  gameAnalyticsIosSecretKey: 5d41ad4ac04a7af0e6dc940454e41be63259cd3e
+  gameAnalyticsAndroidGameKey: 092f7ec16d217fd6c4a5f532859848c9
+  gameAnalyticsAndroidSecretKey: 5d41ad4ac04a7af0e6dc940454e41be63259cd3e
+  facebookAppId: 272516132211877
+  facebookClientToken: 3798a8618b18920f48b92ef5fd649304
+  adjustIOSToken: xbs7j2u6h4ow
+  adjustAndroidToken: xbs7j2u6h4ow
+  EditorIdfa: 200850bf-bccc-4c69-99b6-74f6fb907256
+  UseRemoteConfig: 0
+  UseVoodooAnalytics: 1
+  companyName: Mooshroom Games
+  privacyPolicyURL: https://docs.google.com/document/d/1GIkBjZZTHRAc5qKGx_NQzDSmVkDgTvsHr6_pYvg5FT4/edit
+  developerContactEmail: mushroomhits@gmail.com

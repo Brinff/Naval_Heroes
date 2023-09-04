@@ -15,18 +15,19 @@ public class AmmoItem : MonoBehaviour, IDisposable
     [SerializeField]
     private AnimationCurve m_SizeCurve;
     [SerializeField]
-    private GameObject m_Cross;
+    private Image m_Cross;
     private bool m_IsAvailable;
     public void SetAvailable(bool isAvailable)
     {
         m_IsAvailable = isAvailable;
-        m_Cross.SetActive(!isAvailable);
+        m_Cross.gameObject.SetActive(!isAvailable);
     }
 
     public void SetSprite(Sprite sprite)
     {
         m_Background.sprite = sprite;
         m_Fill.sprite = sprite;
+        m_Cross.sprite = sprite;
     }
 
 
