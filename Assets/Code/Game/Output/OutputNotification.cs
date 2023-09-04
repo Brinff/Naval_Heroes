@@ -5,13 +5,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OutputPlayerNotificationSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroupUpdateSystem
+public class OutputPlayerNotificationSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
 {
     //private Entity m_Entity;
     //private Team m_Team;
     private PlayerNotificationWidget m_PlayerNotificationWidget;
 
-
+    private void OnEnable()
+    {
+        
+    }
     //public void OnDamageEndHealth(Entity entity, float damage)
     //{
 
