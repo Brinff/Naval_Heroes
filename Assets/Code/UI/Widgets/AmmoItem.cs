@@ -14,6 +14,14 @@ public class AmmoItem : MonoBehaviour, IDisposable
     private Gradient m_ReloadColor;
     [SerializeField]
     private AnimationCurve m_SizeCurve;
+    [SerializeField]
+    private GameObject m_Cross;
+    private bool m_IsAvailable;
+    public void SetAvailable(bool isAvailable)
+    {
+        m_IsAvailable = isAvailable;
+        m_Cross.SetActive(!isAvailable);
+    }
 
     public void SetSprite(Sprite sprite)
     {
@@ -23,7 +31,7 @@ public class AmmoItem : MonoBehaviour, IDisposable
 
 
     private float m_Reload;
-    public float reload => m_Reload;
+    public float reload => m_IsAvailable ? m_Reload : -0.1f;
 
     public void SetReload(float amount)
     {

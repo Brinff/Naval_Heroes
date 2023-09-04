@@ -28,7 +28,8 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
     private EcsPool<AbilityAmmo> m_PoolAbilityAmmo;
     private BeginEntityCommandSystem m_BeginEntityCommandSystem;
     private AutoFightToggleWidget m_AutoFightToggleWidget;
-
+    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<DeadTag> m_PoolDeadTag;
     private PlayerPrefsData<bool> m_AutoFightToggle;
     private EcsPool<AbilityAutoUse> m_PoolAutoUse;
     public void Init(IEcsSystems systems)
@@ -56,6 +57,9 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
         m_PoolAbilityAmmoUI = m_World.GetPool<AbilityAmmoUI>();
         m_PoolAbilityAmmoAmount = m_World.GetPool<AbilityAmmoAmount>();
         m_PoolAutoUse = m_World.GetPool<AbilityAutoUse>();
+
+        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolDeadTag = m_World.GetPool<DeadTag>();
 
         m_BattleDataFilter = m_World.Filter<BattleData>().End();
 
@@ -104,6 +108,7 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
                     var abilityAmmoData = m_AbilityAmmoDatabase.GetById(abilityAmmo.id);
                     var abilityItem = m_AbilityWidget.CreateAbility();
 
+                    abilityItem.SetAvailable(true);
                     abilityItem.SetAbilityIcon(abilityData.icon);
                     abilityItem.SetId(abilityData.id);
                     abilityItem.SetReload(0);
@@ -129,6 +134,7 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
                             {
                                 var ammoItem = abilityItem.CreateAmmoItem();
                                 ammoItem.SetReload(abilityAmmoAmount.current > i ? 1 : 0);
+                                ammoItem.SetAvailable(true);
                                 abilityAmmoUI.abilityAmmoItem.Add(ammoItem);
                             }
                         }
@@ -144,7 +150,7 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
                     ref var abilityUI = ref m_PoolAbilityUI.Get(abilityEntity);
                     ref var abilityReload = ref m_PoolAbilityReload.Get(abilityEntity);
                     abilityUI.abilityItem.SetReload(abilityReload.progress);
-
+                    bool isAnyAlive = false;
                     foreach (var item in abilityGroup.entities)
                     {
                         if (item.Unpack(m_World, out int childAbility))
@@ -152,11 +158,31 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
                             ref var abilityAmmoUI = ref m_PoolAbilityAmmoUI.Get(childAbility);
                             ref var abilityAmmoAmount = ref m_PoolAbilityAmmoAmount.Get(childAbility);
                             ref var abilityAmmoReload = ref m_PoolAbilityReload.Get(childAbility);
+                            ref var rootAbility = ref m_PoolRoot.Get(childAbility);
+
+                            bool isDead = false;
+                            if(rootAbility.entity.Unpack(m_World, out int rootAbilityEntity))
+                            {
+                                if (m_PoolDeadTag.Has(rootAbilityEntity))
+                                {
+                                    isDead = true;
+                                }
+                                else
+                                {
+                                    isAnyAlive = true;
+                                }
+                            }
 
                             for (int i = 0; i < abilityAmmoAmount.max; i++)
                             {
                                 var ammoItem = abilityAmmoUI.abilityAmmoItem[i];
 
+                                if (isDead)
+                                {
+                                    ammoItem.SetAvailable(false);
+                                    ammoItem.SetReload(0);
+                                    continue;
+                                }
                                 //ammoItem.SetReload(abilityAmmoReload.progress);
                                 //ammoItem.SetReload(abilityAmmoReload.progress);
                                 ammoItem.SetReload(abilityAmmoAmount.current > i ? 1 : abilityAmmoAmount.current == i ? abilityAmmoReload.progress : 0);
@@ -164,6 +190,8 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
                             }
                         }
                     }
+
+                    abilityUI.abilityItem.SetAvailable(isAnyAlive);
 
                     abilityUI.abilityItem.UpdateAmmo();
                 }

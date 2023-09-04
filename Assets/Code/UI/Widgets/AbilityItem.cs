@@ -42,9 +42,16 @@ public class AbilityItem : MonoBehaviour, IDisposable, IPointerDownHandler, IPoi
 
     private int m_Id;
 
+    [SerializeField]
+    private GameObject m_Cross;
+    public void SetAvailable(bool isAvailable)
+    {
+        m_Cross.SetActive(!isAvailable);
+    }
+
     //private void OnClick()
     //{
-        
+
     //}
 
     public void SetId(int id)
@@ -78,6 +85,7 @@ public class AbilityItem : MonoBehaviour, IDisposable, IPointerDownHandler, IPoi
         //m_AmmoItems = m_AmmoItems.OrderBy(x => x.reload).ToList();
         foreach (var item in m_AmmoItems)
         {
+         //   Debug.Log(item.reload);
             item.transform.SetAsLastSibling();
         }
     }
