@@ -477,7 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 0
-  color: {r: 0, g: 0.36862746, b: 1, a: 0.5019608}
+  color: {r: 0.023718417, g: 0.20525545, b: 0.38679248, a: 0.5019608}
   alpha: 1
   width: 1
   tails: 30
@@ -557,7 +557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 182629135}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.15, z: 146.90001}
+  m_LocalPosition: {x: 0, y: 2.3, z: 146.90001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
