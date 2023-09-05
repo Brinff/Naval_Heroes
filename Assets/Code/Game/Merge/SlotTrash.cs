@@ -3,10 +3,8 @@ using Game.Utility;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.VersionControl;
+
 using UnityEngine;
-using UnityEngine.EventSystems;
-using static UnityEngine.Networking.UnityWebRequest;
 
 public class SlotTrash : MonoBehaviour, ISlotPopulate, ISlotRenderer
 {

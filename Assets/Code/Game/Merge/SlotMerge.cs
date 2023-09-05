@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Game.Merge.Data;
 using Game.Utility;
+using DG.Tweening;
 
 public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragHandler, IEndDragHandler, ISlotRenderer
 {
@@ -21,7 +22,7 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
     private EntityData result;
 
     [SerializeField]
-    private GridRendererAuthoring m_GridRenderer;
+    private SpriteRenderer m_GridRenderer;
 
     public bool AddItem(SlotItem item, Vector3 position)
     {
@@ -97,8 +98,8 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
     {
         GridAuhoring grid = gameObject.GetComponent<GridAuhoring>();
 
-        var gridRenderer = GetComponent<GridRendererAuthoring>();
-        gridRenderer.BeginFill(grid.scale, grid.center);
+        //var gridRenderer = GetComponent<GridRendererAuthoring>();
+        //gridRenderer.BeginFill(grid.scale, grid.center);
 
 
         colliders = new BoxCollider[grid.rects.Length];
@@ -109,10 +110,10 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
             boxCollider.center = new Vector3(sigleRect.center.x, 0, sigleRect.center.y);
             boxCollider.size = new Vector3(sigleRect.size.x, 1, sigleRect.size.y);
             colliders[i] = boxCollider;
-            gridRenderer.AddRect(grid.rects[i].position, grid.rects[i].size);
+            //gridRenderer.AddRect(grid.rects[i].position, grid.rects[i].size);
         }
 
-        gridRenderer.EndFill();
+        //gridRenderer.EndFill();
 
 
 
@@ -137,13 +138,13 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
     public void Show(float duration)
     {
         item?.Show();
-        m_GridRenderer.DoAlpha(1, duration);
+        m_GridRenderer.DOFade(1, duration);
     }
 
     public void Hide(float duration)
     {
         item?.Hide();
-        m_GridRenderer.DoAlpha(0, duration);
+        m_GridRenderer.DOFade(0, duration);
     }
 
     public bool AddItemPossible(SlotItem slotItem, Vector3 position)

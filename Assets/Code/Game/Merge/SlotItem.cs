@@ -135,7 +135,7 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     //[SerializeField]
     //public float m_Force;
     private Vector3 m_CurrentPosition;
-    private Quaternion m_CurrentRotation;
+    private Quaternion m_CurrentRotation = Quaternion.identity;
     private Vector3 m_TargetPosition;
     private Vector3 m_Velocity;
     //[SerializeField]
@@ -160,10 +160,15 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         Vector3 localVelocity = transform.InverseTransformVector(m_Velocity);
         localVelocity = Vector3.Scale(localVelocity, gameSettings.merge.moveItem.rotationByLocalVelocty);
         Vector3 velocity = transform.TransformVector(localVelocity);
-        Vector3 right = Vector3.Cross(velocity, Vector3.up);
-        float angle = Mathf.Clamp(velocity.magnitude, 0, gameSettings.merge.moveItem.clampRotationByVelocity);
+
+        if (velocity != Vector3.zero)
+        {
+            Vector3 right = Vector3.Cross(velocity, Vector3.up);
+            float angle = Mathf.Clamp(velocity.magnitude, 0, gameSettings.merge.moveItem.clampRotationByVelocity);
+            m_CurrentRotation = Quaternion.AngleAxis(angle, right);
+        }
         m_CurrentPosition += m_Velocity * Time.deltaTime;
-        m_CurrentRotation = Quaternion.AngleAxis(angle, right);
+       
         if (entity)
         {
             entity.transform.rotation = m_CurrentRotation;
