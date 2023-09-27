@@ -33,12 +33,14 @@ public class ZoomToggleWidget : MonoBehaviour, IUIElement
 
     private void OnDisable()
     {
+        m_ToggleImage.SetAlpha(0);
+        m_IsToggle = false;
         m_Button.onClick.RemoveListener(OnClickButton);
     }
 
     private void OnClickButton()
     {
-        SetToggle(!m_IsToggle);
+        m_IsToggle = !m_IsToggle;
         OnToggle?.Invoke(m_IsToggle);
     }
 

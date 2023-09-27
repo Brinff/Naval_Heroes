@@ -45,6 +45,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
     private EcsFilter m_ShipColliderFilter;
     private EcsPool<ProjectileColliderComponent> m_PoolProjectileCollider;
     private EcsPool<Team> m_PoolTeam;
+    private EcsPool<DeadTag> m_PoolDeadTag;
     private EcsPool<RootComponent> m_PoolRoot;
 
     private Bounds m_Bounds;
@@ -78,6 +79,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
         m_PoolProjectileCollider = m_World.GetPool<ProjectileColliderComponent>();
         m_PoolTeam = m_World.GetPool<Team>();
         m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolDeadTag = m_World.GetPool<DeadTag>();
     }
 
     private void OnChangeZoomFactor(float value)
@@ -110,6 +112,9 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
     private void ZoomToggle(bool value)
     {
         m_IsZoom = value;
+
+        m_ZoomToggleWidget.SetToggle(value);
+
         if (m_IsZoom)
         {
             var viewZoom = m_World.Filter<ViewComponent>().Inc<ZoomTag>().End().GetSingleton();
@@ -165,6 +170,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
             ref var root = ref m_PoolRoot.Get(entity);
             if (root.entity.Unpack(m_World, out int rootEntity))
             {
+                if (m_PoolDeadTag.Has(rootEntity)) continue;
                 if (m_PoolTeam.Has(rootEntity))
                 {
                     ref var team = ref m_PoolTeam.Get(rootEntity);
