@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Data/Level")]
 public class LevelData : ScriptableObject, IData
 {
+    public bool startInZoom = false;
     public int reward = 1000;
     public int loseReward = 100;
     public List<GameObject> stages = new List<GameObject>();
