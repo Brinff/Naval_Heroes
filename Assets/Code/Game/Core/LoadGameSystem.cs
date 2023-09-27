@@ -11,10 +11,18 @@ public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
 
     private EcsWorld m_World;
 
+    private const string KEY = "2dbfd836d4632a62fcea73af7c31bccf9d964c44";
+
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
         var commandSystem = systems.GetSystem<CommandSystem>();
+
+
+        SmartlookUnity.SetupOptionsBuilder builder = new SmartlookUnity.SetupOptionsBuilder(KEY);
+        SmartlookUnity.Smartlook.SetupAndStartRecording(builder.Build());
+
+
         commandSystem.Execute<CreatePlayerCommand>();
         commandSystem.Execute<GoHomeCommand>();
     }
