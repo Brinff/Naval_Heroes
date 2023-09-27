@@ -86,7 +86,7 @@ public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
         {
             ref var transform = ref m_PoolTransform.Get(entity);
             ref var compassEnemyIndicator = ref m_CompassEnemyIndicator.Get(entity);
-            compassEnemyIndicator.indicator.Hide(false);
+            m_CompassWidget.Hide(compassEnemyIndicator.indicator);
             m_CompassEnemyIndicator.Del(entity);
         }
 
@@ -94,7 +94,7 @@ public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
         {
             ref var transform = ref m_PoolTransform.Get(entity);
             ref var compassEnemyIndicator = ref m_CompassEnemyIndicator.Get(entity);
-            compassEnemyIndicator.indicator.Hide(true);
+            m_CompassWidget.Hide(compassEnemyIndicator.indicator);
             m_CompassEnemyIndicator.Del(entity);
         }
     }

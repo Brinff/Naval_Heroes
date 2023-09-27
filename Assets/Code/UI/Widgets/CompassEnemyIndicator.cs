@@ -24,18 +24,18 @@ public class CompassEnemyIndicator : MonoBehaviour
         transform.DOScale(1, 1f).SetEase(Ease.OutBack);
     }
 
-    [Button]
-    public void Hide(bool immediately)
-    {
-        if (immediately)
-        {
-            Destroy(gameObject);
-        }
-        else m_Image.DOFade(0, 0.2f).OnComplete(Kill);
-    }
+    //[Button]
+    //public void Hide(bool immediately)
+    //{
+    //    //if (immediately)
+    //    //{
+    //        Destroy(gameObject);
+    //    //}
+    //    //else m_Image.DOFade(0, 0.2f).OnComplete(Kill);
+    //}
 
-    private void Kill()
-    {
-        Destroy(gameObject, 0.5f);
-    }
+    //private void Kill()
+    //{
+    //    Destroy(gameObject, 0.5f);
+    //}
 }

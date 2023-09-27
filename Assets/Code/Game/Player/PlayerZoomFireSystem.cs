@@ -172,9 +172,10 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
         Gizmos.DrawSphere(m_Point, 1);
     }
 
-    private bool m_IsZoomedInStart;
+    private bool m_IsStarted;
+    private bool m_IsEnded;
 
-
+    
     public void Run(IEcsSystems systems)
     {
         var sencitivityScale = m_SensitivityScale * Mathf.Lerp(m_RotationSensitivityAtZoom.y, m_RotationSensitivityAtZoom.x, m_ZoomFactor);
@@ -328,19 +329,40 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
         foreach (var battleDataEntity in m_BattleDataFilter)
         {
             ref var battleData = ref m_PoolBattleData.Get(battleDataEntity);
-            if (battleData.isStarted && !m_IsZoomedInStart)
+
+            if(m_IsStarted!= battleData.isStarted)
             {
-                if (battleData.levelData.startInZoom)
+                m_IsStarted = battleData.isStarted;
+
+                if (m_IsStarted && battleData.levelData.startInZoom)
                 {
                     ZoomToggle(true);
-                    m_IsZoomedInStart = true;
                 }
+            }
 
-                if (battleData.isEnded)
-                {
-                    m_IsZoom = false;
-                    m_IsZoomedInStart = false;
-                }
+
+            if (m_IsEnded != battleData.isEnded)
+            {
+                m_IsEnded = battleData.isEnded;
+                m_IsZoom = false;
+            }
+
+            if (battleData.isStarted)
+            {
+                //if (!m_IsZoomedInStart)
+                //{
+                //    if (battleData.levelData.startInZoom)
+                //    {
+                //        ZoomToggle(true);
+                //        m_IsZoomedInStart = true;
+                //    }
+                //}
+
+                //if (battleData.isEnded)
+                //{
+                //    m_IsZoom = false;
+                //    m_IsZoomedInStart = false;
+                //}
             }
         }
     }

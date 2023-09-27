@@ -32,12 +32,32 @@ public class CompassWidget : MonoBehaviour, IUIElement
     [SerializeField, Range(5, 360)]
     private float m_AngleView = 180;
 
+    private List<GameObject> m_Items = new List<GameObject>();
+
+
+    public void Clear()
+    {
+        foreach (var item in m_Items)
+        {
+            Destroy(item);
+        }
+
+        m_Items.Clear();
+    }
+
+    public void Hide(CompassEnemyIndicator compassEnemyIndicator)
+    {
+        m_Items.Remove(compassEnemyIndicator.gameObject);
+        Destroy(compassEnemyIndicator.gameObject);
+    }
+
     public CompassEnemyIndicator CreateEnemyIndicator(Vector3 position)
     {
         var indicator = Instantiate(m_EnemyIndicatorPrefab);
         indicator.transform.SetParent(m_EnemyView);
         indicator.rectTransform.anchoredPosition = m_EnemyIndicatorPrefab.rectTransform.anchoredPosition;
         indicator.gameObject.SetActive(true);
+        m_Items.Add(indicator.gameObject);
         UpdateIndicator(indicator.rectTransform, position);
         return indicator;
     }
