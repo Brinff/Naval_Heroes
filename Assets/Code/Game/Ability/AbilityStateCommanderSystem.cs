@@ -55,6 +55,15 @@ public class AbilityStateCommanderSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
                 }
 
             abilityState.isAvailable = abilityReload.progress >= 1 && hasAnyAmmo;
+            //if (abilityGroup.entities != null)
+            //    for (int i = 0; i < abilityGroup.entities.Count; i++)
+            //    {
+            //        if (abilityGroup.entities[i].Unpack(m_World, out int childAbility))
+            //        {
+            //            ref var childAbilityState = ref m_PoolAbilityPerfrom.Get(childAbility);
+            //            childAbilityState.isZoom = abilityState.isZoom;
+            //        }
+            //    }
 
             if (abilityState.isPerfrom)
             {

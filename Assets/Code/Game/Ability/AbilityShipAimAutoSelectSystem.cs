@@ -35,11 +35,12 @@ public class AbilityShipAimAutoSelectSystem : MonoBehaviour, IEcsInitSystem, IEc
         foreach (var entity in m_ShipAbilityFilter)
         {
             ref var abilityState = ref m_PoolAbilityState.Get(entity);
-            if (abilityState.isPerfrom && abilityState.isAvailable)
+            ref var abilityGroup = ref m_PoolAbilityGroup.Get(entity);
+            ref var abilityAim = ref m_PoolAbilityAim.Get(entity);
+            ref var root = ref m_PoolRoot.Get(entity);
+
+            if (abilityState.isPerfrom && abilityState.isAvailable && !abilityState.isZoom)
             {
-                ref var abilityGroup = ref m_PoolAbilityGroup.Get(entity);
-                ref var abilityAim = ref m_PoolAbilityAim.Get(entity);
-                ref var root = ref m_PoolRoot.Get(entity);
                 int? selectEnemyEntity = null;
                 if (root.entity.Unpack(m_World, out int rootEntity))
                 {
@@ -75,24 +76,21 @@ public class AbilityShipAimAutoSelectSystem : MonoBehaviour, IEcsInitSystem, IEc
                     abilityAim.target = m_World.PackEntity(selectEnemyEntity.Value);
                     ref var enemyTransfrom = ref m_PoolTransform.Get(selectEnemyEntity.Value);
                     abilityAim.point = enemyTransfrom.transform.position;
-
-                    if (abilityGroup.entities != null)
-                        foreach (var weaponPackEntity in abilityGroup.entities)
-                        {
-                            if (weaponPackEntity.Unpack(m_World, out int weaponEntity))
-                            {
-                                ref var weaponAim = ref m_PoolAbilityAim.Get(weaponEntity);
-                                weaponAim.target = abilityAim.target;
-                                weaponAim.point = abilityAim.point;
-                            }
-                        }
                 }
-
-
-
-
                 //abilityAim.point = 
             }
+
+
+            if (abilityGroup.entities != null)
+                foreach (var weaponPackEntity in abilityGroup.entities)
+                {
+                    if (weaponPackEntity.Unpack(m_World, out int weaponEntity))
+                    {
+                        ref var weaponAim = ref m_PoolAbilityAim.Get(weaponEntity);
+                        weaponAim.target = abilityAim.target;
+                        weaponAim.point = abilityAim.point;
+                    }
+                }
         }
     }
 }

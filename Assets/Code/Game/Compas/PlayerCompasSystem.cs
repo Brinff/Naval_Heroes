@@ -9,7 +9,7 @@ public struct CompassEnemyIndicatorComponent
     public CompassEnemyIndicator indicator;
 }
 
-public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroupUpdateSystem
+public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem
 {
     private EcsWorld m_World;
     private EcsFilter m_PlayerShipFilter;
@@ -32,10 +32,10 @@ public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
         m_PoolEye = m_World.GetPool<EyeComponent>();
         m_CompassEnemyIndicator = m_World.GetPool<CompassEnemyIndicatorComponent>();
 
-        m_NewEnemyFilter = m_World.Filter<AITag>().Inc<ShipTag>().Inc<NewEntityTag>().Inc<TransformComponent>().Exc<CompassEnemyIndicatorComponent>().End();
-        m_EnemyFilter = m_World.Filter<AITag>().Inc<ShipTag>().Inc<TransformComponent>().Inc<CompassEnemyIndicatorComponent>().End();
-        m_DeadEnemyFilter = m_World.Filter<AITag>().Inc<ShipTag>().Inc<CompassEnemyIndicatorComponent>().Inc<DeadTag>().End();
-        m_DestroyEnemyFilter = m_World.Filter<AITag>().Inc<ShipTag>().Inc<CompassEnemyIndicatorComponent>().Inc<DestroyComponent>().End();
+        m_NewEnemyFilter = m_World.Filter<Team>().Inc<ShipTag>().Inc<NewEntityTag>().Inc<TransformComponent>().Exc<CompassEnemyIndicatorComponent>().End();
+        m_EnemyFilter = m_World.Filter<Team>().Inc<ShipTag>().Inc<TransformComponent>().Inc<CompassEnemyIndicatorComponent>().End();
+        m_DeadEnemyFilter = m_World.Filter<Team>().Inc<ShipTag>().Inc<CompassEnemyIndicatorComponent>().Inc<DeadTag>().End();
+        m_DestroyEnemyFilter = m_World.Filter<Team>().Inc<ShipTag>().Inc<CompassEnemyIndicatorComponent>().Inc<DestroyComponent>().End();
     }
 
     public void Run(IEcsSystems systems)

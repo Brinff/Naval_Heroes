@@ -46,9 +46,13 @@ public class AbilityAutoUseSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem
                 if (shipTeam.id != abilityTeam.id) countEnemy++;
             }
 
-            if(abilityAutoUse.isActive && abilitState.isAvailable)
+            if(abilityAutoUse.isActive && abilitState.isAvailable && !abilitState.isZoom)
             {
                 abilitState.isPerfrom = countEnemy > 0;
+            }
+            else
+            {
+
             }
         }        
     }

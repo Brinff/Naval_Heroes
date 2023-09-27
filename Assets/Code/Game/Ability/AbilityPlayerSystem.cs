@@ -203,12 +203,13 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
         foreach (var abilityEntity in m_AbilityFilter)
         {
             ref var ability = ref m_PoolAbility.Get(abilityEntity);
-            ref var abilityState = ref m_PoolAbilityState.Get(abilityEntity);
+            var abilityState = m_PoolAbilityState.Get(abilityEntity);
 
             if (id == ability.id && abilityState.isAvailable)
             {
                 var beginEcb = m_BeginEntityCommandSystem.CreateBuffer();
-                beginEcb.SetComponent(abilityEntity, new AbilityState() { isPerfrom = true });
+                abilityState.isPerfrom = true;
+                beginEcb.SetComponent(abilityEntity, abilityState);
                 Debug.Log($"Perform: {abilityData.name}");
             }
         }

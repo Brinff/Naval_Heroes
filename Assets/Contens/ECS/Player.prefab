@@ -31,8 +31,9 @@ Transform:
   m_Children:
   - {fileID: 3691646767225164045}
   - {fileID: 1792477153326336449}
+  - {fileID: 9178041857493461565}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1729771634931528832
 MonoBehaviour:
@@ -46,6 +47,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07e89c5746f2ae4896516c78bcb3795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2505412433241479864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9178041857493461565}
+  - component: {fileID: 2541468290722800763}
+  - component: {fileID: 8936896450498754503}
+  m_Layer: 0
+  m_Name: Zoom View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9178041857493461565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505412433241479864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 31.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6523546904363525531}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2541468290722800763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505412433241479864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46870edb9d3eb3643ba95ddc1ebfa61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8936896450498754503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505412433241479864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b89685d0d87e94186dc1e924d2a86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FieldOfView: 60
 --- !u!1 &2877073033754557250
 GameObject:
   m_ObjectHideFlags: 0
