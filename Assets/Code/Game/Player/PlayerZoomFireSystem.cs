@@ -48,6 +48,8 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
     private EcsFilter m_AbilityFilter;
     private EcsFilter m_AbilityGroupFilter;
     private EcsFilter m_ZoomFilter;
+
+
     private EcsPool<ViewComponent> m_PoolView;
     private EcsPool<AbilityState> m_PoolAbilityState;
     private EcsPool<AbilityAim> m_PoolAbilityAim;
@@ -60,7 +62,8 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
     private EcsPool<DeadTag> m_PoolDeadTag;
     private EcsPool<RootComponent> m_PoolRoot;
     private EcsPool<AbilityTargetArea> m_PoolAbilityTargetArea;
-
+    private EcsFilter m_BattleDataFilter;
+    private EcsPool<BattleData> m_PoolBattleData;
     private Bounds m_Bounds;
     private Vector3 m_Point;
 
@@ -78,6 +81,9 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
 
 
         m_World = systems.GetWorld();
+        m_PoolBattleData = m_World.GetPool<BattleData>();
+
+        m_BattleDataFilter = m_World.Filter<BattleData>().End();
 
         m_ZoomFilter = m_World.Filter<ViewComponent>().Inc<ZoomTag>().End();
         m_AbilityFilter = m_World.Filter<AbilityState>().Inc<AbilityAim>().Inc<AbilityGroup>().Inc<PlayerTag>().End();
@@ -125,7 +131,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
         m_CameraInputWidget = null;
     }
 
-    private void ZoomToggle(bool value)
+    public void ZoomToggle(bool value)
     {
         m_IsZoom = value;
 
@@ -166,12 +172,11 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
         Gizmos.DrawSphere(m_Point, 1);
     }
 
-
+    private bool m_IsZoomedInStart;
 
 
     public void Run(IEcsSystems systems)
     {
-
         var sencitivityScale = m_SensitivityScale * Mathf.Lerp(m_RotationSensitivityAtZoom.y, m_RotationSensitivityAtZoom.x, m_ZoomFactor);
         var fieldOfView = Mathf.Lerp(m_FieldOfViewAtZoom.y, m_FieldOfViewAtZoom.x, m_ZoomFactor);
 
@@ -320,6 +325,24 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
             }
         }
 
+        foreach (var battleDataEntity in m_BattleDataFilter)
+        {
+            ref var battleData = ref m_PoolBattleData.Get(battleDataEntity);
+            if (battleData.isStarted && !m_IsZoomedInStart)
+            {
+                if (battleData.levelData.startInZoom)
+                {
+                    ZoomToggle(true);
+                    m_IsZoomedInStart = true;
+                }
+
+                if (battleData.isEnded)
+                {
+                    m_IsZoom = false;
+                    m_IsZoomedInStart = false;
+                }
+            }
+        }
     }
 
 
