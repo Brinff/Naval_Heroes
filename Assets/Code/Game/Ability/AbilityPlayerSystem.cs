@@ -95,6 +95,7 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
         {
             ref var ability = ref m_PoolAbility.Get(abilityEntity);
             ref var abilityGroup = ref m_PoolAbilityGroup.Get(abilityEntity);
+            ref var abilityState = ref m_PoolAbilityState.Get(abilityEntity);
 
             if (abilityGroup.entities != null && abilityGroup.entities.Count > 0)
             {
@@ -189,6 +190,8 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
                         }
                     }
 
+                    abilityState.isAnyAlive = isAnyAlive;
+
                     abilityUI.abilityItem.SetAvailable(isAnyAlive);
 
                     abilityUI.abilityItem.UpdateAmmo();
@@ -205,11 +208,12 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
             ref var ability = ref m_PoolAbility.Get(abilityEntity);
             var abilityState = m_PoolAbilityState.Get(abilityEntity);
 
-            if (id == ability.id && abilityState.isAvailable)
+            if (id == ability.id && abilityState.isAvailable && abilityState.isAnyAlive)
             {
                 var beginEcb = m_BeginEntityCommandSystem.CreateBuffer();
                 abilityState.isPerfrom = true;
                 beginEcb.SetComponent(abilityEntity, abilityState);
+
                 Debug.Log($"Perform: {abilityData.name}");
             }
         }

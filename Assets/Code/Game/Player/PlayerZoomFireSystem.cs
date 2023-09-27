@@ -6,6 +6,14 @@ using Game.UI;
 using Sirenix.OdinInspector;
 using System;
 using System.Linq;
+using Sirenix.OdinInspector.Editor.Drawers;
+
+public struct AbilityTargetArea
+{
+    public Vector3 point;
+    public GameObject element;
+    public float time;
+}
 
 public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySystem, IEcsRunSystem, IEcsGroup<Update>
 {
@@ -13,6 +21,8 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
     private ZoomToggleWidget m_ZoomToggleWidget;
     private CameraInputWidget m_CameraInputWidget;
     private ZoomFactorWidget m_ZoomFactorWidget;
+
+
     private bool m_IsZoom;
     private Vector2 m_Delta;
     private float m_ZoomFactor;
@@ -42,12 +52,14 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
     private EcsPool<AbilityState> m_PoolAbilityState;
     private EcsPool<AbilityAim> m_PoolAbilityAim;
     private EcsPool<AbilityGroup> m_PoolAbilityGroup;
+    private EcsPool<Ability> m_PoolAbility;
 
     private EcsFilter m_ShipColliderFilter;
     private EcsPool<ProjectileColliderComponent> m_PoolProjectileCollider;
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<DeadTag> m_PoolDeadTag;
     private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<AbilityTargetArea> m_PoolAbilityTargetArea;
 
     private Bounds m_Bounds;
     private Vector3 m_Point;
@@ -63,6 +75,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
 
         m_ZoomFactorWidget = UISystem.Instance.GetElement<ZoomFactorWidget>();
         m_ZoomFactorWidget.OnChangeZoomFactor += OnChangeZoomFactor;
+
 
         m_World = systems.GetWorld();
 
@@ -81,6 +94,8 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
         m_PoolTeam = m_World.GetPool<Team>();
         m_PoolRoot = m_World.GetPool<RootComponent>();
         m_PoolDeadTag = m_World.GetPool<DeadTag>();
+        m_PoolAbility = m_World.GetPool<Ability>();
+        m_PoolAbilityTargetArea = m_World.GetPool<AbilityTargetArea>();
     }
 
     private void OnChangeZoomFactor(float value)
@@ -150,6 +165,10 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
         Gizmos.DrawWireCube(m_Bounds.center, m_Bounds.size);
         Gizmos.DrawSphere(m_Point, 1);
     }
+
+
+
+
     public void Run(IEcsSystems systems)
     {
 
@@ -256,8 +275,19 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
             {
                 ref var abilityState = ref m_PoolAbilityState.Get(entity);
                 abilityState.isZoom = m_IsZoom;
+
                 if (point.HasValue)
                 {
+                    ref var ability = ref m_PoolAbility.Get(entity);
+                    if (abilityState.isPerfrom)
+                    {
+                        var newEntity = m_World.NewEntity();
+                        ref var newAbility = ref m_PoolAbility.Add(newEntity);
+                        newAbility.id = ability.id;
+                        ref var newAbilityTragetArea = ref m_PoolAbilityTargetArea.Add(newEntity);
+                        newAbilityTragetArea.point = point.Value;
+                    }
+
                     ref var abilityAim = ref m_PoolAbilityAim.Get(entity);
                     abilityAim.point = point.Value;
 
@@ -273,6 +303,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
             ref var abilityState = ref m_PoolAbilityState.Get(entity);
             ref var abilityAim = ref m_PoolAbilityAim.Get(entity);
             ref var abilityGroup = ref m_PoolAbilityGroup.Get(entity);
+
 
             if (abilityGroup.entities != null)
             {

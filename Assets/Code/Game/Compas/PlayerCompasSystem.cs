@@ -9,10 +9,10 @@ public struct CompassEnemyIndicatorComponent
     public CompassEnemyIndicator indicator;
 }
 
-public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem
+public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup<Update>
 {
     private EcsWorld m_World;
-    private EcsFilter m_PlayerShipFilter;
+    //private EcsFilter m_PlayerShipFilter;
     private EcsFilter m_PlayerEyeFilter;
     private EcsFilter m_NewEnemyFilter;
     private EcsFilter m_EnemyFilter;
@@ -22,15 +22,17 @@ public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem
     private EcsPool<TransformComponent> m_PoolTransform;
     private EcsPool<EyeComponent> m_PoolEye;
     private EcsPool<CompassEnemyIndicatorComponent> m_CompassEnemyIndicator;
+    private EcsPool<Team> m_PoolTeam;
     public void Init(IEcsSystems systems)
     {
         m_CompassWidget = UISystem.Instance.GetElement<CompassWidget>();
         m_World = systems.GetWorld();
-        m_PlayerShipFilter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Inc<TransformComponent>().End();
+        //m_PlayerShipFilter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Inc<TransformComponent>().End();
         m_PlayerEyeFilter = m_World.Filter<PlayerTag>().Inc<EyeComponent>().End();
         m_PoolTransform = m_World.GetPool<TransformComponent>();
         m_PoolEye = m_World.GetPool<EyeComponent>();
         m_CompassEnemyIndicator = m_World.GetPool<CompassEnemyIndicatorComponent>();
+        m_PoolTeam = m_World.GetPool<Team>();
 
         m_NewEnemyFilter = m_World.Filter<Team>().Inc<ShipTag>().Inc<NewEntityTag>().Inc<TransformComponent>().Exc<CompassEnemyIndicatorComponent>().End();
         m_EnemyFilter = m_World.Filter<Team>().Inc<ShipTag>().Inc<TransformComponent>().Inc<CompassEnemyIndicatorComponent>().End();
@@ -40,14 +42,14 @@ public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem
 
     public void Run(IEcsSystems systems)
     {
-        var playerShipEntity = m_PlayerShipFilter.GetSingleton();
+        //var playerShipEntity = m_PlayerShipFilter.GetSingleton();
 
-        if (playerShipEntity != null)
-        {
-            ref var transform = ref m_PoolTransform.Get(playerShipEntity.Value);
-            m_CompassWidget.SetForward(transform.transform.rotation);
-            m_CompassWidget.SetPosition(transform.transform.position);
-        }
+        //if (playerShipEntity != null)
+        //{
+        //    ref var transform = ref m_PoolTransform.Get(playerShipEntity.Value);
+        //    m_CompassWidget.SetForward(transform.transform.rotation);
+        //    m_CompassWidget.SetPosition(transform.transform.position);
+        //}
 
         var playerEyeEntity = m_PlayerEyeFilter.GetSingleton();
 
@@ -55,15 +57,21 @@ public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem
         {
             ref var eye = ref m_PoolEye.Get(playerEyeEntity.Value);
             m_CompassWidget.SetRotation(eye.transform.rotation);
+            m_CompassWidget.SetForward(Quaternion.identity);
+            m_CompassWidget.SetPosition(eye.transform.position);
         }
 
         foreach (var entity in m_NewEnemyFilter)
         {
             ref var transform = ref m_PoolTransform.Get(entity);
-            ref var compassEnemyIndicator = ref m_CompassEnemyIndicator.Add(entity);
+            ref var team = ref m_PoolTeam.Get(entity);
+            if (team.id != 0)
+            {
+                ref var compassEnemyIndicator = ref m_CompassEnemyIndicator.Add(entity);
 
-            compassEnemyIndicator.indicator = m_CompassWidget.CreateEnemyIndicator(transform.transform.position);
-            compassEnemyIndicator.indicator.Show();
+                compassEnemyIndicator.indicator = m_CompassWidget.CreateEnemyIndicator(transform.transform.position);
+                compassEnemyIndicator.indicator.Show();
+            }
         }
 
         foreach (var entity in m_EnemyFilter)

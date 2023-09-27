@@ -540,6 +540,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 180054129}
+  - component: {fileID: 180054130}
   m_Layer: 5
   m_Name: Torpedo
   m_TagString: Untagged
@@ -569,6 +570,18 @@ RectTransform:
   m_AnchoredPosition: {x: 136, y: -106.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &180054130
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180054128}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &182629135
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf8b4283581f4d43919792b30af0c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 987582104}
   m_SensitivityHorizontal: 0.35
   m_SensitivityVertical: 0.25
   m_SensitivityScale: 5
@@ -1070,6 +1083,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 640151574}
+  - component: {fileID: 640151575}
   m_Layer: 5
   m_Name: Planes
   m_TagString: Untagged
@@ -1099,6 +1113,18 @@ RectTransform:
   m_AnchoredPosition: {x: 38.4, y: -106.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &640151575
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640151573}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!224 &642230079 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 248915692022320348, guid: 4b9f9198407eaca4f989def34e14e421, type: 3}
@@ -1485,6 +1511,8 @@ MonoBehaviour:
     element: {fileID: 420858287955765234}
   - acitve: 1
     element: {fileID: 1628328097}
+  - acitve: 1
+    element: {fileID: 315679418}
 --- !u!114 &792821839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1532,12 +1560,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
-  - {fileID: 792821844}
-  - {fileID: 792821838}
-  - {fileID: 792821842}
-  - {fileID: 792821843}
-  - {fileID: 792821839}
   - {fileID: 792821841}
+  - {fileID: 792821842}
+  - {fileID: 792821838}
+  - {fileID: 792821843}
+  - {fileID: 792821844}
+  - {fileID: 792821839}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,7 +2183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1091248193
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6715,6 +6743,7 @@ GameObject:
   - component: {fileID: 129955705365612504}
   - component: {fileID: 7635766301652503619}
   - component: {fileID: 260689995}
+  - component: {fileID: 9008398067643487198}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -8428,6 +8457,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9627601464370ef48b21f24d7c8d2f53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9008398067643487198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6658513040784902215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1aea37219d5ba142a79772b41bc639d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 987582104}
+  m_TorpedoAbility: {fileID: 11400000, guid: a04864951b23bf04789de7d3b4ed4af1, type: 2}
+  m_PlanesAbility: {fileID: 11400000, guid: 5a101c5210a10be458581f24b486d5cf, type: 2}
 --- !u!4 &9068647027346772434
 Transform:
   m_ObjectHideFlags: 0
