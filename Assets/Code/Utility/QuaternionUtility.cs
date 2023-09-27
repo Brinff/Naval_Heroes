@@ -10,6 +10,24 @@ public static class QuaternionUtility
         return Quaternion.LookRotation(project);
     }
 
+    public static Quaternion ClampAngleYX(Quaternion rotation, float minY, float maxY, float minX, float maxX)
+    {
+        Quaternion rotationY = ProjectOnPlane(rotation, Quaternion.identity, Vector3.up);
+
+        float angleY = Vector3.SignedAngle(Vector3.forward, rotationY * Vector3.forward, Vector3.up);
+        angleY = Mathf.Clamp(angleY, -maxY, -minY);
+        rotationY = Quaternion.AngleAxis(angleY, Vector3.up);
+
+
+        Quaternion rotationX = ProjectOnPlane(rotation, rotationY, Vector3.right);
+        Vector3 forwardY = rotationX * Vector3.forward;
+        Vector3 forwardXZ = Vector3.ProjectOnPlane(forwardY, Vector3.up);
+        Vector3 right = rotationX * Vector3.right;
+        float angle = Vector3.SignedAngle(forwardXZ, forwardY, right);
+        angle = Mathf.Clamp(angle, -maxX, -minX);
+        Quaternion clampRotationX = Quaternion.AngleAxis(angle, right);
+        return rotationY * clampRotationX;
+    }
 
     public static Quaternion ClampAngleX(Quaternion rotation, float min, float max)
     {

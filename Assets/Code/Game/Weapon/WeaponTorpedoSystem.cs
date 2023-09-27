@@ -94,9 +94,9 @@ public class WeaponTorpedoSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
 
 
 
-                TorpedoProjectile cannonProjectile = new TorpedoProjectile() { damage = statDamage.value, owner = root.entity, target = abilityAim.point, timeFactor = 2, speed = 100, speedLookAt = 1f, team = teamId };
+                TorpedoProjectile cannonProjectile = new TorpedoProjectile() { damage = statDamage.value, owner = root.entity, target = new Vector3(abilityAim.point.x, -1.5f, abilityAim.point.z), timeFactor = 2, speed = 100, speedLookAt = 1f, team = teamId };
 
-                cannonProjectile.Launch(m_World, weaponTorpedo.orgin.position, weaponTorpedo.orgin.forward);
+                cannonProjectile.Launch(m_World, new Vector3(weaponTorpedo.orgin.position.x, -1.5f, weaponTorpedo.orgin.position.z), weaponTorpedo.orgin.forward);
                 //for (int i = 0; i < weaponTorpedo.barels.Length; i++)
                 //{
                 //    var barrel = weaponTorpedo.barels[i];

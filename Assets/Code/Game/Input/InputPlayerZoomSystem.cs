@@ -5,9 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Leopotam.EcsLite;
-using static UnityEngine.Rendering.DebugUI;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.UIElements;
 
 //public struct OrbitViewComponent
 //{

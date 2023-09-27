@@ -16,7 +16,8 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
     private bool m_IsZoom;
     private Vector2 m_Delta;
     private float m_ZoomFactor;
-
+    [SerializeField]
+    private Camera m_Camera;
 
     [SerializeField, Range(0f, 10f)]
     private float m_SensitivityHorizontal = 1;
@@ -198,7 +199,15 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
             rotation = rotationDeltaY * rotation;
             rotation = rotation * rotationDeltaX;
 
-            view.rotation = QuaternionUtility.ClampAngleX(rotation, m_TiltAngleMin, m_TiltAngleMax);
+            //Quaternion rotationY = QuaternionUtility.ClampAxisAngle(QuaternionUtility.ProjectOnPlane(rotation, Quaternion.identity, Vector3.up), Quaternion.identity, -45, 45, Vector3.up);
+            //Quaternion rotationX = QuaternionUtility.ClampAxisAngle(QuaternionUtility.ProjectOnPlane(rotation, rotationY, Vector3.right), rotationY, m_TiltAngleMin, m_TiltAngleMax, Vector3.right);
+
+            //rotation = QuaternionUtility.ClampAngleY(rotation, -45, 45);
+
+            rotation = QuaternionUtility.ClampAngleYX(rotation, -45, 45, m_TiltAngleMin, m_TiltAngleMax); //QuaternionUtility.ClampAngleX(rotation, m_TiltAngleMin, m_TiltAngleMax);
+
+            view.rotation = rotation;
+            //view.rotation *= rotationX;
 
             view.fieldOfView = fieldOfView;
 
