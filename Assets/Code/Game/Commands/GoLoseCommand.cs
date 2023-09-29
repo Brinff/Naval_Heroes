@@ -17,6 +17,7 @@ public class GoLoseCommand : MonoBehaviour, ICommand<BattleData>
         m_LoseWidget.SetReward(m_Reward = battleData.loseReward);
         m_LoseWidget.OnRetry += OnRetry;
 
+        SmartlookUnity.Smartlook.TrackNavigationEvent("Battle", SmartlookUnity.Smartlook.NavigationEventType.exit);
         TinySauce.OnGameFinished(false, 0, battleData.level);
         Debug.Log("Lose!");
     }

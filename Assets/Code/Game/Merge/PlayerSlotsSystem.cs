@@ -30,7 +30,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     private EcsPool<ClearBattleTag> m_PoolClearBattleTag;
     private PlayerMoneySystem m_PlayerMoneySystem;
     private CommandSystem m_CommandSystem;
-
+    private EcsPool<NewEntityTag> m_PoolNewTag;
     public SlotCollection slotCollection => m_SlotCollection;
 
     public void Init(IEcsSystems systems)
@@ -38,6 +38,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         m_World = systems.GetWorld();
         m_PoolTeam = m_World.GetPool<Team>();
         m_PoolPlayerTag = m_World.GetPool<PlayerTag>();
+        m_PoolNewTag = m_World.GetPool<NewEntityTag>();
         m_EntityDatabase = systems.GetData<EntityDatabase>();
         m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>());
         m_PlayerAmountBuyShip = new PlayerPrefsData<int>(nameof(m_PlayerAmountBuyShip), 0);
@@ -168,8 +169,9 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         return false;
     }
 
-    public void Bake()
+    public void Bake(IEcsSystems systems)
     {
+        var ecb = systems.GetSystem<BeginEntityCommandSystem>().CreateBuffer();
         var slots = m_SlotCollection.GetSlots<SlotBattleGrid>();
         foreach (var slot in slots)
         {
@@ -180,7 +182,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
                     var entity = m_World.Bake(item.entity, out List<int> entities);
                     m_PoolTeam.Add(entity);
                     m_PoolPlayerTag.Add(entity);
-
+                    ecb.AddComponent<NewEntityTag>(entity);
                     foreach (var childEntity in entities)
                     {
                         m_PoolClearBattleTag.Add(childEntity);

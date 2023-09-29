@@ -23,7 +23,7 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         var playerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
         playerSlotsSystem.Hide();
 
-        playerSlotsSystem.Bake();
+        playerSlotsSystem.Bake(systems);
 
         UISystem.Instance.compositionModule.Show<UIBattleComposition>();
 
@@ -52,7 +52,7 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         battleData.loseReward = levelData.loseReward;
         world.GetPool<ClearBattleTag>().Add(battleDataEntity);
 
-
+        SmartlookUnity.Smartlook.TrackNavigationEvent("Battle", SmartlookUnity.Smartlook.NavigationEventType.enter);
         TinySauce.OnGameStarted(battleData.level);
 
         commandSystem.Execute<GoStageCommand, BattleData>(battleData);

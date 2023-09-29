@@ -15,6 +15,8 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         PlayerMissionSystem playerMissionSystem = systems.GetSystem<PlayerMissionSystem>();
 
 
+        SmartlookUnity.Smartlook.TrackNavigationEvent("Merge", SmartlookUnity.Smartlook.NavigationEventType.enter);
+
         m_PlayerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
         m_PlayerSlotsSystem.slotCollection.OnChange += OnChangeSlotCollection;
 
@@ -66,6 +68,7 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         }
         m_StartGameWidget.OnClick -= OnClickBattle;
         m_PlayerSlotsSystem.slotCollection.OnChange -= OnChangeSlotCollection;
+        SmartlookUnity.Smartlook.TrackNavigationEvent("Merge", SmartlookUnity.Smartlook.NavigationEventType.exit);
         m_CommandSystem.Execute<GoBattleCommand>();
     }
 }

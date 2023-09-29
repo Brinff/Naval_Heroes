@@ -119,7 +119,7 @@ public class ProjectileRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
 
             Vector3 delta = transform.position - raycast.previusPosition;
             float magintude = delta.magnitude;
-            Vector3 direction = Vector3.Normalize(delta);
+            Vector3 direction = delta != Vector3.zero ? Vector3.Normalize(delta) : Vector3.up;
 
 
             ray.direction = direction;

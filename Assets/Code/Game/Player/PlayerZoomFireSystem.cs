@@ -4,9 +4,7 @@ using UnityEngine;
 using Leopotam.EcsLite;
 using Game.UI;
 using Sirenix.OdinInspector;
-using System;
 using System.Linq;
-using Sirenix.OdinInspector.Editor.Drawers;
 
 public struct AbilityTargetArea
 {
@@ -150,7 +148,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
 
             UISystem.Instance.compositionModule.Show<UIGameShipZoomComposition>();
 
-
+            SmartlookUnity.Smartlook.TrackNavigationEvent("Zoom", SmartlookUnity.Smartlook.NavigationEventType.enter);
 
         }
         else
@@ -160,6 +158,8 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
             eye.view = m_World.PackEntity(viewBattle.Value);
 
             UISystem.Instance.compositionModule.Show<UIBattleComposition>();
+
+            SmartlookUnity.Smartlook.TrackNavigationEvent("Zoom", SmartlookUnity.Smartlook.NavigationEventType.exit);
         }
     }
     public Vector2 GetAxis(float sensitivityHorizontal, float sensitivityVertical, float sensitivityScale)

@@ -20,6 +20,8 @@ public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
 
 
         SmartlookUnity.SetupOptionsBuilder builder = new SmartlookUnity.SetupOptionsBuilder(KEY);
+        builder.SetFps(5);
+        builder.SetStartNewSession(true);
         SmartlookUnity.Smartlook.SetupAndStartRecording(builder.Build());
 
 
