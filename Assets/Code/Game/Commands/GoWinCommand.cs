@@ -17,6 +17,7 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_PlayerLevelPovider = systems.GetSystem<PlayerMissionSystem>();
 
+        SmartlookUnity.Smartlook.TrackNavigationEvent("Battle", SmartlookUnity.Smartlook.NavigationEventType.exit);
         TinySauce.OnGameFinished(true, 0, battleData.level);
 
         m_PlayerLevelPovider.CompleteLevel();
