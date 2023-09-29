@@ -9700,7 +9700,7 @@ GameObject:
   - component: {fileID: 2876186357178903577}
   - component: {fileID: 2129191278086343131}
   m_Layer: 0
-  m_Name: FX Ship Water Idle Backup
+  m_Name: FX Ship Water Idle Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
