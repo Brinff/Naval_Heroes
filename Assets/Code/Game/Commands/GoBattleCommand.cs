@@ -50,6 +50,7 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         battleData.level = playerLevelProvider.level;
         battleData.winReward = levelData.reward;
         battleData.loseReward = levelData.loseReward;
+        battleData.isShooter = playerLevelProvider.level == 1 && GameSettings.Instance.firstLevelisShooter;
         world.GetPool<ClearBattleTag>().Add(battleDataEntity);
 
         SmartlookUnity.Smartlook.TrackNavigationEvent("Battle", SmartlookUnity.Smartlook.NavigationEventType.enter);

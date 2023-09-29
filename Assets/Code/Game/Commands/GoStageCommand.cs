@@ -18,6 +18,7 @@ public struct BattleData
     public int winReward;
     public int loseReward;
     public List<GameObject> enemies;
+    public bool isShooter;
 }
 
 public class GoStageCommand : MonoBehaviour, ICommand<BattleData>, ICommand

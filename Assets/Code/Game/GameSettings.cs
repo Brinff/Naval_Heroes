@@ -8,4 +8,8 @@ public class GameSettings : Singleton<GameSettings>
 {
     [InlineEditor]
     public MergeSettings merge;
+
+
+    [SerializeField]
+    public bool firstLevelisShooter;
 }

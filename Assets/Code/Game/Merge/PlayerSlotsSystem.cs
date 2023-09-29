@@ -15,6 +15,10 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         public int entityId;
         public Vector3 position;
     }
+    [SerializeField]
+    private EntityData m_StartShip;
+    [SerializeField]
+    private SlotBattleGrid m_StartSlot;
 
     private PlayerPrefsData<List<Slot>> m_PlayerSlots;
     private PlayerPrefsData<int> m_PlayerAmountBuyShip;
@@ -40,7 +44,15 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         m_PoolPlayerTag = m_World.GetPool<PlayerTag>();
         m_PoolNewTag = m_World.GetPool<NewEntityTag>();
         m_EntityDatabase = systems.GetData<EntityDatabase>();
-        m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>());
+
+        Slot slot = new Slot() { entityId = m_StartShip.id, position = new Vector3(14.289993f, 2.29999447f, -829.839966f), slotId = m_StartSlot.id };
+
+        var misions = systems.GetSystem<PlayerMissionSystem>();
+
+        bool isFirst = GameSettings.Instance.firstLevelisShooter && misions.level == 1;
+        if (isFirst) m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>() { slot });
+        else m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>());
+
         m_PlayerAmountBuyShip = new PlayerPrefsData<int>(nameof(m_PlayerAmountBuyShip), 0);
         m_PlayerMoneySystem = systems.GetSystem<PlayerMoneySystem>();
         m_CommandSystem = systems.GetSystem<CommandSystem>();

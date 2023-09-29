@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
 {
+    [SerializeField]
+    private bool m_IsShooter;
     //[SerializeField]
     //private EntityData m_EntityData;
 
@@ -24,8 +26,13 @@ public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
         builder.SetStartNewSession(true);
         SmartlookUnity.Smartlook.SetupAndStartRecording(builder.Build());
 
-
+        var playerLevelProvider = systems.GetSystem<PlayerMissionSystem>();
         commandSystem.Execute<CreatePlayerCommand>();
-        commandSystem.Execute<GoHomeCommand>();
+
+        if (playerLevelProvider.level == 1 && GameSettings.Instance.firstLevelisShooter)
+        {
+            commandSystem.Execute<GoBattleCommand>();
+        }
+        else commandSystem.Execute<GoHomeCommand>();
     }
 }

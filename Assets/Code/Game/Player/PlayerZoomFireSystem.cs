@@ -334,7 +334,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
             {
                 m_IsStarted = battleData.isStarted;
 
-                if (m_IsStarted && battleData.levelData.startInZoom)
+                if (m_IsStarted && battleData.isShooter)
                 {
                     ZoomToggle(true);
                 }
