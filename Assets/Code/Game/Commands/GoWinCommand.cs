@@ -12,8 +12,17 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
     private PlayerMoneySystem m_PlayerMoneyProvider;
     private int m_Reward;
 
+    private bool m_IsLockClaim;
+    private IEnumerator WaitLockClaim()
+    {
+        m_IsLockClaim = true;
+        yield return new WaitForSeconds(GameSettings.Instance.timeLockScreen);
+        m_IsLockClaim = false;
+    }
+
     public void Execute(EcsWorld world, IEcsSystems systems, BattleData battleData)
     {
+        StartCoroutine(WaitLockClaim());
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_PlayerLevelPovider = systems.GetSystem<PlayerMissionSystem>();
 
@@ -36,6 +45,8 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
 
     private void OnClaimReward()
     {
+        if (m_IsLockClaim) return;
+
         m_WinWidget.OnClaim -= OnClaimReward;
         m_CommandSystem.Execute<MoneyAddCommand, int>(m_Reward);
         m_CommandSystem.Execute<GoHomeCommand>();

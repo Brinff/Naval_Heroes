@@ -9,12 +9,21 @@ public class GoHomeCommand : MonoBehaviour, ICommand
     private StartGameWidget m_StartGameWidget;
     private PlayerSlotsSystem m_PlayerSlotsSystem;
     private CommandSystem m_CommandSystem;
-    
+    private bool m_IsLockBattle;
+
+    private IEnumerator WaitLockBattle()
+    {
+        m_IsLockBattle = true;
+        yield return new WaitForSeconds(GameSettings.Instance.timeLockScreen);
+        m_IsLockBattle = false;
+    }
+
     public void Execute(EcsWorld world, IEcsSystems systems)
     {
         PlayerMissionSystem playerMissionSystem = systems.GetSystem<PlayerMissionSystem>();
 
-
+        StartCoroutine(WaitLockBattle());
+        
         SmartlookUnity.Smartlook.TrackNavigationEvent("Merge", SmartlookUnity.Smartlook.NavigationEventType.enter);
 
         m_PlayerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
@@ -23,6 +32,7 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         m_StartGameWidget = UISystem.Instance.GetElement<StartGameWidget>();
         m_StartGameWidget.SetLevel(playerMissionSystem.level);
         m_StartGameWidget.OnClick += OnClickBattle;
+        m_StartGameWidget.SetBlock(!m_PlayerSlotsSystem.IsAnyRadyBattle());
 
         UISystem.Instance.compositionModule.Show<UIHomeComposition>();
         m_CommandSystem = systems.GetSystem<CommandSystem>();
@@ -62,7 +72,7 @@ public class GoHomeCommand : MonoBehaviour, ICommand
 
     private void OnClickBattle()
     {
-        if (!m_PlayerSlotsSystem.IsAnyRadyBattle())
+        if (!m_PlayerSlotsSystem.IsAnyRadyBattle() || m_IsLockBattle)
         {
             return;
         }

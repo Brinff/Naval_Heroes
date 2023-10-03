@@ -477,6 +477,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 0
+  stroke: 0
+  isFrame: 0
   color: {r: 0.025186857, g: 0.07227186, b: 0.27889434, a: 0.5019608}
   alpha: 1
   width: 1
@@ -527,6 +529,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 2
+  stroke: 0
+  isFrame: 0
   color: {r: 6.422234, g: 5.158298, b: 0, a: 1}
   alpha: 1
   width: 1
@@ -612,6 +616,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1219281501}
   - {fileID: 165797466}
   - {fileID: 1232403957}
   - {fileID: 1066062846}
@@ -632,6 +637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 182629139}
+  gridHighlight: {fileID: 1219281502}
   gridField: {fileID: 165797467}
   gridReject: {fileID: 1232403958}
   gridCurrent: {fileID: 1066062847}
@@ -1054,6 +1060,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 5f1e6658dca5e09438a93e3748268b53, type: 2}
+  m_ExpandBorderRaycast: 20
+  m_ColorDefault: {r: 0, g: 0.49680567, b: 1, a: 1}
+  m_ColorAccept: {r: 0, g: 1, b: 0.054902077, a: 1}
+  m_ColorReject: {r: 1, g: 0, b: 0, a: 1}
+  m_HighlightDefault: 1.2
+  m_HighlightActive: 2
   m_GridRenderer: {fileID: 1001050636}
 --- !u!114 &555444951
 MonoBehaviour:
@@ -1208,6 +1220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 0
+  stroke: 0
+  isFrame: 0
   color: {r: 1, g: 0.009791803, b: 0, a: 1}
   alpha: 1
   width: 1
@@ -1325,7 +1339,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   merge: {fileID: 11400000, guid: bde44b15daa47024f90cc8c39d8793ef, type: 2}
-  firstLevelisShooter: 1
+  firstLevelisShooter: 0
+  timeLockScreen: 0.5
 --- !u!4 &759405079
 Transform:
   m_ObjectHideFlags: 0
@@ -1410,6 +1425,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 0
+  stroke: 0
+  isFrame: 0
   color: {r: 0.19339307, g: 0.6226415, b: 0, a: 1}
   alpha: 1
   width: 1
@@ -1567,10 +1584,10 @@ MonoBehaviour:
   m_Compositions:
   - {fileID: 792821844}
   - {fileID: 792821843}
-  - {fileID: 792821841}
   - {fileID: 792821842}
-  - {fileID: 792821839}
   - {fileID: 792821838}
+  - {fileID: 792821839}
+  - {fileID: 792821841}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1769,7 +1786,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c61b2ef0781789f4390b0a57b04ba051, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2158,20 +2175,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 1
+  stroke: 0
+  isFrame: 0
   color: {r: 0, g: 0.6930368, b: 5.992157, a: 1}
   alpha: 1
   width: 1
   tails: 0
---- !u!4 &1066383592 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-  m_PrefabInstance: {fileID: 4678600974325869042}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1066383594 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7161652885911573963, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-  m_PrefabInstance: {fileID: 4678600974325869042}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1091248192
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,6 +2348,58 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b452ce7a5c83a2d4193650430be9944b, type: 3}
+--- !u!1 &1219281500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1219281501}
+  - component: {fileID: 1219281502}
+  m_Layer: 9
+  m_Name: Grid Highlight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1219281501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219281500}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 182629137}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1219281502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219281500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f21419d2165ab4ba7e4f11dbc8e5b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
+  layer: 4
+  stroke: 10
+  isFrame: 1
+  color: {r: 0.049642656, g: 1.4737021, b: 10.524218, a: 1.2}
+  alpha: 1
+  width: 1
+  tails: 0
 --- !u!1 &1232403956
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,6 +2446,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: fe7d093a7bc5f544e89ef6b92ca1ddcd, type: 2}
   layer: 3
+  stroke: 0
+  isFrame: 0
   color: {r: 6.422235, g: 0, b: 0, a: 1}
   alpha: 1
   width: 1
@@ -2464,7 +2527,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c61b2ef0781789f4390b0a57b04ba051, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2795,6 +2858,7 @@ MonoBehaviour:
   spriteRenderer:
   - {fileID: 873945177}
   - {fileID: 1261502583}
+  m_LockColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
 --- !u!114 &1761755360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3200,6 +3264,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 5f1e6658dca5e09438a93e3748268b53, type: 2}
+  m_ExpandBorderRaycast: 20
+  m_ColorDefault: {r: 0, g: 0.49680567, b: 1, a: 1}
+  m_ColorAccept: {r: 0, g: 1, b: 0.054902077, a: 1}
+  m_ColorReject: {r: 1, g: 0, b: 0, a: 1}
+  m_HighlightDefault: 1.2
+  m_HighlightActive: 2
   m_GridRenderer: {fileID: 335203678}
 --- !u!114 &1941629121
 MonoBehaviour:
@@ -3273,8 +3343,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 1
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -5335,8 +5405,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1066383592}
+  m_Children: []
   m_Father: {fileID: 318926376933013510}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5439,67 +5508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4df2ea14f318ce4ba3afd768b384959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &4678600974325869042
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 4183231068831305440}
-    m_Modifications:
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_RootOrder
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412083601182777756, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7703984866084938748, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
-      propertyPath: m_Name
-      value: Fx Ship Lvl Up PS
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 94bfbe0a62d7ab94da82beb8c1d3019b, type: 3}
 --- !u!114 &4693340425241509693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5512,7 +5520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d03544bc74ac9045a7274a862b6c2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UpgradeEffect: {fileID: 1066383594}
+  m_UpgradeEffect: {fileID: 0}
 --- !u!114 &4694076009828723935
 MonoBehaviour:
   m_ObjectHideFlags: 0

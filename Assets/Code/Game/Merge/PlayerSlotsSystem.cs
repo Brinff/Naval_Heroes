@@ -67,7 +67,18 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         {
             item.SetCost((int)value);
             item.spendMoney = SpendMoney;
+            item.enoughMoney = EnoughMoney;
         }
+    }
+
+    public bool EnoughMoney(EntityData entityData)
+    {
+        var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+        if (m_PlayerMoneySystem.HasMoney((int)value))
+        {
+            return true;
+        }
+        return false;
     }
 
     public bool SpendMoney(EntityData entityData)

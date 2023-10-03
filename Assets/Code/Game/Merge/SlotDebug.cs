@@ -143,4 +143,9 @@ public class SlotDebug : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandle
     {
         return false;
     }
+
+    public bool RemoveItemPossible(SlotItem slotItem, Vector3 position)
+    {
+        return true;
+    }
 }

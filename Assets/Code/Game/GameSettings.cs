@@ -12,4 +12,6 @@ public class GameSettings : Singleton<GameSettings>
 
     [SerializeField]
     public bool firstLevelisShooter;
+    [SerializeField]
+    public float timeLockScreen = 0.3f;
 }

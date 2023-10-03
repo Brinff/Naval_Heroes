@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Networking.UnityWebRequest;
 
-public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag, ISlotRenderer
+public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemBeginDrag, IItemEndDrag, ISlotRenderer
 {
     public GridAuhoring grid;
     public SlotCollection collection { get; private set; }
@@ -13,6 +13,7 @@ public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag, ISlotR
 
     public int id => name.GetDeterministicHashCode();
 
+    public GridRendererAuthoring gridHighlight;
     public GridRendererAuthoring gridField;
     public GridRendererAuthoring gridReject;
     public GridRendererAuthoring gridCurrent;
@@ -24,11 +25,16 @@ public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag, ISlotR
 
         grid = GetComponent<GridAuhoring>();
         gridField.BeginFill(grid.scale, grid.center);
+        gridHighlight.BeginFill(grid.scale, grid.center);
         foreach (var item in grid.rects)
         {
+            gridHighlight.AddRect(item.position, item.size);
             gridField.AddRect(item.position, item.size);
         }
         gridField.EndFill();
+        gridHighlight.EndFill();
+
+        gridHighlight.SetAlpha(0);
     }
 
     public bool AddItem(SlotItem item, Vector3 position)
@@ -132,11 +138,14 @@ public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag, ISlotR
 
     public void ItemBeginDrag(SlotItem slotItem)
     {
-
+        gridHighlight.SetAlpha(1);
+        //gridField.SetColor(m_ColorField * m_HighlightActive);
     }
 
     public void ItemEndDrag(SlotItem slotItem)
     {
+        gridHighlight.SetAlpha(0);
+        //gridField.SetColor(m_ColorField * m_HighlightDefault);
         gridNew.Clear();
         gridReject.Clear();
     }
@@ -160,6 +169,11 @@ public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemEndDrag, ISlotR
     public bool AddItemPossible(SlotItem item, Vector3 position)
     {
         if (items.Contains(item)) return false;
+        return true;
+    }
+
+    public bool RemoveItemPossible(SlotItem slotItem, Vector3 position)
+    {
         return true;
     }
 }
