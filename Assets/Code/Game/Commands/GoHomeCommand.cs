@@ -34,6 +34,8 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         m_StartGameWidget.OnClick += OnClickBattle;
         m_StartGameWidget.SetBlock(!m_PlayerSlotsSystem.IsAnyRadyBattle());
 
+
+
         UISystem.Instance.compositionModule.Show<UIHomeComposition>();
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_CommandSystem.Execute<ClearBattleDataCommand>();
@@ -63,6 +65,8 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         //m_CommandSystem.Execute<UpgradeFillCommand>();
         //m_CommandSystem.Execute<UpgradeUpdateCommand>();
         m_CommandSystem.Execute<MoneyUpdateCommand>();
+
+        systems.GetSystem<TutorialSystem>().HomeTutorial();
     }
 
     private void OnChangeSlotCollection(SlotCollection collection)

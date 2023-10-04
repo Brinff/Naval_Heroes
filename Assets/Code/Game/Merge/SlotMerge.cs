@@ -42,6 +42,14 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
     [SerializeField]
     private SpriteRenderer m_GridRenderer;
     private MaterialPropertyBlock m_MaterialPropertyBlock;
+
+    private bool m_IsMerged;
+
+    public bool IsMerged()
+    {
+        return m_IsMerged;
+    }
+
     public bool AddItem(SlotItem item, Vector3 position)
     {
         if (items.Count == 0)
@@ -71,12 +79,19 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
             item.transform.position = transform.position;
             item.SetEntity(result);
             collection.SetDirty();
-
+            m_IsMerged = true;
+            StartCoroutine(PostMerged());
             result = null;
 
             return true;
         }
         return false;
+    }
+
+    private IEnumerator PostMerged()
+    {
+        yield return null;
+        m_IsMerged = false;
     }
 
     public bool RemoveItem(SlotItem item)

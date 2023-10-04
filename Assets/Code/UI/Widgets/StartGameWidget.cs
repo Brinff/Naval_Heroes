@@ -19,6 +19,11 @@ public class StartGameWidget : MonoBehaviour, IUIElement
         m_Group.alpha = isBlock ? 0.5f : 1;
     }
 
+    public Button GetButton()
+    {
+        return m_Button;
+    }
+
     private void OnDisable()
     {
         m_Button.onClick.RemoveAllListeners();
