@@ -20,6 +20,8 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
     [SerializeField]
     private Color m_ColorAccept;
     [SerializeField]
+    private Color m_ColorMerge;
+    [SerializeField]
     private Color m_ColorReject;
     [SerializeField]
     private float m_HighlightDefault = 1;
@@ -110,8 +112,14 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
 
                     result = data.GetResult(this.item.entityData, item.entityData);
 
-                    
-                    if (result != null) return true;
+
+                    if (result != null)
+                    {
+                        SetColor(m_ColorMerge, m_HighlightActive);
+
+                        return true;
+                    }
+
                     SetColor(m_ColorReject, m_HighlightActive);
                 }
             }
