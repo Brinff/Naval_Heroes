@@ -1,6 +1,8 @@
 
 using DG.Tweening;
+using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Game.Grid.Auhoring
@@ -10,9 +12,12 @@ namespace Game.Grid.Auhoring
     {
         public Material material;
         public int layer = 0;
+
+        public float stroke = 0;
+        public bool isFrame;
         [ColorUsage(true, true)]
         public Color color;
-        [Range(0,1)]
+        [Range(0, 1)]
         public float alpha;
 
         private Material instanceMaterial;
@@ -48,7 +53,7 @@ namespace Game.Grid.Auhoring
 
         public Tween DoAlpha(float alpha, float duration)
         {
-           return DOTween.To(GetAlpha, SetAlpha, alpha, duration);
+            return DOTween.To(GetAlpha, SetAlpha, alpha, duration);
         }
 
         public float width = 1f;
@@ -105,26 +110,62 @@ namespace Game.Grid.Auhoring
                 Vector3 originA = orgin + new Vector3(x * scale.x, 0, 0) + new Vector3(center.x, 0, center.y - width) - halfScale;
 
                 float sizeY = size.y * scale.y + width * 2;
-                AddLine(originA, Vector3.forward, sizeY, Color.white, Color.white, width);
-                if (tails > 0)
+                if (isFrame)
                 {
-                    Vector3 originB = originA + Vector3.forward * sizeY;
-                    AddLine(originA, -Vector3.forward, tails, Color.white, Color.clear, width);
-                    AddLine(originB, Vector3.forward, tails, Color.white, Color.clear, width);
+                    if (x == 0 || x == size.x)
+                    {
+                        AddLine(originA, Vector3.forward, sizeY, Color.white, Color.white, stroke, width);
+
+                        if (tails > 0)
+                        {
+                            Vector3 originB = originA + Vector3.forward * sizeY;
+                            AddLine(originA, -Vector3.forward, tails, Color.white, Color.clear, 0, width);
+                            AddLine(originB, Vector3.forward, tails, Color.white, Color.clear, 0, width);
+                        }
+                    }
                 }
+                else
+                {
+                    AddLine(originA, Vector3.forward, sizeY, Color.white, Color.white, 0, width);
+
+                    if (tails > 0)
+                    {
+                        Vector3 originB = originA + Vector3.forward * sizeY;
+                        AddLine(originA, -Vector3.forward, tails, Color.white, Color.clear, 0, width);
+                        AddLine(originB, Vector3.forward, tails, Color.white, Color.clear, 0, width);
+                    }
+                }
+
             }
 
             for (int y = 0; y < size.y + 1; y++)
             {
                 Vector3 originA = orgin + new Vector3(0, 0, y * scale.y) + new Vector3(center.x - width, 0, center.y) - halfScale;
                 float sizeX = size.x * scale.x + width * 2;
-                AddLine(originA, Vector3.right, sizeX, Color.white, Color.white, width);
-
-                if (tails > 0)
+                if (isFrame)
                 {
-                    Vector3 originB = originA + Vector3.right * sizeX;
-                    AddLine(originA, -Vector3.right, tails, Color.white, Color.clear, width);
-                    AddLine(originB, Vector3.right, tails, Color.white, Color.clear, width);
+                    if (y == 0 || y == size.y)
+                    {
+                        AddLine(originA, Vector3.right, sizeX, Color.white, Color.white, stroke, width);
+
+                        if (tails > 0)
+                        {
+                            Vector3 originB = originA + Vector3.right * sizeX;
+                            AddLine(originA, -Vector3.right, tails, Color.white, Color.clear, 0, width);
+                            AddLine(originB, Vector3.right, tails, Color.white, Color.clear, 0, width);
+                        }
+                    }
+                }
+                else
+                {
+                    AddLine(originA, Vector3.right, sizeX, Color.white, Color.white, 0, width);
+
+                    if (tails > 0)
+                    {
+                        Vector3 originB = originA + Vector3.right * sizeX;
+                        AddLine(originA, -Vector3.right, tails, Color.white, Color.clear, 0, width);
+                        AddLine(originB, Vector3.right, tails, Color.white, Color.clear, 0, width);
+                    }
                 }
             }
         }
@@ -143,43 +184,101 @@ namespace Game.Grid.Auhoring
             return mesh;
         }
 
-        private void AddLine(Vector3 start, Vector3 direction, float size, Color colorStart, Color colorEnd, float width)
+        private void AddLine(Vector3 start, Vector3 direction, float size, Color colorStart, Color colorEnd, float stroke, float width)
         {
-            AddLine(start, start + direction * size, colorStart, colorEnd, width);
+            AddLine(start, start + direction * size, colorStart, colorEnd, stroke, width);
         }
 
-        private void AddLine(Vector3 start, Vector3 end, Color colorStart, Color colorEnd, float width)
+        private void AddLine(Vector3 start, Vector3 end, Color colorStart, Color colorEnd, float stroke, float width)
         {
-            int index = vertices.Count;
+
             Vector3 direction = Vector3.Normalize(end - start);
+
+
             Vector3 right = Vector3.Cross(direction, Vector3.up);
-            Vector3 p0 = start + right * width;
-            Vector3 p1 = end + right * width;
-            Vector3 p2 = end - right * width;
-            Vector3 p3 = start - right * width;
 
-            vertices.Add(p0);
-            vertices.Add(p1);
-            vertices.Add(p2);
-            vertices.Add(p3);
 
-            colors.Add(colorStart);
-            colors.Add(colorEnd);
-            colors.Add(colorEnd);
-            colors.Add(colorStart);
+            if (stroke > 0)
+            {
+                float distance = Vector3.Distance(start, end);
+                int countStroke = Mathf.RoundToInt(distance / stroke);
+                float lenght = distance / countStroke;
 
-            normals.Add(Vector3.up);
-            normals.Add(Vector3.up);
-            normals.Add(Vector3.up);
-            normals.Add(Vector3.up);
 
-            triangles.Add(index + 0);
-            triangles.Add(index + 1);
-            triangles.Add(index + 2);
+                Vector3 p0 = start + right * width;
+                Vector3 p1 = end + right * width;
+                Vector3 p2 = end - right * width;
+                Vector3 p3 = start - right * width;
 
-            triangles.Add(index + 2);
-            triangles.Add(index + 3);
-            triangles.Add(index + 0);
+                for (int i = 0; i < countStroke; i++)
+                {
+                    if (i % 2 == 0) continue;
+
+                    Vector3 localStart = Vector3.Lerp(start, end, (float)i / countStroke);
+                    Vector3 localEnd = localStart + direction * lenght;
+                    p0 = localStart + right * width;
+                    p1 = localEnd + right * width;
+                    p2 = localEnd - right * width;
+                    p3 = localStart - right * width;
+
+                    int index = vertices.Count;
+
+                    vertices.Add(p0);
+                    vertices.Add(p1);
+                    vertices.Add(p2);
+                    vertices.Add(p3);
+
+                    colors.Add(colorStart);
+                    colors.Add(colorEnd);
+                    colors.Add(colorEnd);
+                    colors.Add(colorStart);
+
+                    normals.Add(Vector3.up);
+                    normals.Add(Vector3.up);
+                    normals.Add(Vector3.up);
+                    normals.Add(Vector3.up);
+
+                    triangles.Add(index + 0);
+                    triangles.Add(index + 1);
+                    triangles.Add(index + 2);
+
+                    triangles.Add(index + 2);
+                    triangles.Add(index + 3);
+                    triangles.Add(index + 0);
+                }
+            }
+            else
+            {
+                int index = vertices.Count;
+
+                Vector3 p0 = start + right * width;
+                Vector3 p1 = end + right * width;
+                Vector3 p2 = end - right * width;
+                Vector3 p3 = start - right * width;
+
+                vertices.Add(p0);
+                vertices.Add(p1);
+                vertices.Add(p2);
+                vertices.Add(p3);
+
+                colors.Add(colorStart);
+                colors.Add(colorEnd);
+                colors.Add(colorEnd);
+                colors.Add(colorStart);
+
+                normals.Add(Vector3.up);
+                normals.Add(Vector3.up);
+                normals.Add(Vector3.up);
+                normals.Add(Vector3.up);
+
+                triangles.Add(index + 0);
+                triangles.Add(index + 1);
+                triangles.Add(index + 2);
+
+                triangles.Add(index + 2);
+                triangles.Add(index + 3);
+                triangles.Add(index + 0);
+            }
         }
     }
 

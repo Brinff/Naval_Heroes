@@ -88,4 +88,9 @@ public class SlotTrash : MonoBehaviour, ISlotPopulate, ISlotRenderer
     {
         return true;
     }
+
+    public bool RemoveItemPossible(SlotItem slotItem, Vector3 position)
+    {
+        return true;
+    }
 }

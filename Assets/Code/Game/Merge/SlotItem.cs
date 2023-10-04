@@ -33,19 +33,30 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         entity.SetActive(false);
     }
 
+    private bool isDrag = false;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        var otherSlots = parentSlot.collection.GetSlots<IItemBeginDrag>();
-        foreach (var item in otherSlots)
+        if (parentSlot!=null)
         {
-            item.ItemBeginDrag(this);
-        }
+            if(parentSlot.RemoveItemPossible(this, Vector3.zero))
+            {
+                var otherSlots = parentSlot.collection.GetSlots<IItemBeginDrag>();
+                foreach (var item in otherSlots)
+                {
+                    item.ItemBeginDrag(this);
+                }
 
-        height = GameSettings.Instance.merge.moveItem.height;
+                isDrag = true;
+                height = GameSettings.Instance.merge.moveItem.height;
+            }
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!isDrag) return;
+
         var otherSlots = parentSlot.collection.GetSlots<ISlotPopulate>();
         Plane plane = new Plane(Vector3.up, 0);
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
@@ -67,6 +78,8 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!isDrag) return;
+
         if (populateSlot == null)
         {
             targetPosition = transform.position;
@@ -87,6 +100,8 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
 
         height = 0;
+
+        isDrag = false;
     }
 
 

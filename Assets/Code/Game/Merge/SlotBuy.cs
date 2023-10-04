@@ -19,9 +19,11 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     [SerializeField]
     private TextMeshPro m_CostLabel;
-
     [SerializeField]
     private SpriteRenderer[] spriteRenderer;
+    [SerializeField]
+    private Color m_LockColor;
+
 
     public int id => name.GetDeterministicHashCode();
 
@@ -31,6 +33,10 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
     public delegate bool SpendMoney(EntityData entity);
 
     public SpendMoney spendMoney;
+
+    public delegate bool EnoughMoney(EntityData entity);
+
+    public EnoughMoney enoughMoney;
 
     public void SetCost(int amount)
     {
@@ -55,9 +61,9 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     public bool RemoveItem(SlotItem slotItem)
     {
-        if (spendMoney.Invoke(entity))
+        if (enoughMoney.Invoke(entity))
         {
-            if (items.Remove(slotItem))
+            if (spendMoney.Invoke(entity) && items.Remove(slotItem))
             {
                 Spawn();
                 return true;
@@ -66,10 +72,28 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
         return false;
     }
 
+
+    private void CheckMoney()
+    {
+        bool isEnoughMoney = enoughMoney?.Invoke(entity) ?? false;
+        foreach (var sprite in spriteRenderer)
+        {
+            sprite.color = isEnoughMoney ? Color.white : m_LockColor;
+        }
+        m_CostLabel.color = isEnoughMoney ? Color.white : m_LockColor;
+    }
+
     [Button]
     public void Spawn()
     {
         AddItem(SlotItem.Create(collection, entity, transform.position), transform.position);
+        StartCoroutine(Delay());
+    }
+
+    private IEnumerator Delay()
+    {
+        yield return null;
+        CheckMoney();
     }
 
     public void Prepare(SlotCollection collection)
@@ -136,6 +160,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     public void Show(float duration)
     {
+        CheckMoney();
         item.Show();
         m_CostLabel.DOFade(1, duration);
         foreach (var item in spriteRenderer)
@@ -158,6 +183,12 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     public bool AddItemPossible(SlotItem slotItem, Vector3 position)
     {
+        return false;
+    }
+
+    public bool RemoveItemPossible(SlotItem slotItem, Vector3 position)
+    {
+        if (slotItem.entityData != null) return enoughMoney.Invoke(slotItem.entityData);
         return false;
     }
 }
