@@ -121,7 +121,7 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
                 {
                     SetColor(m_ColorAccept, m_HighlightActive);
 
-                    if (this.item == null) return true;
+                    if (this.item == null || item == this.item) return true;
 
 
 
