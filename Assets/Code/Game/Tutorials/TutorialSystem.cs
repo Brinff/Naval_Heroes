@@ -1,8 +1,6 @@
 using Leopotam.EcsLite;
-using Sirenix.OdinInspector.Editor.GettingStarted;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering.Universal;
 using UnityEngine;
 
 public class TutorialSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup<Update>
