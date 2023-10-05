@@ -7,9 +7,27 @@ using Game.Merge.Data;
 using Game.Utility;
 using DG.Tweening;
 
-public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragHandler, IEndDragHandler, ISlotRenderer
+public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragHandler, IEndDragHandler, ISlotRenderer, IItemBeginDrag, IItemEndDrag
 {
     public MergeDatabase data;
+
+
+    [SerializeField]
+    private float m_ExpandBorderRaycast = 0.5f;
+
+    [SerializeField]
+    private Color m_ColorDefault;
+    [SerializeField]
+    private Color m_ColorAccept;
+    [SerializeField]
+    private Color m_ColorMerge;
+    [SerializeField]
+    private Color m_ColorReject;
+    [SerializeField]
+    private float m_HighlightDefault = 1;
+    [SerializeField]
+    private float m_HighlightActive = 2;
+
     public SlotCollection collection { get; private set; }
 
     public List<SlotItem> items { get; private set; } = new List<SlotItem>();
@@ -23,6 +41,14 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
 
     [SerializeField]
     private SpriteRenderer m_GridRenderer;
+    private MaterialPropertyBlock m_MaterialPropertyBlock;
+
+    private bool m_IsMerged;
+
+    public bool IsMerged()
+    {
+        return m_IsMerged;
+    }
 
     public bool AddItem(SlotItem item, Vector3 position)
     {
@@ -53,12 +79,19 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
             item.transform.position = transform.position;
             item.SetEntity(result);
             collection.SetDirty();
-
+            m_IsMerged = true;
+            StartCoroutine(PostMerged());
             result = null;
 
             return true;
         }
         return false;
+    }
+
+    private IEnumerator PostMerged()
+    {
+        yield return null;
+        m_IsMerged = false;
     }
 
     public bool RemoveItem(SlotItem item)
@@ -75,6 +108,9 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
     {
         Plane plane = new Plane(Vector3.up, 0);
         position = Vector3.zero;
+
+        SetColor(m_ColorDefault, m_HighlightActive);
+
         if (plane.Raycast(ray, out float distance))
         {
             result = null;
@@ -83,20 +119,44 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
             {
                 if (colliders[i].Raycast(ray, out RaycastHit _, 10000))
                 {
+                    SetColor(m_ColorAccept, m_HighlightActive);
+
                     if (this.item == null) return true;
+
+
 
                     result = data.GetResult(this.item.entityData, item.entityData);
 
-                    if (result != null) return true;
+
+                    if (result != null)
+                    {
+                        SetColor(m_ColorMerge, m_HighlightActive);
+
+                        return true;
+                    }
+
+                    SetColor(m_ColorReject, m_HighlightActive);
                 }
             }
         }
         return false;
     }
 
+
+    private void SetColor(Color color, float highlight)
+    {
+        if (m_MaterialPropertyBlock == null) m_MaterialPropertyBlock = new MaterialPropertyBlock();
+        m_GridRenderer.GetPropertyBlock(m_MaterialPropertyBlock);
+        m_MaterialPropertyBlock.SetColor("_Color", color * highlight);
+        m_GridRenderer.SetPropertyBlock(m_MaterialPropertyBlock);
+    }
+
     public void Prepare(SlotCollection collection)
     {
+
         GridAuhoring grid = gameObject.GetComponent<GridAuhoring>();
+
+        SetColor(m_ColorDefault, m_HighlightDefault);
 
         //var gridRenderer = GetComponent<GridRendererAuthoring>();
         //gridRenderer.BeginFill(grid.scale, grid.center);
@@ -108,7 +168,7 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
             var sigleRect = grid.GetSingleRect(grid.rects[i]);
             BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
             boxCollider.center = new Vector3(sigleRect.center.x, 0, sigleRect.center.y);
-            boxCollider.size = new Vector3(sigleRect.size.x, 1, sigleRect.size.y);
+            boxCollider.size = new Vector3(sigleRect.size.x + m_ExpandBorderRaycast, 1, sigleRect.size.y + m_ExpandBorderRaycast);
             colliders[i] = boxCollider;
             //gridRenderer.AddRect(grid.rects[i].position, grid.rects[i].size);
         }
@@ -151,5 +211,20 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
     {
         if (items.Count == 0) return true;
         return false;
+    }
+
+    public void ItemBeginDrag(SlotItem slotItem)
+    {
+        SetColor(m_ColorDefault, m_HighlightActive);
+    }
+
+    public void ItemEndDrag(SlotItem slotItem)
+    {
+        SetColor(m_ColorDefault, m_HighlightDefault);
+    }
+
+    public bool RemoveItemPossible(SlotItem slotItem, Vector3 position)
+    {
+        return true;
     }
 }
