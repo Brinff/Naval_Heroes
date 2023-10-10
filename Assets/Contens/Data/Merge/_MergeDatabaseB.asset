@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dc407fbd6c05484ebf8facfb8ff96ca, type: 3}
-  m_Name: _MergeDatabase
+  m_Name: _MergeDatabaseB
   m_EditorClassIdentifier: 
   items:
   - isEnable: 1
