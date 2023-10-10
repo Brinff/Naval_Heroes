@@ -31,12 +31,17 @@ public class SlotCollection : MonoBehaviour
 
     public void Prepare()
     {
-        LayoutRebuilder.ForceRebuildLayoutImmediate(m_Layout);
+        UpdateLayout();
         var slots = GetComponentsInChildren<ISlot>();
         foreach (var item in slots)
         {
             RegisterSlot(item);
         }
+    }
+
+    public void UpdateLayout()
+    {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(m_Layout);
     }
 
     public T[] GetSlots<T>() where T : ISlot

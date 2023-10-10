@@ -85,7 +85,8 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
     }
 
 
-    private void CheckMoney()
+
+    public void CheckMoney()
     {
         int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
         bool isEnoughMoney = enoughMoney?.Invoke(money) ?? false;
@@ -196,6 +197,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
         if (m_Mission >= m_UnlockReachLevel)
         {
 
+            gameObject.SetActive(true);
             CheckMoney();
             item.Show();
             m_CostLabel.DOFade(1, duration);
@@ -208,8 +210,22 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
         //gridRenderer.DoAlpha(1, duration);
     }
 
+    public void UpdatePositions()
+    {
+        foreach (var item in items)
+        {
+            item.position = m_Socket.position;
+            item.rotation = m_Socket.rotation;
+            item.scale = m_Socket.localScale.x;
+            item.targetPosition = m_Socket.position;
+            item.targetScale = m_Socket.localScale.x;
+            item.targetRotation = m_Socket.rotation;
+        }
+    }
+
     public void Hide(float duration)
     {
+        gameObject.SetActive(false);
         item.Hide();
         m_CostLabel.DOFade(0, duration);
         foreach (var item in spriteRenderer)
