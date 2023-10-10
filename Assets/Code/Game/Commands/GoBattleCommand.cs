@@ -48,8 +48,8 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         battleData.levelData = levelData;
         battleData.stage = 0;
         battleData.level = playerLevelProvider.level;
-        battleData.winReward = levelData.reward;
-        battleData.loseReward = levelData.loseReward;
+        battleData.winReward = (int)GameSettings.Instance.winReward.GetResult(playerLevelProvider.level);
+        battleData.loseReward = (int)GameSettings.Instance.loseReward.GetResult(playerLevelProvider.level);
         battleData.isShooter = playerLevelProvider.level == 1 && GameSettings.Instance.firstLevelisShooter;
         world.GetPool<ClearBattleTag>().Add(battleDataEntity);
 

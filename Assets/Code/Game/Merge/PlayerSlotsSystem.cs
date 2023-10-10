@@ -21,10 +21,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     private SlotBattleGrid m_StartSlot;
 
     private PlayerPrefsData<List<Slot>> m_PlayerSlots;
-    private PlayerPrefsData<int> m_PlayerAmountBuyShip;
 
-    [SerializeField]
-    private ProgressionData m_CostShip;
     [SerializeField]
     private SlotCollection m_SlotCollection;
     private EntityDatabase m_EntityDatabase;
@@ -53,7 +50,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         if (isFirst) m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>() { slot });
         else m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>());
 
-        m_PlayerAmountBuyShip = new PlayerPrefsData<int>(nameof(m_PlayerAmountBuyShip), 0);
+        //m_PlayerAmountBuyShip = new PlayerPrefsData<int>(nameof(m_PlayerAmountBuyShip), 0);
         m_PlayerMoneySystem = systems.GetSystem<PlayerMoneySystem>();
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_SlotCollection.Prepare();
@@ -62,42 +59,44 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         m_SlotCollection.OnChange += Save;
 
         var slotBuys = m_SlotCollection.GetSlots<SlotBuy>();
-        var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+        //var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
         foreach (var item in slotBuys)
         {
-            item.SetCost((int)value);
+            m_PlayerMoneySystem.OnChangeValue += item.CheckMoney;
+            //item.SetCost((int)value);
             item.spendMoney = SpendMoney;
             item.enoughMoney = EnoughMoney;
+            item.CheckMoney();
         }
     }
 
-    public bool EnoughMoney(EntityData entityData)
+    public bool EnoughMoney(int money)
     {
-        var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-        if (m_PlayerMoneySystem.HasMoney((int)value))
+        //var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+        if (m_PlayerMoneySystem.HasMoney(money))
         {
             return true;
         }
         return false;
     }
 
-    public bool SpendMoney(EntityData entityData)
+    public bool SpendMoney(int money)
     {
-        var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-        if (m_PlayerMoneySystem.HasMoney((int)value))
+        //var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+        if (m_PlayerMoneySystem.HasMoney(money))
         {
-            m_CommandSystem.Execute<MoneySpendCommand, int>((int)value);
+            m_CommandSystem.Execute<MoneySpendCommand, int>(money);
 
-            m_PlayerAmountBuyShip.Value++;
+            //m_PlayerAmountBuyShip.Value++;
 
-            var slotBuys = m_SlotCollection.GetSlots<SlotBuy>();
-            var newValue = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-            foreach (var item in slotBuys)
-            {
-                item.SetCost((int)newValue);
-            }
+            //var slotBuys = m_SlotCollection.GetSlots<SlotBuy>();
+            //var newValue = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+            //foreach (var item in slotBuys)
+            //{
+            //    item.SetCost((int)newValue);
+            //}
 
-            m_PlayerAmountBuyShip.Save();
+            //m_PlayerAmountBuyShip.Save();
             return true;
         }
         return false;
@@ -116,7 +115,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
             var slots = m_SlotCollection.GetSlots<ISlot>();
             var findSlot = slots.First(x => x.id == slotData.slotId);
             var findEntity = m_EntityDatabase.GetById(slotData.entityId);
-            findSlot.AddItem(SlotItem.Create(m_SlotCollection, findEntity, slotData.position), slotData.position);
+            findSlot.AddItem(SlotItem.Create(m_SlotCollection, findEntity, slotData.position, Quaternion.identity, 1), slotData.position);
         }
     }
 
@@ -152,6 +151,14 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         {
             item.Show(0.3f);
         }
+        m_SlotCollection.UpdateLayout();
+        var buySlots = m_SlotCollection.GetSlots<SlotBuy>();
+        foreach (var item in buySlots)
+        {
+            item.UpdatePositions();
+        }
+
+       
     }
 
     private Coroutine coroutine;
