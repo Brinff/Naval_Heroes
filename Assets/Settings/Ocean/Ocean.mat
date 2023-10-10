@@ -139,7 +139,7 @@ Material:
     - _CascadesFadeDist: 300
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ContactFoam: 0.109
+    - _ContactFoam: 0.34
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1

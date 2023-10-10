@@ -10,9 +10,14 @@ public class PlayerMoneySystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update
     private PlayerPrefsData<int> m_MoneySoft;
     public int amount => m_MoneySoft.Value;
 
+    public delegate void ChangeValue();
+
+    public event ChangeValue OnChangeValue;
+
     public void AddMoney(int amount)
     {
         m_MoneySoft.Value += amount;
+        OnChangeValue?.Invoke();
     }
 
     public bool HasMoney(int amount)
@@ -23,7 +28,11 @@ public class PlayerMoneySystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update
     public bool SpendMoney(int amount)
     {
         bool hasMoney = HasMoney(amount);
-        m_MoneySoft.Value -= amount;
+        if (hasMoney)
+        {
+            m_MoneySoft.Value -= amount;
+            OnChangeValue?.Invoke();
+        }
         return hasMoney;
     }
 

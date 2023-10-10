@@ -62,9 +62,11 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         //var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
         foreach (var item in slotBuys)
         {
+            m_PlayerMoneySystem.OnChangeValue += item.CheckMoney;
             //item.SetCost((int)value);
             item.spendMoney = SpendMoney;
             item.enoughMoney = EnoughMoney;
+            item.CheckMoney();
         }
     }
 
@@ -149,6 +151,14 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         {
             item.Show(0.3f);
         }
+        m_SlotCollection.UpdateLayout();
+        var buySlots = m_SlotCollection.GetSlots<SlotBuy>();
+        foreach (var item in buySlots)
+        {
+            item.UpdatePositions();
+        }
+
+       
     }
 
     private Coroutine coroutine;
