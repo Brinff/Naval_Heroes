@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48839c99001e6d94fb85762ca4d55083, type: 3}
   m_Name: Ship Cost B Submarine
   m_EditorClassIdentifier: 
-  value: 100
+  value: 150
   pow: 2
   factor: 0.5
   maxStep: 100
