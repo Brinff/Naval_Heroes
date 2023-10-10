@@ -23,11 +23,12 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         PlayerMissionSystem playerMissionSystem = systems.GetSystem<PlayerMissionSystem>();
 
         StartCoroutine(WaitLockBattle());
-        
+
         SmartlookUnity.Smartlook.TrackNavigationEvent("Merge", SmartlookUnity.Smartlook.NavigationEventType.enter);
 
         m_PlayerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
         m_PlayerSlotsSystem.slotCollection.OnChange += OnChangeSlotCollection;
+
 
         m_StartGameWidget = UISystem.Instance.GetElement<StartGameWidget>();
         m_StartGameWidget.SetLevel(playerMissionSystem.level);
@@ -45,6 +46,13 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         eye.view = world.PackEntity(viewHome.Value);
 
         var slotSystem = systems.GetSystem<PlayerSlotsSystem>();
+
+        var slots = slotSystem.slotCollection.GetSlots<SlotBuy>();
+        foreach (var slot in slots)
+        {
+            slot.SetMissionAmount(playerMissionSystem.level);
+        }
+
         slotSystem.Show();
 
         //var filterPlayer = world.Filter<PlayerTagLeo>().Inc<ShipTag>().Exc<DeadTag>().End();

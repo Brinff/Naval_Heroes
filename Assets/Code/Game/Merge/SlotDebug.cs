@@ -53,6 +53,7 @@ public class SlotDebug : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandle
             items.Add(slotItem);
             slotItem.parentSlot = this;
             slotItem.targetPosition = position;
+            slotItem.targetRotation = Quaternion.identity;
             slotItem.transform.position = position;
             return true;
         }
@@ -71,7 +72,7 @@ public class SlotDebug : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandle
 
     public void Spawn()
     {
-        AddItem(SlotItem.Create(collection, entity, transform.position), transform.position);
+        AddItem(SlotItem.Create(collection, entity, transform.position, Quaternion.identity, 1), transform.position);
     }
 
     public void Prepare(SlotCollection collection)

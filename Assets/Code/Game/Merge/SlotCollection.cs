@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class SlotCollection : MonoBehaviour
 {
     private List<ISlot> slots = new List<ISlot>();
-
+    [SerializeField]
+    private RectTransform m_Layout;
     public delegate void ChangeDelegate(SlotCollection collection);
 
     public event ChangeDelegate OnChange;
@@ -29,6 +31,7 @@ public class SlotCollection : MonoBehaviour
 
     public void Prepare()
     {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(m_Layout);
         var slots = GetComponentsInChildren<ISlot>();
         foreach (var item in slots)
         {
