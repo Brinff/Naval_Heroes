@@ -53,6 +53,7 @@ public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
 
     public void Launch(EcsWorld ecsWorld, IEcsSystems systems)
     {
+        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
         StartCoroutine(DelayLaunch());
     }
 
@@ -65,7 +66,7 @@ public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
         if (m_SlotA != null)
         {
             TargetRaycastMediator.Instance.AddTargetRaycast(m_SlotA.gameObject);
-            TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
+            
             m_TutorialDragWidget.PlaceAtWorld(m_SlotA.transform.position, slotB.transform.position);
             m_TutorialDragWidget.Show(false);
         }

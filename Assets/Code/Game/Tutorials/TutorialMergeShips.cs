@@ -62,7 +62,7 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
                 }
             }
             TargetRaycastMediator.Instance.AddTargetRaycast(m_ItemA.gameObject);
-            TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
+           
             m_TutorialDragWidget.PlaceAtWorld(m_ItemA.transform.position, itemB.transform.position);
             m_TutorialDragWidget.Show(false);
         }
@@ -119,6 +119,7 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
 
     public void Launch(EcsWorld ecsWorld, IEcsSystems systems)
     {
+        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
         StartCoroutine(DelayLaunch());
         m_SlotCollection.OnChange += OnChange;
     }

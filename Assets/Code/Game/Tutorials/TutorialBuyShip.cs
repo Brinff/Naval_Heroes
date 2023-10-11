@@ -55,6 +55,7 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
 
     public void Launch(EcsWorld ecsWorld, IEcsSystems systems)
     {
+        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
         StartCoroutine(DelayLaunch());
     }
 
@@ -65,7 +66,7 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
         Transform transform = slot.GetComponentInChildren<TutorialPoint>().transform;
         m_TutorialTapWidget.PlaceAtWorld(transform.position);
         TargetRaycastMediator.Instance.AddTargetRaycast(slot.gameObject);
-        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
+        
         m_TutorialTapWidget.Show(false);
     }
 
