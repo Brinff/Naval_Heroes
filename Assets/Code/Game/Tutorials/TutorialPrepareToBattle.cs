@@ -44,6 +44,10 @@ public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
         {
             TargetRaycastMediator.Instance.RemoveTargetRaycast(m_SlotA.gameObject);
         }
+
+        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        messageWidget.Hide(false);
+
         TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
         m_SlotA = null;
         m_TutorialDragWidget.Hide(false);
@@ -59,7 +63,11 @@ public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
 
     private IEnumerator DelayLaunch()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.4f);
+        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        messageWidget.SetText("DRAG AND DROP TO SET THE SHIP");
+        messageWidget.Show(false);
+
         m_SlotCollection.OnChange += OnChange;
         m_SlotA = m_SlotCollection.GetSlots<SlotMerge>().FirstOrDefault(x => x.item != null);
         SlotBattleGrid slotB = m_SlotCollection.GetSlots<SlotBattleGrid>().FirstOrDefault();
