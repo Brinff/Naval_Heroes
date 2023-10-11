@@ -130,7 +130,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
         BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
         RectTransform rectTransform = transform as RectTransform;
-        boxCollider.size = rectTransform.sizeDelta;
+        boxCollider.size =  new Vector3(rectTransform.sizeDelta.x + 10, rectTransform.sizeDelta.y + 10, 20);
 
         colliders = new BoxCollider[] { boxCollider };
 
