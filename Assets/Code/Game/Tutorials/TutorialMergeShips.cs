@@ -114,6 +114,8 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
         m_TutorialDragWidget.Hide(false);
         m_IsDone.Value = true;
         m_SlotCollection.OnChange -= OnChange;
+        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        messageWidget.Hide(false);
         m_ItemA = null;
     }
 
@@ -126,7 +128,10 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
 
     private IEnumerator DelayLaunch()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.4f);
+        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        messageWidget.SetText("DRAG AND DROP TO MERGE SHIPS");
+        messageWidget.Show(false);
         DoMerge();
     }
 

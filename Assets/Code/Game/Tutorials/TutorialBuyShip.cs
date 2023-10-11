@@ -50,6 +50,10 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
         TargetRaycastMediator.Instance.RemoveTargetRaycast(slot.gameObject);
         TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
         m_TutorialTapWidget.Hide(false);
+
+        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        messageWidget.Hide(false);
+
         m_IsDone.Value = true;
     }
 
@@ -61,7 +65,12 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
 
     private IEnumerator DelayLaunch()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.4f);
+
+        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        messageWidget.SetText("TAP THE BUTTON TO BUY A SHIP");
+        messageWidget.Show(false);
+
         var slot = m_SlotCollection.GetSlots<SlotBuy>().FirstOrDefault();
         Transform transform = slot.GetComponentInChildren<TutorialPoint>().transform;
         m_TutorialTapWidget.PlaceAtWorld(transform.position);

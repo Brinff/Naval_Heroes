@@ -35,6 +35,9 @@ public class TutorialGoToBattle : MonoBehaviour, ITutorial
 
     public void Done(EcsWorld ecsWorld, IEcsSystems systems)
     {
+        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        messageWidget.Hide(false);
+
         var button = UISystem.Instance.GetElement<StartGameWidget>().GetButton();
         TargetRaycastMediator.Instance.RemoveTargetRaycast(button.gameObject);
         TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
@@ -44,10 +47,22 @@ public class TutorialGoToBattle : MonoBehaviour, ITutorial
 
     public void Launch(EcsWorld ecsWorld, IEcsSystems systems)
     {
+        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
+        StartCoroutine(DoLaunch());
+    }
+
+    private IEnumerator DoLaunch()
+    {
+        yield return new WaitForSeconds(0.4f);
+        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        messageWidget.SetText("TAP THE BUTTON TO START BATTLE");
+        messageWidget.Show(false);
+
         var button = UISystem.Instance.GetElement<StartGameWidget>().GetButton();
         Transform transform = button.GetComponentInChildren<TutorialPoint>().transform;
+
         TargetRaycastMediator.Instance.AddTargetRaycast(button.gameObject);
-        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
+
         m_TutorialTapWidget.PlaceAtScreen(transform.position);
         m_TutorialTapWidget.Show(false);
     }
