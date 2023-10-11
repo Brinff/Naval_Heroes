@@ -29,7 +29,7 @@ public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
         var playerLevelProvider = systems.GetSystem<PlayerMissionSystem>();
         commandSystem.Execute<CreatePlayerCommand>();
 
-        if (playerLevelProvider.level == 1 && GameSettings.Instance.firstLevelisShooter)
+        if (playerLevelProvider.level == 1 && GameSettings.Instance.firstEnterInBattle)
         {
             commandSystem.Execute<GoBattleCommand>();
         }

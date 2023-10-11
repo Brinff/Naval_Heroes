@@ -46,7 +46,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
 
         var misions = systems.GetSystem<PlayerMissionSystem>();
 
-        bool isFirst = GameSettings.Instance.firstLevelisShooter && misions.level == 1;
+        bool isFirst = GameSettings.Instance.firstEnterInBattle && misions.level == 1;
         if (isFirst) m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>() { slot });
         else m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>());
 

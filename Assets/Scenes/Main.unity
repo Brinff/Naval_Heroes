@@ -1450,6 +1450,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafd8cc29343cb24c8c9a37935c38120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_ToDoTutorials
+      Entry: 7
+      Data: 0|System.Collections.Generic.Queue`1[[ITutorial, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: m_ProccesTutorial
+      Entry: 6
+      Data: 
 --- !u!114 &257307942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2669,6 +2693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   merge: {fileID: 11400000, guid: bde44b15daa47024f90cc8c39d8793ef, type: 2}
   firstLevelisShooter: 0
+  firstEnterInBattle: 1
   timeLockScreen: 0.5
   winReward: {fileID: 11400000, guid: 56b666792b0828e43bafa0b8a10958a5, type: 2}
   loseReward: {fileID: 11400000, guid: 468f328f2e57d654ea7c57782083edb9, type: 2}
@@ -2914,12 +2939,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
-  - {fileID: 792821842}
-  - {fileID: 792821839}
-  - {fileID: 792821841}
   - {fileID: 792821844}
-  - {fileID: 792821838}
   - {fileID: 792821843}
+  - {fileID: 792821841}
+  - {fileID: 792821838}
+  - {fileID: 792821839}
+  - {fileID: 792821842}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0

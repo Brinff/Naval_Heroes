@@ -13,6 +13,8 @@ public class GameSettings : Singleton<GameSettings>
     [SerializeField]
     public bool firstLevelisShooter;
     [SerializeField]
+    public bool firstEnterInBattle;
+    [SerializeField]
     public float timeLockScreen = 0.3f;
 
     public ProgressionData winReward;
