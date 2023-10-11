@@ -31,10 +31,10 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
             DoMerge();
         }
     }
-
+    private SlotItem m_ItemA;
     private void DoMerge()
     {
-        SlotItem itemA = null;
+        
         var slots = m_SlotCollection.GetSlots<ISlot>();
 
         ISlot slotB = m_SlotCollection.GetSlots<SlotMerge>().FirstOrDefault(x => x.item);
@@ -47,22 +47,23 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
             foreach (var slot in slots)
             {
                 if (slotB == slot || slot is SlotBuy || slot is SlotTrash || slot is SlotDebug) continue;
-                itemA = slot.items.FirstOrDefault();
-                if (itemA != null) break;
+                m_ItemA = slot.items.FirstOrDefault();
+                if (m_ItemA != null) break;
             }
 
-            if (itemA == null)
+            if (m_ItemA == null)
             {
                 //check slots buy
                 foreach (var slot in slots)
                 {
                     if (slotB == slot || slot is SlotTrash || slot is SlotDebug) continue;
-                    itemA = slot.items.FirstOrDefault();
-                    if (itemA != null) break;
+                    m_ItemA = slot.items.FirstOrDefault();
+                    if (m_ItemA != null) break;
                 }
             }
-
-            m_TutorialDragWidget.PlaceAtWorld(itemA.transform.position, itemB.transform.position);
+            TargetRaycastMediator.Instance.AddTargetRaycast(m_ItemA.gameObject);
+            TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
+            m_TutorialDragWidget.PlaceAtWorld(m_ItemA.transform.position, itemB.transform.position);
             m_TutorialDragWidget.Show(false);
         }
         else
@@ -71,22 +72,24 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
             foreach (var slot in slots)
             {
                 if (slotB == slot || slot is SlotBuy || slot is SlotTrash || slot is SlotDebug) continue;
-                itemA = slot.items.FirstOrDefault();
-                if (itemA != null) break;
+                m_ItemA = slot.items.FirstOrDefault();
+                if (m_ItemA != null) break;
             }
 
-            if (itemA == null)
+            if (m_ItemA == null)
             {
                 //check slots buy
                 foreach (var slot in slots)
                 {
                     if (slotB == slot || slot is SlotTrash || slot is SlotDebug) continue;
-                    itemA = slot.items.FirstOrDefault();
-                    if (itemA != null) break;
+                    m_ItemA = slot.items.FirstOrDefault();
+                    if (m_ItemA != null) break;
                 }
             }
 
-            m_TutorialDragWidget.PlaceAtWorld(itemA.transform.position, (slotB as SlotMerge).transform.position);
+            TargetRaycastMediator.Instance.AddTargetRaycast(m_ItemA.gameObject);
+            TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
+            m_TutorialDragWidget.PlaceAtWorld(m_ItemA.transform.position, (slotB as SlotMerge).transform.position);
             m_TutorialDragWidget.Show(false);
         }
     }
@@ -106,9 +109,12 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
     }
     public void Done(EcsWorld ecsWorld, IEcsSystems systems)
     {
+        TargetRaycastMediator.Instance.RemoveTargetRaycast(m_ItemA.gameObject);
+        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
         m_TutorialDragWidget.Hide(false);
         m_IsDone.Value = true;
         m_SlotCollection.OnChange -= OnChange;
+        m_ItemA = null;
     }
 
     public void Launch(EcsWorld ecsWorld, IEcsSystems systems)
