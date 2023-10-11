@@ -43,8 +43,8 @@ public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
         if (m_SlotA)
         {
             TargetRaycastMediator.Instance.RemoveTargetRaycast(m_SlotA.gameObject);
-            TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
         }
+        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
         m_SlotA = null;
         m_TutorialDragWidget.Hide(false);
         m_IsDone.Value = true;
