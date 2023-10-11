@@ -2793,6 +2793,7 @@ GameObject:
   - component: {fileID: 792821841}
   - component: {fileID: 792821842}
   - component: {fileID: 792821843}
+  - component: {fileID: 792821845}
   m_Layer: 0
   m_Name: '[UI]'
   m_TagString: Untagged
@@ -2989,6 +2990,48 @@ MonoBehaviour:
     element: {fileID: 951346404}
   - acitve: 1
     element: {fileID: 642230080}
+--- !u!114 &792821845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792821835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41344c6f12a1f6343a5ed51ee785967b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 2040863459}
+    - {fileID: 987582108}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_Raycasters
+      Entry: 7
+      Data: 0|ITargetRaycaster[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  m_IsOverrideTargetRaycasts: 0
 --- !u!1 &873945175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3415,8 +3458,8 @@ GameObject:
   - component: {fileID: 987582104}
   - component: {fileID: 987582103}
   - component: {fileID: 987582102}
-  - component: {fileID: 987582106}
   - component: {fileID: 987582107}
+  - component: {fileID: 987582108}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3542,22 +3585,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 45.282, y: 0, z: 0}
---- !u!114 &987582106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 987582101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EventMask:
-    serializedVersion: 2
-    m_Bits: 512
-  m_MaxRayIntersections: 0
 --- !u!114 &987582107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3572,6 +3599,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 987582104}
   m_Transform: {fileID: 987582105}
+--- !u!114 &987582108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987582101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6621c9922632a4487be2a8d9fcfec2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 512
+  m_MaxRayIntersections: 0
+  m_IsOverrideTargetRaycasts: 0
 --- !u!1 &1001050634
 GameObject:
   m_ObjectHideFlags: 0
@@ -5316,8 +5360,8 @@ GameObject:
   - component: {fileID: 2040863457}
   - component: {fileID: 2040863456}
   - component: {fileID: 2040863455}
-  - component: {fileID: 2040863454}
   - component: {fileID: 2040863458}
+  - component: {fileID: 2040863459}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5325,23 +5369,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2040863454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040863453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 1015
 --- !u!114 &2040863455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5443,6 +5470,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &2040863459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040863453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efd42d3f7b6ac9449949dc8cea27959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsOverrideTargetRaycasts: 0
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 1015
 --- !u!1 &2065607435 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 894405661454018318, guid: c458c9a783b96334f8d041c7e154a310, type: 3}

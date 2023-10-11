@@ -35,13 +35,16 @@ public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
 
     public bool ConditionDone(EcsWorld ecsWorld, IEcsSystems systems)
     {
-        return !m_IsDone.Value && m_SlotCollection.GetSlots<SlotBattleGrid>().Any(x => x.items.Count > 0);
+        return m_IsDone.Value || m_SlotCollection.GetSlots<SlotBattleGrid>().Any(x => x.items.Count > 0);
     }
 
     public void Done(EcsWorld ecsWorld, IEcsSystems systems)
     {
-        TargetRaycastMediator.Instance.RemoveTargetRaycast(m_SlotA.gameObject);
-        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
+        if (m_SlotA)
+        {
+            TargetRaycastMediator.Instance.RemoveTargetRaycast(m_SlotA.gameObject);
+            TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
+        }
         m_SlotA = null;
         m_TutorialDragWidget.Hide(false);
         m_IsDone.Value = true;
@@ -83,13 +86,14 @@ public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
                 if (m_SlotA != slotA)
                 {
                     TargetRaycastMediator.Instance.RemoveTargetRaycast(m_SlotA.gameObject);
-                    m_SlotA = slotA;
-                    TargetRaycastMediator.Instance.AddTargetRaycast(m_SlotA.gameObject);
                 }
             }
             SlotBattleGrid slotB = m_SlotCollection.GetSlots<SlotBattleGrid>().FirstOrDefault();
             if (slotA != null)
             {
+                m_SlotA = slotA;
+                TargetRaycastMediator.Instance.AddTargetRaycast(m_SlotA.gameObject);
+
                 m_TutorialDragWidget.PlaceAtWorld(slotA.transform.position, slotB.transform.position);
                 m_TutorialDragWidget.Show(false);
             }

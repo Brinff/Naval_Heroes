@@ -1,10 +1,12 @@
 using Leopotam.EcsLite;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup<Update>
+public class TutorialSystem : SerializedMonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup<Update>
 {
+    [SerializeField]
     private Queue<ITutorial> m_ToDoTutorials = new Queue<ITutorial>();
     private List<ITutorial> m_ProcessTutorials = new List<ITutorial>();
     private List<ITutorial> m_DoneTutorials = new List<ITutorial>();
@@ -26,6 +28,7 @@ public class TutorialSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcs
         }
     }
 
+    [SerializeField]
     private ITutorial m_ProccesTutorial;
     public void Run(IEcsSystems systems)
     {
