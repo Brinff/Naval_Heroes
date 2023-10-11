@@ -2535,7 +2535,7 @@ MonoBehaviour:
   m_Entity: {fileID: 11400000, guid: 95e827ef307352749952a72c18b85559, type: 2}
   m_CostShip: {fileID: 11400000, guid: fe7a0a937b5032d488615858854bd9cd, type: 2}
   m_Key: Aircraft Carrier
-  m_UnlockReachLevel: -1
+  m_UnlockReachLevel: 11
   m_CostLabel: {fileID: 1050966003}
   spriteRenderer:
   - {fileID: 884465281}
@@ -3302,7 +3302,7 @@ MonoBehaviour:
   m_Entity: {fileID: 11400000, guid: 75bf7d703d4577743a0051e3673dc7eb, type: 2}
   m_CostShip: {fileID: 11400000, guid: 8f3e225e0b7ef2945842686136f7c3ee, type: 2}
   m_Key: Submarine
-  m_UnlockReachLevel: -1
+  m_UnlockReachLevel: 3
   m_CostLabel: {fileID: 107178261}
   spriteRenderer:
   - {fileID: 706929326}
@@ -9137,7 +9137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d5ab389d0cd984c9e3c53e03670428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartMoney: 1000000
+  m_StartMoney: 0
 --- !u!1 &6658513040784902215
 GameObject:
   m_ObjectHideFlags: 0

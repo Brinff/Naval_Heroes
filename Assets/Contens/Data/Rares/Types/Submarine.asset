@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48839c99001e6d94fb85762ca4d55083, type: 3}
-  m_Name: Ship Cost B Aircraft Carrier
+  m_Script: {fileID: 11500000, guid: 582ec903cd3fb5e49a1c05106eba8c4c, type: 3}
+  m_Name: Submarine
   m_EditorClassIdentifier: 
-  value: 250
-  pow: 3
-  factor: 4
-  maxStep: 100
+  color: {r: 0, g: 0.8051599, b: 0.8207547, a: 1}

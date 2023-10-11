@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ship Cost B Artillery
   m_EditorClassIdentifier: 
   value: 100
-  pow: 2
-  factor: 0.5
+  pow: 2.5
+  factor: 5
   maxStep: 100
