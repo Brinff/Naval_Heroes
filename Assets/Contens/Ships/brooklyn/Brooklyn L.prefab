@@ -4250,13 +4250,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634fa4982cfe28c4189864e3579c9298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: -90, y: -15}
-  scale: {x: 30, y: 30}
+  center: {x: -80, y: 0}
+  scale: {x: 40, y: 40}
   rects:
   - x: 0
     y: 0
-    width: 7
-    height: 2
+    width: 5
+    height: 1
 --- !u!114 &8094541797808103626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4346,7 +4346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e8fa47dc1aa0e40b2e54e5397e71c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Amount: 10
+  amount: 10
 --- !u!1 &7962384179946999224
 GameObject:
   m_ObjectHideFlags: 0

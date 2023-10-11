@@ -1172,13 +1172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634fa4982cfe28c4189864e3579c9298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: -135.71, y: -139.74}
-  scale: {x: 30, y: 30}
+  center: {x: -160.1, y: -130.64}
+  scale: {x: 40, y: 40}
   rects:
   - x: 0
     y: 0
-    width: 10
-    height: 14
+    width: 9
+    height: 13
 --- !u!1 &212671199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1680,8 +1680,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425281041}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -185.7815}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -169}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1383428769}
@@ -1795,7 +1795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555444941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 75, y: 2.3, z: -82}
+  m_LocalPosition: {x: 75, y: 2.3, z: -74.99999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2511,7 +2511,7 @@ MonoBehaviour:
   m_Entity: {fileID: 11400000, guid: 95e827ef307352749952a72c18b85559, type: 2}
   m_CostShip: {fileID: 11400000, guid: fe7a0a937b5032d488615858854bd9cd, type: 2}
   m_Key: Aircraft Carrier
-  m_UnlockReachLevel: 11
+  m_UnlockReachLevel: -1
   m_CostLabel: {fileID: 1050966003}
   spriteRenderer:
   - {fileID: 884465281}
@@ -2913,12 +2913,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
+  - {fileID: 792821842}
+  - {fileID: 792821839}
+  - {fileID: 792821841}
   - {fileID: 792821844}
   - {fileID: 792821838}
   - {fileID: 792821843}
-  - {fileID: 792821842}
-  - {fileID: 792821841}
-  - {fileID: 792821839}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3234,7 +3234,7 @@ MonoBehaviour:
   m_Entity: {fileID: 11400000, guid: 75bf7d703d4577743a0051e3673dc7eb, type: 2}
   m_CostShip: {fileID: 11400000, guid: 8f3e225e0b7ef2945842686136f7c3ee, type: 2}
   m_Key: Submarine
-  m_UnlockReachLevel: 3
+  m_UnlockReachLevel: -1
   m_CostLabel: {fileID: 107178261}
   spriteRenderer:
   - {fileID: 706929326}
@@ -4449,7 +4449,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383428768}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0000019073486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5257,7 +5257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941629110}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -75, y: 2.3, z: -82}
+  m_LocalPosition: {x: -75, y: 2.3, z: -74.99999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5573,7 +5573,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.93276155, b: 0.68301886, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -9067,7 +9067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d5ab389d0cd984c9e3c53e03670428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_StartMoney: 200
+  m_StartMoney: 1000000
 --- !u!1 &6658513040784902215
 GameObject:
   m_ObjectHideFlags: 0

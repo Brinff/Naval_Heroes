@@ -2120,13 +2120,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634fa4982cfe28c4189864e3579c9298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  center: {x: -45, y: -15}
-  scale: {x: 30, y: 30}
+  center: {x: -40, y: 0}
+  scale: {x: 40, y: 40}
   rects:
   - x: 0
     y: 0
-    width: 4
-    height: 2
+    width: 3
+    height: 1
 --- !u!114 &427366812066422394
 MonoBehaviour:
   m_ObjectHideFlags: 0
