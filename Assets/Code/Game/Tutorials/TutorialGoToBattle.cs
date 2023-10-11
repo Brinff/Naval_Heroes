@@ -35,6 +35,9 @@ public class TutorialGoToBattle : MonoBehaviour, ITutorial
 
     public void Done(EcsWorld ecsWorld, IEcsSystems systems)
     {
+        var button = UISystem.Instance.GetElement<StartGameWidget>().GetButton();
+        TargetRaycastMediator.Instance.RemoveTargetRaycast(button.gameObject);
+        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
         m_TutorialTapWidget.Hide(false);
         m_IsDone.Value = true;
     }
@@ -43,6 +46,8 @@ public class TutorialGoToBattle : MonoBehaviour, ITutorial
     {
         var button = UISystem.Instance.GetElement<StartGameWidget>().GetButton();
         Transform transform = button.GetComponentInChildren<TutorialPoint>().transform;
+        TargetRaycastMediator.Instance.AddTargetRaycast(button.gameObject);
+        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
         m_TutorialTapWidget.PlaceAtScreen(transform.position);
         m_TutorialTapWidget.Show(false);
     }
