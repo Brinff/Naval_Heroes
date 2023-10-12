@@ -678,6 +678,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Option: 0
   m_Value: 200
+--- !u!1 &5880083454983681043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 68128754502462817}
+  m_Layer: 0
+  m_Name: Trail Orgin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &68128754502462817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5880083454983681043}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 64.19, y: 1.68, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1.15}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4527194387611607790}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6143260632842882490
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,6 +882,7 @@ GameObject:
   - component: {fileID: -2603536020758496684}
   - component: {fileID: 8241422490463537094}
   - component: {fileID: 4158190951622195772}
+  - component: {fileID: 8824698318989181360}
   m_Layer: 0
   m_Name: Sangamon S 1
   m_TagString: Untagged
@@ -874,6 +906,7 @@ Transform:
   - {fileID: 2224237164853835853}
   - {fileID: 1436138624650270454}
   - {fileID: 4002630959761522817}
+  - {fileID: 68128754502462817}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -986,6 +1019,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 1
+--- !u!114 &8824698318989181360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6778801472794295917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b0c564289c6dc4eb3c9c02b7c22f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Orgin: {fileID: 68128754502462817}
+  m_Lifetime: 11
+  m_Scale: {x: 1.4, y: 1, z: 1.4}
 --- !u!1 &7339000119796958887
 GameObject:
   m_ObjectHideFlags: 0

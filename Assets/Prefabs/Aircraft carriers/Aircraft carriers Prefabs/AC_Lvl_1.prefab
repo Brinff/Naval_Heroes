@@ -36,6 +36,7 @@ Transform:
   - {fileID: 1333022049435335447}
   - {fileID: 7214871938689338021}
   - {fileID: 2326202935150833378}
+  - {fileID: 5578144432371026419}
   - {fileID: 1538548955523861430}
   m_Father: {fileID: 4527194387611607790}
   m_RootOrder: 0
@@ -173,6 +174,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &516341462125579134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5578144432371026419}
+  m_Layer: 0
+  m_Name: Trail Orgin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5578144432371026419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516341462125579134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 79.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 795403997504216441}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1776072832440011852
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,6 +883,7 @@ GameObject:
   - component: {fileID: -2603536020758496684}
   - component: {fileID: 8241422490463537094}
   - component: {fileID: 4158190951622195772}
+  - component: {fileID: 3365282183313100868}
   m_Layer: 0
   m_Name: AC_Lvl_1
   m_TagString: Untagged
@@ -986,6 +1019,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 1
+--- !u!114 &3365282183313100868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6778801472794295917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b0c564289c6dc4eb3c9c02b7c22f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Orgin: {fileID: 5578144432371026419}
+  m_Lifetime: 13
+  m_Scale: {x: 1.4, y: 1, z: 1.4}
 --- !u!1 &7339000119796958887
 GameObject:
   m_ObjectHideFlags: 0
