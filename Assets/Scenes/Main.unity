@@ -7494,6 +7494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27951d36b84493a458727142f838f36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GodMode: 1
 --- !u!1 &3093850807509620315
 GameObject:
   m_ObjectHideFlags: 0
@@ -8737,6 +8738,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_VFXTrail: {fileID: 4731636227409746115, guid: 4e1f81f2eb5f8e14fabca2151596b78c, type: 3}
   m_VFXTrailPoolSize: 10
+  m_WaterHeight: 0.6
+  m_VFXTrailRotation: {x: 0.49999997, y: -0.49999997, z: 0.49999997, w: 0.49999997}
 --- !u!4 &5484798673076992603
 Transform:
   m_ObjectHideFlags: 0
