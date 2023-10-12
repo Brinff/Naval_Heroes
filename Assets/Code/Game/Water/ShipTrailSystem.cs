@@ -15,6 +15,8 @@ public class ShipTrailSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
     private float m_WaterHeight = 0;
     [SerializeField]
     private Quaternion m_VFXTrailRotation = Quaternion.identity;
+    [SerializeField]
+    private bool m_Debug = true;
 
     private EcsWorld m_World;
 
@@ -66,11 +68,23 @@ public class ShipTrailSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
             if (shipTrail.particleSystem == null)
             {
                 shipTrail.particleSystem = m_Pool.Get();
+
+                shipTrail.particleSystem.transform.rotation = m_VFXTrailRotation;
+                shipTrail.particleSystem.transform.localScale = shipTrail.scale;
+                var main = shipTrail.particleSystem.main;
+                main.startLifetime = shipTrail.lifetime;
+
                 shipTrail.particleSystem.Play();
             }
             shipTrail.particleSystem.transform.position = position;
-            shipTrail.particleSystem.transform.rotation = m_VFXTrailRotation;
-            shipTrail.particleSystem.transform.localScale = shipTrail.orgin.localScale;
+
+            if (m_Debug)
+            {
+                shipTrail.particleSystem.transform.rotation = m_VFXTrailRotation;
+                shipTrail.particleSystem.transform.localScale = shipTrail.scale;
+                var main = shipTrail.particleSystem.main;
+                main.startLifetime = shipTrail.lifetime;
+            }
         }
     }
 }

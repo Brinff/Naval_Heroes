@@ -2686,6 +2686,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4922854087410684708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1439602353544827894}
+  m_Layer: 0
+  m_Name: TrailOrgin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1439602353544827894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4922854087410684708}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 7.61, z: 96.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7960390486270090476}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4952673291801610560
 GameObject:
   m_ObjectHideFlags: 0
@@ -3829,6 +3860,7 @@ Transform:
   - {fileID: 7210280742292496534}
   - {fileID: 7591274731895777009}
   - {fileID: 8550927870371791339}
+  - {fileID: 1439602353544827894}
   m_Father: {fileID: 1468786854299531543}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -4212,6 +4244,7 @@ GameObject:
   - component: {fileID: 7450538805012080149}
   - component: {fileID: -3164377083669502449}
   - component: {fileID: -7032671555158841897}
+  - component: {fileID: 1178200704771939555}
   m_Layer: 0
   m_Name: Art_Lvl_4
   m_TagString: Untagged
@@ -4347,6 +4380,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 4
+--- !u!114 &1178200704771939555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916594432077460907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b0c564289c6dc4eb3c9c02b7c22f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Orgin: {fileID: 1439602353544827894}
+  m_Lifetime: 16
+  m_Scale: {x: 1.3, y: 1, z: 1.3}
 --- !u!1 &7962384179946999224
 GameObject:
   m_ObjectHideFlags: 0

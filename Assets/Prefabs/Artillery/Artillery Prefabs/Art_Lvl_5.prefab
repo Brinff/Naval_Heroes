@@ -1037,6 +1037,7 @@ GameObject:
   - component: {fileID: 138198533297211377}
   - component: {fileID: 1471005363043824139}
   - component: {fileID: 5154385712343147195}
+  - component: {fileID: 4128080750752430137}
   m_Layer: 0
   m_Name: Art_Lvl_5
   m_TagString: Untagged
@@ -1172,6 +1173,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 5
+--- !u!114 &4128080750752430137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274979080763799702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b0c564289c6dc4eb3c9c02b7c22f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Orgin: {fileID: 8363212317871529921}
+  m_Lifetime: 13
+  m_Scale: {x: 1.7, y: 1, z: 1.7}
 --- !u!1 &2454875872360308599
 GameObject:
   m_ObjectHideFlags: 0
@@ -2680,6 +2696,37 @@ Transform:
   m_Father: {fileID: 7580955358338608258}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8203615147188764653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8363212317871529921}
+  m_Layer: 0
+  m_Name: TrailOrgin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8363212317871529921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203615147188764653}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 14.309999, z: 74.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9074224838353377729}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8279033069012944322
 GameObject:
   m_ObjectHideFlags: 0
@@ -2964,6 +3011,7 @@ Transform:
   - {fileID: 34380034279929929}
   - {fileID: 4600842962369980708}
   - {fileID: 6015567396170814512}
+  - {fileID: 8363212317871529921}
   m_Father: {fileID: 7580955358338608258}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
