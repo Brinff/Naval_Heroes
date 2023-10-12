@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ship Cost B Aircraft Carrier
   m_EditorClassIdentifier: 
   value: 250
-  pow: 3
+  pow: 2.7
   factor: 4
   maxStep: 100

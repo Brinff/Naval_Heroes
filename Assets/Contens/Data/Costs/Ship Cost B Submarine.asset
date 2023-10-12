@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ship Cost B Submarine
   m_EditorClassIdentifier: 
   value: 150
-  pow: 2.75
+  pow: 2.6
   factor: 4.5
   maxStep: 100
