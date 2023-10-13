@@ -3081,12 +3081,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
-  - {fileID: 792821842}
+  - {fileID: 792821838}
+  - {fileID: 792821843}
   - {fileID: 792821841}
   - {fileID: 792821839}
-  - {fileID: 792821843}
   - {fileID: 792821844}
-  - {fileID: 792821838}
+  - {fileID: 792821842}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7383,6 +7383,7 @@ GameObject:
   - component: {fileID: 5455264918296568951}
   - component: {fileID: 4716228866083970784}
   - component: {fileID: 5455264918296568952}
+  - component: {fileID: 5455264918296568953}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -7494,7 +7495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27951d36b84493a458727142f838f36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_GodMode: 0
+  m_GodMode: 1
 --- !u!1 &3093850807509620315
 GameObject:
   m_ObjectHideFlags: 0
@@ -8741,6 +8742,20 @@ MonoBehaviour:
   m_WaterHeight: 0.6
   m_VFXTrailRotation: {x: 0.49999997, y: -0.49999997, z: 0.49999997, w: 0.49999997}
   m_Debug: 0
+--- !u!114 &5455264918296568953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620323967308890192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd0c781dd154a548b4dc9d2d565ead7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OceanSimulation: {fileID: 1777309717}
+  m_Rotation: {x: 0, y: 0, z: 0}
 --- !u!4 &5484798673076992603
 Transform:
   m_ObjectHideFlags: 0

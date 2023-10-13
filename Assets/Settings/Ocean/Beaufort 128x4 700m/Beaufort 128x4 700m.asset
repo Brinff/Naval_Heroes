@@ -89,7 +89,7 @@ MonoBehaviour:
   _depth: 1000
   _swell: {fileID: 11400000, guid: 9275ed2623fcd8a478d04263e6973ff0, type: 2}
   _localWaves: {fileID: 0}
-  _displayWindForce01: 10
+  _displayWindForce01: 1
   _defaultEqualizer: {fileID: 11400000, guid: 1fd9d91ff7b9c9a4c91fe8d00b1d9ef0, type: 2}
   _localWavesArray:
   - {fileID: 8216255704537436480}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8036a3839c161684a839801183dabb0f, type: 3}
-  m_Name: Beaufort 128x4 700m | Wind Force 5
+  m_Name: Beaufort 128x4 700m | Wind Force 6
   m_EditorClassIdentifier: 
   _spectrum:
     energySpectrum: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
     cutoffWavelength: 0.01
     alignment: 1
     extraAlignment: 0
-  _referenceWaveHeight: 3.4
+  _referenceWaveHeight: 5
   _chop: 1.49
   _foam:
     decayRate: 0.02
@@ -170,7 +170,7 @@ MonoBehaviour:
     underwater: 0.476
     cascadesWeights: {x: 3, y: 1, z: 0.3, w: 0.2}
   _equalizer: {fileID: 0}
-  _windForce: 5
+  _windForce: 6
 --- !u!114 &7173340815376038411
 MonoBehaviour:
   m_ObjectHideFlags: 0
