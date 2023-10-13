@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 7932914392098550537}
   - component: {fileID: 1234121189016669507}
   m_Layer: 0
-  m_Name: South Dakota L
+  m_Name: Art_Lvl_BOSS
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: ed419d64724f5f248890bbd6ef21b966, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 599b9591afd5c47578918d67bdbc7ec1, type: 2}
 --- !u!1 &5886449396812989190
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 5
+  m_Duration: 1
 --- !u!114 &1870086053446610431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.9
+  m_Value: 1
 --- !u!1 &7385703431173710686
 GameObject:
   m_ObjectHideFlags: 0

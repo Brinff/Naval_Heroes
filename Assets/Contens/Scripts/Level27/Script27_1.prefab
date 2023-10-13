@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &374695606688273622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8964082696241542951}
+  - component: {fileID: 8242100984824959699}
+  m_Layer: 0
+  m_Name: Art_Lvl_6 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8964082696241542951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374695606688273622}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -154, y: 0, z: -265}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3735960675166061339}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8242100984824959699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374695606688273622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf4721651f495e4d99ec1655e4fb25b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Team: 1
+  m_EntityData: {fileID: 11400000, guid: ed419d64724f5f248890bbd6ef21b966, type: 2}
 --- !u!1 &892603046748559454
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.9
+  m_Value: 0.8
 --- !u!1 &6216943166191915982
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +395,7 @@ GameObject:
   - component: {fileID: 1353164761790878690}
   - component: {fileID: 1950208634488922084}
   m_Layer: 0
-  m_Name: South Dakota L
+  m_Name: Art_Lvl_6
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -363,7 +409,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6216943166191915982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -73.3, y: 0, z: -282}
+  m_LocalPosition: {x: 158, y: 0, z: -270}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -588,6 +634,7 @@ Transform:
   - {fileID: 4975377555215953533}
   - {fileID: 1353164761790878690}
   - {fileID: 8640295742436832676}
+  - {fileID: 8964082696241542951}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -633,7 +680,7 @@ GameObject:
   - component: {fileID: 8640295742436832676}
   - component: {fileID: 6518795150619605464}
   m_Layer: 0
-  m_Name: Sangamon L
+  m_Name: AC_Lvl_6
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -647,7 +694,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8941507485370550890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 92.2, y: 0, z: -194}
+  m_LocalPosition: {x: -0, y: 0, z: -150}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -667,4 +714,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 72d9b64370e1d5e4f9ff832938c1150c, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 864b985f9d0055e499010f6a5a0f0aed, type: 2}

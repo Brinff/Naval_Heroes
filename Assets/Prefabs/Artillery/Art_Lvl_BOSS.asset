@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb65e8002ef153047a14522bb03a55c2, type: 3}
-  m_Name: Sub_i-58
+  m_Name: Art_Lvl_BOSS
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2117897578878625422, guid: 5a0471481170d124e87cdb99948f30ff, type: 3}
+  prefab: {fileID: 2274979080763799702, guid: 53bf61c2ee7e6462eb8d895024034e6e, type: 3}
