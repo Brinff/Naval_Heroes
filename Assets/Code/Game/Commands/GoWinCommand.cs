@@ -49,6 +49,7 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
 
         m_WinWidget.OnClaim -= OnClaimReward;
         m_CommandSystem.Execute<MoneyAddCommand, int>(m_Reward);
+        m_CommandSystem.Execute<EndBattleCommand>();
         m_CommandSystem.Execute<GoHomeCommand>();
 
         m_PlayerMoneyProvider = null;
