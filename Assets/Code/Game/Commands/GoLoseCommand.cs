@@ -40,6 +40,7 @@ public class GoLoseCommand : MonoBehaviour, ICommand<BattleData>
 
         m_LoseWidget.OnRetry -= OnRetry;
         m_CommandSystem.Execute<MoneyAddCommand, int>(m_Reward);
+        m_CommandSystem.Execute<EndBattleCommand>();
         m_CommandSystem.Execute<GoHomeCommand>();
         m_LoseWidget = null;
         m_CommandSystem = null;
