@@ -1443,6 +1443,7 @@ GameObject:
   - component: {fileID: 3489344002986352074}
   - component: {fileID: 5928409770672873787}
   - component: {fileID: 4025414595035837340}
+  - component: {fileID: 3668036354069388108}
   m_Layer: 0
   m_Name: Art_Lvl_6
   m_TagString: Untagged
@@ -1593,6 +1594,20 @@ MonoBehaviour:
   m_Orgin: {fileID: 8678539771261761736}
   m_Lifetime: 16
   m_Scale: {x: 1.7, y: 1, z: 1.7}
+--- !u!114 &3668036354069388108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2274979080763799702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac543b37321f364f98e159557c42603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_WaterLine: 4.34
+  m_Slope: 1
 --- !u!1 &2282847331539686944
 GameObject:
   m_ObjectHideFlags: 0

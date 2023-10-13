@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 8241422490463537094}
   - component: {fileID: 4158190951622195772}
   - component: {fileID: 145970310106104118}
+  - component: {fileID: 2104903454038699482}
   m_Layer: 0
   m_Name: AC_Lvl_5
   m_TagString: Untagged
@@ -615,6 +616,20 @@ MonoBehaviour:
   m_Orgin: {fileID: 438837777193895657}
   m_Lifetime: 15
   m_Scale: {x: 2, y: 1, z: 2}
+--- !u!114 &2104903454038699482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6778801472794295917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac543b37321f364f98e159557c42603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_WaterLine: -3.69
+  m_Slope: 1
 --- !u!1 &6882149136227972846
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,7 +883,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5629727574527139602, guid: 2caf1560065bf284f83e88c05161ca8f, type: 3}
+  - {fileID: 2100000, guid: 94f39d679fdf61f439114951e6c4950c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

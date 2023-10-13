@@ -35,7 +35,7 @@ public class ShipBuoyancySystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
             {
                 shipTransform.transform.position = waterPosition - Vector3.up * shipBuoyancy.waterLine;
                 //Debug.Log(waterNormal)
-                waterNormal += Vector3.up * 5;
+                waterNormal += Vector3.up * Mathf.Lerp(40, 5, shipBuoyancy.slope);
                 waterNormal = Vector3.Normalize(waterNormal);
 
                 shipTransform.transform.rotation = Quaternion.LookRotation(Vector3.forward, waterNormal);

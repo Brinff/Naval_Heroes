@@ -23,7 +23,6 @@ public class ShipBuoyancyAuthoring : MonoBehaviour, IEntityAuthoring
     {
         using (new GizmosScope(transform.localToWorldMatrix, new Color(0, 0, 1f, 0.5f)))
         {
-            Vector3 size = new Vector3(100, 0.1f, 100);
             GridAuhoring gridAuhoring = GetComponent<GridAuhoring>();
             if (gridAuhoring != null)
             {
@@ -44,10 +43,11 @@ public class ShipBuoyancyAuthoring : MonoBehaviour, IEntityAuthoring
 
 
                 }
-                Vector3 c = localBounds.center;
-                c.y = m_WaterLine;
-                localBounds.center = c;
-                Gizmos.DrawCube(localBounds.center, localBounds.size);
+                Vector3 center = localBounds.center;
+                center.y = m_WaterLine;
+                Vector3 size = localBounds.size;
+                size.y = 0.1f;
+                Gizmos.DrawCube(center, size);
             }
 
         }
