@@ -1279,7 +1279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Current: 0
-  m_Max: 1
+  m_Max: 2
 --- !u!114 &2254227050186554123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 0
-  m_Value: 144
+  m_Value: 169
 --- !u!1 &3341757186976157272
 GameObject:
   m_ObjectHideFlags: 0
@@ -3179,7 +3179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116f6d6219b8a0f4ebd07ce16f818494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 720
+  health: 845
 --- !u!114 &8720737492768609822
 MonoBehaviour:
   m_ObjectHideFlags: 0

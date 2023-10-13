@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 0
-  m_Value: 120
+  m_Value: 130
 --- !u!1 &2334597561583762025
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,7 +2183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116f6d6219b8a0f4ebd07ce16f818494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 600
+  health: 650
 --- !u!114 &-8963363798705678983
 MonoBehaviour:
   m_ObjectHideFlags: 0

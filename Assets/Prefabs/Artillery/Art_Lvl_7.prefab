@@ -1444,7 +1444,7 @@ GameObject:
   - component: {fileID: 5928409770672873787}
   - component: {fileID: 4025414595035837340}
   m_Layer: 0
-  m_Name: Art_Lvl_6
+  m_Name: Art_Lvl_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1512,7 +1512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116f6d6219b8a0f4ebd07ce16f818494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1856
+  health: 2413
 --- !u!114 &1103335688430964133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1577,7 +1577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e8fa47dc1aa0e40b2e54e5397e71c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 6
+  amount: 7
 --- !u!114 &4025414595035837340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4829,7 +4829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 3
+  m_Duration: 3.5
 --- !u!114 &107093256871985286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4843,7 +4843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Current: 0
-  m_Max: 3
+  m_Max: 4
 --- !u!114 &4916138984583158672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4894,7 +4894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 0
-  m_Value: 371
+  m_Value: 483
 --- !u!1 &7814474845194766947
 GameObject:
   m_ObjectHideFlags: 0

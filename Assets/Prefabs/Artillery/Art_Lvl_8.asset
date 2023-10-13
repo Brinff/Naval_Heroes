@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb65e8002ef153047a14522bb03a55c2, type: 3}
-  m_Name: South Dakota SP
+  m_Name: Art_Lvl_8
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2274979080763799702, guid: dd381cb134a15cb4187afe8b10ef62d8, type: 3}
+  prefab: {fileID: 2274979080763799702, guid: 5aeee2b475e984198b5e9537066f2ee2, type: 3}

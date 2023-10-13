@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Current: 0
-  m_Max: 1
+  m_Max: 2
 --- !u!114 &1513754629870675652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 0
-  m_Value: 173
+  m_Value: 220
 --- !u!1 &266991749400213259
 GameObject:
   m_ObjectHideFlags: 0
@@ -4314,7 +4314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116f6d6219b8a0f4ebd07ce16f818494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 864
+  health: 1099
 --- !u!114 &8664327949160449575
 MonoBehaviour:
   m_ObjectHideFlags: 0
