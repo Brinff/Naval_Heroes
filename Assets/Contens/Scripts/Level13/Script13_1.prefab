@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 4
+  m_Duration: 1
 --- !u!114 &4907828729105607655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7e4ba4577e3f449a207e49f50bfc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsSeparately: 0
+  m_IsSeparately: 1
 --- !u!114 &5313303042165201150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.45
+  m_Value: 0.7
 --- !u!1 &3578917471391140443
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 7932914392098550537}
   - component: {fileID: 1234121189016669507}
   m_Layer: 0
-  m_Name: Gato L
+  m_Name: Sub_Lvl_3
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 7b74ca6dba208cd42a10dd92f508c468, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 9311b261e7b698a4da8d561b4ef35570, type: 2}
 --- !u!1 &4474588631238644977
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 8986812666735416075}
   - component: {fileID: 155545407042939650}
   m_Layer: 0
-  m_Name: Mahan L (1)
+  m_Name: Art_Lvl_3
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 699d7ffefeb078747a73688cb6495fe4, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 22bb4ce80266a754289315398776e334, type: 2}
 --- !u!1 &5886449396812989190
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 4
+  m_Duration: 1
 --- !u!114 &1870086053446610431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.45
+  m_Value: 0.6
 --- !u!1 &7316131232669963443
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +487,7 @@ GameObject:
   - component: {fileID: 4812201830995966309}
   - component: {fileID: 1632120742980166080}
   m_Layer: 0
-  m_Name: Gato L (1)
+  m_Name: Sub_Lvl_3
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 7b74ca6dba208cd42a10dd92f508c468, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 9311b261e7b698a4da8d561b4ef35570, type: 2}
 --- !u!1 &7385703431173710686
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +702,7 @@ GameObject:
   - component: {fileID: 2800585995920451327}
   - component: {fileID: 3884198419795708279}
   m_Layer: 0
-  m_Name: Mahan L
+  m_Name: Art_Lvl_3
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -736,7 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 699d7ffefeb078747a73688cb6495fe4, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 22bb4ce80266a754289315398776e334, type: 2}
 --- !u!1 &8483572887083098724
 GameObject:
   m_ObjectHideFlags: 0
