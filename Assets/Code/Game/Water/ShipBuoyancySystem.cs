@@ -33,12 +33,12 @@ public class ShipBuoyancySystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
             var shipPosition = shipTransform.transform.position;
             if(m_OceanSimulation.Collision.GetWaterData(shipPosition, out Vector3 waterPosition, out Vector3 waterNormal))
             {
-                shipTransform.transform.position = waterPosition - Vector3.up * shipBuoyancy.waterLine;
+                shipTransform.transform.position = Vector3.Lerp(shipTransform.transform.position, waterPosition - Vector3.up * shipBuoyancy.waterLine, Time.deltaTime * 20f);
                 //Debug.Log(waterNormal)
                 waterNormal += Vector3.up * Mathf.Lerp(40, 5, shipBuoyancy.slope);
                 waterNormal = Vector3.Normalize(waterNormal);
 
-                shipTransform.transform.rotation = Quaternion.LookRotation(Vector3.forward, waterNormal);
+                shipTransform.transform.rotation = Quaternion.Lerp(shipTransform.transform.rotation , Quaternion.LookRotation(Vector3.forward, waterNormal), Time.deltaTime * 1f);
             }
         }
     }
