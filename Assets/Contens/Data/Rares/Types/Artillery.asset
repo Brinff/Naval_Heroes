@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582ec903cd3fb5e49a1c05106eba8c4c, type: 3}
   m_Name: Artillery
   m_EditorClassIdentifier: 
-  color: {r: 0.754717, g: 0, b: 0.7228916, a: 1}
+  color: {r: 0.754717, g: 0, b: 0.75070256, a: 1}

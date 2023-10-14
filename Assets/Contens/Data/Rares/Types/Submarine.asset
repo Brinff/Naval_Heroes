@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 582ec903cd3fb5e49a1c05106eba8c4c, type: 3}
   m_Name: Submarine
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0.8051599, b: 0.8207547, a: 1}
+  color: {r: 0, g: 0.72799855, b: 0.8396226, a: 1}

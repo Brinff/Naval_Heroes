@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: SimulationSettings
   m_EditorClassIdentifier: 
   _resolution: 128
-  _cascadesNumber: 4
+  _cascadesNumber: 2
   _anisoLevel: 2
   _simulateFoam: 1
   _updateSpectrum: 1
-  _readbackCascades: 0
+  _readbackCascades: 1
   _samplingIterations: 1
   _domainsMode: 0
   _simulationScale: 443.58
@@ -27,4 +27,4 @@ MonoBehaviour:
   _c1Scale: 167
   _c2Scale: 30.84
   _c3Scale: 5.62
-  _displaySpectrum: {fileID: 11400000, guid: b270d96f838383548994ef61f862fade, type: 2}
+  _displaySpectrum: {fileID: 11400000, guid: 60b7fe5ee6ea80e4aa9ad21d6132d821, type: 2}

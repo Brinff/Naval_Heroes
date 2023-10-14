@@ -3,7 +3,42 @@ guid: 2caf1560065bf284f83e88c05161ca8f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Aircraft_Carrier1_1
+    second: {fileID: 2100000, guid: 94f39d679fdf61f439114951e6c4950c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Aircraft_Carrier2
+    second: {fileID: 2100000, guid: 54fbac5a0de6b0a48b15b1c0812c0cef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Aircraft_Carrier3a
+    second: {fileID: 2100000, guid: 260a8fad9377a404cb07e553dd0e0bcf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Aircraft_Carrier3b
+    second: {fileID: 2100000, guid: df018d3ad3f06d544a75d052ccb8fbae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Aircraft_Carrier3d
+    second: {fileID: 2100000, guid: 4b353c541ca3395489cb00b357768ac6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Aircraft_Carrier4_1
+    second: {fileID: 2100000, guid: c182fefbc52b4fe479b5233b48dad9e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: a23b0a1802c3235449f397124918d721, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -90,7 +125,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.005
+    globalScale: 0.5
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

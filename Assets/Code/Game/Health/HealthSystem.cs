@@ -12,6 +12,8 @@ public class HealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsPo
     private EcsPool<HealthEndEvent> m_PoolHealthEnd;
     private EcsPool<DeadTag> m_PoolDead;
     private EcsWorld m_World;
+    [SerializeField]
+    private bool m_GodMode;
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
@@ -34,6 +36,8 @@ public class HealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsPo
 
     public void Run(IEcsSystems systems)
     {
+        if (m_GodMode) return;
+
         foreach (var entity in m_FilterA)
         {
             ref var health = ref m_PoolHealth.Get(entity);
