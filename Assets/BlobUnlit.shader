@@ -4,6 +4,7 @@ Shader "Unlit/BlobUnlit"
     {
         _SphA ("Sph A", Vector) = (0,0,0,0)
         _SphB ("Sph B", Vector) = (0,0,0,0)
+        _SphC ("Sph C", Vector) = (0,0,0,0)
         _LineEnd ("Line End", Vector) = (0,0,0,0)
         _BlobFactorSph("Blob Factor Sph", Range(0,1)) = 0
         _BlobFactorLine("Blob Factor Line", Range(0,1)) = 0
@@ -39,6 +40,7 @@ Shader "Unlit/BlobUnlit"
 
             float4 _SphA;
             float4 _SphB;
+            float4 _SphC;
             float4 _LineEnd;
             float _BlobFactorSph;
             float _BlobFactorLine;
@@ -75,12 +77,16 @@ Shader "Unlit/BlobUnlit"
                 fixed4 c = 0;
                 float shpA = length(i.uv - _SphA.xy)  - _SphA.w;
                 float shpB = length(i.uv - _SphB.xy)  - _SphB.w;
+                float shpC = length(i.uv - _SphC.xy)  - _SphC.w;
 
                 float l = line_segment(i.uv, _SphA.xy, _SphB.xy) - _LineEnd.w;
                 float ab = smoothUnion(shpA, shpB, _BlobFactorSph);
                 float lab = smoothUnion(l, ab, _BlobFactorLine);
+                float labc = smoothUnion(lab, shpC, _BlobFactorSph);
 
-                float result = smoothstep(_Edge0, _Edge1, lab);
+                float result = smoothstep(_Edge0, _Edge1, labc);
+
+
 
                 return result;
             }
