@@ -86,8 +86,8 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BlobFactor: 0.163
-    - _BlobFactorLine: 0.456
-    - _BlobFactorSph: 0.425
+    - _BlobFactorLine: 0.374
+    - _BlobFactorSph: 0.183
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -98,7 +98,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _Edge0: 0
-    - _Edge1: 0
+    - _Edge1: -0.06
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -122,10 +122,11 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LineEnd: {r: 1.53, g: -0.54, b: 0, a: 0.07}
+    - _LineEnd: {r: 1.53, g: -0.34, b: 0, a: 0.04}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SphA: {r: 0.52, g: 0.74, b: 0, a: 0.1}
-    - _SphB: {r: 0.8, g: 0.19, b: 0, a: 0.02}
+    - _SphA: {r: 0.7, g: 0.79, b: 0, a: 0.1}
+    - _SphB: {r: 0.75, g: 0.18, b: 0, a: 0.02}
+    - _SphC: {r: 0.17, g: 0.15, b: 0, a: 0.1}
     - _Step: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &2244507053515680120
