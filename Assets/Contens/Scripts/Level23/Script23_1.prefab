@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 2208831481335000673}
   - component: {fileID: 1768324891385340788}
   m_Layer: 0
-  m_Name: AC_Lvl_5
+  m_Name: AC_Lvl_6
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2488229540041359140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -104.2, y: 0, z: -145.5}
+  m_LocalPosition: {x: -115.1, y: 0, z: -145.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: b7b5a50da6b5cd944a153283571b96c1, type: 2}
+  m_EntityData: {fileID: 11400000, guid: bc2612e25951d7548bf4d3fb5721d809, type: 2}
 --- !u!1 &3030502060325486396
 GameObject:
   m_ObjectHideFlags: 0
