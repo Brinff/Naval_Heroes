@@ -72,6 +72,8 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     point = newPosition;
                 }
             }
+            targetRotation = Quaternion.identity;
+            targetScale = 1;
             targetPosition = point;
         }
     }
@@ -82,7 +84,9 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         if (populateSlot == null)
         {
-            targetPosition = transform.position;
+            targetPosition = position;
+            targetRotation = rotation;
+            targetScale = scale;
         }
         else
         {
@@ -90,7 +94,12 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             {
                 populateSlot.AddItem(this, targetPosition);
             }
-            else targetPosition = transform.position;
+            else
+            {
+                targetPosition = position;
+                targetRotation = rotation;
+                targetScale = scale;
+            }
         }
 
         var otherSlots = parentSlot.collection.GetSlots<IItemEndDrag>();
@@ -151,7 +160,12 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     //public float m_Force;
     private Vector3 m_CurrentPosition;
     private Quaternion m_CurrentRotation = Quaternion.identity;
+    private float m_CurrentScale = 1;
+
     private Vector3 m_TargetPosition;
+    private Quaternion m_TargetRotation = Quaternion.identity;
+    private float m_TargetScale = 1;
+
     private Vector3 m_Velocity;
     //[SerializeField]
     //private Vector3 m_RotationByLocalVelocty;
@@ -185,11 +199,13 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         //m_CurrentPosition += m_Velocity * Time.deltaTime;
 
         m_CurrentPosition = Vector3.Lerp(m_CurrentPosition, target, Time.deltaTime * 20);
-
+        m_CurrentRotation = Quaternion.Lerp(m_CurrentRotation, m_TargetRotation, Time.deltaTime * 20);
+        m_CurrentScale = Mathf.Lerp(m_CurrentScale, m_TargetScale, Time.deltaTime * 20);
         if (entity)
         {
             entity.transform.rotation = m_CurrentRotation;
             entity.transform.position = m_CurrentPosition;
+            entity.transform.localScale = Vector3.one * m_CurrentScale;
         }
 
         if (info)
@@ -200,9 +216,17 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public Vector3 currentPosition { get => m_CurrentPosition; set { m_TargetPosition = value; m_Velocity = Vector3.zero; m_CurrentPosition = value; } }
     public Vector3 targetPosition { get => m_TargetPosition; set => m_TargetPosition = value; }
-    public Vector3 position { get => transform.position; set => transform.position = value; }
+    public Quaternion targetRotation { get => m_TargetRotation; set => m_TargetRotation = value; }
+    public float targetScale { get => m_TargetScale; set => m_TargetScale = value; }
 
-    public static SlotItem Create(SlotCollection collection, EntityData entityData, Vector3 position)
+    private Quaternion m_Rotation;
+    private float m_Scale;
+
+    public Vector3 position { get => transform.position; set => transform.position = value; }
+    public float scale { get => m_Scale; set => m_Scale = value; }
+    public Quaternion rotation { get => m_Rotation; set => m_Rotation = value; }
+
+    public static SlotItem Create(SlotCollection collection, EntityData entityData, Vector3 position, Quaternion rotation, float scale)
     {
         GameObject gameObject = new GameObject($"Slot Item {entityData.name}");
         gameObject.layer = 9;
@@ -214,8 +238,15 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         slotItem.info = widget.Create();
         slotItem.transform.SetParent(collection.transform);
         slotItem.currentPosition = position;
+
         slotItem.targetPosition = position;
+        slotItem.targetRotation = rotation;
+        slotItem.targetScale = scale;
+
         slotItem.position = position;
+        slotItem.rotation = rotation;
+        slotItem.scale = scale;
+
         slotItem.SetEntity(entityData);
 
         

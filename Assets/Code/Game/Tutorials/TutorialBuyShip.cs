@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static PlayerSlotsSystem;
 
 
 public interface ITutorial
@@ -45,21 +46,36 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
 
     public void Done(EcsWorld ecsWorld, IEcsSystems systems)
     {
+        var slot = m_SlotCollection.GetSlots<SlotBuy>().FirstOrDefault();
+        TargetRaycastMediator.Instance.RemoveTargetRaycast(slot.gameObject);
+        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
         m_TutorialTapWidget.Hide(false);
+
+        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        messageWidget.Hide(false);
+
         m_IsDone.Value = true;
     }
 
     public void Launch(EcsWorld ecsWorld, IEcsSystems systems)
     {
+        TargetRaycastMediator.Instance.isOverrideTargetRaycasts = true;
         StartCoroutine(DelayLaunch());
     }
 
     private IEnumerator DelayLaunch()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.4f);
+
+        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        messageWidget.SetText("TAP THE BUTTON TO BUY A SHIP");
+        messageWidget.Show(false);
+
         var slot = m_SlotCollection.GetSlots<SlotBuy>().FirstOrDefault();
         Transform transform = slot.GetComponentInChildren<TutorialPoint>().transform;
         m_TutorialTapWidget.PlaceAtWorld(transform.position);
+        TargetRaycastMediator.Instance.AddTargetRaycast(slot.gameObject);
+        
         m_TutorialTapWidget.Show(false);
     }
 

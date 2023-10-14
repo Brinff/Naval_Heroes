@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 6024617887545501416}
   - component: {fileID: 1356242679088326646}
   m_Layer: 0
-  m_Name: Sangamon S (1)
+  m_Name: AC_Lvl_5
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5227423552840498877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -135, y: 0, z: -171}
+  m_LocalPosition: {x: -169, y: 0, z: -199}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 95e827ef307352749952a72c18b85559, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 75bbf2480c00b46d784ad0d1435e3bf5, type: 2}
 --- !u!1 &5886449396812989190
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.8
+  m_Value: 1
 --- !u!1 &6162888171830038805
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 108355267571478529}
   - component: {fileID: 5987064993709480682}
   m_Layer: 0
-  m_Name: Sangamon S
+  m_Name: AC_Lvl_5
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -409,7 +409,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6162888171830038805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 120, y: 0, z: -215}
+  m_LocalPosition: {x: 184, y: 0, z: -172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 95e827ef307352749952a72c18b85559, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 75bbf2480c00b46d784ad0d1435e3bf5, type: 2}
 --- !u!1 &6216943166191915982
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 1353164761790878690}
   - component: {fileID: 1950208634488922084}
   m_Layer: 0
-  m_Name: South Dakota S
+  m_Name: Art_Lvl_7
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -455,7 +455,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6216943166191915982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -301}
+  m_LocalPosition: {x: 33, y: 0, z: -308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 30619f76512b021489467c08ce5a2584, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 157772caa05604fd097952e6b89645f0, type: 2}
 --- !u!1 &7385703431173710686
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.8
+  m_Value: 1
 --- !u!1 &8483572887083098724
 GameObject:
   m_ObjectHideFlags: 0

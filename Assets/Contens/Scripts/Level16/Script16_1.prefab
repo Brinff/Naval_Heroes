@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5147713905163871311}
   - component: {fileID: 2331344224569758816}
   m_Layer: 0
-  m_Name: Mahan L (1)
+  m_Name: Art_Lvl_4
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304204335144549089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 164, y: 0, z: -298}
+  m_LocalPosition: {x: 155, y: 0, z: -324}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 699d7ffefeb078747a73688cb6495fe4, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 0bebdc8bbe562d442ace8a8d3d27a657, type: 2}
 --- !u!1 &892603046748559454
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 2.9
+  m_Duration: 0.5
 --- !u!114 &4907828729105607655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.75
+  m_Value: 0.5
 --- !u!1 &2148717893891373224
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 5324384726490414502}
   - component: {fileID: 9081396519348163476}
   m_Layer: 0
-  m_Name: Gato L
+  m_Name: Sub_Lvl_4
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -240,7 +240,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2148717893891373224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3, y: 0, z: -269}
+  m_LocalPosition: {x: 13, y: 0, z: -241}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 7b74ca6dba208cd42a10dd92f508c468, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 76c1c9adfe730094b9a2d26682b422d7, type: 2}
 --- !u!1 &3578917471391140443
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 7932914392098550537}
   - component: {fileID: 1234121189016669507}
   m_Layer: 0
-  m_Name: Mahan L
+  m_Name: Art_Lvl_3
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -286,7 +286,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3578917471391140443}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -162, y: 0, z: -311}
+  m_LocalPosition: {x: -164, y: 0, z: -301}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 699d7ffefeb078747a73688cb6495fe4, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 22bb4ce80266a754289315398776e334, type: 2}
 --- !u!1 &5437663484999733596
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 3815805590783419559}
   - component: {fileID: 4226564114508135634}
   m_Layer: 0
-  m_Name: Gato S
+  m_Name: Sub_Lvl_3
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -332,7 +332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5437663484999733596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -103, y: 0, z: -194}
+  m_LocalPosition: {x: -110, y: 0, z: -176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 75bf7d703d4577743a0051e3673dc7eb, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 9311b261e7b698a4da8d561b4ef35570, type: 2}
 --- !u!1 &5685139526973993002
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 5623582669600418249}
   - component: {fileID: 8788608958538274364}
   m_Layer: 0
-  m_Name: Gato S (1)
+  m_Name: Sub_Lvl_3
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -378,7 +378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5685139526973993002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 89, y: 0, z: -185}
+  m_LocalPosition: {x: 124, y: 0, z: -158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 75bf7d703d4577743a0051e3673dc7eb, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 9311b261e7b698a4da8d561b4ef35570, type: 2}
 --- !u!1 &5886449396812989190
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 4
+  m_Duration: 1
 --- !u!114 &1870086053446610431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,7 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 1
+  m_Value: 0.75
 --- !u!1 &7385703431173710686
 GameObject:
   m_ObjectHideFlags: 0

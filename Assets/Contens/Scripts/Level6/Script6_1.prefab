@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 6619870447876502674}
   - component: {fileID: 6907292306092641900}
   m_Layer: 0
-  m_Name: Mahan S (1)
+  m_Name: Art_Lvl_2
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -194,7 +194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567332464445782238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59.4, y: 0, z: -254.7}
+  m_LocalPosition: {x: 152.2, y: 0, z: -213.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 942391044987b6d4d9ec2cbc44cb524e, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 699d7ffefeb078747a73688cb6495fe4, type: 2}
 --- !u!1 &2505852486893534401
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 5429030819307813407}
   - component: {fileID: 410330130454518295}
   m_Layer: 0
-  m_Name: Mahan L
+  m_Name: AC_Lvl_1
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -240,7 +240,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2505852486893534401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.7, y: 0, z: -96.9}
+  m_LocalPosition: {x: -4.4, y: 0, z: -280.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 699d7ffefeb078747a73688cb6495fe4, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 95e827ef307352749952a72c18b85559, type: 2}
 --- !u!1 &5886449396812989190
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,98 +430,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Option: 3
   m_Value: 0.65
---- !u!1 &6682455201076629211
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3318795816331549357}
-  - component: {fileID: 2933243491487428145}
-  m_Layer: 0
-  m_Name: Mahan S
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3318795816331549357
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6682455201076629211}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 149, y: 0, z: -169.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3735960675166061339}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2933243491487428145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6682455201076629211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf4721651f495e4d99ec1655e4fb25b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 942391044987b6d4d9ec2cbc44cb524e, type: 2}
---- !u!1 &7109202423435555767
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3327937496919187275}
-  - component: {fileID: 6318659801246042006}
-  m_Layer: 0
-  m_Name: Mahan S
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3327937496919187275
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7109202423435555767}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -73.7, y: 0, z: -275.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3735960675166061339}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6318659801246042006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7109202423435555767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf4721651f495e4d99ec1655e4fb25b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 942391044987b6d4d9ec2cbc44cb524e, type: 2}
 --- !u!1 &7385703431173710686
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 0.3
+  m_Duration: 1
 --- !u!114 &7570207837286448875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,7 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 1
+  m_Value: 0.8
 --- !u!1 &8483572887083098724
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,8 +634,6 @@ Transform:
   - {fileID: 3894568137251906151}
   - {fileID: 4975377555215953533}
   - {fileID: 8603661756172458766}
-  - {fileID: 3318795816331549357}
-  - {fileID: 3327937496919187275}
   - {fileID: 6619870447876502674}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -774,7 +680,7 @@ GameObject:
   - component: {fileID: 8603661756172458766}
   - component: {fileID: 2914999948756696149}
   m_Layer: 0
-  m_Name: Mahan S
+  m_Name: Art_Lvl_2
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -788,7 +694,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8828564453380862248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -147.5, y: 0, z: -171.8}
+  m_LocalPosition: {x: -156, y: 0, z: -188.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -808,4 +714,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 942391044987b6d4d9ec2cbc44cb524e, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 699d7ffefeb078747a73688cb6495fe4, type: 2}

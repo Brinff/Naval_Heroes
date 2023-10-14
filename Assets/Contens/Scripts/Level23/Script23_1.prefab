@@ -1,51 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &480983584071578285
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6712539887992368297}
-  - component: {fileID: 5530650989407250154}
-  m_Layer: 0
-  m_Name: Gato S
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6712539887992368297
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 480983584071578285}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -166, y: 0, z: -283}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3735960675166061339}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5530650989407250154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 480983584071578285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf4721651f495e4d99ec1655e4fb25b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 75bf7d703d4577743a0051e3673dc7eb, type: 2}
 --- !u!1 &892603046748559454
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 0.5
+  m_Duration: 1
 --- !u!114 &4907828729105607655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7e4ba4577e3f449a207e49f50bfc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsSeparately: 1
+  m_IsSeparately: 0
 --- !u!114 &5313303042165201150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,8 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.7
---- !u!1 &2383823517889253547
+  m_Value: 0.9
+--- !u!1 &2488229540041359140
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -223,44 +177,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9029383682754986607}
-  - component: {fileID: 3358418354968556867}
+  - component: {fileID: 2208831481335000673}
+  - component: {fileID: 1768324891385340788}
   m_Layer: 0
-  m_Name: Gato L
+  m_Name: AC_Lvl_6
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9029383682754986607
+--- !u!4 &2208831481335000673
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2383823517889253547}
+  m_GameObject: {fileID: 2488229540041359140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: -318}
+  m_LocalPosition: {x: -115.1, y: 0, z: -145.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3735960675166061339}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3358418354968556867
+--- !u!114 &1768324891385340788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2383823517889253547}
+  m_GameObject: {fileID: 2488229540041359140}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cf4721651f495e4d99ec1655e4fb25b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 7b74ca6dba208cd42a10dd92f508c468, type: 2}
+  m_EntityData: {fileID: 11400000, guid: bc2612e25951d7548bf4d3fb5721d809, type: 2}
 --- !u!1 &3030502060325486396
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +226,7 @@ GameObject:
   - component: {fileID: 7497744671090994192}
   - component: {fileID: 7397426919211663520}
   m_Layer: 0
-  m_Name: Gato S
+  m_Name: Sub_Lvl_5
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -286,7 +240,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3030502060325486396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 171, y: 0, z: -282}
+  m_LocalPosition: {x: 135.5, y: 0, z: -151.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -306,7 +260,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 75bf7d703d4577743a0051e3673dc7eb, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 075ad67d744ae144090412fd7a5e3c52, type: 2}
+--- !u!1 &5618897273735400887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6719733594046936524}
+  - component: {fileID: 9016854033691779998}
+  m_Layer: 0
+  m_Name: Art_Lvl_5 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6719733594046936524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5618897273735400887}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -141.2, y: 0, z: -284.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3735960675166061339}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9016854033691779998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5618897273735400887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf4721651f495e4d99ec1655e4fb25b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Team: 1
+  m_EntityData: {fileID: 11400000, guid: 30619f76512b021489467c08ce5a2584, type: 2}
 --- !u!1 &5886449396812989190
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 3.5
+  m_Duration: 1
 --- !u!114 &1870086053446610431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,8 +475,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.7
---- !u!1 &6755683523278979940
+  m_Value: 1
+--- !u!1 &6627643983837317337
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -484,44 +484,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1477668422884545017}
-  - component: {fileID: 6079428932355983979}
+  - component: {fileID: 7976372318903224315}
+  - component: {fileID: 285392868149812714}
   m_Layer: 0
-  m_Name: Brooklyn L
+  m_Name: Art_Lvl_5
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1477668422884545017
+--- !u!4 &7976372318903224315
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6755683523278979940}
+  m_GameObject: {fileID: 6627643983837317337}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: -224}
+  m_LocalPosition: {x: 141.7, y: 0, z: -307.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3735960675166061339}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6079428932355983979
+--- !u!114 &285392868149812714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6755683523278979940}
+  m_GameObject: {fileID: 6627643983837317337}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cf4721651f495e4d99ec1655e4fb25b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 0bebdc8bbe562d442ace8a8d3d27a657, type: 2}
+  m_EntityData: {fileID: 11400000, guid: 30619f76512b021489467c08ce5a2584, type: 2}
 --- !u!1 &7385703431173710686
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756041cc3ea7a4847808f41d38c4f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Duration: 0.3
+  m_Duration: 1
 --- !u!114 &7570207837286448875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7e4ba4577e3f449a207e49f50bfc4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsSeparately: 1
+  m_IsSeparately: 0
 --- !u!114 &2525960512623035287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,7 +690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 1
+  m_Value: 0.9
 --- !u!1 &8483572887083098724
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,10 +724,10 @@ Transform:
   - {fileID: 438218681523121144}
   - {fileID: 3894568137251906151}
   - {fileID: 4975377555215953533}
-  - {fileID: 1477668422884545017}
   - {fileID: 7497744671090994192}
-  - {fileID: 6712539887992368297}
-  - {fileID: 9029383682754986607}
+  - {fileID: 7976372318903224315}
+  - {fileID: 2208831481335000673}
+  - {fileID: 6719733594046936524}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
