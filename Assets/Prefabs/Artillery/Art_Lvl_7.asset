@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb65e8002ef153047a14522bb03a55c2, type: 3}
   m_Name: Art_Lvl_7
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2274979080763799702, guid: 2635e9cc4a8034a53a4ebdcb2e3b9c4d, type: 3}
+  prefab: {fileID: 2274979080763799702, guid: 96881405b21b84f46b8bd800013ba0a5, type: 3}

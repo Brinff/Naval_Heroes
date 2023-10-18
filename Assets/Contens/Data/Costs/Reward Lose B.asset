@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 100
   pow: 2
-  factor: 0.25
+  factor: 0.5
   maxStep: 100

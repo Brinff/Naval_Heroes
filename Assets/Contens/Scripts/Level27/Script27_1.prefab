@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.8
+  m_Value: 0.9
 --- !u!1 &6216943166191915982
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.9
+  m_Value: 0.8
 --- !u!1 &8483572887083098724
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,4 +714,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Team: 1
-  m_EntityData: {fileID: 11400000, guid: 864b985f9d0055e499010f6a5a0f0aed, type: 2}
+  m_EntityData: {fileID: 11400000, guid: bc2612e25951d7548bf4d3fb5721d809, type: 2}
