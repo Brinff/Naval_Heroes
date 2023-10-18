@@ -3,7 +3,32 @@ guid: 514a19c9bd8e447cc88e4c692e25cc1b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_T-22_Hull
+    second: {fileID: 2100000, guid: 77795b8965b58864d8cf93addc5ac71d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_T-22_Main
+    second: {fileID: 2100000, guid: 0954ae08219799343978afa73ba7b6fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_T-22_Radar_1
+    second: {fileID: 2100000, guid: 831368d350069fd4ea90f9ffad505f7b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_T-22_TorpedoTube
+    second: {fileID: 2100000, guid: 713f4ecce5e856641b06a3457bfe1bdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_T-22_Vessel
+    second: {fileID: 2100000, guid: 5c404dea56d651342af353bd934bc9a6, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +60,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
