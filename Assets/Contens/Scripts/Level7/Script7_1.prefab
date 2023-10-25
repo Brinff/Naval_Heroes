@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.4
+  m_Value: 0.3
 --- !u!1 &2427709072670966064
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.4
+  m_Value: 0.3
 --- !u!1 &7385703431173710686
 GameObject:
   m_ObjectHideFlags: 0
