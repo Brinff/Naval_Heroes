@@ -8739,7 +8739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_VFXTrail: {fileID: 4731636227409746115, guid: 4e1f81f2eb5f8e14fabca2151596b78c, type: 3}
   m_VFXTrailPoolSize: 10
-  m_WaterHeight: 0.6
+  m_WaterHeight: 1.2
   m_VFXTrailRotation: {x: 0.49999997, y: -0.49999997, z: 0.49999997, w: 0.49999997}
   m_Debug: 0
 --- !u!114 &5455264918296568953
