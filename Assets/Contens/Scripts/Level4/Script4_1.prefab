@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.5
+  m_Value: 0.35
 --- !u!1 &2505852486893534401
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Option: 3
-  m_Value: 0.5
+  m_Value: 0.35
 --- !u!1 &7385703431173710686
 GameObject:
   m_ObjectHideFlags: 0
