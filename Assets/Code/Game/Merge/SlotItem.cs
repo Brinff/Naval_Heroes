@@ -21,6 +21,9 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private float height;
 
+
+    public bool isLockDrag { get; set; }
+
     public void Show()
     {
         gameObject.SetActive(true);
@@ -37,6 +40,7 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (isLockDrag) return;
         if (parentSlot!=null)
         {
             if(parentSlot.RemoveItemPossible(this, Vector3.zero))
