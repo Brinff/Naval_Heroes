@@ -50,6 +50,7 @@ public class Group<T> : IEcsGroup where T : IEcsGroup
         if (isEditor)
         {
 #if UNITY_EDITOR
+            m_EcsSystem.Add(new EcsWorldViewSystem());
             m_EcsSystem.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
             m_EcsSystem.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
 #endif
@@ -98,15 +99,12 @@ public struct TransformComponent
     public Transform transform;
 }
 
-public struct ParentComponent
+public struct Parent
 {
     public int entity;
 }
 
-public struct RootComponent
-{
-    public EcsPackedEntity entity;
-}
+
 
 public struct ChildsComponent
 {
@@ -224,45 +222,5 @@ public class EntityManager : Singleton<EntityManager>, ISingletonSetup
         {
             group.EndInit(m_IsEditor);
         }
-
-        //SharedData sharedData = new SharedData(transform);
-
-        //        m_UpdateSystems = new EcsSystems(m_World, transform.GetComponentsInChildren<IEcsData>());
-        //        m_FixedUpdateSystems = new EcsSystems(m_World);
-        //#if UNITY_EDITOR
-        //        m_GizmosSystems = new EcsSystems(m_World);
-        //#endif
-
-
-
-
-        //        foreach (var item in compontens)
-        //        {
-        //            if (item is IEcsGroupUpdateSystem) m_UpdateSystems.Add(item);
-        //            if (item is IEcsGroupFixedUpdateSystem) m_FixedUpdateSystems.Add(item);
-        //#if UNITY_EDITOR
-        //            if (item is IEcsGroupGizmosSystem) m_GizmosSystems.Add(item);
-        //#endif
-        //        }
-
-        //#if UNITY_EDITOR
-        //        m_UpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
-        //        m_UpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
-
-        //        m_FixedUpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
-        //        m_FixedUpdateSystems.Add(new Leopotam.EcsLite.UnityEditor.EcsSystemsDebugSystem());
-        //#endif
-
-        //        m_UpdateSystems.Init();
-        //        m_FixedUpdateSystems.Init();
-        //#if UNITY_EDITOR
-        //        m_GizmosSystems.Init();
-        //#endif
     }
-
-
-    //public int NewEntity(GameObject gameObject)
-    //{
-
-    //}
 }

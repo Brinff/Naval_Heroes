@@ -58,7 +58,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
     private EcsPool<ProjectileColliderComponent> m_PoolProjectileCollider;
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<DeadTag> m_PoolDeadTag;
-    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Root> m_PoolRoot;
     private EcsPool<AbilityTargetArea> m_PoolAbilityTargetArea;
     private EcsFilter m_BattleDataFilter;
     private EcsPool<BattleData> m_PoolBattleData;
@@ -92,11 +92,11 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
         m_PoolAbilityAim = m_World.GetPool<AbilityAim>();
         m_PoolAbilityGroup = m_World.GetPool<AbilityGroup>();
 
-        m_ShipColliderFilter = m_World.Filter<RootComponent>().Inc<ProjectileColliderComponent>().End();
+        m_ShipColliderFilter = m_World.Filter<Root>().Inc<ProjectileColliderComponent>().End();
 
         m_PoolProjectileCollider = m_World.GetPool<ProjectileColliderComponent>();
         m_PoolTeam = m_World.GetPool<Team>();
-        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolRoot = m_World.GetPool<Root>();
         m_PoolDeadTag = m_World.GetPool<DeadTag>();
         m_PoolAbility = m_World.GetPool<Ability>();
         m_PoolAbilityTargetArea = m_World.GetPool<AbilityTargetArea>();

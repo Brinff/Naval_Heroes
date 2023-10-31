@@ -13,7 +13,7 @@ public class AbilityShipAimAutoSelectSystem : MonoBehaviour, IEcsInitSystem, IEc
     private EcsPool<AbilityState> m_PoolAbilityState;
     private EcsPool<AbilityAim> m_PoolAbilityAim;
     private EcsPool<AbilityGroup> m_PoolAbilityGroup;
-    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Root> m_PoolRoot;
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<TransformComponent> m_PoolTransform;
     public void Init(IEcsSystems systems)
@@ -25,7 +25,7 @@ public class AbilityShipAimAutoSelectSystem : MonoBehaviour, IEcsInitSystem, IEc
         m_PoolAbilityState = m_World.GetPool<AbilityState>();
         m_PoolAbilityAim = m_World.GetPool<AbilityAim>();
         m_PoolAbilityGroup = m_World.GetPool<AbilityGroup>();
-        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolRoot = m_World.GetPool<Root>();
         m_PoolTeam = m_World.GetPool<Team>();
         m_PoolTransform = m_World.GetPool<TransformComponent>();
     }

@@ -15,7 +15,7 @@ public class InputPlayerFireSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyste
     private EcsWorld m_World;
     private EcsFilter m_FilterFire;
     private EcsPool<WeaponFireCompoment> m_PoolTurretFireCompoment;
-    private EcsPool<RootComponent> m_PoolRootComponent;
+    private EcsPool<Root> m_PoolRootComponent;
     private EcsPool<PlayerTag> m_PoolPlayerTag;
 
     [Button]
@@ -37,10 +37,10 @@ public class InputPlayerFireSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyste
         m_World = systems.GetWorld();
 
         m_FilterTurretPlayer = m_World.Filter<WeaponFireCompoment>().Inc<PlayerTag>().Exc<AITag>().End();
-        m_FilterTurretOthers = m_World.Filter<WeaponFireCompoment>().Inc<RootComponent>().Exc<PlayerTag>().End();
+        m_FilterTurretOthers = m_World.Filter<WeaponFireCompoment>().Inc<Root>().Exc<PlayerTag>().End();
 
         m_PoolTurretFireCompoment = m_World.GetPool<WeaponFireCompoment>();
-        m_PoolRootComponent = m_World.GetPool<RootComponent>();
+        m_PoolRootComponent = m_World.GetPool<Root>();
         m_PoolPlayerTag = m_World.GetPool<PlayerTag>();
     }
 

@@ -26,7 +26,7 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
     private EcsPool<AbilityAmmo> m_PoolAbilityAmmo;
     private BeginEntityCommandSystem m_BeginEntityCommandSystem;
     private AutoFightToggleWidget m_AutoFightToggleWidget;
-    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Root> m_PoolRoot;
     private EcsPool<DeadTag> m_PoolDeadTag;
     private PlayerPrefsData<bool> m_AutoFightToggle;
     private EcsPool<AbilityAutoUse> m_PoolAutoUse;
@@ -56,7 +56,7 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
         m_PoolAbilityAmmoAmount = m_World.GetPool<AbilityAmmoAmount>();
         m_PoolAutoUse = m_World.GetPool<AbilityAutoUse>();
 
-        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolRoot = m_World.GetPool<Root>();
         m_PoolDeadTag = m_World.GetPool<DeadTag>();
 
         m_BattleDataFilter = m_World.Filter<BattleData>().End();

@@ -9,7 +9,7 @@ public class PlayerAimSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
     private EcsFilter m_Filter;
     private EcsPool<TurretAimComponent> m_PoolTurretAimComponent;
     private EcsPool<PlayerAimPointComponent> m_PoolAimPoint;
-    private EcsPool<RootComponent> m_PoolRootComponent;
+    private EcsPool<Root> m_PoolRootComponent;
     private EcsPool<TransformComponent> m_PoolTransform;
     private EcsPool<LookAtViewComponent> m_PoolLookAtView;
     private EcsPool<EyeRaycastComponent> m_PoolEyeRaycast;
@@ -25,7 +25,7 @@ public class PlayerAimSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
         m_PlayerFilter = m_World.Filter<PlayerAimPointComponent>().Inc<LookAtViewComponent>().Inc<PlayerTag>().Exc<AITag>().End();
 
         m_PoolTurretAimComponent = m_World.GetPool<TurretAimComponent>();
-        m_PoolRootComponent = m_World.GetPool<RootComponent>();
+        m_PoolRootComponent = m_World.GetPool<Root>();
         m_PoolAimPoint = m_World.GetPool<PlayerAimPointComponent>();
         m_PoolTransform = m_World.GetPool<TransformComponent>();
         m_PoolLookAtView = m_World.GetPool<LookAtViewComponent>();
