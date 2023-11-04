@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Voodoo.Tiny.Sauce.Internal.Ads;
 
 public class EndBattleCommand : MonoBehaviour, ICommand
 {
@@ -13,5 +14,7 @@ public class EndBattleCommand : MonoBehaviour, ICommand
         {
             pool.Add(entity);
         }
+        
+        TSAdsManager.ShowInterstitial();
     }
 }
