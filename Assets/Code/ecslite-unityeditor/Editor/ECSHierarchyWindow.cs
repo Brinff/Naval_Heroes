@@ -12,73 +12,69 @@ using UnityEditor.IMGUI.Controls;
 
 public class ECSHierarchyWindow : EditorWindow
 {
-    [SerializeField]
-    private VisualTreeAsset m_VisualTreeAsset = default;
-
     [MenuItem("ECS/Hierarchy")]
     public static void ShowExample()
     {
         ECSHierarchyWindow wnd = GetWindow<ECSHierarchyWindow>();
-        wnd.titleContent = new GUIContent("ECSHierarchyWindow");
+        wnd.titleContent = new GUIContent("ECS Hierarchy");
     }
 
-
+    [SerializeField]
+    private int m_SelectedWorld = 0;
     [SerializeField]
     private TreeViewState m_TreeViewState;
     private EntityTreeViewGUI m_EntityTreeViewGUI;
 
+
+    private Styles m_Style;
+    private Styles style => m_Style != null ? m_Style : m_Style = new Styles();
+
+    public class Styles
+    {
+        public GUIStyle toolbar = new GUIStyle("Toolbar");
+        public GUIStyle toolbarDropDown = new GUIStyle("ToolbarDropDown");
+        public GUIStyle toolbarSearchField = new GUIStyle("ToolbarSearchTextField");
+    }
 
     private void CreateGUI()
     {
         if (EcsWorldViewSystem.views != null && EcsWorldViewSystem.views.Count > 0)
         {
             var viewSystem = EcsWorldViewSystem.views[0];
+            viewSystem.OnCreateViewEntity += OnChangeEntity;
+            viewSystem.OnChangeViewEntity += OnChangeEntity;
+            viewSystem.OnDestroyViewEntity += OnChangeEntity;
+
             if (m_TreeViewState == null)
                 m_TreeViewState = new TreeViewState();
-            m_EntityTreeViewGUI = new EntityTreeViewGUI(viewSystem, m_TreeViewState);
+
+            m_EntityTreeViewGUI = new EntityTreeViewGUI(viewSystem.world, m_TreeViewState);
         }
+    }
+
+    private void OnChangeEntity(int entity)
+    {
+        if (m_EntityTreeViewGUI != null) m_EntityTreeViewGUI.Reload();
     }
 
     public void OnGUI()
     {
-        if (m_EntityTreeViewGUI != null)
-            m_EntityTreeViewGUI.OnGUI(new Rect(0, 0, position.width, position.height));
+        if (EcsWorldViewSystem.views != null && EcsWorldViewSystem.views.Count > 0 && m_EntityTreeViewGUI != null)
+        {
+            Rect toolbarRect = new Rect(0, 0, position.width, 22);
+            GUILayout.BeginArea(toolbarRect);
+            GUILayout.BeginHorizontal(style.toolbar);
+
+            int selectIndex = EditorGUILayout.Popup(m_SelectedWorld, EcsWorldViewSystem.views.Select(x => x.name).ToArray(), style.toolbarDropDown);
+            m_EntityTreeViewGUI.searchString = EditorGUILayout.TextField(m_EntityTreeViewGUI.searchString, style.toolbarSearchField);
+
+            GUILayout.EndHorizontal();
+            GUILayout.EndArea();
+
+            Rect hierarchyRect = new Rect(0, toolbarRect.y + toolbarRect.height + 2, position.width, position.height - toolbarRect.height - 2);
+
+            if (m_EntityTreeViewGUI != null)
+                m_EntityTreeViewGUI.OnGUI(hierarchyRect);
+        }
     }
-
-    //private IMGUIContainer m_TreeViewContainer;
-    //public void CreateGUI()
-    //{
-    //    VisualElement root = rootVisualElement;
-
-    //    VisualElement labelFromUXML = m_VisualTreeAsset.Instantiate();
-    //    root.Add(labelFromUXML);
-    //    //m_TreeViewContainer = root.Q<IMGUIContainer>("Body");
-    //    //m_TreeViewContainer.onGUIHandler = OnDrawTree;
-
-    //    if (EcsWorldViewSystem.views != null && EcsWorldViewSystem.views.Count > 0)
-    //    {
-    //        var viewSystem = EcsWorldViewSystem.views[0];
-
-    //        var treeView = new EntityTreeView(viewSystem);
-    //        root.Add(treeView);         
-    //    }
-
-    //    //if (m_TreeViewState == null)
-    //    //    m_TreeViewState = new TreeViewState();
-
-    //    //m_EntityTreeViewGUI = new EntityTreeViewGUI(m_TreeViewState);
-
-    //}
-
-    //private void OnDrawTree()
-    //{
-
-    //    //
-    //    Rect rect = GUILayoutUtility.GetRect(10,600, GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
-    //    Debug.Log($"Rect: {rect}");
-    //    if (m_EntityTreeViewGUI != null && m_TreeViewContainer != null) 
-    //        m_EntityTreeViewGUI.OnGUI(rect);
-
-    //    //GUILayout.Button("Test");
-    //}
 }

@@ -12,18 +12,18 @@ public class DestroyEntitySystem : MonoBehaviour, IEcsPostRunSystem, IEcsInitSys
     private EcsFilter m_FilterC;
 
     private EcsPool<DestroyComponent> m_DestroyEntity;
-    private EcsPool<ChildsComponent> m_Childs;
+    private EcsPool<Childs> m_Childs;
     private EcsPool<GameObjectComponent> m_GameObject;
 
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
         m_FilterA = m_World.Filter<DestroyComponent>().End();
-        m_FilterB = m_World.Filter<DestroyComponent>().Inc<ChildsComponent>().End();
+        m_FilterB = m_World.Filter<DestroyComponent>().Inc<Childs>().End();
         m_FilterD = m_World.Filter<DestroyComponent>().Inc<GameObjectComponent>().End();
 
         m_DestroyEntity = m_World.GetPool<DestroyComponent>();
-        m_Childs = m_World.GetPool<ChildsComponent>();
+        m_Childs = m_World.GetPool<Childs>();
         m_GameObject = m_World.GetPool<GameObjectComponent>();
     }
 

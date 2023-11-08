@@ -106,7 +106,7 @@ public struct Parent
 
 
 
-public struct ChildsComponent
+public struct Childs
 {
     public EcsPackedEntity[] entities;
 }

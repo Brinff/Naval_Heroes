@@ -62,7 +62,7 @@ public static class EcsExtentions
     public static int Bake(this EcsWorld world, Transform transform)
     {
         var poolParentComponent = world.GetPool<Parent>();
-        var poolChilds = world.GetPool<ChildsComponent>();
+        var poolChilds = world.GetPool<Childs>();
         var poolRoot = world.GetPool<Root>();
         var poolLink = world.GetPool<Link>();
         var poolName = world.GetPool<Name>();
@@ -85,7 +85,7 @@ public static class EcsExtentions
     public static int Bake(this EcsWorld world, Transform transform, out List<int> entities)
     {
         var poolParentComponent = world.GetPool<Parent>();
-        var poolChilds = world.GetPool<ChildsComponent>();
+        var poolChilds = world.GetPool<Childs>();
         var poolRoot = world.GetPool<Root>();
         var poolLink = world.GetPool<Link>();
         var poolName = world.GetPool<Name>();

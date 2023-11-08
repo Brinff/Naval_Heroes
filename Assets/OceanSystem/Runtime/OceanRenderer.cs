@@ -4,7 +4,6 @@ using UnityEngine.Rendering;
 
 namespace OceanSystem
 {
-    [ExecuteAlways]
     public class OceanRenderer : MonoBehaviour
     {
         public enum OceanReflectionsMode { Default, RealtimeProbe, Custom }

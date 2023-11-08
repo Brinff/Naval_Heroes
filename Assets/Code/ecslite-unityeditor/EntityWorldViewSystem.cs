@@ -26,20 +26,16 @@ public class EcsWorldViewSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSyst
 {
     private string m_Name = "defaultWorld";
     private EcsWorld m_World;
-    private List<EcsViewEntity> m_Entities = new List<EcsViewEntity>();
+    private List<int> m_Entities = new List<int>();
     private static List<EcsWorldViewSystem> s_Views;
-
-    private EcsPool<Root> m_PoolRoot;
-    private EcsPool<Name> m_PoolName;
-
     public string name => m_Name;
     public EcsWorld world => m_World;
-    public List<EcsViewEntity> entities => m_Entities;
+    public List<int> entities => m_Entities;
+
     public static List<EcsWorldViewSystem> views => s_Views;
 
     public delegate void ViewSystemDelegate(EcsWorldViewSystem worldViewSystem);
-    public delegate void ViewEntityDelegate(EcsViewEntity view);
-
+    public delegate void ViewEntityDelegate(int entity);
     public static event ViewSystemDelegate OnCreateViewSystem;
 
     public static event ViewSystemDelegate OnDestroyViewSystem;
@@ -54,11 +50,7 @@ public class EcsWorldViewSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSyst
         s_Views.Add(this);
 
         m_World = systems.GetWorld();
-        m_PoolName = m_World.GetPool<Name>();
-        m_PoolRoot = m_World.GetPool<Root>();
-
         m_World.AddEventListener(this);
-
 
         var entities = Array.Empty<int>();
         var entitiesCount = m_World.GetAllEntities(ref entities);
@@ -66,8 +58,6 @@ public class EcsWorldViewSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSyst
         {
             OnEntityCreated(entities[i]);
         }
-
-
         OnCreateViewSystem?.Invoke(this);
     }
 
@@ -88,21 +78,21 @@ public class EcsWorldViewSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSyst
     {
         //var entities = Array.Empty<int>();
         //var entitiesCount = m_World.GetAllEntities(ref entities);
-        for (var i = 0; i < m_Entities.Count; i++)
-        {
-            var entityView = m_Entities[i];
-            if (m_World.PackEntity(entityView.entity).Unpack(m_World, out int realEntity))
-            {
-                var gen = m_World.GetEntityGen(realEntity);
-                var name = GetEntityName(realEntity, gen);
-                if (name != entityView.name)
-                {
-                    entityView.name = name;
-                    OnChangeViewEntity?.Invoke(entityView);
-                }
-            }
-            m_Entities[i] = entityView;
-        }
+        //for (var i = 0; i < m_Entities.Count; i++)
+        //{
+        //    var entityView = m_Entities[i];
+        //    if (m_World.PackEntity(entityView.entity).Unpack(m_World, out int realEntity))
+        //    {
+        //        var gen = m_World.GetEntityGen(realEntity);
+        //        var name = GetEntityName(realEntity, gen);
+        //        if (name != entityView.name)
+        //        {
+        //            entityView.name = name;
+        //            OnChangeViewEntity?.Invoke(entityView);
+        //        }
+        //    }
+        //    m_Entities[i] = entityView;
+        //}
 
         //for (int i = 0; i < m_Entities.Count; i++)
         //{
@@ -237,49 +227,48 @@ public class EcsWorldViewSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSyst
     //{
 
     //}
-    private Type[] m_Types;
-    public string GetEntityName(int entity, int gen)
-    {
-        var entityName = entity.ToString("X8");
+    //private Type[] m_Types;
+    //public string GetEntityName(int entity, int gen)
+    //{
+    //    var entityName = entity.ToString("X8");
 
-        if (m_PoolName.Has(entity))
-        {
-            ref var name = ref m_PoolName.Get(entity);
-            entityName = name.value;
-        }
-        else
-        {
-            if (gen > 0)
-            {
-                var count = m_World.GetComponentTypes(entity, ref m_Types);
-                for (var i = 0; i < count; i++)
-                {
-                    entityName = $"{entityName}:{EditorExtensions.GetCleanGenericTypeName(m_Types[i])}";
-                }
-            }
-        }
-        return entityName;
-    }
+    //    if (m_PoolName.Has(entity))
+    //    {
+    //        ref var name = ref m_PoolName.Get(entity);
+    //        entityName = name.value;
+    //    }
+    //    else
+    //    {
+    //        if (gen > 0)
+    //        {
+    //            var count = m_World.GetComponentTypes(entity, ref m_Types);
+    //            for (var i = 0; i < count; i++)
+    //            {
+    //                entityName = $"{entityName}:{EditorExtensions.GetCleanGenericTypeName(m_Types[i])}";
+    //            }
+    //        }
+    //    }
+    //    return entityName;
+    //}
 
     public void OnEntityCreated(int entity)
     {
-        var gen = m_World.GetEntityGen(entity);
-        EcsViewEntity ecsViewEntity = new EcsViewEntity() { entity = entity, gen = gen, name = GetEntityName(entity, gen) };
-        m_Entities.Add(ecsViewEntity);
-        OnCreateViewEntity?.Invoke(ecsViewEntity);
+        //var gen = m_World.GetEntityGen(entity);
+        //EcsViewEntity ecsViewEntity = new EcsViewEntity() { entity = entity, gen = gen, name = GetEntityName(entity, gen) };
+        m_Entities.Add(entity);
+        OnCreateViewEntity?.Invoke(entity);
     }
 
     public void OnEntityChanged(int entity)
     {
+        OnChangeViewEntity?.Invoke(entity);
         //throw new NotImplementedException();
     }
 
     public void OnEntityDestroyed(int entity)
     {
-        var gen = m_World.GetEntityGen(entity);
-        EcsViewEntity ecsViewEntity = new EcsViewEntity() { entity = entity, gen = gen, name = "" };
-        m_Entities.Remove(ecsViewEntity);
-        OnDestroyViewEntity?.Invoke(ecsViewEntity);
+        m_Entities.Remove(entity);
+        OnDestroyViewEntity?.Invoke(entity);
     }
 
     public void OnFilterCreated(EcsFilter filter)
