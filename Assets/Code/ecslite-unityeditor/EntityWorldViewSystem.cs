@@ -1,13 +1,7 @@
 using Leopotam.EcsLite;
-using Leopotam.EcsLite.UnityEditor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.Experimental.Rendering;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.Rendering.DebugUI;
 
 public struct EcsViewEntity
 {
@@ -21,7 +15,7 @@ public struct EcsViewEntity
         return HashCode.Combine(entity, gen);
     }
 }
-
+#if UNITY_EDITOR
 public class EcsWorldViewSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSystem, IEcsPostDestroySystem, IEcsWorldEventListener
 {
     private string m_Name = "defaultWorld";
@@ -251,11 +245,12 @@ public class EcsWorldViewSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSyst
         {
             if (gen > 0)
             {
+                /*
                 var count = m_World.GetComponentTypes(entity, ref m_Types);
                 for (var i = 0; i < count; i++)
                 {
                     entityName = $"{entityName}:{EditorExtensions.GetCleanGenericTypeName(m_Types[i])}";
-                }
+                }*/
             }
         }
         return entityName;
@@ -297,3 +292,4 @@ public class EcsWorldViewSystem : IEcsPreInitSystem, IEcsInitSystem, IEcsRunSyst
         //throw new NotImplementedException();
     }
 }
+#endif

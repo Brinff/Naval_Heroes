@@ -19,7 +19,9 @@ public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
         m_World = systems.GetWorld();
         var commandSystem = systems.GetSystem<CommandSystem>();
 
+        
         TSAdsManager.SetFSDisplayConditions(30, 30, 3);
+        TSAdsManager.ToggleAds(true);
 
         SmartlookUnity.SetupOptionsBuilder builder = new SmartlookUnity.SetupOptionsBuilder(KEY);
         builder.SetFps(5);
