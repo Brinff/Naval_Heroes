@@ -46,7 +46,7 @@ public class ProjectileRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
     private EcsPool<ProjectileRaycast> m_PoolRaycast;
     private EcsPool<ProjectileTransform> m_PoolTransform;
     private EcsPool<ProjectileColliderComponent> m_PoolProjectileColliderComponent;
-    private EcsPool<RootComponent> m_PoolRootComponent;
+    private EcsPool<Root> m_PoolRootComponent;
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<ProjectileColliderHitComponent> m_PoolProjectileColliderHitComponent;
 
@@ -71,14 +71,14 @@ public class ProjectileRaycastSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
     {
         m_World = systems.GetWorld();
         m_FilterProjectile = m_World.Filter<ProjectileRaycast>().Inc<ProjectileTransform>().End();
-        m_FilterCollider = m_World.Filter<ProjectileColliderComponent>().Inc<RootComponent>().End();
+        m_FilterCollider = m_World.Filter<ProjectileColliderComponent>().Inc<Root>().End();
         m_DestroyFilter = m_World.Filter<ProjectileRaycast>().Inc<ProjectileDestroyEvent>().End();
 
         m_PoolRaycast = m_World.GetPool<ProjectileRaycast>();
         m_PoolTransform = m_World.GetPool<ProjectileTransform>();
         m_PoolProjectileColliderComponent = m_World.GetPool<ProjectileColliderComponent>();
         m_PoolTeam = m_World.GetPool<Team>();
-        m_PoolRootComponent = m_World.GetPool<RootComponent>();
+        m_PoolRootComponent = m_World.GetPool<Root>();
         m_PoolProjectileColliderHitComponent = m_World.GetPool<ProjectileColliderHitComponent>();
     }
 

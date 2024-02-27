@@ -8,7 +8,7 @@ public class ProjectileDamageSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyst
 
     private EcsPool<ProjectileColliderHitComponent> m_PoolProjectileColliderHit;
     private EcsPool<ProjectileDamage> m_PoolProjectileDamage;
-    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Root> m_PoolRoot;
     private EcsPool<HealthComponent> m_PoolHealth;
     private EcsPool<ProjectileDestroyEvent> m_PoolPojectileDestoryEvent;
     private EcsPool<ProjectileExplosionComponent> m_PoolProjectileExplosion;
@@ -17,9 +17,9 @@ public class ProjectileDamageSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyst
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
-        m_Filter = m_World.Filter<ProjectileColliderHitComponent>().Inc<RootComponent>().End();
+        m_Filter = m_World.Filter<ProjectileColliderHitComponent>().Inc<Root>().End();
         m_PoolProjectileColliderHit = m_World.GetPool<ProjectileColliderHitComponent>();
-        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolRoot = m_World.GetPool<Root>();
         m_PoolProjectileDamage = m_World.GetPool<ProjectileDamage>();
         m_PoolHealth = m_World.GetPool<HealthComponent>();
         m_PoolPojectileDestoryEvent = m_World.GetPool<ProjectileDestroyEvent>();

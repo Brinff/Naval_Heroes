@@ -133,7 +133,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.0.6
+  bundleVersion: 0.0.9
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -159,7 +159,7 @@ PlayerSettings:
     iPhone: com.Mushroom.NavalHeroes
   buildNumber:
     Standalone: 0
-    iPhone: 6
+    iPhone: 9
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 3
@@ -831,7 +831,7 @@ PlayerSettings:
     iPhone: VS_ATT;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1
   additionalCompilerArguments: {}
   platformArchitecture:
-    iPhone: 1
+    iPhone: 2
   scriptingBackend:
     Android: 1
     Standalone: 0

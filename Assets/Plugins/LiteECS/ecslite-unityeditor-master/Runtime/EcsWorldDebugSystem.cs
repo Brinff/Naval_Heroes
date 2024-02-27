@@ -32,7 +32,8 @@ namespace Leopotam.EcsLite.UnityEditor {
             _entitiesRoot.SetParent (_rootGo.transform, false);
         }
 
-        public void PreInit (IEcsSystems systems) {
+        public void PreInit (IEcsSystems systems) 
+        {
             _world = systems.GetWorld (_worldName);
             if (_world == null) { throw new Exception ("Cant find required world."); }
             _entities = new EcsEntityDebugView [_world.GetWorldSize ()];
@@ -40,18 +41,23 @@ namespace Leopotam.EcsLite.UnityEditor {
             _world.AddEventListener (this);
             var entities = Array.Empty<int> ();
             var entitiesCount = _world.GetAllEntities (ref entities);
-            for (var i = 0; i < entitiesCount; i++) {
+            for (var i = 0; i < entitiesCount; i++)
+            {
                 OnEntityCreated (entities[i]);
             }
         }
 
-        public void Run (IEcsSystems systems) {
-            foreach (var pair in _dirtyEntities) {
+        public void Run (IEcsSystems systems) 
+        {
+            foreach (var pair in _dirtyEntities) 
+            {
                 var entity = pair.Key;
                 var entityName = entity.ToString (_entityNameFormat);
-                if (_world.GetEntityGen (entity) > 0) {
+                if (_world.GetEntityGen (entity) > 0) 
+                {
                     var count = _world.GetComponentTypes (entity, ref _typesCache);
-                    for (var i = 0; i < count; i++) {
+                    for (var i = 0; i < count; i++) 
+                    {
                         entityName = $"{entityName}:{EditorExtensions.GetCleanGenericTypeName (_typesCache[i])}";
                     }
                 }
@@ -61,7 +67,8 @@ namespace Leopotam.EcsLite.UnityEditor {
         }
 
         public void OnEntityCreated (int entity) {
-            if (!_entities[entity]) {
+            if (!_entities[entity]) 
+            {
                 var go = new GameObject ();
                 go.transform.SetParent (_entitiesRoot, false);
                 var entityObserver = go.AddComponent<EcsEntityDebugView> ();
@@ -69,23 +76,29 @@ namespace Leopotam.EcsLite.UnityEditor {
                 entityObserver.World = _world;
                 entityObserver.DebugSystem = this;
                 _entities[entity] = entityObserver;
-                if (_bakeComponentsInName) {
+                if (_bakeComponentsInName) 
+                {
                     _dirtyEntities[entity] = 1;
-                } else {
+                } else 
+                {
                     go.name = entity.ToString (_entityNameFormat);
                 }
             }
             _entities[entity].gameObject.SetActive (true);
         }
 
-        public void OnEntityDestroyed (int entity) {
-            if (_entities[entity]) {
+        public void OnEntityDestroyed (int entity) 
+        {
+            if (_entities[entity]) 
+            {
                 _entities[entity].gameObject.SetActive (false);
             }
         }
 
-        public void OnEntityChanged (int entity) {
-            if (_bakeComponentsInName) {
+        public void OnEntityChanged (int entity) 
+        {
+            if (_bakeComponentsInName) 
+            {
                 _dirtyEntities[entity] = 1;
             }
         }
@@ -101,7 +114,8 @@ namespace Leopotam.EcsLite.UnityEditor {
             Object.Destroy (_rootGo);
         }
 
-        public EcsEntityDebugView GetEntityView (int entity) {
+        public EcsEntityDebugView GetEntityView (int entity) 
+        {
             return entity >= 0 && entity < _entities.Length ? _entities[entity] : null;
         }
 

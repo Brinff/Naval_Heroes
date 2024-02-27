@@ -11,7 +11,7 @@ public class AISearchTargetSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem
     private EcsFilter m_Filter;
     private EcsFilter m_TeamFilter;
     private EcsPool<AITargetComponent> m_PoolAITarget;
-    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Root> m_PoolRoot;
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<TransformComponent> m_PoolTransform;
     private EcsPool<AISearchAngleComponent> m_PoolAISearchAngle;
@@ -21,13 +21,13 @@ public class AISearchTargetSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem
     {
         m_World = systems.GetWorld();
         //m_FilterTargets = m_World.Filter<AITargetComponent>().End();
-        m_FilterWithRoot = m_World.Filter<AITargetComponent>().Inc<TransformComponent>().Inc<RootComponent>().Exc<DeadTag>().End();
+        m_FilterWithRoot = m_World.Filter<AITargetComponent>().Inc<TransformComponent>().Inc<Root>().Exc<DeadTag>().End();
         m_Filter = m_World.Filter<AITargetComponent>().Inc<Team>().Inc<TransformComponent>().Exc<DeadTag>().End();
 
         m_TeamFilter = m_World.Filter<Team>().Exc<DeadTag>().End();
         m_PoolAITarget = m_World.GetPool<AITargetComponent>();
         m_PoolTransform = m_World.GetPool<TransformComponent>();
-        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolRoot = m_World.GetPool<Root>();
         m_PoolTeam = m_World.GetPool<Team>();
         m_PoolAISearchAngle = m_World.GetPool<AISearchAngleComponent>();
         m_PoolAISearchRadius = m_World.GetPool<AISearchRadiusComponent>();

@@ -15,7 +15,7 @@ public class AbilityCommanderGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
 
     private EcsPool<Ability> m_PoolAbility;
     private EcsPool<AbilityGroup> m_PoolGroupAbility;
-    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Root> m_PoolRoot;
     private EcsPool<Team> m_TeamPool;
     private EcsPool<StatDamageComponent> m_PoolStatDamage;
 
@@ -30,7 +30,7 @@ public class AbilityCommanderGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
 
         m_PoolAbility = m_World.GetPool<Ability>();
         m_PoolGroupAbility = m_World.GetPool<AbilityGroup>();
-        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolRoot = m_World.GetPool<Root>();
         m_TeamPool = m_World.GetPool<Team>();
         m_PoolStatDamage = m_World.GetPool<StatDamageComponent>();
     }

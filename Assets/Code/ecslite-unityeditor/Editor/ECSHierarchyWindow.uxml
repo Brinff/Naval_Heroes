@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <uie:Toolbar name="Toolbar" style="width: 100%; justify-content: flex-start;">
+        <ui:DropdownField index="-1" choices="1,2,3" name="WorldSelector" style="width: 216px;" />
+        <uie:ToolbarSpacer />
+        <uie:ToolbarPopupSearchField focusable="true" name="SearchField" style="position: relative;" />
+    </uie:Toolbar>
+    <ui:IMGUIContainer name="Body" style="height: 100%; align-items: auto;" />
+</ui:UXML>

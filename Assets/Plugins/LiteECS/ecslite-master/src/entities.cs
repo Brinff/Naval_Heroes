@@ -3,6 +3,7 @@
 // Copyright (c) 2012-2023 Leopotam <leopotam@yandex.ru>
 // ----------------------------------------------------------------------------
 
+using System;
 using System.Runtime.CompilerServices;
 
 #if ENABLE_IL2CPP
@@ -13,6 +14,11 @@ namespace Leopotam.EcsLite {
     public struct EcsPackedEntity {
         internal int Id;
         internal int Gen;
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Gen);
+        }
     }
 
     public struct EcsPackedEntityWithWorld {

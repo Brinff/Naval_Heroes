@@ -12,7 +12,7 @@ public class AIWeaponFireSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
     private EcsPool<WeaponFireCompoment> m_PoolWeaponFire;
     private EcsPool<TransformComponent> m_PoolTransform;
     private EcsPool<AITargetComponent> m_PoolAITarget;
-    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Root> m_PoolRoot;
     private EcsPool<AITag> m_PoolAITag;
 
     private EcsWorld m_World;
@@ -21,14 +21,14 @@ public class AIWeaponFireSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
         m_World = systems.GetWorld();
         m_Filter = m_World.Filter<AITag>().Inc<AITargetComponent>().Inc<WeaponFireCompoment>().Inc<TransformComponent>().End();
 
-        m_FilterTurretOthers = m_World.Filter<WeaponFireCompoment>().Inc<RootComponent>().Exc<AITag>().End();
+        m_FilterTurretOthers = m_World.Filter<WeaponFireCompoment>().Inc<Root>().Exc<AITag>().End();
 
 
         m_PoolWeaponFire = m_World.GetPool<WeaponFireCompoment>();
         m_PoolTransform = m_World.GetPool<TransformComponent>();
         m_PoolAITarget = m_World.GetPool<AITargetComponent>();
         m_PoolAITag = m_World.GetPool<AITag>();
-        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolRoot = m_World.GetPool<Root>();
     }
 
     public void Run(IEcsSystems systems)

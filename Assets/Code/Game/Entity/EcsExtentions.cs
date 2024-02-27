@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-
+using UnityEngine.Video;
 
 public static class EcsExtentions
 {
@@ -61,13 +61,13 @@ public static class EcsExtentions
 
     public static int Bake(this EcsWorld world, Transform transform)
     {
-        var poolParentComponent = world.GetPool<ParentComponent>();
-        var poolChilds = world.GetPool<ChildsComponent>();
-        var poolRoot = world.GetPool<RootComponent>();
+        var poolParentComponent = world.GetPool<Parent>();
+        var poolChilds = world.GetPool<Childs>();
+        var poolRoot = world.GetPool<Root>();
         var poolLink = world.GetPool<Link>();
-
+        var poolName = world.GetPool<Name>();
         List<int> entities = new List<int>();
-        Bake(world, transform, poolRoot, poolLink, null, ref entities);
+        Bake(world, transform, poolRoot, poolLink, poolName, null, ref entities);
         int root = entities.First();
 
         if (entities.Count > 1)
@@ -84,13 +84,14 @@ public static class EcsExtentions
 
     public static int Bake(this EcsWorld world, Transform transform, out List<int> entities)
     {
-        var poolParentComponent = world.GetPool<ParentComponent>();
-        var poolChilds = world.GetPool<ChildsComponent>();
-        var poolRoot = world.GetPool<RootComponent>();
+        var poolParentComponent = world.GetPool<Parent>();
+        var poolChilds = world.GetPool<Childs>();
+        var poolRoot = world.GetPool<Root>();
         var poolLink = world.GetPool<Link>();
+        var poolName = world.GetPool<Name>();
 
         entities = new List<int>();
-        Bake(world, transform, poolRoot, poolLink, null, ref entities);
+        Bake(world, transform, poolRoot, poolLink, poolName, null, ref entities);
         int root = entities.First();
 
         if (entities.Count > 1)
@@ -105,7 +106,7 @@ public static class EcsExtentions
         return root;
     }
 
-    private static void Bake(EcsWorld world, Transform transform, EcsPool<RootComponent> poolRoot, EcsPool<Link> poolLink, Nullable<EcsPackedEntity> root, ref List<int> entities)
+    private static void Bake(EcsWorld world, Transform transform, EcsPool<Root> poolRoot, EcsPool<Link> poolLink, EcsPool<Name> poolName, Nullable<EcsPackedEntity> root, ref List<int> entities)
     {
         IEntityAuthoring[] entityAuthorings = transform.GetComponents<IEntityAuthoring>();
         if (entityAuthorings.Length > 0)
@@ -120,6 +121,9 @@ public static class EcsExtentions
             if (isAnyEnable)
             {
                 int entity = world.NewEntity();
+
+                ref var name = ref poolName.Add(entity);
+                name.value = transform.name;
 
                 ref var link = ref poolLink.Add(entity);
                 link.transform = transform;
@@ -149,7 +153,7 @@ public static class EcsExtentions
         for (int i = 0; i < transform.childCount; i++)
         {
             var child = transform.GetChild(i);
-            Bake(world, child, poolRoot, poolLink, root, ref entities);
+            Bake(world, child, poolRoot, poolLink, poolName, root, ref entities);
         }
     }
 

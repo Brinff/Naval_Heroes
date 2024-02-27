@@ -25,6 +25,7 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
     private CommandSystem m_CommandSystem;
     private PlayerPrefsData<bool> m_IsDone;
     private TutorialTapWidget m_TutorialTapWidget;
+    private SlotItem m_SlotItem;
 
     public void Prepare(EcsWorld ecsWorld, IEcsSystems systems)
     {
@@ -47,13 +48,14 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
     public void Done(EcsWorld ecsWorld, IEcsSystems systems)
     {
         var slot = m_SlotCollection.GetSlots<SlotBuy>().FirstOrDefault();
+        
         TargetRaycastMediator.Instance.RemoveTargetRaycast(slot.gameObject);
         TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
         m_TutorialTapWidget.Hide(false);
 
         var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
         messageWidget.Hide(false);
-
+        if (m_SlotItem != null) m_SlotItem.isLockDrag = false;
         m_IsDone.Value = true;
     }
 
@@ -65,13 +67,17 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
 
     private IEnumerator DelayLaunch()
     {
+        var slot = m_SlotCollection.GetSlots<SlotBuy>().FirstOrDefault();
+        m_SlotItem = slot.item;
+        m_SlotItem.isLockDrag = true;
+
         yield return new WaitForSeconds(0.4f);
 
         var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
         messageWidget.SetText("TAP THE BUTTON TO BUY A SHIP");
         messageWidget.Show(false);
 
-        var slot = m_SlotCollection.GetSlots<SlotBuy>().FirstOrDefault();
+        //var slot = m_SlotCollection.GetSlots<SlotBuy>().FirstOrDefault();
         Transform transform = slot.GetComponentInChildren<TutorialPoint>().transform;
         m_TutorialTapWidget.PlaceAtWorld(transform.position);
         TargetRaycastMediator.Instance.AddTargetRaycast(slot.gameObject);

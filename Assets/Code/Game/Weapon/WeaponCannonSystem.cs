@@ -11,7 +11,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
     private EcsPool<WeaponCannon> m_PoolWeaponCannon;
     private EcsPool<AbilityState> m_PoolAbilityState;
     private EcsPool<AbilityAim> m_PoolAbilityAim;
-    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Root> m_PoolRoot;
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<StatDamageComponent> m_StatDamage;
     private EcsPool<DeadTag> m_PoolDeadTag;
@@ -41,7 +41,7 @@ public class WeaponCannonSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
         m_PoolWeaponCannon = m_World.GetPool<WeaponCannon>();
         m_PoolAbilityState = m_World.GetPool<AbilityState>();
         m_PoolAbilityAim = m_World.GetPool<AbilityAim>();
-        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolRoot = m_World.GetPool<Root>();
         m_PoolTeam = m_World.GetPool<Team>();
         m_StatDamage = m_World.GetPool<StatDamageComponent>();
         m_PoolDeadTag = m_World.GetPool<DeadTag>();

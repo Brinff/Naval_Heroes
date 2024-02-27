@@ -3081,12 +3081,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
-  - {fileID: 792821838}
-  - {fileID: 792821843}
-  - {fileID: 792821841}
   - {fileID: 792821839}
   - {fileID: 792821844}
+  - {fileID: 792821843}
   - {fileID: 792821842}
+  - {fileID: 792821841}
+  - {fileID: 792821838}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3155,8 +3155,6 @@ MonoBehaviour:
     element: {fileID: 1628328097}
   - acitve: 1
     element: {fileID: 951346404}
-  - acitve: 1
-    element: {fileID: 642230080}
 --- !u!114 &792821845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4264,6 +4262,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b452ce7a5c83a2d4193650430be9944b, type: 3}
+--- !u!1 &1168297711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1168297713}
+  - component: {fileID: 1168297712}
+  m_Layer: 0
+  m_Name: ADS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1168297712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168297711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac87d9500d6542b593510e8bea5e723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1168297713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168297711}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -87.630936, y: -172.88455, z: -348.94794}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1219281500
 GameObject:
   m_ObjectHideFlags: 0
@@ -7789,7 +7831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f0b6fb706d5c5489a0e868f017a312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsShooter: 1
 --- !u!1001 &4121468935268363309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8739,7 +8780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_VFXTrail: {fileID: 4731636227409746115, guid: 4e1f81f2eb5f8e14fabca2151596b78c, type: 3}
   m_VFXTrailPoolSize: 10
-  m_WaterHeight: 0.6
+  m_WaterHeight: 1.2
   m_VFXTrailRotation: {x: 0.49999997, y: -0.49999997, z: 0.49999997, w: 0.49999997}
   m_Debug: 0
 --- !u!114 &5455264918296568953

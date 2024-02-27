@@ -15,7 +15,7 @@ public class AbilityShipGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyst
 
     private EcsPool<Ability> m_PoolAbility;
     private EcsPool<AbilityGroup> m_PoolGroupAbility;
-    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Root> m_PoolRoot;
     private EcsPool<Team> m_TeamPool;
     private EcsPool<StatDamageComponent> m_PoolStatDamage;
 
@@ -25,12 +25,12 @@ public class AbilityShipGroupSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyst
         m_AbilityDatabase = systems.GetData<AbilityDatabase>();
         m_AbilityAmmoDatabase = systems.GetData<AbilityAmmoDatabase>();
 
-        m_AbilityShipFilter = m_World.Filter<Ability>().Inc<AbilityGroup>().Inc<ShipTag>().Inc<RootComponent>().End();
-        m_AbilityOtherFilter = m_World.Filter<Ability>().Inc<WeaponTag>().Inc<RootComponent>().End();
+        m_AbilityShipFilter = m_World.Filter<Ability>().Inc<AbilityGroup>().Inc<ShipTag>().Inc<Root>().End();
+        m_AbilityOtherFilter = m_World.Filter<Ability>().Inc<WeaponTag>().Inc<Root>().End();
 
         m_PoolAbility = m_World.GetPool<Ability>();
         m_PoolGroupAbility = m_World.GetPool<AbilityGroup>();
-        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolRoot = m_World.GetPool<Root>();
         m_PoolStatDamage = m_World.GetPool<StatDamageComponent>();
     }
 

@@ -3,11 +3,10 @@ using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Voodoo.Tiny.Sauce.Internal.Ads;
 
 public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
 {
-    [SerializeField]
-    private bool m_IsShooter;
     //[SerializeField]
     //private EntityData m_EntityData;
 
@@ -20,6 +19,9 @@ public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
         m_World = systems.GetWorld();
         var commandSystem = systems.GetSystem<CommandSystem>();
 
+        
+        TSAdsManager.SetFSDisplayConditions(30, 30, 3);
+        TSAdsManager.ToggleAds(true);
 
         SmartlookUnity.SetupOptionsBuilder builder = new SmartlookUnity.SetupOptionsBuilder(KEY);
         builder.SetFps(5);

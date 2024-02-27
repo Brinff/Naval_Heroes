@@ -9,14 +9,14 @@ public class WeaponReloadSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, 
     private EcsWorld m_World;
     private EcsPool<WeaponReloadComponent> m_PoolWeaponReloadComponent;
     private EcsPool<StatReloadComponent> m_PoolStatReloadComponent;
-    private EcsPool<RootComponent> m_PoolRoot;
+    private EcsPool<Root> m_PoolRoot;
     public void Init(IEcsSystems systems)
     {
         m_World = systems.GetWorld();
         m_Filter = m_World.Filter<WeaponReloadComponent>().End();
         m_PoolWeaponReloadComponent = m_World.GetPool<WeaponReloadComponent>();
         m_PoolStatReloadComponent = m_World.GetPool<StatReloadComponent>();
-        m_PoolRoot = m_World.GetPool<RootComponent>();
+        m_PoolRoot = m_World.GetPool<Root>();
         m_PoolStatReloadComponent = m_World.GetPool<StatReloadComponent>();
     }
 
