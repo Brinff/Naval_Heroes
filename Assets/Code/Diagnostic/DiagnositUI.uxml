@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Code/Diagnostic/Resources/Styles/GroupStyle.uss?fileID=7433441132597879392&amp;guid=5dddc922a405b2e468a81cc54c3435a8&amp;type=3#GroupStyle" />
+    <Style src="project://database/Assets/Code/Diagnostic/Resources/Styles/RuntimeTabbedViewStyle.uss?fileID=7433441132597879392&amp;guid=4a802aa353591fb41a3fecbd1550fc41&amp;type=3#RuntimeTabbedViewStyle" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:RadioButtonGroup value="-1" choices="&apos;ddaw,dawdwa,dawd,dawd,daw,daw">
+            <ui:RadioButton />
+            <ui:RadioButton />
+            <ui:RadioButton />
+        </ui:RadioButtonGroup>
+        <ui:RadioButtonGroup value="-1" choices="&apos;ddaw,dawdwa,dawd,dawd,daw,daw">
+            <ui:RadioButton />
+            <ui:RadioButton />
+            <ui:RadioButton />
+        </ui:RadioButtonGroup>
+        <ui:RadioButtonGroup value="-1" choices="&apos;ddaw,dawdwa,dawd,dawd,daw,daw">
+            <ui:RadioButton />
+            <ui:RadioButton />
+            <ui:RadioButton />
+        </ui:RadioButtonGroup>
+        <ui:RadioButtonGroup value="-1" choices="&apos;ddaw,dawdwa,dawd,dawd,daw,daw">
+            <ui:RadioButton />
+            <ui:RadioButton />
+            <ui:RadioButton />
+        </ui:RadioButtonGroup>
+    </ui:VisualElement>
+</ui:UXML>

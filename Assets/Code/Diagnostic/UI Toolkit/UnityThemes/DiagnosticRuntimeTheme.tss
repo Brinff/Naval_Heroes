@@ -1,0 +1,4 @@
+@import url("unity-theme://default");
+
+@import url("/Assets/Code/Diagnostic/Resources/Styles/GroupStyle.uss");
+@import url("/Assets/Code/Diagnostic/Resources/Styles/RuntimeTabbedViewStyle.uss");
