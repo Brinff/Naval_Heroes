@@ -1,6 +1,7 @@
 using Game.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 using Leopotam.EcsLite;
 
@@ -89,7 +90,7 @@ public class OutputPlayerHealthSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSy
     {
         EcsWorld world = systems.GetWorld();
 
-        m_PlayerHealthBarWidget = UISystem.Instance.GetElement<PlayerHealthBarWidget>();
+        m_PlayerHealthBarWidget = ServiceLocator.Get<UIService>().GetElement<PlayerHealthBarWidget>();
 
         m_Filter = world.Filter<Team>().Inc<HealthComponent>().End();
         m_NewEntityFilter = world.Filter<Team>().Inc<HealthComponent>().Inc<NewEntityTag>().End();

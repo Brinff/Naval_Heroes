@@ -2,6 +2,7 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 public class GoHomeCommand : MonoBehaviour, ICommand
@@ -30,14 +31,14 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         m_PlayerSlotsSystem.slotCollection.OnChange += OnChangeSlotCollection;
 
 
-        m_StartGameWidget = UISystem.Instance.GetElement<StartGameWidget>();
+        m_StartGameWidget = ServiceLocator.Get<UIService>().GetElement<StartGameWidget>();
         m_StartGameWidget.SetLevel(playerMissionSystem.level);
         m_StartGameWidget.OnClick += OnClickBattle;
         m_StartGameWidget.SetBlock(!m_PlayerSlotsSystem.IsAnyRadyBattle());
 
 
 
-        UISystem.Instance.compositionModule.Show<UIHomeComposition>();
+        ServiceLocator.Get<UIService>().compositionModule.Show<UIHomeComposition>();
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_CommandSystem.Execute<ClearBattleDataCommand>();
 
@@ -72,7 +73,7 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         m_CommandSystem.Execute<SetupPlayerCommand>();
         //m_CommandSystem.Execute<UpgradeFillCommand>();
         //m_CommandSystem.Execute<UpgradeUpdateCommand>();
-        m_CommandSystem.Execute<MoneyUpdateCommand>();
+        //m_CommandSystem.Execute<MoneyUpdateCommand>();
 
         systems.GetSystem<TutorialSystem>().HomeTutorial();
     }

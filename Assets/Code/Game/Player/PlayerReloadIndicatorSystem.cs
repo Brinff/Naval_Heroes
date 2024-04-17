@@ -2,6 +2,7 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 public struct WeaponReloadIndicatorComponent
@@ -28,7 +29,7 @@ public class PlayerReloadIndicatorSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
         m_WeaponReload = m_World.GetPool<WeaponReloadComponent>();
         m_WeaponReloadIndicator = m_World.GetPool<WeaponReloadIndicatorComponent>();
         m_Childs = m_World.GetPool<Childs>();
-        m_ReloadIndicatorWidget = UISystem.Instance.GetElement<ReloadIndicatorWidget>();
+        m_ReloadIndicatorWidget = ServiceLocator.Get<UIService>().GetElement<ReloadIndicatorWidget>();
     }
 
     public void Run(IEcsSystems systems)

@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 public class InputPlayerFireSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroupUpdateSystem, IEcsDestroySystem
@@ -31,7 +32,7 @@ public class InputPlayerFireSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyste
 
     public void Init(IEcsSystems systems)
     {
-        m_InputFireWidget = UISystem.Instance.GetElement<FireInputWidget>();
+        m_InputFireWidget = ServiceLocator.Get<UIService>().GetElement<FireInputWidget>();
         m_InputFireWidget.OnPerform += Fire;
 
         m_World = systems.GetWorld();

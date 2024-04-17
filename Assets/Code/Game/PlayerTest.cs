@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerTest : MonoBehaviour
 {
-    public Transform player1;
+    /*public Transform player1;
     public Transform player2;
 
     public int entity;
@@ -40,5 +40,5 @@ public class PlayerTest : MonoBehaviour
             this.entity = entityPlayer1;
             return;
         }
-    }
+    }*/
 }

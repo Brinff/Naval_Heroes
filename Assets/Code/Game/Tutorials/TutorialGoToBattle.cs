@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Services;
 using UnityEngine;
 
 
@@ -17,7 +18,7 @@ public class TutorialGoToBattle : MonoBehaviour, ITutorial
 
     public void Prepare(EcsWorld ecsWorld, IEcsSystems systems)
     {
-        m_TutorialTapWidget = UISystem.Instance.GetElement<TutorialTapWidget>();
+        m_TutorialTapWidget = ServiceLocator.Get<UIService>().GetElement<TutorialTapWidget>();
         m_SlotCollection = systems.GetSystem<PlayerSlotsSystem>().slotCollection;
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_IsDone = new PlayerPrefsData<bool>($"{nameof(TutorialGoToBattle)}_{nameof(m_IsDone)}", false);
@@ -35,10 +36,10 @@ public class TutorialGoToBattle : MonoBehaviour, ITutorial
 
     public void Done(EcsWorld ecsWorld, IEcsSystems systems)
     {
-        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        var messageWidget = ServiceLocator.Get<UIService>().GetElement<MessageWidget>();
         messageWidget.Hide(false);
 
-        var button = UISystem.Instance.GetElement<StartGameWidget>().GetButton();
+        var button = ServiceLocator.Get<UIService>().GetElement<StartGameWidget>().GetButton();
         TargetRaycastMediator.Instance.RemoveTargetRaycast(button.gameObject);
         TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
         m_TutorialTapWidget.Hide(false);
@@ -54,11 +55,11 @@ public class TutorialGoToBattle : MonoBehaviour, ITutorial
     private IEnumerator DoLaunch()
     {
         yield return new WaitForSeconds(0.4f);
-        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        var messageWidget = ServiceLocator.Get<UIService>().GetElement<MessageWidget>();
         messageWidget.SetText("TAP THE BUTTON TO START BATTLE");
         messageWidget.Show(false);
 
-        var button = UISystem.Instance.GetElement<StartGameWidget>().GetButton();
+        var button = ServiceLocator.Get<UIService>().GetElement<StartGameWidget>().GetButton();
         Transform transform = button.GetComponentInChildren<TutorialPoint>().transform;
 
         TargetRaycastMediator.Instance.AddTargetRaycast(button.gameObject);

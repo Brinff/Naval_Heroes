@@ -21,6 +21,8 @@ namespace Code.Game.States
             ServiceLocator.ForEach<WalletService>(x => x.Initialize());
             ServiceLocator.ForEach<WalletMediator>(x => x.Initialize());
             
+            ServiceLocator.ForEach<EntityManager>(x=>x.Initialize());
+            
             ServiceLocator.ForEach<DiagnosticService>(x => x.Initialize());
             
             if (m_LaunchGameAtStart) m_StateMachine.Play<LaunchGameState>();

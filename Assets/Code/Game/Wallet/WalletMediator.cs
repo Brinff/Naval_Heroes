@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Code.Game.Flow;*/
 using Code.Services;
+using Game.UI;
 /*using Code.UI;
 using UI.Code.Widgets;*/
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace Code.Game.Wallet
         [SerializeField]
         private Currency m_Currency;
         private WalletService m_WalletService;
-        //private WalletCounter m_WalletCounter;
+        private SoftMoneyCounterWidget m_WalletCounter;
         
         private void OnEnable()
         {
@@ -32,14 +33,14 @@ namespace Code.Game.Wallet
         {
             m_WalletService = ServiceLocator.Get<WalletService>(x => x.currency == m_Currency);
            
-            //m_WalletCounter = ServiceLocator.Get<UIService>().GetWidget<WalletCounter>();
+            m_WalletCounter = ServiceLocator.Get<UIService>().GetElement<SoftMoneyCounterWidget>();
             m_WalletService.OnUpdate += OnUpdateWallet;
-            //m_WalletCounter.valueLabel.SetValue(m_WalletService.amount, true);
+            m_WalletCounter.SetMoney(m_WalletService.amount);
         }
 
         private void OnUpdateWallet()
         {
-            //m_WalletCounter.valueLabel.SetValue(m_WalletService.amount, false);
+            m_WalletCounter.SetMoney(m_WalletService.amount);
         }
     }
 }

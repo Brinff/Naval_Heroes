@@ -863,6 +863,7 @@ GameObject:
   - component: {fileID: 107934381}
   - component: {fileID: 107934380}
   - component: {fileID: 107934379}
+  - component: {fileID: 107934382}
   m_Layer: 0
   m_Name: Wallet
   m_TagString: Untagged
@@ -917,6 +918,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 376328407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &107934382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107934378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d675ffcf989e29448e0df2ab19493f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Currency: {fileID: 11400000, guid: 2a5889c4313302d48a9626d5360ef5ed, type: 2}
 --- !u!1 &109344761
 GameObject:
   m_ObjectHideFlags: 0
@@ -6333,6 +6347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9892f86be2c2a48801e7cd5a6f254b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_CommandSystem: {fileID: 0}
 --- !u!114 &129955705365612504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9558,6 +9573,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_StartMoney: 0
+  m_MoneySoft:
+    m_Version: 
+    m_Value: 0
+    m_Key: 
 --- !u!1 &6658513040784902215
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 
@@ -18,14 +19,14 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         ref var eye = ref world.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
         eye.view = world.PackEntity(view.Value);
 
-        UISystem.Instance.GetElement<CompassWidget>().Clear();
+        ServiceLocator.Get<UIService>().GetElement<CompassWidget>().Clear();
 
         var playerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
         playerSlotsSystem.Hide();
 
         playerSlotsSystem.Bake(systems);
 
-        UISystem.Instance.compositionModule.Show<UIBattleComposition>();
+        ServiceLocator.Get<UIService>().compositionModule.Show<UIBattleComposition>();
 
         var commanderInstance = GameObject.Instantiate(m_CommanderPrefab);
         world.Bake(commanderInstance, out List<int> entities);

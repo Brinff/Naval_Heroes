@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Services;
 using UnityEngine;
 
 public class TutorialMergeShips : MonoBehaviour, ITutorial
@@ -15,7 +16,7 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
     private SlotMerge m_TargetSlot;
     public void Prepare(EcsWorld ecsWorld, IEcsSystems systems)
     {
-        m_TutorialDragWidget = UISystem.Instance.GetElement<TutorialDragWidget>();
+        m_TutorialDragWidget = ServiceLocator.Get<UIService>().GetElement<TutorialDragWidget>();
         m_SlotCollection = systems.GetSystem<PlayerSlotsSystem>().slotCollection;
 
         m_CommandSystem = systems.GetSystem<CommandSystem>();
@@ -114,7 +115,7 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
         m_TutorialDragWidget.Hide(false);
         m_IsDone.Value = true;
         m_SlotCollection.OnChange -= OnChange;
-        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        var messageWidget = ServiceLocator.Get<UIService>().GetElement<MessageWidget>();
         messageWidget.Hide(false);
         m_ItemA = null;
     }
@@ -129,7 +130,7 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
     private IEnumerator DelayLaunch()
     {
         yield return new WaitForSeconds(0.4f);
-        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        var messageWidget = ServiceLocator.Get<UIService>().GetElement<MessageWidget>();
         messageWidget.SetText("DRAG AND DROP TO MERGE SHIPS");
         messageWidget.Show(false);
         DoMerge();

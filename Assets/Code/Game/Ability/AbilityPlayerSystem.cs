@@ -2,6 +2,7 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>, IEcsDestroySystem
@@ -32,14 +33,16 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
     private EcsPool<AbilityAutoUse> m_PoolAutoUse;
     public void Init(IEcsSystems systems)
     {
+        var uiService = ServiceLocator.Get<UIService>();
+        
         m_BeginEntityCommandSystem = systems.GetSystem<BeginEntityCommandSystem>();
         m_World = systems.GetWorld();
         m_AbilityDatabase = systems.GetData<AbilityDatabase>();
         m_AbilityAmmoDatabase = systems.GetData<AbilityAmmoDatabase>();
-        m_AbilityWidget = UISystem.Instance.GetElement<AbilityWidget>();
+        m_AbilityWidget = uiService.GetElement<AbilityWidget>();
 
         m_AutoFightToggle = new PlayerPrefsData<bool>(nameof(m_AutoFightToggle), false);
-        m_AutoFightToggleWidget = UISystem.Instance.GetElement<AutoFightToggleWidget>();
+        m_AutoFightToggleWidget = uiService.GetElement<AutoFightToggleWidget>();
         m_AutoFightToggleWidget.isToggle = m_AutoFightToggle.Value;
         m_AutoFightToggleWidget.OnToggle += OnToggleAutoFight;
 

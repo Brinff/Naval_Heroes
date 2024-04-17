@@ -2,6 +2,7 @@ using Game.Grid.Auhoring;
 using Game.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -237,7 +238,7 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 
         var slotItem = gameObject.AddComponent<SlotItem>();
-        var widget = UISystem.Instance.GetElement<SlotItemInfoWidget>();
+        var widget = ServiceLocator.Get<UIService>().GetElement<SlotItemInfoWidget>();
 
         slotItem.info = widget.Create();
         slotItem.transform.SetParent(collection.transform);

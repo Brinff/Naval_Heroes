@@ -2,6 +2,7 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 public struct CompassEnemyIndicatorComponent
@@ -25,7 +26,7 @@ public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
     private EcsPool<Team> m_PoolTeam;
     public void Init(IEcsSystems systems)
     {
-        m_CompassWidget = UISystem.Instance.GetElement<CompassWidget>();
+        m_CompassWidget = ServiceLocator.Get<UIService>().GetElement<CompassWidget>();
         m_World = systems.GetWorld();
         //m_PlayerShipFilter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Inc<TransformComponent>().End();
         m_PlayerEyeFilter = m_World.Filter<PlayerTag>().Inc<EyeComponent>().End();

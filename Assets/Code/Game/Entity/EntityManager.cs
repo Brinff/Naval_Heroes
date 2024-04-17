@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 using UnityEngine.UIElements;
 using System.Linq;
 using System;
+using Code.Services;
 using Sirenix.Utilities;
 using UnityEngine.PlayerLoop;
 
@@ -116,7 +117,7 @@ public struct Link
     public Transform transform;
 }
 
-public class EntityManager : Singleton<EntityManager>, ISingletonSetup
+public class EntityManager : MonoBehaviour, IService, IInitializable
 {
     [SerializeField]
     private bool m_IsEditor;
@@ -147,6 +148,17 @@ public class EntityManager : Singleton<EntityManager>, ISingletonSetup
 
     //[SerializeField]
     //private Transform[] m_BakeEntities;
+
+
+    private void OnEnable()
+    {
+        ServiceLocator.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Unregister(this);
+    }
 
     private void Update()
     {
@@ -187,8 +199,8 @@ public class EntityManager : Singleton<EntityManager>, ISingletonSetup
 
         m_Data = null;
     }
-
-    public void Setup()
+    
+    public void Initialize()
     {
         m_World = new EcsWorld();
 

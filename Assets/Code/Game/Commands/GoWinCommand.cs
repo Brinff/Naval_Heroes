@@ -2,6 +2,8 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Game.Wallet;
+using Code.Services;
 using UnityEngine;
 
 public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
@@ -9,7 +11,7 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
     private WinWidget m_WinWidget;
     private CommandSystem m_CommandSystem;
     private PlayerMissionSystem m_PlayerLevelPovider;
-    private PlayerMoneySystem m_PlayerMoneyProvider;
+    private WalletService m_WalletService;
     private int m_Reward;
 
     private bool m_IsLockClaim;
@@ -34,13 +36,13 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
 
         //m_PlayerMoneyProvider = systems.GetSystem<PlayerMoneySystem>();
 
-        m_WinWidget = UISystem.Instance.GetElement<WinWidget>();
+        var usService = ServiceLocator.Get<UIService>();
+        
+        m_WinWidget = usService.GetElement<WinWidget>();
         m_WinWidget.OnClaim += OnClaimReward;
         m_WinWidget.SetReward(battleData.winReward, false);
         m_WinWidget.SetLevel(battleData.level);
-        UISystem.Instance.compositionModule.Show<UIWinCompositon>();
-
-        
+        usService.compositionModule.Show<UIWinCompositon>();
     }
 
     private void OnClaimReward()
@@ -48,11 +50,12 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
         if (m_IsLockClaim) return;
 
         m_WinWidget.OnClaim -= OnClaimReward;
-        m_CommandSystem.Execute<MoneyAddCommand, int>(m_Reward);
+        ServiceLocator.Get<WalletService>().IncomeValue(m_Reward, "Game", "Win");
+        //m_CommandSystem.Execute<MoneyAddCommand, int>(m_Reward);
         m_CommandSystem.Execute<EndBattleCommand>();
         m_CommandSystem.Execute<GoHomeCommand>();
 
-        m_PlayerMoneyProvider = null;
+        m_WalletService = null;
         m_WinWidget = null;
         m_PlayerLevelPovider = null;
         m_CommandSystem = null;

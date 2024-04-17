@@ -5,6 +5,8 @@ using Leopotam.EcsLite;
 using Sirenix.OdinInspector;
 using System.Linq;
 using System;
+using Code.Game.Wallet;
+using Code.Services;
 
 public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySystem, IEcsRunSystem, IEcsGroup<Update>
 {
@@ -29,9 +31,9 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     private EcsPool<Team> m_PoolTeam;
     private EcsPool<PlayerTag> m_PoolPlayerTag;
     private EcsPool<ClearBattleTag> m_PoolClearBattleTag;
-    private PlayerMoneySystem m_PlayerMoneySystem;
     private CommandSystem m_CommandSystem;
     private EcsPool<NewEntityTag> m_PoolNewTag;
+    private WalletService m_WalletService;
     public SlotCollection slotCollection => m_SlotCollection;
 
     public void Init(IEcsSystems systems)
@@ -51,7 +53,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         else m_PlayerSlots = new PlayerPrefsData<List<Slot>>(nameof(m_PlayerSlots), new List<Slot>());
 
         //m_PlayerAmountBuyShip = new PlayerPrefsData<int>(nameof(m_PlayerAmountBuyShip), 0);
-        m_PlayerMoneySystem = systems.GetSystem<PlayerMoneySystem>();
+        m_WalletService = ServiceLocator.Get<WalletService>();
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_SlotCollection.Prepare();
         m_PoolClearBattleTag = m_World.GetPool<ClearBattleTag>();
@@ -62,7 +64,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         //var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
         foreach (var item in slotBuys)
         {
-            m_PlayerMoneySystem.OnChangeValue += item.CheckMoney;
+            m_WalletService.OnUpdate += item.CheckMoney;
             //item.SetCost((int)value);
             item.spendMoney = SpendMoney;
             item.enoughMoney = EnoughMoney;
@@ -73,7 +75,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
     public bool EnoughMoney(int money)
     {
         //var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-        if (m_PlayerMoneySystem.HasMoney(money))
+        if (m_WalletService.IsEnough(money))
         {
             return true;
         }
@@ -82,10 +84,11 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
 
     public bool SpendMoney(int money)
     {
+        WalletService walletService = ServiceLocator.Get<WalletService>();
         //var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-        if (m_PlayerMoneySystem.HasMoney(money))
+        if (walletService.IsEnough(money))
         {
-            m_CommandSystem.Execute<MoneySpendCommand, int>(money);
+            //m_CommandSystem.Execute<MoneySpendCommand, int>(money);
 
             //m_PlayerAmountBuyShip.Value++;
 

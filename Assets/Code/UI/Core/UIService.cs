@@ -1,8 +1,10 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Code.Services;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,7 +17,7 @@ using UnityEditor;
 
 namespace Game.UI
 {
-    public class UISystem : Singleton<UISystem>
+    public class UIService : MonoBehaviour, IService
     {
         [SerializeField]
         private Canvas canvas;
@@ -27,6 +29,16 @@ namespace Game.UI
         private bool m_IsInteractable;
 
         private List<IUIElement> m_UIElemnts = new List<IUIElement>();
+
+        private void OnEnable()
+        {
+            ServiceLocator.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            ServiceLocator.Unregister(this);
+        }
 
         public T GetElement<T>() where T : IUIElement
         {

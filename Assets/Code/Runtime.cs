@@ -23,12 +23,12 @@ public class Runtime : MonoBehaviour
     private StartGameWidget startGameWidget;
     public void Start()
     {
-        int playerEntity = EntityManager.Instance.world.Bake(m_Player);
+        //int playerEntity = EntityManager.Instance.world.Bake(m_Player);
 
-        EntityManager.Instance.world.GetPool<HomeViewActiveEvent>().Add(playerEntity);
-        EntityManager.Instance.world.GetPool<PlayerTag>().Add(playerEntity);
+        //EntityManager.Instance.world.GetPool<HomeViewActiveEvent>().Add(playerEntity);
+        //EntityManager.Instance.world.GetPool<PlayerTag>().Add(playerEntity);
 
-        m_PlayerEntity = EntityManager.Instance.world.PackEntityWithWorld(playerEntity);
+        //m_PlayerEntity = EntityManager.Instance.world.PackEntityWithWorld(playerEntity);
 
         //startGameWidget = UISystem.Instance.GetElement<StartGameWidget>();
         //startGameWidget.OnClick += OnStartGame;

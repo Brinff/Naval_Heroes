@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 using Leopotam.EcsLite;
 
@@ -65,10 +66,10 @@ public class InputPlayerZoomSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyste
 
     public void Init(IEcsSystems systems)
     {
-        m_ZoomFactorWidget = UISystem.Instance.GetElement<ZoomFactorWidget>();
+        m_ZoomFactorWidget = ServiceLocator.Get<UIService>().GetElement<ZoomFactorWidget>();
         m_ZoomFactorWidget.OnChangeZoomFactor += OnChangeZoomFactor;
 
-        m_ZoomViewWidget = UISystem.Instance.GetElement<ZoomViewWidget>();
+        m_ZoomViewWidget = ServiceLocator.Get<UIService>().GetElement<ZoomViewWidget>();
 
         m_World = systems.GetWorld();
 

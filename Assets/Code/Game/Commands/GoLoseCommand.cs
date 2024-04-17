@@ -2,6 +2,8 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Game.Wallet;
+using Code.Services;
 using UnityEngine;
 
 public class GoLoseCommand : MonoBehaviour, ICommand<BattleData>
@@ -23,13 +25,15 @@ public class GoLoseCommand : MonoBehaviour, ICommand<BattleData>
     {
         StartCoroutine(WaitLockRetry());
 
+        var uiService = ServiceLocator.Get<UIService>();
+        
         m_CommandSystem = systems.GetSystem<CommandSystem>();
-        UISystem.Instance.compositionModule.Show<UILoseComposion>();
-        m_LoseWidget = UISystem.Instance.GetElement<LoseWidget>();
+        uiService.compositionModule.Show<UILoseComposion>();
+        m_LoseWidget = uiService.GetElement<LoseWidget>();
         m_LoseWidget.SetReward(m_Reward = battleData.loseReward);
         m_LoseWidget.OnRetry += OnRetry;
 
-        SmartlookUnity.Smartlook.TrackNavigationEvent("Battle", SmartlookUnity.Smartlook.NavigationEventType.exit);
+        //SmartlookUnity.Smartlook.TrackNavigationEvent("Battle", SmartlookUnity.Smartlook.NavigationEventType.exit);
         TinySauce.OnGameFinished(false, 0, battleData.level);
         Debug.Log("Lose!");
     }
@@ -39,7 +43,8 @@ public class GoLoseCommand : MonoBehaviour, ICommand<BattleData>
         if (m_IsLockRetry) return;
 
         m_LoseWidget.OnRetry -= OnRetry;
-        m_CommandSystem.Execute<MoneyAddCommand, int>(m_Reward);
+        ServiceLocator.Get<WalletService>().IncomeValue(m_Reward, "Game", "Lose");
+        //m_CommandSystem.Execute<MoneyAddCommand, int>(m_Reward);
         m_CommandSystem.Execute<EndBattleCommand>();
         m_CommandSystem.Execute<GoHomeCommand>();
         m_LoseWidget = null;

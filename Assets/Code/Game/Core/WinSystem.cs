@@ -2,6 +2,8 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Game.Wallet;
+using Code.Services;
 using UnityEngine;
 
 public class WinSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroupUpdateSystem, IEcsDestroySystem
@@ -22,7 +24,7 @@ public class WinSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup
         m_World = systems.GetWorld();
         m_Filter = m_World.Filter<GoWinEvent>().End();
         m_RewardFilter = m_World.Filter<RewardComponent>().End();
-        m_WinWidget = UISystem.Instance.GetElement<WinWidget>();
+        m_WinWidget = ServiceLocator.Get<UIService>().GetElement<WinWidget>();
         m_WinWidget.OnClaim += OnClaim;
     }
 
@@ -41,8 +43,9 @@ public class WinSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup
             {
                 ref var reward = ref m_World.GetPool<RewardComponent>().Get(entity);
 
-                PlayerMoneySystem playerMoneySoftProvider = systems.GetSystem<PlayerMoneySystem>();
-                playerMoneySoftProvider.AddMoney(reward.amount);
+                ServiceLocator.Get<WalletService>().IncomeValue(reward.amount, "Game", "Win");
+                //PlayerMoneySystem playerMoneySoftProvider = systems.GetSystem<PlayerMoneySystem>();
+                //playerMoneySoftProvider.AddMoney(reward.amount);
 
                 m_World.GetPool<GoHomeEvent>().Add(entity);
                 m_World.GetPool<RewardComponent>().Del(entity);
@@ -62,7 +65,7 @@ public class WinSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup
             m_WinWidget.SetLevel(playerMissionSystem.level);
             playerMissionSystem.CompleteLevel();
 
-            UISystem.Instance.compositionModule.Show<UIWinCompositon>();
+            ServiceLocator.Get<UIService>().compositionModule.Show<UIWinCompositon>();
             m_World.GetPool<LevelComponent>().Del(entity);
             m_World.GetPool<GoWinEvent>().Del(entity);
         }
