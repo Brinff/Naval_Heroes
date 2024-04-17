@@ -5140,6 +5140,8 @@ GameObject:
   - component: {fileID: 1550674061}
   - component: {fileID: 1550674060}
   - component: {fileID: 1550674059}
+  - component: {fileID: 1550674063}
+  - component: {fileID: 1550674064}
   m_Layer: 0
   m_Name: GameStateMachine
   m_TagString: Untagged
@@ -5159,6 +5161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0adae6faffd4daeadce4563b0ee4ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Player: {fileID: 652023675142777429, guid: b452ce7a5c83a2d4193650430be9944b, type: 3}
 --- !u!114 &1550674060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5171,7 +5174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65641a5ca168415cb80e31e2113c6b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LaunchGameAtStart: 0
+  m_LaunchGameAtStart: 1
 --- !u!114 &1550674061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5199,6 +5202,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1550674063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550674058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a216ab97c2f4226a8a5c35d77fa9225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1550674064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550674058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6656eb8d40c541d394302f46beeca90b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CommanderPrefab: {fileID: 1027094743976128327, guid: c458c9a783b96334f8d041c7e154a310, type: 3}
+  m_MissionDatabase: {fileID: 11400000, guid: 8746ecb0d421434449d8d83b1effa2af, type: 2}
 --- !u!224 &1628328095 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6225630291827732171, guid: 8f5386f6256976248bba14fb0df42167, type: 3}

@@ -16,7 +16,7 @@ public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
 
     public void Init(IEcsSystems systems)
     {
-        m_World = systems.GetWorld();
+        /*m_World = systems.GetWorld();
         var commandSystem = systems.GetSystem<CommandSystem>();
 
         
@@ -35,6 +35,6 @@ public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
         {
             commandSystem.Execute<GoBattleCommand>();
         }
-        else commandSystem.Execute<GoHomeCommand>();
+        else commandSystem.Execute<GoHomeCommand>();*/
     }
 }

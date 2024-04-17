@@ -24,7 +24,7 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         var playerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
         playerSlotsSystem.Hide();
 
-        playerSlotsSystem.Bake(systems);
+        playerSlotsSystem.Bake();
 
         ServiceLocator.Get<UIController>().compositionModule.Show<UIBattleComposition>();
 

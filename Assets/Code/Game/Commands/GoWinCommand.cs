@@ -2,6 +2,7 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Game.States;
 using Code.Game.Wallet;
 using Code.Services;
 using UnityEngine;
@@ -53,7 +54,7 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
         ServiceLocator.Get<WalletService>().IncomeValue(m_Reward, "Game", "Win");
         //m_CommandSystem.Execute<MoneyAddCommand, int>(m_Reward);
         m_CommandSystem.Execute<EndBattleCommand>();
-        m_CommandSystem.Execute<GoHomeCommand>();
+        ServiceLocator.Get<GameStateMachine>().Play<HomeState>();
 
         m_WalletService = null;
         m_WinWidget = null;

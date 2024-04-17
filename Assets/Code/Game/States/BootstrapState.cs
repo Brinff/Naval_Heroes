@@ -4,6 +4,7 @@ using Code.Game.Wallet;
 using Code.Services;
 using Code.States;
 using UnityEngine;
+using Voodoo.Tiny.Sauce.Internal.Ads;
 
 namespace Code.Game.States
 {
@@ -16,6 +17,10 @@ namespace Code.Game.States
         {
             //TODO: All initializes, sdk, loads, ect
             Application.targetFrameRate = 60;
+            
+            TSAdsManager.SetFSDisplayConditions(30, 30, 3);
+            TSAdsManager.ToggleAds(true);
+            
             m_StateMachine = stateMachine;
             
             ServiceLocator.ForEach<WalletService>(x => x.Initialize());

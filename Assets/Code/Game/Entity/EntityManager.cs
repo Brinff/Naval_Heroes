@@ -60,6 +60,8 @@ public class Group<T> : IEcsGroup where T : IEcsGroup
         m_EcsSystem.Init();
     }
 
+    public IEcsSystems systems => m_EcsSystem;
+
     public void Run()
     {
         m_EcsSystem.Run();
@@ -73,6 +75,7 @@ public interface IEcsGroup : IDisposable
     public void Add(IEcsSystem system);
     public void BeginInit(EcsWorld world, IEcsData[] data);
     public void EndInit(bool isEditor);
+    public IEcsSystems systems { get; }
 }
 
 public interface IEcsGroup<T> where T : IEcsGroup
@@ -126,6 +129,18 @@ public class EntityManager : MonoBehaviour, IService, IInitializable
     private List<IEcsGroup> m_Groups = new List<IEcsGroup>();
 
     private IEcsData[] m_Data;
+
+
+    public T GetSystem<T>() where T : IEcsSystem
+    {
+        for (int i = 0; i < m_Groups.Count; i++)
+        {
+            var g = m_Groups[i];
+            var s = g.systems.GetSystem<T>();
+            if (s != null) return s;
+        }
+        return default(T);
+    }
 
     public void Run<T>() where T : IEcsGroup
     {

@@ -55,25 +55,8 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         }
 
         slotSystem.Show();
-
-        //var filterPlayer = world.Filter<PlayerTagLeo>().Inc<ShipTag>().Exc<DeadTag>().End();
-        //var filterEnemy = world.Filter<AITag>().Inc<ShipTag>().Exc<DeadTag>().End();
-
-        //var poolDestroy = world.GetPool<DestroyComponent>();
-        //foreach (var entity in filterEnemy)
-        //{
-        //    if (!poolDestroy.Has(entity)) poolDestroy.Add(entity);
-        //}
-
-        //if (!filterPlayer.IsAny())
-        //{
-        //    m_CommandSystem.Execute<CreatePlayerCommand>();
-        //}
-
+        
         m_CommandSystem.Execute<SetupPlayerCommand>();
-        //m_CommandSystem.Execute<UpgradeFillCommand>();
-        //m_CommandSystem.Execute<UpgradeUpdateCommand>();
-        //m_CommandSystem.Execute<MoneyUpdateCommand>();
 
         systems.GetSystem<TutorialSystem>().HomeTutorial();
     }
@@ -91,7 +74,6 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         }
         m_StartGameWidget.OnClick -= OnClickBattle;
         m_PlayerSlotsSystem.slotCollection.OnChange -= OnChangeSlotCollection;
-        SmartlookUnity.Smartlook.TrackNavigationEvent("Merge", SmartlookUnity.Smartlook.NavigationEventType.exit);
         m_CommandSystem.Execute<GoBattleCommand>();
     }
 }

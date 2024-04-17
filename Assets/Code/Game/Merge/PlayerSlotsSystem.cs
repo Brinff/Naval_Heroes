@@ -202,9 +202,10 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         return false;
     }
 
-    public void Bake(IEcsSystems systems)
+    public void Bake()
     {
-        var ecb = systems.GetSystem<BeginEntityCommandSystem>().CreateBuffer();
+        var entityManager = ServiceLocator.Get<EntityManager>();
+        var ecb = entityManager.GetSystem<BeginEntityCommandSystem>().CreateBuffer();
         var slots = m_SlotCollection.GetSlots<SlotBattleGrid>();
         foreach (var slot in slots)
         {
