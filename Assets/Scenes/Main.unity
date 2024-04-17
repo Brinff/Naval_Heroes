@@ -898,7 +898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Currency: {fileID: 11400000, guid: 2a5889c4313302d48a9626d5360ef5ed, type: 2}
   m_CustomKey: m_MoneySoft
-  m_StartValue: 1000
+  m_StartValue: 0
   m_Log:
     m_Enable: 0
     m_Name: 
