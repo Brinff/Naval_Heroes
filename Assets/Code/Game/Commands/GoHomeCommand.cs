@@ -31,14 +31,14 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         m_PlayerSlotsSystem.slotCollection.OnChange += OnChangeSlotCollection;
 
 
-        m_StartGameWidget = ServiceLocator.Get<UIService>().GetElement<StartGameWidget>();
+        m_StartGameWidget = ServiceLocator.Get<UIController>().GetElement<StartGameWidget>();
         m_StartGameWidget.SetLevel(playerMissionSystem.level);
         m_StartGameWidget.OnClick += OnClickBattle;
         m_StartGameWidget.SetBlock(!m_PlayerSlotsSystem.IsAnyRadyBattle());
 
 
 
-        ServiceLocator.Get<UIService>().compositionModule.Show<UIHomeComposition>();
+        ServiceLocator.Get<UIController>().compositionModule.Show<UIHomeComposition>();
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_CommandSystem.Execute<ClearBattleDataCommand>();
 

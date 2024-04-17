@@ -28,7 +28,7 @@ public class ClearBattleDataCommand : MonoBehaviour, ICommand
             world.DelEntity(entity);
         }
 
-        var uiService = ServiceLocator.Get<UIService>();
+        var uiService = ServiceLocator.Get<UIController>();
         uiService.GetElement<AbilityWidget>().Clear();
         uiService.GetElement<WorldEnemyWidget>().Clear();
     }

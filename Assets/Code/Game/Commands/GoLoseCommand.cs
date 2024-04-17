@@ -25,7 +25,7 @@ public class GoLoseCommand : MonoBehaviour, ICommand<BattleData>
     {
         StartCoroutine(WaitLockRetry());
 
-        var uiService = ServiceLocator.Get<UIService>();
+        var uiService = ServiceLocator.Get<UIController>();
         
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         uiService.compositionModule.Show<UILoseComposion>();

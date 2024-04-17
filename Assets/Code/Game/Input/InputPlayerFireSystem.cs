@@ -32,7 +32,7 @@ public class InputPlayerFireSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyste
 
     public void Init(IEcsSystems systems)
     {
-        m_InputFireWidget = ServiceLocator.Get<UIService>().GetElement<FireInputWidget>();
+        m_InputFireWidget = ServiceLocator.Get<UIController>().GetElement<FireInputWidget>();
         m_InputFireWidget.OnPerform += Fire;
 
         m_World = systems.GetWorld();

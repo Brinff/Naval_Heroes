@@ -52,7 +52,7 @@ public class InputPlayerMovementSystem : MonoBehaviour, IEcsInitSystem, IEcsRunS
 
     public void Init(IEcsSystems systems)
     {
-        m_InputWidget = ServiceLocator.Get<UIService>().GetElement<MovementInputButtonsWidget>();
+        m_InputWidget = ServiceLocator.Get<UIController>().GetElement<MovementInputButtonsWidget>();
         m_InputWidget.OnChangeAxisValue += OnChangeAxisValue;
 
         var world = systems.GetWorld();

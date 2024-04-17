@@ -68,14 +68,14 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
 
     public void Init(IEcsSystems systems)
     {
-        m_ZoomToggleWidget = ServiceLocator.Get<UIService>().GetElement<ZoomToggleWidget>();
+        m_ZoomToggleWidget = ServiceLocator.Get<UIController>().GetElement<ZoomToggleWidget>();
         m_ZoomToggleWidget.OnToggle += ZoomToggle;
 
-        m_CameraInputWidget = ServiceLocator.Get<UIService>().GetElement<CameraInputWidget>();
+        m_CameraInputWidget = ServiceLocator.Get<UIController>().GetElement<CameraInputWidget>();
         m_CameraInputWidget.OnEndInput += OnCameraEndInput;
         m_CameraInputWidget.OnUpdateInput += OnCameraUpdateInput;
 
-        m_ZoomFactorWidget = ServiceLocator.Get<UIService>().GetElement<ZoomFactorWidget>();
+        m_ZoomFactorWidget = ServiceLocator.Get<UIController>().GetElement<ZoomFactorWidget>();
         m_ZoomFactorWidget.OnChangeZoomFactor += OnChangeZoomFactor;
 
 
@@ -147,7 +147,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
 
             eye.view = m_World.PackEntity(viewZoom.Value);
 
-            ServiceLocator.Get<UIService>().compositionModule.Show<UIGameShipZoomComposition>();
+            ServiceLocator.Get<UIController>().compositionModule.Show<UIGameShipZoomComposition>();
 
             SmartlookUnity.Smartlook.TrackNavigationEvent("Zoom", SmartlookUnity.Smartlook.NavigationEventType.enter);
 
@@ -158,7 +158,7 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
             ref var eye = ref m_World.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
             eye.view = m_World.PackEntity(viewBattle.Value);
 
-            ServiceLocator.Get<UIService>().compositionModule.Show<UIBattleComposition>();
+            ServiceLocator.Get<UIController>().compositionModule.Show<UIBattleComposition>();
 
             SmartlookUnity.Smartlook.TrackNavigationEvent("Zoom", SmartlookUnity.Smartlook.NavigationEventType.exit);
         }

@@ -26,7 +26,7 @@ public class PlayerCompasSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, 
     private EcsPool<Team> m_PoolTeam;
     public void Init(IEcsSystems systems)
     {
-        m_CompassWidget = ServiceLocator.Get<UIService>().GetElement<CompassWidget>();
+        m_CompassWidget = ServiceLocator.Get<UIController>().GetElement<CompassWidget>();
         m_World = systems.GetWorld();
         //m_PlayerShipFilter = m_World.Filter<PlayerTag>().Inc<ShipTag>().Inc<TransformComponent>().End();
         m_PlayerEyeFilter = m_World.Filter<PlayerTag>().Inc<EyeComponent>().End();

@@ -33,7 +33,7 @@ public class AbilityPlayerSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem,
     private EcsPool<AbilityAutoUse> m_PoolAutoUse;
     public void Init(IEcsSystems systems)
     {
-        var uiService = ServiceLocator.Get<UIService>();
+        var uiService = ServiceLocator.Get<UIController>();
         
         m_BeginEntityCommandSystem = systems.GetSystem<BeginEntityCommandSystem>();
         m_World = systems.GetWorld();

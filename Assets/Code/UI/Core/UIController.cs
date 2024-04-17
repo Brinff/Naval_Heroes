@@ -17,7 +17,7 @@ using UnityEditor;
 
 namespace Game.UI
 {
-    public class UIService : MonoBehaviour, IService
+    public class UIController : MonoBehaviour, IService
     {
         [SerializeField]
         private Canvas canvas;

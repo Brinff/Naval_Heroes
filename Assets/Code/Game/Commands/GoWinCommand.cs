@@ -36,7 +36,7 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
 
         //m_PlayerMoneyProvider = systems.GetSystem<PlayerMoneySystem>();
 
-        var usService = ServiceLocator.Get<UIService>();
+        var usService = ServiceLocator.Get<UIController>();
         
         m_WinWidget = usService.GetElement<WinWidget>();
         m_WinWidget.OnClaim += OnClaimReward;

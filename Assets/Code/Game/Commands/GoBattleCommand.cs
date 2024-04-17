@@ -19,14 +19,14 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         ref var eye = ref world.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
         eye.view = world.PackEntity(view.Value);
 
-        ServiceLocator.Get<UIService>().GetElement<CompassWidget>().Clear();
+        ServiceLocator.Get<UIController>().GetElement<CompassWidget>().Clear();
 
         var playerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
         playerSlotsSystem.Hide();
 
         playerSlotsSystem.Bake(systems);
 
-        ServiceLocator.Get<UIService>().compositionModule.Show<UIBattleComposition>();
+        ServiceLocator.Get<UIController>().compositionModule.Show<UIBattleComposition>();
 
         var commanderInstance = GameObject.Instantiate(m_CommanderPrefab);
         world.Bake(commanderInstance, out List<int> entities);
