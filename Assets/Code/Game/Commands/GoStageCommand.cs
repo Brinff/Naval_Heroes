@@ -1,6 +1,8 @@
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Game.States;
+using Code.Services;
 using UnityEngine;
 
 public struct ClearBattleTag
@@ -59,8 +61,9 @@ public class GoStageCommand : MonoBehaviour, ICommand<BattleData>, ICommand
             //    ref var playerAimPoint = ref world.GetPool<PlayerAimPointComponent>().Get(entity);
             //    playerAimPoint.state = AimState.Idle;
             //}
-            var commandSystem = systems.GetSystem<CommandSystem>();
-            commandSystem.Execute<GoWinCommand, BattleData>(battleData);
+            ServiceLocator.Get<GameStateMachine>().Play<WinState>(x=>x.SetBattleData(battleData));
+            /*var commandSystem = systems.GetSystem<CommandSystem>();
+            commandSystem.Execute<GoWinCommand, BattleData>(battleData);*/
         }
     }
 

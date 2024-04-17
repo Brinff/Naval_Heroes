@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Game.States;
 using Code.Services;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ public class TutorialGoToBattle : MonoBehaviour, ITutorial
 
     public bool ConditionDone(EcsWorld ecsWorld, IEcsSystems systems)
     {
-        return !m_IsDone.Value && m_CommandSystem.HasCommand<GoBattleCommand>();
+        return !m_IsDone.Value && ServiceLocator.Get<GameStateMachine>().currentState is BattleState;
     }
 
     public void Done(EcsWorld ecsWorld, IEcsSystems systems)

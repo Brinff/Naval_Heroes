@@ -56,7 +56,7 @@ public class GoHomeCommand : MonoBehaviour, ICommand
 
         slotSystem.Show();
         
-        m_CommandSystem.Execute<SetupPlayerCommand>();
+        //m_CommandSystem.Execute<SetupPlayerCommand>();
 
         systems.GetSystem<TutorialSystem>().HomeTutorial();
     }

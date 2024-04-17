@@ -51,7 +51,7 @@ namespace Code.Game.States
 
             slotSystem.Show();
 
-            m_CommandSystem.Execute<SetupPlayerCommand>();
+            //m_CommandSystem.Execute<SetupPlayerCommand>();
 
             entityManager.GetSystem<TutorialSystem>().HomeTutorial();
         }

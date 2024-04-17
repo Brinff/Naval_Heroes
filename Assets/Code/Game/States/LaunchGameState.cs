@@ -16,19 +16,19 @@ namespace Code.Game.States
             entityManager.world.Bake(instance);
 
             //var m_World = systems.GetWorld();
-            /*var commandSystem = entityManager.GetSystem<CommandSystem>();
+            //var commandSystem = entityManager.GetSystem<CommandSystem>();
 
             var playerLevelProvider = entityManager.GetSystem<PlayerMissionSystem>();
-            commandSystem.Execute<CreatePlayerCommand>();*/
+            //commandSystem.Execute<CreatePlayerCommand>();
 
-            /*
+            
             if (playerLevelProvider.level == 1 && GameSettings.Instance.firstEnterInBattle)
             {
-                commandSystem.Execute<GoBattleCommand>();
+                stateMachine.Play<BattleState>();
             }
-            else //commandSystem.Execute<GoHomeCommand>();*/
+            else  stateMachine.Play<HomeState>();
 
-            stateMachine.Play<HomeState>();
+           
         }
     }
 }
