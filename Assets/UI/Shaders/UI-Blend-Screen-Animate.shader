@@ -7,6 +7,7 @@ Shader "UI/Blend-Screen-Animate"
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
         _OverlayTex ("OverlayTex", 2D) = "black" {}
+        _OverlayBlend("OverlayBlend", Range(0,1)) = 1
         _OverlayScrollSpeed("Overlay Scroll Speed", Vector) = (1,0,0,0)
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
@@ -81,6 +82,7 @@ Shader "UI/Blend-Screen-Animate"
 
             sampler2D _MainTex;
             sampler2D _OverlayTex;
+            float _OverlayBlend;
             float4 _OverlayTex_ST;
             float2 _OverlayScrollSpeed;
             fixed4 _Color;
@@ -139,7 +141,7 @@ Shader "UI/Blend-Screen-Animate"
 
                 half4 color = IN.color * (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd);
                 half4 overlayColor = tex2D(_OverlayTex,  TRANSFORM_TEX(IN.texcoord, _OverlayTex) + _Time.x * _OverlayScrollSpeed);
-                overlayColor.a *= 0.6f;
+                overlayColor.a *= _OverlayBlend;
                 
                 color = Screen(color, overlayColor);
 
