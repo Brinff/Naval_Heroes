@@ -1,4 +1,5 @@
-﻿using Code.Game.Wallet;
+﻿using Assets.Code.Game.Ads;
+using Code.Game.Wallet;
 using Code.Services;
 using Code.States;
 using Game.UI;
@@ -44,6 +45,9 @@ namespace Code.Game.States
             ServiceLocator.Get<WalletService>().IncomeValue(m_Reward, "Game", "Lose");
             //m_CommandSystem.Execute<MoneyAddCommand, int>(m_Reward);
             m_CommandSystem.Execute<EndBattleCommand>();
+
+            ServiceLocator.Get<AdsBattleInterstitial>().Show();
+
             ServiceLocator.Get<GameStateMachine>().Play<HomeState>();
             //m_CommandSystem.Execute<GoHomeCommand>();
         }

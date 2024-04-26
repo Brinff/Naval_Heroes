@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Code.Game.Wallet;
 using Code.CSV;
 using Code.Game.Analytics;
 using Code.IO;
@@ -66,9 +67,19 @@ namespace Code.Game.Wallet
             
             m_Amount = new PlayerPrefsProperty<int>(string.IsNullOrEmpty(m_CustomKey) ? GetSaveKey(nameof(m_Amount)) : m_CustomKey).OnDefault(() =>
             {
-                Log(0, m_StartValue, m_StartValue, Operation.Income, AnalyticService.GAME, "FirstLaunch");
-                m_AnalyticService.OnCurrencyGiven(m_Currency.name, m_StartValue, AnalyticService.GAME, "FirstLaunch");
-                return m_StartValue;
+                var walletMigration = GetComponent<IWalletMigration>();
+                if (walletMigration?.Migrate(out int migrateValue) ?? false)
+                {
+                    Log(0, m_StartValue, m_StartValue, Operation.Income, AnalyticService.GAME, "Migrate");
+                    m_AnalyticService.OnCurrencyGiven(m_Currency.name, m_StartValue, AnalyticService.GAME, "Migrate");
+                    return migrateValue;
+                }
+                else
+                {
+                    Log(0, m_StartValue, m_StartValue, Operation.Income, AnalyticService.GAME, "FirstLaunch");
+                    m_AnalyticService.OnCurrencyGiven(m_Currency.name, m_StartValue, AnalyticService.GAME, "FirstLaunch");
+                    return m_StartValue;
+                }
             }).Build();
 
 

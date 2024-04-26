@@ -1,4 +1,6 @@
 ﻿
+using Assets.Code.Game.Ads;
+using Code.Ads;
 using Code.Diagnostic;
 using Code.Game.Analytics;
 using Code.Game.Slots;
@@ -30,6 +32,8 @@ namespace Code.Game.States
             m_StateMachine = stateMachine;
             
             ServiceLocator.ForEach<AnalyticService>(x=>x.Initialize());
+            ServiceLocator.ForEach<AdsService>(x=>x.Initialize());
+            ServiceLocator.ForEach<AdsBattleInterstitial>(x => x.Initialize());
             
             ServiceLocator.ForEach<WalletService>(x => x.Initialize());
             ServiceLocator.ForEach<WalletMediator>(x => x.Initialize());
