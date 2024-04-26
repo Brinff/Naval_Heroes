@@ -232,6 +232,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &19994849
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 19994850}
+  - component: {fileID: 19994851}
+  m_Layer: 0
+  m_Name: Aircraft Carrier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &19994850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19994849}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 93388980}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &19994851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19994849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505bd1a47a9a4c8dbe593dae05fc8b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ProgressionCost: {fileID: 11400000, guid: fe7a0a937b5032d488615858854bd9cd, type: 2}
+  m_Category: {fileID: 11400000, guid: c546bc147f07d3c4cb497af41453a270, type: 2}
+  m_Currency: {fileID: 11400000, guid: 2a5889c4313302d48a9626d5360ef5ed, type: 2}
 --- !u!1 &45271789
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,6 +899,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 74200523}
+  - {fileID: 378751888}
+  - {fileID: 19994850}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &95735305
@@ -2745,6 +2794,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377029402}
   m_CullTransparentMesh: 1
+--- !u!1 &378751887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 378751888}
+  - component: {fileID: 378751889}
+  m_Layer: 0
+  m_Name: Submarine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &378751888
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378751887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 93388980}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &378751889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378751887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505bd1a47a9a4c8dbe593dae05fc8b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ProgressionCost: {fileID: 11400000, guid: 8f3e225e0b7ef2945842686136f7c3ee, type: 2}
+  m_Category: {fileID: 11400000, guid: 41387c7b487b54a459516c9bb331bcde, type: 2}
+  m_Currency: {fileID: 11400000, guid: 2a5889c4313302d48a9626d5360ef5ed, type: 2}
 --- !u!1 &425281041
 GameObject:
   m_ObjectHideFlags: 0
@@ -3452,8 +3548,8 @@ MonoBehaviour:
     SerializationNodes:
     - Name: m_DropTargets
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Code.Game.Slots.IDropTarget, Assembly-CSharp]],
-        mscorlib
+      Data: 0|System.Collections.Generic.List`1[[Code.Game.Slots.DragAndDrop.IDropTarget,
+        Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -3465,8 +3561,8 @@ MonoBehaviour:
       Data: 
     - Name: m_DragHandlers
       Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[Code.Game.Slots.IDragHandler, Assembly-CSharp]],
-        mscorlib
+      Data: 1|System.Collections.Generic.List`1[[Code.Game.Slots.DragAndDrop.IDragAndDropHandler,
+        Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -4198,6 +4294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Entity: {fileID: 11400000, guid: 95e827ef307352749952a72c18b85559, type: 2}
   m_CostShip: {fileID: 11400000, guid: fe7a0a937b5032d488615858854bd9cd, type: 2}
+  m_Category: {fileID: 11400000, guid: c546bc147f07d3c4cb497af41453a270, type: 2}
   m_Key: Aircraft Carrier
   m_UnlockReachLevel: 11
   m_CostLabel: {fileID: 1050966003}
@@ -5798,6 +5895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Entity: {fileID: 11400000, guid: 75bf7d703d4577743a0051e3673dc7eb, type: 2}
   m_CostShip: {fileID: 11400000, guid: 8f3e225e0b7ef2945842686136f7c3ee, type: 2}
+  m_Category: {fileID: 11400000, guid: 41387c7b487b54a459516c9bb331bcde, type: 2}
   m_Key: Submarine
   m_UnlockReachLevel: 3
   m_CostLabel: {fileID: 107178261}
@@ -8738,6 +8836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Entity: {fileID: 11400000, guid: 942391044987b6d4d9ec2cbc44cb524e, type: 2}
   m_CostShip: {fileID: 11400000, guid: a64cece0aa3d52b44ad2db62cd027a6a, type: 2}
+  m_Category: {fileID: 11400000, guid: 42f6a1364e54b4a409d3c97410359b9a, type: 2}
   m_Key: Artellery
   m_UnlockReachLevel: -1
   m_CostLabel: {fileID: 252974400}
@@ -10225,6 +10324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Entity: {fileID: 11400000, guid: 942391044987b6d4d9ec2cbc44cb524e, type: 2}
   m_CostShip: {fileID: 11400000, guid: fe79498eccb136f498657fa3c14a6b08, type: 2}
+  m_Category: {fileID: 0}
   m_Key: 
   m_UnlockReachLevel: -1
   m_CostLabel: {fileID: 667472546}
@@ -10435,6 +10535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Entity: {fileID: 11400000, guid: 942391044987b6d4d9ec2cbc44cb524e, type: 2}
   m_CostShip: {fileID: 11400000, guid: fe79498eccb136f498657fa3c14a6b08, type: 2}
+  m_Category: {fileID: 0}
   m_Key: 
   m_UnlockReachLevel: -1
   m_CostLabel: {fileID: 109344763}

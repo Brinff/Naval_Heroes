@@ -4,10 +4,9 @@ using Code.Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Code.Game.Slots
+namespace Code.Game.Slots.DragAndDrop
 {
-    
-    public interface IDragHandler
+    public interface IDragAndDropHandler
     {
         void OnBeginDrag();
         void OnDrag();
@@ -16,22 +15,22 @@ namespace Code.Game.Slots
 
     public interface IDropTarget
     {
-        bool Overlap(IDragHandler dragHandler, out float weight);
+        bool Overlap(IDragAndDropHandler dragHandler, out float weight);
     }
 
     public interface IEnterDragHandler : IDropTarget
     {
-        void OnEnterDragHandler(IDragHandler dragHandler);
+        void OnEnterDragHandler(IDragAndDropHandler dragHandler);
     }
 
     public interface IStayDragHandler : IDropTarget
     {
-        void OnStayDragHandler(IDragHandler dragHandler);
+        void OnStayDragHandler(IDragAndDropHandler dragHandler);
     }
     
     public interface IExitDragHandler : IDropTarget
     {
-        void OnExitDragHandler(IDragHandler dragHandler);
+        void OnExitDragHandler(IDragAndDropHandler dragHandler);
     }
 
     public class DragAndDropService : SerializedMonoBehaviour, IService, IInitializable
@@ -52,7 +51,7 @@ namespace Code.Game.Slots
         }
 
         [SerializeField] private List<IDropTarget> m_DropTargets = new List<IDropTarget>();
-        [SerializeField] private List<IDragHandler> m_DragHandlers = new List<IDragHandler>();
+        [SerializeField] private List<IDragAndDropHandler> m_DragHandlers = new List<IDragAndDropHandler>();
 
         public ItemDragHandler Create(Item item)
         {

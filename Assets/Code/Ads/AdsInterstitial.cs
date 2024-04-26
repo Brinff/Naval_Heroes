@@ -12,6 +12,17 @@ namespace Assets.Code.Ads
         [SerializeField]
         private string m_Placement;
 
+
+        private void OnEnable()
+        {
+            ServiceLocator.Register(this);
+        }
+
+        private void OnDisable()
+        {
+            ServiceLocator.Unregister(this);
+        }
+
         public virtual void Initialize()
         {
             MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += OnInterstitialLoadedEvent;
@@ -20,6 +31,7 @@ namespace Assets.Code.Ads
             MaxSdkCallbacks.Interstitial.OnAdClickedEvent += OnInterstitialClickedEvent;
             MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialHiddenEvent;
             MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += OnInterstitialAdFailedToDisplayEvent;
+            LoadInterstitial();
         }
 
         private int m_RetryAttempt;

@@ -8,7 +8,7 @@ using System;
 using Code.Game.Wallet;
 using Code.Services;
 
-public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySystem, IEcsRunSystem, IEcsGroup<Update>
+public class PlayerSlotsSystem : MonoBehaviour, IService, IInitializable, IEcsInitSystem, IEcsDestroySystem, IEcsRunSystem, IEcsGroup<Update>
 {
     [System.Serializable]
     public class Slot
@@ -60,49 +60,17 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
         Load();
         m_SlotCollection.OnChange += Save;
 
-        var slotBuys = m_SlotCollection.GetSlots<SlotBuy>();
+        //var slotBuys = m_SlotCollection.GetSlots<SlotBuy>();
         //var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-        foreach (var item in slotBuys)
+/*        foreach (var item in slotBuys)
         {
             m_WalletService.OnUpdate += item.CheckMoney;
+            item.Prepare
             //item.SetCost((int)value);
             item.spendMoney = SpendMoney;
             item.enoughMoney = EnoughMoney;
             item.CheckMoney();
-        }
-    }
-
-    public bool EnoughMoney(int money)
-    {
-        //var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-        if (m_WalletService.IsEnough(money))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public bool SpendMoney(int money)
-    {
-        WalletService walletService = ServiceLocator.Get<WalletService>();
-        //var value = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-        if (walletService.IsEnough(money))
-        {
-            //m_CommandSystem.Execute<MoneySpendCommand, int>(money);
-
-            //m_PlayerAmountBuyShip.Value++;
-
-            //var slotBuys = m_SlotCollection.GetSlots<SlotBuy>();
-            //var newValue = m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-            //foreach (var item in slotBuys)
-            //{
-            //    item.SetCost((int)newValue);
-            //}
-
-            //m_PlayerAmountBuyShip.Save();
-            return true;
-        }
-        return false;
+        }*/
     }
 
     public void Run(IEcsSystems systems)
@@ -226,5 +194,10 @@ public class PlayerSlotsSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySyste
             }
         }
         
+    }
+
+    public void Initialize()
+    {
+        throw new NotImplementedException();
     }
 }
