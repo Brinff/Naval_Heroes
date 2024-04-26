@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using System.IO;
-using System.Runtime.Serialization;
 using System.Text;
-using Newtonsoft.Json;
-using Sirenix.Utilities.Editor;
-using UnityEditor;
 using UnityEngine;
 using SerializationUtility = Sirenix.Serialization.SerializationUtility;
 
@@ -42,7 +37,6 @@ namespace Code.Confings
         {
             var value = SerializationUtility.SerializeValue(m_Data, DataFormat.JSON);
             var text = Encoding.UTF8.GetString(value).Replace(" ", "").Replace("\n", "");
-            Clipboard.Copy(text);
         }
 
         [Button]
