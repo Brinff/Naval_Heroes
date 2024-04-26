@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.CSV;
+using Code.Game.Analytics;
 using Code.IO;
 using Code.Services;
 using Sirenix.OdinInspector;
@@ -19,6 +20,8 @@ namespace Code.Game.Wallet
         [SerializeField] private CSVTable m_Log;
         [ShowInInspector] public int amount => m_Amount != null ? m_Amount.value : 0;
 
+        private AnalyticService m_AnalyticService;
+        
         public delegate void AmountDelegate();
 
         private bool m_IsDirty;
@@ -48,7 +51,7 @@ namespace Code.Game.Wallet
 
         private string GetSaveKey(string key)
         {
-            return PlayerPrefsProperty<int>.ToKey($"{m_Currency.name}_{key}");
+            return PlayerPrefsProperty.ToKey($"{m_Currency.name}_{key}");
         }
 
         public void Initialize()
@@ -56,15 +59,15 @@ namespace Code.Game.Wallet
             if (isInitialized) return;
             isInitialized = true;
 
-            TinySauce.DeclareCurrency(m_Currency.name);
+            m_AnalyticService = ServiceLocator.Get<AnalyticService>();
 
             m_TotalSpendAmount = new PlayerPrefsProperty<int>(GetSaveKey(nameof(m_TotalSpendAmount))).Build();
             m_TotalIncomeAmount = new PlayerPrefsProperty<int>(GetSaveKey(nameof(m_TotalIncomeAmount))).Build();
             
             m_Amount = new PlayerPrefsProperty<int>(string.IsNullOrEmpty(m_CustomKey) ? GetSaveKey(nameof(m_Amount)) : m_CustomKey).OnDefault(() =>
             {
-                Log(0, m_StartValue, m_StartValue, Operation.Income, "Game", "FirstLaunch");
-                TinySauce.OnCurrencyGiven(m_Currency.name, m_StartValue, "Game", "FirstLaunch");
+                Log(0, m_StartValue, m_StartValue, Operation.Income, AnalyticService.GAME, "FirstLaunch");
+                m_AnalyticService.OnCurrencyGiven(m_Currency.name, m_StartValue, AnalyticService.GAME, "FirstLaunch");
                 return m_StartValue;
             }).Build();
 
@@ -89,7 +92,9 @@ namespace Code.Game.Wallet
             m_TotalIncomeAmount.value += amount;
 
             Log(m_Amount.value, amount, m_Amount.value + amount, Operation.Income, source, id);
-
+            
+            m_AnalyticService.OnCurrencyTaken(m_Currency.name, amount, source, id);
+            
             m_Amount.value += amount;
 
             OnChangeAmount?.Invoke();
@@ -126,7 +131,9 @@ namespace Code.Game.Wallet
             m_TotalSpendAmount.value += amount;
 
             Log(m_Amount.value, amount, m_Amount.value - amount, Operation.Spend, source, id);
-
+            
+            m_AnalyticService.OnCurrencyTaken(m_Currency.name, amount, source, id);
+            
             m_Amount.value -= amount;
 
             if (m_Amount.value < 0) m_Amount.value = 0;

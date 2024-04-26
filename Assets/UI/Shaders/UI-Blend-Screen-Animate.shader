@@ -126,7 +126,7 @@ Shader "UI/Blend-Screen-Animate"
 
             fixed4 Screen(fixed4 a, fixed4 b)
             {
-                fixed3 rgb = 1.0 - (1.0 - a.rgb) * (1.0 - b.rgb* b.a );
+                fixed3 rgb = 1.0 - (1.0 - a.rgb) * (1.0 - b.rgb * b.a);
                 return fixed4(rgb, a.a);
             }
 

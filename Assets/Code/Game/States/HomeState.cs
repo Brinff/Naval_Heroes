@@ -2,6 +2,7 @@
 using Code.States;
 using Game.UI;
 using Leopotam.EcsLite;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace Code.Game.States
@@ -12,6 +13,8 @@ namespace Code.Game.States
         private StartGameWidget m_StartGameWidget;
         private CommandSystem m_CommandSystem;
         private IStateMachine m_StateMachine;
+        [SerializeField]
+        private GameObject m_BattleVirtualCamera;
         public void OnPlay(IStateMachine stateMachine)
         {
             m_StateMachine = stateMachine;
@@ -37,9 +40,12 @@ namespace Code.Game.States
             m_CommandSystem = entityManager.GetSystem<CommandSystem>();
             m_CommandSystem.Execute<ClearBattleDataCommand>();
 
-            var viewHome = world.Filter<ViewComponent>().Inc<HomeTag>().End().GetSingleton();
-            ref var eye = ref world.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
-            eye.view = world.PackEntity(viewHome.Value);
+
+            m_BattleVirtualCamera.SetActive(false);
+
+            /*            var viewHome = world.Filter<ViewComponent>().Inc<HomeTag>().End().GetSingleton();
+                        ref var eye = ref world.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
+                        eye.view = world.PackEntity(viewHome.Value);*/
 
             var slotSystem = entityManager.GetSystem<PlayerSlotsSystem>();
 

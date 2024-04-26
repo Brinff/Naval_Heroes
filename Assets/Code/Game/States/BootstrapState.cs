@@ -1,5 +1,11 @@
 ﻿
 using Code.Diagnostic;
+using Code.Game.Analytics;
+using Code.Game.Slots;
+using Code.Game.Slots.Battle;
+using Code.Game.Slots.Buy;
+using Code.Game.Slots.Merge;
+using Code.Game.Slots.Stash;
 using Code.Game.Wallet;
 using Code.Services;
 using Code.States;
@@ -23,8 +29,26 @@ namespace Code.Game.States
             
             m_StateMachine = stateMachine;
             
+            ServiceLocator.ForEach<AnalyticService>(x=>x.Initialize());
+            
             ServiceLocator.ForEach<WalletService>(x => x.Initialize());
             ServiceLocator.ForEach<WalletMediator>(x => x.Initialize());
+            
+            ServiceLocator.ForEach<ItemFactory>(x=>x.Initialize());
+            
+            ServiceLocator.ForEach<BuyAdsShipService>(x=>x.Initialize());
+            ServiceLocator.ForEach<BuyCurrencyShipService>(x=>x.Initialize());
+            ServiceLocator.ForEach<BuyShipMediator>(x=>x.Initialize());
+            
+            ServiceLocator.ForEach<MergeService>(x=>x.Initialize());
+            ServiceLocator.ForEach<MergeMediator>(x=>x.Initialize());
+            
+            ServiceLocator.ForEach<StashService>(x=>x.Initialize());
+            ServiceLocator.ForEach<StashMediator>(x=>x.Initialize());
+            
+            ServiceLocator.ForEach<BattleFieldService>(x=>x.Initialize());
+            ServiceLocator.ForEach<BattleFieldMediator>(x=>x.Initialize());
+            //ServiceLocator.ForEach<BattleFieldView>(x=>x);
             
             ServiceLocator.ForEach<EntityManager>(x=>x.Initialize());
             

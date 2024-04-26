@@ -1,6 +1,7 @@
 using Game.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,6 +51,6 @@ public class WinWidget : MonoBehaviour, IUIElement
 
     public void SetReward(int amount, bool immediately)
     {
-        m_RewardLabel.text = amount.KiloFormat();
+        m_RewardLabel.text = amount.KiloFormatShort();
     }
 }

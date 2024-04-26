@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,14 +17,27 @@ namespace Code.IO
         void Dispose();
     }
 
-    [Serializable]
-    public class PlayerPrefsProperty<T> : IPlayerPrefsProperty where T : new()
+    public class PlayerPrefsProperty
     {
-        [SerializeField]
-        private string m_Version;
+        public static string ToKey(params object[] key)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendJoin(".", key);
+            return stringBuilder.ToString();
+        }
+        
+        public static string ToKey(string key)
+        {
+            return Regex.Replace(key, "([a-z](?=[A-Z])|[A-Z](?=[A-Z][a-z]))", "$1_").ToUpper();
+        }
+    }
 
-        [SerializeField]
-        private T m_Value;
+    [Serializable]
+    public class PlayerPrefsProperty<T> : PlayerPrefsProperty, IPlayerPrefsProperty where T : new()
+    {
+        [SerializeField] private string m_Version;
+
+        [SerializeField] private T m_Value;
 
         private string m_Key;
         public event Action<T> OnChange;
@@ -45,14 +59,11 @@ namespace Code.IO
             else m_Value = JsonUtility.FromJson<PlayerPrefsProperty<T>>(s).m_Value;
         }*/
 
-        public static string ToKey(string key)
-        {
-            return Regex.Replace(key, "([a-z](?=[A-Z])|[A-Z](?=[A-Z][a-z]))", "$1_").ToUpper();
-        }
-
 
         public delegate T DefaultDelegate();
+
         private DefaultDelegate m_DefaultDelegate;
+
         public PlayerPrefsProperty<T> OnDefault(DefaultDelegate onDefault)
         {
             m_DefaultDelegate = onDefault;
@@ -67,9 +78,10 @@ namespace Code.IO
                 m_Value = m_DefaultDelegate != null ? m_DefaultDelegate.Invoke() : default(T);
             }
             else m_Value = JsonUtility.FromJson<PlayerPrefsProperty<T>>(s).m_Value;
+
             return this;
         }
-        
+
         public PlayerPrefsProperty(string key)
         {
             m_Key = key;
@@ -80,7 +92,6 @@ namespace Code.IO
             get { return m_Value; }
             set
             {
-
                 m_Value = value;
                 Save();
             }

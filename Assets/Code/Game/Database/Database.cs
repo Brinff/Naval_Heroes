@@ -21,7 +21,7 @@ public class Database<T> : Database where T : IData
     public T[] datas => m_Datas;
 
     private Dictionary<int, T> m_DatasMap;
-
+    
     public T GetById(int id)
     {
         if (m_DatasMap == null)

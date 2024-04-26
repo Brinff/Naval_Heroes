@@ -2,6 +2,7 @@ using Game.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Utility;
 using TMPro;
 using UnityEngine;
 
@@ -21,6 +22,6 @@ public class SoftMoneyCounterWidget : MonoBehaviour, IUIElement
 
     public void SetMoney(int amount)
     {
-        m_AmountLabel.text = amount.KiloFormat();
+        m_AmountLabel.text = amount.KiloFormatShort();
     }
 }

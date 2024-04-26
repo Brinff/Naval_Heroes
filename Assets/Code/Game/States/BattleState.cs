@@ -11,6 +11,7 @@ namespace Code.Game.States
     {
         [SerializeField] private GameObject m_CommanderPrefab;
         [SerializeField] private MissionDatabase m_MissionDatabase;
+        [SerializeField] private GameObject m_BattleVirtualCamera;
         public void OnPlay(IStateMachine stateMachine)
         {
             var entityManager = ServiceLocator.Get<EntityManager>();
@@ -18,9 +19,11 @@ namespace Code.Game.States
             
             var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
             var commandSystem = entityManager.GetSystem<CommandSystem>();
-            var view = world.Filter<ViewComponent>().Inc<BattleTag>().End().GetSingleton();
-            ref var eye = ref world.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
-            eye.view = world.PackEntity(view.Value);
+            /*            var view = world.Filter<ViewComponent>().Inc<BattleTag>().End().GetSingleton();
+                        ref var eye = ref world.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
+                        eye.view = world.PackEntity(view.Value);*/
+
+            m_BattleVirtualCamera.SetActive(true);
 
             ServiceLocator.Get<UIController>().GetElement<CompassWidget>().Clear();
 

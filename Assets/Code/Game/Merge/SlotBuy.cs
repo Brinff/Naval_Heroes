@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -50,7 +51,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     public void SetCost(int amount)
     {
-        m_CostLabel.text = amount.KiloFormat();
+        m_CostLabel.text = amount.KiloFormatShort();
     }
 
     public bool AddItem(SlotItem slotItem, Vector3 position)
