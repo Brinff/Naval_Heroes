@@ -1,4 +1,5 @@
-﻿using Code.Services;
+﻿using Code.Game.Slots.DragAndDrop;
+using Code.Services;
 using Game.Merge.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -41,7 +42,7 @@ namespace Code.Game.Slots.Merge
             }
         }
 
-        public bool Overlap(IDragHandler dragHandler, out float weight)
+        public bool Overlap(IDragAndDropHandler dragHandler, out float weight)
         {
             var itemDragHandler = dragHandler as ItemDragHandler;
             if (itemDragHandler == null)
@@ -53,7 +54,7 @@ namespace Code.Game.Slots.Merge
             return m_MergeView.area.Overlap(itemDragHandler.position, new Rect(0, 0, 10, 10), out weight);
         }
 
-        public void OnStayDragHandler(IDragHandler dragHandler)
+        public void OnStayDragHandler(IDragAndDropHandler dragHandler)
         {
             var itemDragHandler = dragHandler as ItemDragHandler;
             if (itemDragHandler == null) return;
@@ -63,7 +64,7 @@ namespace Code.Game.Slots.Merge
             Debug.Log("OnStayDragHandler");
         }
 
-        public void OnExitDragHandler(IDragHandler dragHandler)
+        public void OnExitDragHandler(IDragAndDropHandler dragHandler)
         {
             var itemDragHandler = dragHandler as ItemDragHandler;
             if (itemDragHandler == null) return;
@@ -108,7 +109,7 @@ namespace Code.Game.Slots.Merge
             return itemDragHandler.destinationSlot.item == null;
         }
 
-        public void OnEnterDragHandler(IDragHandler dragHandler)
+        public void OnEnterDragHandler(IDragAndDropHandler dragHandler)
         {
             var itemDragHandler = dragHandler as ItemDragHandler;
             if (itemDragHandler == null) return;

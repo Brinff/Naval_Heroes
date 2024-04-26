@@ -4,11 +4,12 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Code.Game.Slots.DragAndDrop;
 
 namespace Code.Game.Slots
 {
     [System.Serializable]
-    public class ItemDragHandler : IDragHandler
+    public class ItemDragHandler : DragAndDrop.IDragAndDropHandler
     {
         [SerializeField] private Item m_Item;
         public Item item => m_Item;

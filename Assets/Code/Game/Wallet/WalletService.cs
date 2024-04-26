@@ -52,7 +52,7 @@ namespace Code.Game.Wallet
 
         private string GetSaveKey(string key)
         {
-            return PlayerPrefsProperty.ToKey($"{m_Currency.name}_{key}");
+            return PlayerPrefsProperty.ToKey(m_Currency.name, key);
         }
 
         public void Initialize()

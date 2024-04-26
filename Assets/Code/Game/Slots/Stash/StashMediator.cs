@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Game.Slots.DragAndDrop;
 using Code.Services;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace Code.Game.Slots.Stash
             ServiceLocator.Unregister(this);
         }
 
-        public bool Overlap(IDragHandler dragHandler, out float weight)
+        public bool Overlap(IDragAndDropHandler dragHandler, out float weight)
         {
             weight = 0;
             return true;

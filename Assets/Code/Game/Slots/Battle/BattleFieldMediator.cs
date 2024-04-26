@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Game.Slots.DragAndDrop;
 using Code.Services;
 using Game.Grid.Auhoring;
 using Game.UI.Grid;
@@ -57,7 +58,7 @@ namespace Code.Game.Slots.Battle
         private Dictionary<ItemDragHandler, GridItemHandler> m_GridItemHandlers =
             new Dictionary<ItemDragHandler, GridItemHandler>();
         
-        public bool Overlap(IDragHandler dragHandler, out float weight)
+        public bool Overlap(IDragAndDropHandler dragHandler, out float weight)
         {
             var itemDragHandler = dragHandler as ItemDragHandler;
             if (itemDragHandler == null)
@@ -69,7 +70,7 @@ namespace Code.Game.Slots.Battle
             return m_BattleFieldView.area.Overlap(itemDragHandler.position, new Rect(0, 0, 10, 10), out weight);
         }
 
-        public void OnStayDragHandler(IDragHandler dragHandler)
+        public void OnStayDragHandler(IDragAndDropHandler dragHandler)
         {
             var itemDragHandler = dragHandler as ItemDragHandler;
             if (itemDragHandler == null) return;
@@ -94,7 +95,7 @@ namespace Code.Game.Slots.Battle
             itemDragHandler.position */
         }
         
-        public void OnExitDragHandler(IDragHandler dragHandler)
+        public void OnExitDragHandler(IDragAndDropHandler dragHandler)
         {
             var itemDragHandler = dragHandler as ItemDragHandler;
             if (itemDragHandler == null) return;
@@ -116,7 +117,7 @@ namespace Code.Game.Slots.Battle
             
         }
 
-        public void OnEnterDragHandler(IDragHandler dragHandler)
+        public void OnEnterDragHandler(IDragAndDropHandler dragHandler)
         {
             var itemDragHandler = dragHandler as ItemDragHandler;
             if (itemDragHandler == null) return;

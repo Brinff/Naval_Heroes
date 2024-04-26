@@ -10,13 +10,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using Code.Game.Slots;
+using Code.Services;
 
-public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler, ISlotRenderer
+using IPointerDragHandler = UnityEngine.EventSystems.IDragHandler;
+using IPointerBeginDragHandler = UnityEngine.EventSystems.IBeginDragHandler;
+using IPointerEndDragHandler = UnityEngine.EventSystems.IEndDragHandler;
+using Code.Game.Slots.Buy;
+
+public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerEndDragHandler, IPointerDragHandler, IPointerClickHandler, ISlotRenderer
 {
     [SerializeField, FormerlySerializedAs("entity")]
     private EntityData m_Entity;
     [SerializeField]
     private ProgressionData m_CostShip;
+    [SerializeField]
+    private Category m_Category;
+    public Category category => m_Category;
+
     [SerializeField]
     private string m_Key;
     [SerializeField]
@@ -34,20 +45,15 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
     [SerializeField]
     private Transform m_Socket;
 
+    
+    private BuyCurrencyShipService m_BuyCurrencyShipService;
+
 
 
     public int id => name.GetDeterministicHashCode();
 
     private BoxCollider[] colliders;
 
-
-    public delegate bool SpendMoney(int money);
-
-    public SpendMoney spendMoney;
-
-    public delegate bool EnoughMoney(int money);
-
-    public EnoughMoney enoughMoney;
 
     public void SetCost(int amount)
     {
@@ -72,7 +78,14 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     public bool RemoveItem(SlotItem slotItem)
     {
-        int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+        if(m_BuyCurrencyShipService.IsEnoughCurrency())
+        {
+            m_BuyCurrencyShipService.Buy();
+            items.Remove(slotItem);
+            Spawn();
+            return true;
+        }
+/*        int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
         if (enoughMoney.Invoke(money))
         {
             if (spendMoney.Invoke(money) && items.Remove(slotItem))
@@ -81,7 +94,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
                 Spawn();
                 return true;
             }
-        }
+        }*/
         return false;
     }
 
@@ -89,8 +102,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
 
     public void CheckMoney()
     {
-        int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-        bool isEnoughMoney = enoughMoney?.Invoke(money) ?? false;
+        bool isEnoughMoney = m_BuyCurrencyShipService.IsEnoughCurrency();
         foreach (var sprite in spriteRenderer)
         {
             sprite.color = isEnoughMoney ? Color.white : m_LockColor;
@@ -102,7 +114,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
     public void Spawn()
     {
 
-        SetCost((int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value));
+        SetCost(m_BuyCurrencyShipService.cost);
         var slotItem = SlotItem.Create(collection, m_Entity, m_Socket.position, m_Socket.rotation, m_Socket.localScale.x);
         AddItem(slotItem, m_Socket.position);
         StartCoroutine(DelayCheckMoney());
@@ -134,6 +146,11 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
         boxCollider.size =  new Vector3(rectTransform.sizeDelta.x + 10, rectTransform.sizeDelta.y + 10, 20);
 
         colliders = new BoxCollider[] { boxCollider };
+
+
+        m_BuyCurrencyShipService = ServiceLocator.Get<BuyCurrencyShipService>(x => x.category == m_Category);
+        m_BuyCurrencyShipService.OnUpdate += CheckMoney;
+        CheckMoney();
 
         //for (int i = 0; i < grid.rects.Length; i++)
         //{
@@ -245,8 +262,8 @@ public class SlotBuy : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandler,
     {
         if (slotItem.entityData != null)
         {
-            int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-            return enoughMoney.Invoke(money);
+            //int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+            return m_BuyCurrencyShipService.IsEnoughCurrency();
         }
         return false;
     }

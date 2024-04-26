@@ -46,10 +46,18 @@ namespace Code.Game.Slots.Buy
             return m_WalletService.IsEnough(cost);
         }
 
+        private int GetDefaultTransaction()
+        {
+            string name = $"m_PlayerAmountBuyShip{m_Category.name}";
+            PlayerPrefsData<int> oldData = new PlayerPrefsData<int>(name);
+            return oldData.HasValue() ? oldData.Value : 0;
+        }
+
         public void Initialize()
         {
             m_TotalCountTransaction = new PlayerPrefsProperty<int>(
                     PlayerPrefsProperty.ToKey(nameof(BuyCurrencyShipService), m_Category.name, nameof(m_TotalCountTransaction)))
+                .OnDefault(GetDefaultTransaction)
                 .Build();
 
             m_WalletService = ServiceLocator.Get<WalletService>(x => x.currency == m_Currency);
