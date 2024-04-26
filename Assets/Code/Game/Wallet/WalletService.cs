@@ -70,8 +70,8 @@ namespace Code.Game.Wallet
                 var walletMigration = GetComponent<IWalletMigration>();
                 if (walletMigration?.Migrate(out int migrateValue) ?? false)
                 {
-                    Log(0, m_StartValue, m_StartValue, Operation.Income, AnalyticService.GAME, "Migrate");
-                    m_AnalyticService.OnCurrencyGiven(m_Currency.name, m_StartValue, AnalyticService.GAME, "Migrate");
+                    Log(0, migrateValue, migrateValue, Operation.Income, AnalyticService.GAME, "Migrate");
+                    m_AnalyticService.OnCurrencyGiven(m_Currency.name, migrateValue, AnalyticService.GAME, "Migrate");
                     return migrateValue;
                 }
                 else
