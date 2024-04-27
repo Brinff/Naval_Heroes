@@ -25,8 +25,6 @@ public class GoHomeCommand : MonoBehaviour, ICommand
 
         StartCoroutine(WaitLockBattle());
 
-        SmartlookUnity.Smartlook.TrackNavigationEvent("Merge", SmartlookUnity.Smartlook.NavigationEventType.enter);
-
         m_PlayerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
         m_PlayerSlotsSystem.slotCollection.OnChange += OnChangeSlotCollection;
 

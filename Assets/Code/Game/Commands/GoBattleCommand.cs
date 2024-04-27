@@ -54,7 +54,6 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         battleData.isShooter = playerLevelProvider.level == 1 && GameSettings.Instance.firstLevelisShooter;
         world.GetPool<ClearBattleTag>().Add(battleDataEntity);
 
-        SmartlookUnity.Smartlook.TrackNavigationEvent("Battle", SmartlookUnity.Smartlook.NavigationEventType.enter);
         TinySauce.OnGameStarted(battleData.level);
 
         commandSystem.Execute<GoStageCommand, BattleData>(battleData);

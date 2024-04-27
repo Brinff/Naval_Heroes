@@ -149,7 +149,6 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
 
             ServiceLocator.Get<UIController>().compositionModule.Show<UIGameShipZoomComposition>();
 
-            SmartlookUnity.Smartlook.TrackNavigationEvent("Zoom", SmartlookUnity.Smartlook.NavigationEventType.enter);
 
         }
         else
@@ -160,7 +159,6 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
 
             ServiceLocator.Get<UIController>().compositionModule.Show<UIBattleComposition>();
 
-            SmartlookUnity.Smartlook.TrackNavigationEvent("Zoom", SmartlookUnity.Smartlook.NavigationEventType.exit);
         }
     }
     public Vector2 GetAxis(float sensitivityHorizontal, float sensitivityVertical, float sensitivityScale)
