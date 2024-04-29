@@ -77,11 +77,18 @@ namespace Code.Game.States
             }
         }
 
-        private void OnClaimReward()
+        private void OnClaimReward(bool done)
         {
-            m_CommandSystem.Execute<EndBattleCommand>();
-            ServiceLocator.Get<GameStateMachine>().Play<HomeState>();
-            ServiceLocator.Get<WalletService>().IncomeValue(m_RewardCleon - m_Reward, AnalyticService.ADS, "Win");
+            if (done)
+            {
+                m_CommandSystem.Execute<EndBattleCommand>();
+                ServiceLocator.Get<GameStateMachine>().Play<HomeState>();
+                ServiceLocator.Get<WalletService>().IncomeValue(m_RewardCleon - m_Reward, AnalyticService.ADS, "Win");
+            }
+            else
+            {
+                m_ActiveCleon = true;
+            }
         }
 
         private void OnNoThanks()

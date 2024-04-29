@@ -40,9 +40,9 @@ namespace Code.Ads
 
         private int m_RetryAttempt;
 
-        private System.Action m_OnDone;
+        private System.Action<bool> m_OnDone;
 
-        public bool Show(System.Action onDone)
+        public bool Show(System.Action<bool> onDone)
         {
             
             if (MaxSdk.IsRewardedAdReady(m_Id))
@@ -90,13 +90,16 @@ namespace Code.Ads
 
         private void OnRewardedAdHiddenEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
         {
+            m_OnDone?.Invoke(false);
+            m_OnDone = null;
             // Rewarded ad is hidden. Pre-load the next ad
             LoadRewardedAd();
         }
 
         private void OnRewardedAdReceivedRewardEvent(string adUnitId, MaxSdk.Reward reward, MaxSdkBase.AdInfo adInfo)
         {
-            m_OnDone?.Invoke();
+            m_OnDone?.Invoke(true);
+            m_OnDone = null;
             // The rewarded ad displayed and the user should receive the reward.
         }
 
