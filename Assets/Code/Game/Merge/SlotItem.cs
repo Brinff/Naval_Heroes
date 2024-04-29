@@ -29,12 +29,14 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         gameObject.SetActive(true);
         entity.SetActive(true);
+        if(info) info.gameObject.SetActive(true);
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
         entity.SetActive(false);
+        if (info) info.gameObject.SetActive(false);
     }
 
     private bool isDrag = false;
