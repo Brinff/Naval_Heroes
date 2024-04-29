@@ -40,9 +40,11 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
         
         m_WinWidget = usService.GetElement<WinWidget>();
         m_WinWidget.OnClaim += OnClaimReward;
-        m_WinWidget.SetReward(battleData.winReward, false);
-        m_WinWidget.SetLevel(battleData.level);
+/*        m_WinWidget.SetReward(battleData.winReward, false);
+        m_WinWidget.SetLevel(battleData.level);*/
         usService.compositionModule.Show<UIWinCompositon>();
+
+        ServiceLocator.Get<WalletService>().IncomeValue(m_Reward, "Game", "Win");
     }
 
     private void OnClaimReward()
@@ -50,7 +52,7 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
         if (m_IsLockClaim) return;
 
         m_WinWidget.OnClaim -= OnClaimReward;
-        ServiceLocator.Get<WalletService>().IncomeValue(m_Reward, "Game", "Win");
+        
         //m_CommandSystem.Execute<MoneyAddCommand, int>(m_Reward);
         m_CommandSystem.Execute<EndBattleCommand>();
         ServiceLocator.Get<GameStateMachine>().Play<HomeState>();

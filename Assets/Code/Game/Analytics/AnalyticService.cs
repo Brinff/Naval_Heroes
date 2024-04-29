@@ -21,7 +21,7 @@ namespace Code.Game.Analytics
             ServiceLocator.Unregister(this);
         }
         
-        public void DeclareCurrency(string currencyName)
+/*        public void DeclareCurrency(string currencyName)
         {
             Debug.LogWarning($"DeclareCurrency: {currencyName}");
             TinySauce.DeclareCurrency(currencyName);
@@ -31,7 +31,7 @@ namespace Code.Game.Analytics
         {
             Debug.LogWarning($"DeclareItemType: {itemTypeName}");
             TinySauce.DeclareItemType(itemTypeName);
-        }
+        }*/
 
         public void OnCurrencyGiven(string currency, int currencyAmount, string itemType, string itemId)
         {
@@ -47,10 +47,10 @@ namespace Code.Game.Analytics
 
         public void Initialize()
         {
-            DeclareItemType(SHOP);
+/*            DeclareItemType(SHOP);
             DeclareItemType(GAME);
             DeclareItemType(ADS);
-            DeclareItemType(IAP);
+            DeclareItemType(IAP);*/
         }
     }
 }

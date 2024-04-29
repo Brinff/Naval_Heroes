@@ -3,7 +3,7 @@ using UnityEngine;
 using Code.Services;
 using System;
 
-namespace Assets.Code.Ads
+namespace Code.Ads
 {
     public abstract class AdsInterstitial : MonoBehaviour, IAdsService, IInitializable
     {
@@ -44,6 +44,7 @@ namespace Assets.Code.Ads
 
         public virtual void Show()
         {
+            Debug.Log($"Try Show Interstitial: {m_Placement}");
             if (IsReady())
                 MaxSdk.ShowInterstitial(m_Id, m_Placement);
         }

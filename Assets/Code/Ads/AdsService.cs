@@ -1,5 +1,4 @@
-﻿using Assets.Code.Ads;
-using Code.Services;
+﻿using Code.Services;
 using System.Collections;
 using UnityEngine;
 

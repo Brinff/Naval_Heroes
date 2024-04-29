@@ -33,7 +33,6 @@ namespace Code.Game.States
             
             ServiceLocator.ForEach<AnalyticService>(x=>x.Initialize());
             ServiceLocator.ForEach<AdsService>(x=>x.Initialize());
-            ServiceLocator.ForEach<AdsBattleInterstitial>(x => x.Initialize());
             
             ServiceLocator.ForEach<WalletService>(x => x.Initialize());
             ServiceLocator.ForEach<WalletMediator>(x => x.Initialize());

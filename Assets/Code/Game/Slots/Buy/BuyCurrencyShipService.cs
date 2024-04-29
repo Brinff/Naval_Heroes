@@ -65,7 +65,8 @@ namespace Code.Game.Slots.Buy
 
             m_WalletService.OnUpdate += OnUpdateWallet;
 
-            m_AnalyticService.DeclareCurrency(m_Category.name);
+            
+            //m_AnalyticService.DeclareCurrency(m_Category.name);
         }
 
         private void OnUpdateWallet()

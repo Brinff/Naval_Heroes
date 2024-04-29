@@ -1,7 +1,7 @@
 ﻿
 using Code.Services;
 
-namespace Assets.Code.Ads
+namespace Code.Ads
 {
     internal interface IAdsService : IService
     {

@@ -1,4 +1,4 @@
-﻿using Assets.Code.Game.Ads;
+﻿using Code.Game.Ads;
 using Code.Game.Wallet;
 using Code.Services;
 using Code.States;
