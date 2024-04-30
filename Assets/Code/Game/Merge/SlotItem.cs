@@ -2,6 +2,7 @@ using Game.Grid.Auhoring;
 using Game.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -28,12 +29,14 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         gameObject.SetActive(true);
         entity.SetActive(true);
+        if(info) info.gameObject.SetActive(true);
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
         entity.SetActive(false);
+        if (info) info.gameObject.SetActive(false);
     }
 
     private bool isDrag = false;
@@ -237,7 +240,7 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 
         var slotItem = gameObject.AddComponent<SlotItem>();
-        var widget = UISystem.Instance.GetElement<SlotItemInfoWidget>();
+        var widget = ServiceLocator.Get<UIController>().GetElement<SlotItemInfoWidget>();
 
         slotItem.info = widget.Create();
         slotItem.transform.SetParent(collection.transform);

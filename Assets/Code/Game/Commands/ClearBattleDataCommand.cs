@@ -2,6 +2,7 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 public class ClearBattleDataCommand : MonoBehaviour, ICommand
@@ -27,7 +28,8 @@ public class ClearBattleDataCommand : MonoBehaviour, ICommand
             world.DelEntity(entity);
         }
 
-        UISystem.Instance.GetElement<AbilityWidget>().Clear();
-        UISystem.Instance.GetElement<WorldEnemyWidget>().Clear();
+        var uiService = ServiceLocator.Get<UIController>();
+        uiService.GetElement<AbilityWidget>().Clear();
+        uiService.GetElement<WorldEnemyWidget>().Clear();
     }
 }

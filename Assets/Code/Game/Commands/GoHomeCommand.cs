@@ -2,6 +2,7 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 public class GoHomeCommand : MonoBehaviour, ICommand
@@ -24,20 +25,18 @@ public class GoHomeCommand : MonoBehaviour, ICommand
 
         StartCoroutine(WaitLockBattle());
 
-        SmartlookUnity.Smartlook.TrackNavigationEvent("Merge", SmartlookUnity.Smartlook.NavigationEventType.enter);
-
         m_PlayerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
         m_PlayerSlotsSystem.slotCollection.OnChange += OnChangeSlotCollection;
 
 
-        m_StartGameWidget = UISystem.Instance.GetElement<StartGameWidget>();
+        m_StartGameWidget = ServiceLocator.Get<UIController>().GetElement<StartGameWidget>();
         m_StartGameWidget.SetLevel(playerMissionSystem.level);
         m_StartGameWidget.OnClick += OnClickBattle;
         m_StartGameWidget.SetBlock(!m_PlayerSlotsSystem.IsAnyRadyBattle());
 
 
 
-        UISystem.Instance.compositionModule.Show<UIHomeComposition>();
+        ServiceLocator.Get<UIController>().compositionModule.Show<UIHomeComposition>();
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_CommandSystem.Execute<ClearBattleDataCommand>();
 
@@ -54,25 +53,8 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         }
 
         slotSystem.Show();
-
-        //var filterPlayer = world.Filter<PlayerTagLeo>().Inc<ShipTag>().Exc<DeadTag>().End();
-        //var filterEnemy = world.Filter<AITag>().Inc<ShipTag>().Exc<DeadTag>().End();
-
-        //var poolDestroy = world.GetPool<DestroyComponent>();
-        //foreach (var entity in filterEnemy)
-        //{
-        //    if (!poolDestroy.Has(entity)) poolDestroy.Add(entity);
-        //}
-
-        //if (!filterPlayer.IsAny())
-        //{
-        //    m_CommandSystem.Execute<CreatePlayerCommand>();
-        //}
-
-        m_CommandSystem.Execute<SetupPlayerCommand>();
-        //m_CommandSystem.Execute<UpgradeFillCommand>();
-        //m_CommandSystem.Execute<UpgradeUpdateCommand>();
-        m_CommandSystem.Execute<MoneyUpdateCommand>();
+        
+        //m_CommandSystem.Execute<SetupPlayerCommand>();
 
         systems.GetSystem<TutorialSystem>().HomeTutorial();
     }
@@ -90,7 +72,6 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         }
         m_StartGameWidget.OnClick -= OnClickBattle;
         m_PlayerSlotsSystem.slotCollection.OnChange -= OnChangeSlotCollection;
-        SmartlookUnity.Smartlook.TrackNavigationEvent("Merge", SmartlookUnity.Smartlook.NavigationEventType.exit);
         m_CommandSystem.Execute<GoBattleCommand>();
     }
 }

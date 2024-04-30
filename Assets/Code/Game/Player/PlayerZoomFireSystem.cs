@@ -5,6 +5,7 @@ using Leopotam.EcsLite;
 using Game.UI;
 using Sirenix.OdinInspector;
 using System.Linq;
+using Code.Services;
 
 public struct AbilityTargetArea
 {
@@ -67,14 +68,14 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
 
     public void Init(IEcsSystems systems)
     {
-        m_ZoomToggleWidget = UISystem.Instance.GetElement<ZoomToggleWidget>();
+        m_ZoomToggleWidget = ServiceLocator.Get<UIController>().GetElement<ZoomToggleWidget>();
         m_ZoomToggleWidget.OnToggle += ZoomToggle;
 
-        m_CameraInputWidget = UISystem.Instance.GetElement<CameraInputWidget>();
+        m_CameraInputWidget = ServiceLocator.Get<UIController>().GetElement<CameraInputWidget>();
         m_CameraInputWidget.OnEndInput += OnCameraEndInput;
         m_CameraInputWidget.OnUpdateInput += OnCameraUpdateInput;
 
-        m_ZoomFactorWidget = UISystem.Instance.GetElement<ZoomFactorWidget>();
+        m_ZoomFactorWidget = ServiceLocator.Get<UIController>().GetElement<ZoomFactorWidget>();
         m_ZoomFactorWidget.OnChangeZoomFactor += OnChangeZoomFactor;
 
 
@@ -146,9 +147,8 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
 
             eye.view = m_World.PackEntity(viewZoom.Value);
 
-            UISystem.Instance.compositionModule.Show<UIGameShipZoomComposition>();
+            ServiceLocator.Get<UIController>().compositionModule.Show<UIGameShipZoomComposition>();
 
-            SmartlookUnity.Smartlook.TrackNavigationEvent("Zoom", SmartlookUnity.Smartlook.NavigationEventType.enter);
 
         }
         else
@@ -157,9 +157,8 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
             ref var eye = ref m_World.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
             eye.view = m_World.PackEntity(viewBattle.Value);
 
-            UISystem.Instance.compositionModule.Show<UIBattleComposition>();
+            ServiceLocator.Get<UIController>().compositionModule.Show<UIBattleComposition>();
 
-            SmartlookUnity.Smartlook.TrackNavigationEvent("Zoom", SmartlookUnity.Smartlook.NavigationEventType.exit);
         }
     }
     public Vector2 GetAxis(float sensitivityHorizontal, float sensitivityVertical, float sensitivityScale)

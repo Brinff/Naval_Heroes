@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -56,7 +57,7 @@ public class UpgradeItemWidget : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            m_CostLabel.text = amount.KiloFormat();
+            m_CostLabel.text = amount.KiloFormatShort();
         }
     }
 

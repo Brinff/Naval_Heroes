@@ -2,6 +2,7 @@ using Game;
 using Game.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 using Leopotam.EcsLite;
 
@@ -51,7 +52,7 @@ public class InputPlayerMovementSystem : MonoBehaviour, IEcsInitSystem, IEcsRunS
 
     public void Init(IEcsSystems systems)
     {
-        m_InputWidget = UISystem.Instance.GetElement<MovementInputButtonsWidget>();
+        m_InputWidget = ServiceLocator.Get<UIController>().GetElement<MovementInputButtonsWidget>();
         m_InputWidget.OnChangeAxisValue += OnChangeAxisValue;
 
         var world = systems.GetWorld();

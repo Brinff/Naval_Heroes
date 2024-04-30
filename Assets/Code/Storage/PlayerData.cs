@@ -30,6 +30,12 @@ public class PlayerPrefsData<T> : IPlayerPrefsData where T : new()
     public event Action<T> OnChange;
     private IDataResolver m_DataResolver;
 
+    public bool HasValue()
+    {
+        var value = PlayerPrefs.GetString(m_Key, "");
+        return !string.IsNullOrEmpty(value);
+    }
+
     public PlayerPrefsData(string key, IDataResolver dataResolver)
     {
         m_Key = key;

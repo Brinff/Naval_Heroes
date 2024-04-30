@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 public class PlayerViewSwitchSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupUpdateSystem, IEcsDestroySystem
@@ -18,7 +19,7 @@ public class PlayerViewSwitchSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupUp
     [Button]
     public void Zoom()
     {
-        UISystem.Instance.compositionModule.Show<UIGameShipZoomComposition>();
+        ServiceLocator.Get<UIController>().compositionModule.Show<UIGameShipZoomComposition>();
         var entity = m_Filter.GetSingleton();
         if (entity != null) m_World.GetPool<ZoomViewActiveEvent>().Add(entity.Value);
     }
@@ -26,7 +27,7 @@ public class PlayerViewSwitchSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupUp
     [Button]
     public void Orbit()
     {
-        UISystem.Instance.compositionModule.Show<UIGameShipDefaultComposition>();
+        ServiceLocator.Get<UIController>().compositionModule.Show<UIGameShipDefaultComposition>();
         var entity = m_Filter.GetSingleton();
         if (entity != null) m_World.GetPool<OrbitViewActiveEvent>().Add(entity.Value);
     }
@@ -56,7 +57,7 @@ public class PlayerViewSwitchSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupUp
 
     public void Init(IEcsSystems systems)
     {
-        m_ZoomToggleWidget = UISystem.Instance.GetElement<ZoomToggleWidget>();
+        m_ZoomToggleWidget = ServiceLocator.Get<UIController>().GetElement<ZoomToggleWidget>();
         m_ZoomToggleWidget.OnToggle += OnToggleZoom;
 
         m_World = systems.GetWorld();

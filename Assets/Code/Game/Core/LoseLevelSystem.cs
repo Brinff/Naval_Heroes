@@ -1,6 +1,8 @@
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Game.States;
+using Code.Services;
 using UnityEngine;
 
 public class LoseLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
@@ -26,8 +28,11 @@ public class LoseLevelSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEc
         if (!m_Filter.IsAny())
         {
             battleData.isEnded = true;
-            var commandSystem = systems.GetSystem<CommandSystem>();
-            commandSystem.Execute<GoLoseCommand, BattleData>(m_World.Filter<BattleData>().End().GetSingletonComponent<BattleData>());
+            var tempBattleData = battleData;
+            ServiceLocator.Get<GameStateMachine>().Play<LoseState>(x=>x.SetBattleData(tempBattleData));
+            //var commandSystem = systems.GetSystem<CommandSystem>();
+            //var 
+            //commandSystem.Execute<GoLoseCommand, BattleData>(m_World.Filter<BattleData>().End().GetSingletonComponent<BattleData>());
         }
     }
 }

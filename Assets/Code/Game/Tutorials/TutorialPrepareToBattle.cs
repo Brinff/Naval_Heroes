@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Services;
 using UnityEngine;
 
 public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
@@ -17,7 +18,7 @@ public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
 
     public void Prepare(EcsWorld ecsWorld, IEcsSystems systems)
     {
-        m_TutorialDragWidget = UISystem.Instance.GetElement<TutorialDragWidget>();
+        m_TutorialDragWidget = ServiceLocator.Get<UIController>().GetElement<TutorialDragWidget>();
         m_SlotCollection = systems.GetSystem<PlayerSlotsSystem>().slotCollection;
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_IsDone = new PlayerPrefsData<bool>($"{nameof(TutorialPrepareToBattle)}_{nameof(m_IsDone)}", false);
@@ -45,7 +46,7 @@ public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
             TargetRaycastMediator.Instance.RemoveTargetRaycast(m_SlotA.gameObject);
         }
 
-        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        var messageWidget = ServiceLocator.Get<UIController>().GetElement<MessageWidget>();
         messageWidget.Hide(false);
 
         TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
@@ -64,7 +65,7 @@ public class TutorialPrepareToBattle : MonoBehaviour, ITutorial
     private IEnumerator DelayLaunch()
     {
         yield return new WaitForSeconds(0.4f);
-        var messageWidget = UISystem.Instance.GetElement<MessageWidget>();
+        var messageWidget = ServiceLocator.Get<UIController>().GetElement<MessageWidget>();
         messageWidget.SetText("DRAG AND DROP TO SET THE SHIP");
         messageWidget.Show(false);
 

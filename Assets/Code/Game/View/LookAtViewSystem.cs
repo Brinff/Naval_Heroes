@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -73,7 +74,7 @@ public class LookAtViewSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IE
         m_PoolAimBounds = m_World.GetPool<AimBoundsComponent>();
         m_PoolDead = m_World.GetPool<DeadTag>();
 
-        m_InputWidget = UISystem.Instance.GetElement<CameraInputWidget>();
+        m_InputWidget = ServiceLocator.Get<UIController>().GetElement<CameraInputWidget>();
         m_InputWidget.OnBeginInput += OnBeginInput;
         m_InputWidget.OnUpdateInput += OnUpdateInput;
         m_InputWidget.OnEndInput += OnEndInput;

@@ -30,4 +30,19 @@ public static class RectUtility
         newRect.SetMinMax(min, max);
         return newRect;
     }
+    
+    public static Rect GetIntersectRect(this Rect rect, Rect other)
+    {
+        var newRect = new Rect();
+        var min = Vector2.Max(rect.min, other.min);
+        var max = Vector2.Min(rect.max, other.max);
+        newRect.min = min;
+        newRect.max = max;
+        return newRect;
+    }
+
+    public static float GetArea(this Rect rect)
+    {
+        return rect.width * rect.height;
+    }
 }

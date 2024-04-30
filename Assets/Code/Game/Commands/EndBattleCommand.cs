@@ -15,6 +15,6 @@ public class EndBattleCommand : MonoBehaviour, ICommand
             pool.Add(entity);
         }
         
-        TSAdsManager.ShowInterstitial();
+        //TSAdsManager.ShowInterstitial();
     }
 }

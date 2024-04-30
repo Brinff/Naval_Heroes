@@ -2,6 +2,7 @@ using Game.UI;
 using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 public class PlayerAbilityTargetIndicatorSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSystem, IEcsGroup<Update>
@@ -26,7 +27,7 @@ public class PlayerAbilityTargetIndicatorSystem : MonoBehaviour, IEcsRunSystem, 
         m_PoolAbilityTargetArea = m_World.GetPool<AbilityTargetArea>();
 
 
-        m_AbilityTargetWidget = UISystem.Instance.GetElement<AbilityTargetWidget>();
+        m_AbilityTargetWidget = ServiceLocator.Get<UIController>().GetElement<AbilityTargetWidget>();
         m_AbilityTargetWidget.SetWorldCamera(m_Camera);
     }
 

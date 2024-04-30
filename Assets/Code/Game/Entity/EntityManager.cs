@@ -7,6 +7,7 @@ using Sirenix.OdinInspector;
 using UnityEngine.UIElements;
 using System.Linq;
 using System;
+using Code.Services;
 using Sirenix.Utilities;
 using UnityEngine.PlayerLoop;
 
@@ -59,6 +60,8 @@ public class Group<T> : IEcsGroup where T : IEcsGroup
         m_EcsSystem.Init();
     }
 
+    public IEcsSystems systems => m_EcsSystem;
+
     public void Run()
     {
         m_EcsSystem.Run();
@@ -72,6 +75,7 @@ public interface IEcsGroup : IDisposable
     public void Add(IEcsSystem system);
     public void BeginInit(EcsWorld world, IEcsData[] data);
     public void EndInit(bool isEditor);
+    public IEcsSystems systems { get; }
 }
 
 public interface IEcsGroup<T> where T : IEcsGroup
@@ -116,7 +120,7 @@ public struct Link
     public Transform transform;
 }
 
-public class EntityManager : Singleton<EntityManager>, ISingletonSetup
+public class EntityManager : MonoBehaviour, IService, IInitializable
 {
     [SerializeField]
     private bool m_IsEditor;
@@ -125,6 +129,18 @@ public class EntityManager : Singleton<EntityManager>, ISingletonSetup
     private List<IEcsGroup> m_Groups = new List<IEcsGroup>();
 
     private IEcsData[] m_Data;
+
+
+    public T GetSystem<T>() where T : IEcsSystem
+    {
+        for (int i = 0; i < m_Groups.Count; i++)
+        {
+            var g = m_Groups[i];
+            var s = g.systems.GetSystem<T>();
+            if (s != null) return s;
+        }
+        return default(T);
+    }
 
     public void Run<T>() where T : IEcsGroup
     {
@@ -147,6 +163,17 @@ public class EntityManager : Singleton<EntityManager>, ISingletonSetup
 
     //[SerializeField]
     //private Transform[] m_BakeEntities;
+
+
+    private void OnEnable()
+    {
+        ServiceLocator.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Unregister(this);
+    }
 
     private void Update()
     {
@@ -187,8 +214,8 @@ public class EntityManager : Singleton<EntityManager>, ISingletonSetup
 
         m_Data = null;
     }
-
-    public void Setup()
+    
+    public void Initialize()
     {
         m_World = new EcsWorld();
 

@@ -1,0 +1,100 @@
+.unity-tabbed-view__tabs-container {
+    background-color: rgba(118, 118, 118, 0.82);
+    flex-direction: row;
+    border-top-color: rgb(94, 93, 93);
+    border-top-width: 1px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(94, 93, 93);
+    border-right-color: rgb(94, 93, 93);
+    border-bottom-color: rgb(94, 93, 93);
+}
+
+.unity-tabbed-view__content-container {
+    background-color: rgba(159, 159, 159, 0.65);
+    border-left-color: rgb(94, 93, 93);
+    border-right-color: rgb(94, 93, 93);
+    border-top-color: rgb(94, 93, 93);
+    border-bottom-color: rgb(94, 93, 93);
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-bottom-width: 1px;
+    border-top-width: 0;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.unity-tab-button {
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+}
+
+.unity-tab-button--active {
+    background-color: rgba(159, 159, 159, 0.65);
+    border-left-color: rgb(94, 93, 93);
+    border-right-color: rgb(94, 93, 93);
+    border-top-color: rgb(94, 93, 93);
+    border-bottom-color: rgb(94, 93, 93);
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-width: 1px;
+    margin-left: -1px;
+    margin-top: -1px;
+    margin-right: -1px;
+}
+
+.unity-tabbed-view {
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+}
+
+.unity-tab-button:hover {
+}
+
+.unity-tab-button--active > .unity-tab-button-top {
+    background-color: rgb(131, 175, 255);
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    right: 1px;
+    bottom: 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 4px;
+}
+
+.unity-tab-button:hover > .unity-tab-button-hover {
+    transition-duration: 0.2s;
+    transition-property: opacity;
+    opacity: 1;
+}
+
+.unity-tab-button-hover {
+    background-color: rgba(83, 157, 171, 0.57);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    opacity: 0;
+}

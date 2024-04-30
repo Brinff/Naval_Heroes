@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 
 public class OutputPlayerNotificationSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSystem, IEcsGroup<Update>
@@ -92,7 +93,7 @@ public class OutputPlayerNotificationSystem : MonoBehaviour, IEcsInitSystem, IEc
     private EcsPool<Team> m_PoolTeam;
     public void Init(IEcsSystems systems)
     {
-        m_PlayerNotificationWidget = UISystem.Instance.GetElement<PlayerNotificationWidget>();
+        m_PlayerNotificationWidget = ServiceLocator.Get<UIController>().GetElement<PlayerNotificationWidget>();
 
         m_World = systems.GetWorld();
         m_Filter = m_World.Filter<HealthEndEvent>().Inc<Team>().Exc<PlayerTag>().End();

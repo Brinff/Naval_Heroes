@@ -3,6 +3,7 @@ using Game.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Services;
 using UnityEngine;
 using Leopotam.EcsLite;
 
@@ -41,7 +42,7 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
         m_PoolClassification = ecsWorld.GetPool<Classification>();
         m_PoolRare = ecsWorld.GetPool<Rare>();
         m_PoolGradeLevel = ecsWorld.GetPool<GradeLevel>();
-        m_WorldEnemyWidget = UISystem.Instance.GetElement<WorldEnemyWidget>();
+        m_WorldEnemyWidget = ServiceLocator.Get<UIController>().GetElement<WorldEnemyWidget>();
         m_WorldEnemyWidget.SetWorldCamera(m_Camera);
     }
 
