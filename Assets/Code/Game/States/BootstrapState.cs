@@ -1,5 +1,5 @@
 ﻿
-using Assets.Code.Game.Ads;
+using Code.Game.Ads;
 using Code.Ads;
 using Code.Diagnostic;
 using Code.Game.Analytics;

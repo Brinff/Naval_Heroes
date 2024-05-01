@@ -17,6 +17,7 @@ using IPointerDragHandler = UnityEngine.EventSystems.IDragHandler;
 using IPointerBeginDragHandler = UnityEngine.EventSystems.IBeginDragHandler;
 using IPointerEndDragHandler = UnityEngine.EventSystems.IEndDragHandler;
 using Code.Game.Slots.Buy;
+using Code.Game.UI.Components;
 
 public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerEndDragHandler, IPointerDragHandler, IPointerClickHandler, ISlotRenderer
 {
@@ -45,14 +46,38 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
     [SerializeField]
     private Transform m_Socket;
 
-    
-    private BuyCurrencyShipService m_BuyCurrencyShipService;
 
+    private BuyCurrencyShipService m_BuyCurrencyShipService;
+    private BuyAdsShipService m_BuyAdsShipService;
 
 
     public int id => name.GetDeterministicHashCode();
 
     private BoxCollider[] colliders;
+
+    [SerializeField]
+    private GameObject m_CostRewardRoot;
+    [SerializeField]
+    private GameObject m_CostSoftRoot;
+    [SerializeField]
+    private GameObject m_StashRoot;
+    [SerializeField]
+    private TextMeshPro m_StashLabel;
+
+    public enum State
+    {
+        CostSoft, CostReward, Stash 
+    }
+
+    private State m_CurrentState;
+
+    public void SetState(State state)
+    {
+        m_CurrentState = state;
+        m_CostRewardRoot.SetActive(state == State.CostReward);
+        m_CostSoftRoot.SetActive(state == State.CostSoft);
+        m_StashRoot.SetActive(state == State.Stash);
+    }
 
 
     public void SetCost(int amount)
@@ -78,12 +103,24 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
 
     public bool RemoveItem(SlotItem slotItem)
     {
-        if(m_BuyCurrencyShipService.IsEnoughCurrency())
+        if (m_BuyAdsShipService.isEmpty)
         {
-            m_BuyCurrencyShipService.Buy();
-            items.Remove(slotItem);
-            Spawn();
-            return true;
+            if (m_BuyCurrencyShipService.IsEnoughCurrency())
+            {
+                m_BuyCurrencyShipService.Buy();
+                items.Remove(slotItem);
+                Spawn();
+                return true;
+            }
+        }
+        else
+        {
+            if (m_BuyAdsShipService.Spend())
+            {
+                items.Remove(slotItem);
+                Spawn();
+                return true;
+            }
         }
 /*        int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
         if (enoughMoney.Invoke(money))
@@ -100,9 +137,29 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
 
 
 
-    public void CheckMoney()
+    public void UpdateState()
     {
         bool isEnoughMoney = m_BuyCurrencyShipService.IsEnoughCurrency();
+        bool isReadAds = m_BuyAdsShipService.IsReady();
+        if (m_BuyAdsShipService.isEmpty)
+        {
+            if (isReadAds && !isEnoughMoney)
+            {
+                SetState(State.CostReward);
+            }
+            else
+            {
+                SetState(State.CostSoft);
+            }
+        }
+        else
+        {
+            SetState(State.Stash);
+        }
+
+        m_StashLabel.text = $"In Stock: {m_BuyAdsShipService.countInStash.ToString()}";
+
+
         foreach (var sprite in spriteRenderer)
         {
             sprite.color = isEnoughMoney ? Color.white : m_LockColor;
@@ -117,15 +174,10 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
         SetCost(m_BuyCurrencyShipService.cost);
         var slotItem = SlotItem.Create(collection, m_Entity, m_Socket.position, m_Socket.rotation, m_Socket.localScale.x);
         AddItem(slotItem, m_Socket.position);
-        StartCoroutine(DelayCheckMoney());
-
+        //StartCoroutine(DelayCheckMoney());
+        UpdateState();
     }
 
-    private IEnumerator DelayCheckMoney()
-    {
-        yield return null;
-        CheckMoney();
-    }
 
     private PlayerPrefsData<int> m_PlayerAmountBuyShip;
 
@@ -149,8 +201,12 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
 
 
         m_BuyCurrencyShipService = ServiceLocator.Get<BuyCurrencyShipService>(x => x.category == m_Category);
-        m_BuyCurrencyShipService.OnUpdate += CheckMoney;
-        CheckMoney();
+        m_BuyAdsShipService = ServiceLocator.Get<BuyAdsShipService>(x => x.category == m_Category);
+
+        m_BuyCurrencyShipService.OnUpdate += UpdateState;
+        m_BuyAdsShipService.OnUpdate += UpdateState;
+        m_BuyAdsShipService.OnDone += AdsDone;
+        UpdateState();
 
         //for (int i = 0; i < grid.rects.Length; i++)
         //{
@@ -187,17 +243,24 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
         transform.DOScale(Vector3.one * 0.8f, 0.1f);
         transform.DOScale(Vector3.one * 1, 0.1f).SetDelay(0.1f);
 
-        var mergeSlots = collection.GetSlots<SlotMerge>();
-        foreach (var slot in mergeSlots)
+        if (m_CurrentState == State.CostReward)
         {
-            if (slot.AddItemPossible(item, slot.transform.position))
+            m_BuyAdsShipService.Show();
+        }
+        else
+        {
+            var mergeSlots = collection.GetSlots<SlotMerge>();
+            foreach (var slot in mergeSlots)
             {
-                var tempItem = item;
-                if (RemoveItem(tempItem))
+                if (slot.AddItemPossible(item, slot.transform.position))
                 {
-                    if (slot.AddItem(tempItem, slot.transform.position))
+                    var tempItem = item;
+                    if (RemoveItem(tempItem))
                     {
-                        break;
+                        if (slot.AddItem(tempItem, slot.transform.position))
+                        {
+                            break;
+                        }
                     }
                 }
             }
@@ -216,7 +279,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
         {
 
             gameObject.SetActive(true);
-            CheckMoney();
+            UpdateState();
             item.Show();
             m_CostLabel.DOFade(1, duration);
             foreach (var item in spriteRenderer)
@@ -226,6 +289,32 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
         }
         else Hide(0);
         //gridRenderer.DoAlpha(1, duration);
+    }
+
+    private void AdsDone(bool isDone)
+    {
+        if (isDone)
+        {
+            int count = m_BuyAdsShipService.countInStash;
+            for (int i = 0; i < count; i++)
+            {
+                var mergeSlots = collection.GetSlots<SlotMerge>();
+                foreach (var slot in mergeSlots)
+                {
+                    if (slot.AddItemPossible(item, slot.transform.position))
+                    {
+                        var tempItem = item;
+                        if (RemoveItem(tempItem))
+                        {
+                            if (slot.AddItem(tempItem, slot.transform.position))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void UpdatePositions()
@@ -262,8 +351,13 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
     {
         if (slotItem.entityData != null)
         {
+            if (m_BuyAdsShipService.isEmpty)
+            {
+                return m_BuyCurrencyShipService.IsEnoughCurrency();
+            }
+            else return true;
             //int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-            return m_BuyCurrencyShipService.IsEnoughCurrency();
+           
         }
         return false;
     }
