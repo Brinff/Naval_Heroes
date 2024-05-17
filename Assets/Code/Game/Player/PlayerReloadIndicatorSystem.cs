@@ -29,7 +29,7 @@ public class PlayerReloadIndicatorSystem : MonoBehaviour, IEcsInitSystem, IEcsRu
         m_WeaponReload = m_World.GetPool<WeaponReloadComponent>();
         m_WeaponReloadIndicator = m_World.GetPool<WeaponReloadIndicatorComponent>();
         m_Childs = m_World.GetPool<Childs>();
-        m_ReloadIndicatorWidget = ServiceLocator.Get<UIController>().GetElement<ReloadIndicatorWidget>();
+        m_ReloadIndicatorWidget = ServiceLocator.Get<UIController>().GetWidget<ReloadIndicatorWidget>();
     }
 
     public void Run(IEcsSystems systems)

@@ -33,7 +33,7 @@ namespace Code.Game.Wallet
         {
             m_WalletService = ServiceLocator.Get<WalletService>(x => x.currency == m_Currency);
            
-            m_WalletCounter = ServiceLocator.Get<UIController>().GetElement<SoftMoneyCounterWidget>();
+            m_WalletCounter = ServiceLocator.Get<UIController>().GetWidget<SoftMoneyCounterWidget>();
             m_WalletService.OnUpdate += OnUpdateWallet;
             m_WalletCounter.SetMoney(m_WalletService.amount);
         }

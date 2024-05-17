@@ -47,7 +47,7 @@ namespace Code.Game.States
 
             var usService = ServiceLocator.Get<UIController>();
 
-            m_WinWidget = usService.GetElement<WinWidget>();
+            m_WinWidget = usService.GetWidget<WinWidget>();
             m_PositionCleon = 0;
             m_ActiveCleon = true;
 

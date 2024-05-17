@@ -66,10 +66,10 @@ public class InputPlayerZoomSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSyste
 
     public void Init(IEcsSystems systems)
     {
-        m_ZoomFactorWidget = ServiceLocator.Get<UIController>().GetElement<ZoomFactorWidget>();
+        m_ZoomFactorWidget = ServiceLocator.Get<UIController>().GetWidget<ZoomFactorWidget>();
         m_ZoomFactorWidget.OnChangeZoomFactor += OnChangeZoomFactor;
 
-        m_ZoomViewWidget = ServiceLocator.Get<UIController>().GetElement<ZoomViewWidget>();
+        m_ZoomViewWidget = ServiceLocator.Get<UIController>().GetWidget<ZoomViewWidget>();
 
         m_World = systems.GetWorld();
 

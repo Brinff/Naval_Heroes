@@ -27,7 +27,7 @@ public class PlayerAbilityTargetIndicatorSystem : MonoBehaviour, IEcsRunSystem, 
         m_PoolAbilityTargetArea = m_World.GetPool<AbilityTargetArea>();
 
 
-        m_AbilityTargetWidget = ServiceLocator.Get<UIController>().GetElement<AbilityTargetWidget>();
+        m_AbilityTargetWidget = ServiceLocator.Get<UIController>().GetWidget<AbilityTargetWidget>();
         m_AbilityTargetWidget.SetWorldCamera(m_Camera);
     }
 

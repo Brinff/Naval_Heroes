@@ -29,7 +29,7 @@ public class GoHomeCommand : MonoBehaviour, ICommand
         m_PlayerSlotsSystem.slotCollection.OnChange += OnChangeSlotCollection;
 
 
-        m_StartGameWidget = ServiceLocator.Get<UIController>().GetElement<StartGameWidget>();
+        m_StartGameWidget = ServiceLocator.Get<UIController>().GetWidget<StartGameWidget>();
         m_StartGameWidget.SetLevel(playerMissionSystem.level);
         m_StartGameWidget.OnClick += OnClickBattle;
         m_StartGameWidget.SetBlock(!m_PlayerSlotsSystem.IsAnyRadyBattle());

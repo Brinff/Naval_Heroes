@@ -30,7 +30,7 @@ public class GoLoseCommand : MonoBehaviour, ICommand<BattleData>
         
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         uiService.compositionModule.Show<UILoseComposion>();
-        m_LoseWidget = uiService.GetElement<LoseWidget>();
+        m_LoseWidget = uiService.GetWidget<LoseWidget>();
         m_LoseWidget.SetReward(m_Reward = battleData.loseReward);
         m_LoseWidget.OnRetry += OnRetry;
 

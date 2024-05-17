@@ -29,7 +29,7 @@ public class ClearBattleDataCommand : MonoBehaviour, ICommand
         }
 
         var uiService = ServiceLocator.Get<UIController>();
-        uiService.GetElement<AbilityWidget>().Clear();
-        uiService.GetElement<WorldEnemyWidget>().Clear();
+        uiService.GetWidget<AbilityWidget>().Clear();
+        uiService.GetWidget<WorldEnemyWidget>().Clear();
     }
 }

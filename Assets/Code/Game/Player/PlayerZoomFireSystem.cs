@@ -68,14 +68,14 @@ public class PlayerZoomFireSystem : MonoBehaviour, IEcsInitSystem, IEcsDestroySy
 
     public void Init(IEcsSystems systems)
     {
-        m_ZoomToggleWidget = ServiceLocator.Get<UIController>().GetElement<ZoomToggleWidget>();
+        m_ZoomToggleWidget = ServiceLocator.Get<UIController>().GetWidget<ZoomToggleWidget>();
         m_ZoomToggleWidget.OnToggle += ZoomToggle;
 
-        m_CameraInputWidget = ServiceLocator.Get<UIController>().GetElement<CameraInputWidget>();
+        m_CameraInputWidget = ServiceLocator.Get<UIController>().GetWidget<CameraInputWidget>();
         m_CameraInputWidget.OnEndInput += OnCameraEndInput;
         m_CameraInputWidget.OnUpdateInput += OnCameraUpdateInput;
 
-        m_ZoomFactorWidget = ServiceLocator.Get<UIController>().GetElement<ZoomFactorWidget>();
+        m_ZoomFactorWidget = ServiceLocator.Get<UIController>().GetWidget<ZoomFactorWidget>();
         m_ZoomFactorWidget.OnChangeZoomFactor += OnChangeZoomFactor;
 
 

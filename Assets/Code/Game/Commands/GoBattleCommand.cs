@@ -19,7 +19,7 @@ public class GoBattleCommand : MonoBehaviour, ICommand
         ref var eye = ref world.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
         eye.view = world.PackEntity(view.Value);
 
-        ServiceLocator.Get<UIController>().GetElement<CompassWidget>().Clear();
+        ServiceLocator.Get<UIController>().GetWidget<CompassWidget>().Clear();
 
         var playerSlotsSystem = systems.GetSystem<PlayerSlotsSystem>();
         playerSlotsSystem.Hide();

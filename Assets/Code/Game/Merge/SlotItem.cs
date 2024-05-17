@@ -25,18 +25,36 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public bool isLockDrag { get; set; }
 
-    public void Show()
+    public void Show(bool immediately)
     {
-        gameObject.SetActive(true);
-        entity.SetActive(true);
-        if(info) info.gameObject.SetActive(true);
+        if (immediately)
+        {
+            gameObject.SetActive(true);
+            entity.SetActive(true);
+            if (info) info.gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            entity.SetActive(true);
+            if (info) info.gameObject.SetActive(true);
+        }
     }
 
-    public void Hide()
+    public void Hide(bool immediately)
     {
-        gameObject.SetActive(false);
-        entity.SetActive(false);
-        if (info) info.gameObject.SetActive(false);
+        if (immediately)
+        {
+            gameObject.SetActive(false);
+            entity.SetActive(false);
+            if (info) info.gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+            entity.SetActive(false);
+            if (info) info.gameObject.SetActive(false);
+        }
     }
 
     private bool isDrag = false;
@@ -240,7 +258,7 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 
         var slotItem = gameObject.AddComponent<SlotItem>();
-        var widget = ServiceLocator.Get<UIController>().GetElement<SlotItemInfoWidget>();
+        var widget = ServiceLocator.Get<UIController>().GetWidget<SlotItemInfoWidget>();
 
         slotItem.info = widget.Create();
         slotItem.transform.SetParent(collection.transform);

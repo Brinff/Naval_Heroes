@@ -30,7 +30,7 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
 
     public void Prepare(EcsWorld ecsWorld, IEcsSystems systems)
     {
-        m_TutorialTapWidget = ServiceLocator.Get<UIController>().GetElement<TutorialTapWidget>();
+        m_TutorialTapWidget = ServiceLocator.Get<UIController>().GetWidget<TutorialTapWidget>();
         m_SlotCollection = systems.GetSystem<PlayerSlotsSystem>().slotCollection;
         m_CommandSystem = systems.GetSystem<CommandSystem>();
         m_IsDone = new PlayerPrefsData<bool>($"{nameof(TutorialBuyShip)}_{nameof(m_IsDone)}", false);
@@ -54,7 +54,7 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
         TargetRaycastMediator.Instance.isOverrideTargetRaycasts = false;
         m_TutorialTapWidget.Hide(false);
 
-        var messageWidget = ServiceLocator.Get<UIController>().GetElement<MessageWidget>();
+        var messageWidget = ServiceLocator.Get<UIController>().GetWidget<MessageWidget>();
         messageWidget.Hide(false);
         if (m_SlotItem != null) m_SlotItem.isLockDrag = false;
         m_IsDone.Value = true;
@@ -74,7 +74,7 @@ public class TutorialBuyShip : MonoBehaviour, ITutorial
 
         yield return new WaitForSeconds(0.4f);
 
-        var messageWidget = ServiceLocator.Get<UIController>().GetElement<MessageWidget>();
+        var messageWidget = ServiceLocator.Get<UIController>().GetWidget<MessageWidget>();
         messageWidget.SetText("TAP THE BUTTON TO BUY A SHIP");
         messageWidget.Show(false);
 

@@ -57,7 +57,7 @@ public class PlayerViewSwitchSystem : MonoBehaviour, IEcsInitSystem, IEcsGroupUp
 
     public void Init(IEcsSystems systems)
     {
-        m_ZoomToggleWidget = ServiceLocator.Get<UIController>().GetElement<ZoomToggleWidget>();
+        m_ZoomToggleWidget = ServiceLocator.Get<UIController>().GetWidget<ZoomToggleWidget>();
         m_ZoomToggleWidget.OnToggle += OnToggleZoom;
 
         m_World = systems.GetWorld();

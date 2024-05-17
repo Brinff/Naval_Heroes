@@ -120,7 +120,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IService, IInitializable, IEcsIn
         var slots = m_SlotCollection.GetSlots<ISlotRenderer>();
         foreach (var item in slots)
         {
-            item.Show(0.3f);
+            item.Show(false);
         }
         m_SlotCollection.UpdateLayout();
         var buySlots = m_SlotCollection.GetSlots<SlotBuy>();
@@ -147,7 +147,7 @@ public class PlayerSlotsSystem : MonoBehaviour, IService, IInitializable, IEcsIn
         var slots = m_SlotCollection.GetSlots<ISlotRenderer>();
         foreach (var item in slots)
         {
-            item.Hide(0.3f);
+            item.Hide(false);
         }
         coroutine = StartCoroutine(WaitHide());
     }

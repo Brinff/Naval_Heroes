@@ -13,6 +13,8 @@ using Code.Services;
 using Code.States;
 using UnityEngine;
 using Voodoo.Tiny.Sauce.Internal.Ads;
+using Assets.Code.Game;
+using Assets.Code.Game.Shop;
 
 namespace Code.Game.States
 {
@@ -46,15 +48,24 @@ namespace Code.Game.States
             ServiceLocator.ForEach<MergeService>(x=>x.Initialize());
             ServiceLocator.ForEach<MergeMediator>(x=>x.Initialize());
             
-            ServiceLocator.ForEach<StashService>(x=>x.Initialize());
-            ServiceLocator.ForEach<StashMediator>(x=>x.Initialize());
+           
             
             ServiceLocator.ForEach<BattleFieldService>(x=>x.Initialize());
             ServiceLocator.ForEach<BattleFieldMediator>(x=>x.Initialize());
             //ServiceLocator.ForEach<BattleFieldView>(x=>x);
-            
+
+            ServiceLocator.ForEach<NavigateMediator>(x => x.Initialize());
+
+            ServiceLocator.ForEach<ShopService>(x => x.Initialize());
+            ServiceLocator.ForEach<ShopMediator>(x => x.Initialize());
+
+
+
             ServiceLocator.ForEach<EntityManager>(x=>x.Initialize());
-            
+
+            ServiceLocator.ForEach<StashService>(x => x.Initialize());
+            ServiceLocator.ForEach<StashMediator>(x => x.Initialize());
+
             ServiceLocator.ForEach<DiagnosticService>(x => x.Initialize());
             
             if (m_LaunchGameAtStart) m_StateMachine.Play<LaunchGameState>();

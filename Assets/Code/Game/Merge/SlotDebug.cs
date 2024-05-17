@@ -128,15 +128,15 @@ public class SlotDebug : MonoBehaviour, ISlot, IBeginDragHandler, IEndDragHandle
         }
     }
 
-    public void Show(float duration)
+    public void Show(bool immediately)
     {
-        item.Show();
+        item.Show(immediately);
         gameObject.SetActive(true);
     }
 
-    public void Hide(float duration)
+    public void Hide(bool immediately)
     {
-        item.Hide();
+        item.Hide(immediately);
         gameObject.SetActive(false);
     }
 

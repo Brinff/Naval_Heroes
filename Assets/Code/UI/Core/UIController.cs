@@ -40,7 +40,7 @@ namespace Game.UI
             ServiceLocator.Unregister(this);
         }
 
-        public T GetElement<T>() where T : IUIElement
+        public T GetWidget<T>() where T : IUIElement
         {
             if (m_UIElemnts.Count == 0) GetComponentsInChildren<IUIElement>(true, m_UIElemnts);
             var element = m_UIElemnts.Find(x => x is T);

@@ -28,7 +28,7 @@ namespace Code.Game.States
         
             m_CommandSystem = entityManager.GetSystem<CommandSystem>();
             uiService.compositionModule.Show<UILoseComposion>();
-            m_LoseWidget = uiService.GetElement<LoseWidget>();
+            m_LoseWidget = uiService.GetWidget<LoseWidget>();
             m_LoseWidget.SetReward(m_Reward = m_BattleData.loseReward);
             m_LoseWidget.OnRetry += OnRetry;
 

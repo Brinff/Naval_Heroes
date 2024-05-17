@@ -38,7 +38,7 @@ public class GoWinCommand : MonoBehaviour, ICommand<BattleData>
 
         var usService = ServiceLocator.Get<UIController>();
         
-        m_WinWidget = usService.GetElement<WinWidget>();
+        m_WinWidget = usService.GetWidget<WinWidget>();
         m_WinWidget.OnClaim += OnClaimReward;
 /*        m_WinWidget.SetReward(battleData.winReward, false);
         m_WinWidget.SetLevel(battleData.level);*/
