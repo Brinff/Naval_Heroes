@@ -25,8 +25,6 @@ namespace Code.Game.States
 
             m_BattleVirtualCamera.SetActive(true);
 
-            ServiceLocator.Get<UIRoot>().GetWidget<CompassWidget>().Clear();
-
             var playerSlotsSystem = entityManager.GetSystem<PlayerSlotsSystem>();
             playerSlotsSystem.Hide();
 
