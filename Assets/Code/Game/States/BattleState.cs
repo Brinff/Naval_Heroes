@@ -25,14 +25,14 @@ namespace Code.Game.States
 
             m_BattleVirtualCamera.SetActive(true);
 
-            ServiceLocator.Get<UIController>().GetWidget<CompassWidget>().Clear();
+            ServiceLocator.Get<UIRoot>().GetWidget<CompassWidget>().Clear();
 
             var playerSlotsSystem = entityManager.GetSystem<PlayerSlotsSystem>();
             playerSlotsSystem.Hide();
 
             playerSlotsSystem.Bake();
 
-            ServiceLocator.Get<UIController>().compositionModule.Show<UIBattleComposition>();
+            ServiceLocator.Get<UICompositionController>().Show<UIBattleComposition>();
 
             var commanderInstance = GameObject.Instantiate(m_CommanderPrefab);
             world.Bake(commanderInstance, out List<int> entities);

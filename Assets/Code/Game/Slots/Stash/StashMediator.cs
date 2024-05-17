@@ -28,8 +28,8 @@ namespace Code.Game.Slots.Stash
         public void Initialize()
         {
             m_StashView = ServiceLocator.Get<StashView>();
-            m_BottomLayoutWidget = ServiceLocator.Get<UIController>().GetWidget<BottomLayoutWidget>();
-            m_StashButtonWidget = ServiceLocator.Get<UIController>().GetWidget<StashButtonWidget>();
+            m_BottomLayoutWidget = ServiceLocator.Get<UIRoot>().GetWidget<BottomLayoutWidget>();
+            m_StashButtonWidget = ServiceLocator.Get<UIRoot>().GetWidget<StashButtonWidget>();
             m_BuyLayoutView = ServiceLocator.Get<BuyLayoutView>();
 
             m_StashButtonWidget.button.OnClick += OnClickOpenStashButton;
@@ -53,7 +53,7 @@ namespace Code.Game.Slots.Stash
             m_StashView.Show(immedetatley);
             m_BuyLayoutView.Hide(immedetatley);
             m_BottomLayoutWidget.Hide(immedetatley);
-            m_StashView.slot
+
         }
 
         public void Hide(bool immedetatley)

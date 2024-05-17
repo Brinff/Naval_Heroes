@@ -11,7 +11,7 @@ namespace Assets.Code.Game
         private NavigateMenuWidget m_NavigateMenuWidget;
         public void Initialize()
         {
-            m_NavigateMenuWidget = ServiceLocator.Get<UIController>().GetWidget<NavigateMenuWidget>();
+            m_NavigateMenuWidget = ServiceLocator.Get<UIRoot>().GetWidget<NavigateMenuWidget>();
             foreach (var item in m_NavigateMenuWidget.items)
             {
                 item.SetSelect(false, true);

@@ -1,3 +1,4 @@
+using Code.Services;
 using Game.UI;
 using Sirenix.OdinInspector;
 using System;
@@ -6,8 +7,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UICompositionModule : MonoBehaviour
+public class UICompositionController : MonoBehaviour, IService
 {
+    private void OnEnable()
+    {
+        ServiceLocator.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Unregister(this);
+    }
+
+
     [SerializeField]
     private UIComposition m_DefaultComposition;
 

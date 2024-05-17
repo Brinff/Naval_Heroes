@@ -32,18 +32,18 @@ namespace Code.Game.States
             m_PlayerSlotsSystem.slotCollection.OnChange += OnChangeSlotCollection;
 
 
-            m_StartGameWidget = ServiceLocator.Get<UIController>().GetWidget<StartGameWidget>();
+            m_StartGameWidget = ServiceLocator.Get<UIRoot>().GetWidget<StartGameWidget>();
             m_StartGameWidget.SetLevel(playerMissionSystem.level);
             m_StartGameWidget.OnClick += OnClickBattle;
             m_StartGameWidget.SetBlock(!m_PlayerSlotsSystem.IsAnyRadyBattle());
 
-            var navigateMenu = ServiceLocator.Get<UIController>().GetWidget<NavigateMenuWidget>();
+            var navigateMenu = ServiceLocator.Get<UIRoot>().GetWidget<NavigateMenuWidget>();
             var item = navigateMenu.items.First(x => x.name == "Fleet");
             item.SetLock(false, true);
             navigateMenu.Select(item, true);
 
 
-            ServiceLocator.Get<UIController>().compositionModule.Show<UIHomeComposition>();
+            ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
             m_CommandSystem = entityManager.GetSystem<CommandSystem>();
             m_CommandSystem.Execute<ClearBattleDataCommand>();
 

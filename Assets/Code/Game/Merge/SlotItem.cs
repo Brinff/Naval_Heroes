@@ -258,7 +258,7 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 
         var slotItem = gameObject.AddComponent<SlotItem>();
-        var widget = ServiceLocator.Get<UIController>().GetWidget<SlotItemInfoWidget>();
+        var widget = ServiceLocator.Get<UIRoot>().GetWidget<SlotItemInfoWidget>();
 
         slotItem.info = widget.Create();
         slotItem.transform.SetParent(collection.transform);

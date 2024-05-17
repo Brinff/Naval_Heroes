@@ -90,7 +90,7 @@ public class OutputPlayerHealthSystem : MonoBehaviour, IEcsRunSystem, IEcsInitSy
     {
         EcsWorld world = systems.GetWorld();
 
-        m_PlayerHealthBarWidget = ServiceLocator.Get<UIController>().GetWidget<PlayerHealthBarWidget>();
+        m_PlayerHealthBarWidget = ServiceLocator.Get<UIRoot>().GetWidget<PlayerHealthBarWidget>();
 
         m_Filter = world.Filter<Team>().Inc<HealthComponent>().End();
         m_NewEntityFilter = world.Filter<Team>().Inc<HealthComponent>().Inc<NewEntityTag>().End();

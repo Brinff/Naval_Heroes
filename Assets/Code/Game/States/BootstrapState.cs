@@ -14,7 +14,7 @@ using Code.States;
 using UnityEngine;
 using Voodoo.Tiny.Sauce.Internal.Ads;
 using Assets.Code.Game;
-using Assets.Code.Game.Shop;
+using Code.IAP;
 
 namespace Code.Game.States
 {
@@ -56,8 +56,8 @@ namespace Code.Game.States
 
             ServiceLocator.ForEach<NavigateMediator>(x => x.Initialize());
 
-            ServiceLocator.ForEach<ShopService>(x => x.Initialize());
-            ServiceLocator.ForEach<ShopMediator>(x => x.Initialize());
+            //ServiceLocator.ForEach<IAPShopService>(x => x.Initialize());
+            ServiceLocator.ForEach<IAPShopMediator>(x => x.Initialize());
 
 
 

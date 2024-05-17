@@ -16,7 +16,7 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
     private SlotMerge m_TargetSlot;
     public void Prepare(EcsWorld ecsWorld, IEcsSystems systems)
     {
-        m_TutorialDragWidget = ServiceLocator.Get<UIController>().GetWidget<TutorialDragWidget>();
+        m_TutorialDragWidget = ServiceLocator.Get<UIRoot>().GetWidget<TutorialDragWidget>();
         m_SlotCollection = systems.GetSystem<PlayerSlotsSystem>().slotCollection;
 
         m_CommandSystem = systems.GetSystem<CommandSystem>();
@@ -115,7 +115,7 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
         m_TutorialDragWidget.Hide(false);
         m_IsDone.Value = true;
         m_SlotCollection.OnChange -= OnChange;
-        var messageWidget = ServiceLocator.Get<UIController>().GetWidget<MessageWidget>();
+        var messageWidget = ServiceLocator.Get<UIRoot>().GetWidget<MessageWidget>();
         messageWidget.Hide(false);
         m_ItemA = null;
     }
@@ -130,7 +130,7 @@ public class TutorialMergeShips : MonoBehaviour, ITutorial
     private IEnumerator DelayLaunch()
     {
         yield return new WaitForSeconds(0.4f);
-        var messageWidget = ServiceLocator.Get<UIController>().GetWidget<MessageWidget>();
+        var messageWidget = ServiceLocator.Get<UIRoot>().GetWidget<MessageWidget>();
         messageWidget.SetText("DRAG AND DROP TO MERGE SHIPS");
         messageWidget.Show(false);
         DoMerge();
