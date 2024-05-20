@@ -17,7 +17,7 @@ using UnityEditor;
 
 namespace Game.UI
 {
-    public class UIRoot : MonoBehaviour, IService
+    public class UIRoot : MonoBehaviour, IService, IInitializable
     {
         private List<IUIElement> m_UIElemnts = new List<IUIElement>();
 
@@ -37,6 +37,15 @@ namespace Game.UI
             var element = m_UIElemnts.Find(x => x is T);
             if (element != null) return (T)element;
             return default(T);
+        }
+
+        public void Initialize()
+        {
+            GetComponentsInChildren<IUIElement>(true, m_UIElemnts);
+            foreach (var element in m_UIElemnts)
+            {
+                element.Hide(true);
+            }
         }
     }
 }

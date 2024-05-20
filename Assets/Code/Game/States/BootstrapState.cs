@@ -15,6 +15,7 @@ using UnityEngine;
 using Voodoo.Tiny.Sauce.Internal.Ads;
 using Assets.Code.Game;
 using Code.IAP;
+using Game.UI;
 
 namespace Code.Game.States
 {
@@ -32,6 +33,8 @@ namespace Code.Game.States
             TSAdsManager.ToggleAds(true);
             
             m_StateMachine = stateMachine;
+            
+            ServiceLocator.ForEach<UIRoot>(x=>x.Initialize());
             
             ServiceLocator.ForEach<AnalyticService>(x=>x.Initialize());
             ServiceLocator.ForEach<AdsService>(x=>x.Initialize());
