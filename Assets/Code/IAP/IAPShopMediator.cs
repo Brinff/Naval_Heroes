@@ -40,6 +40,7 @@ namespace Code.IAP
 
         private void Show()
         {
+            Debug.Log("Show");
             m_UICompositionController.Show<IAPShopComposition>();
         }
     }

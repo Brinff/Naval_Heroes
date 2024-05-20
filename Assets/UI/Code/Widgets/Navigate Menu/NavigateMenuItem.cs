@@ -29,7 +29,22 @@ public class NavigateMenuItem : MonoBehaviour, IPointerClickHandler
     {
         if(value) m_SelectSequence.Play(immediately);
         else m_DeselectSequence.Play(immediately);
-        m_IsSelected = value;
+        if (m_IsSelected != value)
+        {
+            if (!value && m_IsSelected) Deselect();
+            if (value && !m_IsSelected) Select();
+            m_IsSelected = value;
+        }
+    }
+
+    public void Select()
+    {
+        OnSelect?.Invoke();
+    }
+
+    public void Deselect()
+    {
+        OnDeselect?.Invoke();
     }
 
     public bool m_IsLock;

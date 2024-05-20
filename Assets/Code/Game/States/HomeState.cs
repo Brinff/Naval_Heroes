@@ -17,12 +17,17 @@ namespace Code.Game.States
         private IStateMachine m_StateMachine;
         [SerializeField]
         private GameObject m_BattleVirtualCamera;
+
+        private NavigateMenuItem m_NavigateMenuItem;
+        
         public void OnPlay(IStateMachine stateMachine)
         {
             m_StateMachine = stateMachine;
             
             var entityManager = ServiceLocator.Get<EntityManager>();
             var world = entityManager.world;
+            
+            
             
             PlayerMissionSystem playerMissionSystem = entityManager.GetSystem<PlayerMissionSystem>();
 
@@ -38,9 +43,11 @@ namespace Code.Game.States
             m_StartGameWidget.SetBlock(!m_PlayerSlotsSystem.IsAnyRadyBattle());
 
             var navigateMenu = ServiceLocator.Get<UIRoot>().GetWidget<NavigateMenuWidget>();
-            var item = navigateMenu.items.First(x => x.name == "Fleet");
-            item.SetLock(false, true);
-            navigateMenu.Select(item, true);
+            m_NavigateMenuItem = navigateMenu.items.First(x => x.name == "Fleet");
+            m_NavigateMenuItem.SetLock(false, true);
+            navigateMenu.Select(m_NavigateMenuItem, true);
+
+            m_NavigateMenuItem.OnSelect += Select;
 
 
             ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
@@ -67,6 +74,8 @@ namespace Code.Game.States
             //m_CommandSystem.Execute<SetupPlayerCommand>();
 
             entityManager.GetSystem<TutorialSystem>().HomeTutorial();
+            
+            
         }
 
         private void OnChangeSlotCollection(SlotCollection collection)
@@ -89,6 +98,12 @@ namespace Code.Game.States
         {
             m_StartGameWidget.OnClick -= OnClickBattle;
             m_PlayerSlotsSystem.slotCollection.OnChange -= OnChangeSlotCollection;
+            m_NavigateMenuItem.OnSelect -= Select;
+        }
+
+        private void Select()
+        {
+            ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
         }
     }
 }
