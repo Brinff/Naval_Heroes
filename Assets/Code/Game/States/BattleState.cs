@@ -17,7 +17,7 @@ namespace Code.Game.States
             var entityManager = ServiceLocator.Get<EntityManager>();
             var world = entityManager.world;
             
-            var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
+            //var filter = world.Filter<PlayerTag>().Inc<ShipTag>().End();
             var commandSystem = entityManager.GetSystem<CommandSystem>();
             /*            var view = world.Filter<ViewComponent>().Inc<BattleTag>().End().GetSingleton();
                         ref var eye = ref world.Filter<EyeComponent>().End().GetSingletonComponent<EyeComponent>();
@@ -55,7 +55,7 @@ namespace Code.Game.States
             battleData.level = playerLevelProvider.level;
             battleData.winReward = (int)GameSettings.Instance.winReward.GetResult(playerLevelProvider.level);
             battleData.loseReward = (int)GameSettings.Instance.loseReward.GetResult(playerLevelProvider.level);
-            battleData.isShooter = playerLevelProvider.level == 1 && GameSettings.Instance.firstLevelisShooter;
+            //battleData.isShooter = playerLevelProvider.level == 1 && GameSettings.Instance.firstLevelisShooter;
             world.GetPool<ClearBattleTag>().Add(battleDataEntity);
 
             //SmartlookUnity.Smartlook.TrackNavigationEvent("Battle", SmartlookUnity.Smartlook.NavigationEventType.enter);

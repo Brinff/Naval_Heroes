@@ -11,7 +11,7 @@ namespace Code.Game.Wallet
         [SerializeField] private Currency m_Currency;
 
         public int order => 0;
-        public string path => "Wallets";
+        public string path => $"Wallets/{m_Currency.name}";
 
         private void OnEnable()
         {

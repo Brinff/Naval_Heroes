@@ -1,5 +1,6 @@
 ﻿using Game.UI;
 using System.Collections;
+using Code.Services;
 using Code.UI.Components;
 using DG.Tweening;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Code.IAP
         
         public void Hide(bool immediately)
         {
+            
             m_HideSequence.Play(immediately).OnComplete(OnCompleteHide);
         }
 
