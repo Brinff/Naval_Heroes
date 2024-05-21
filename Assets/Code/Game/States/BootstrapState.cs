@@ -59,7 +59,7 @@ namespace Code.Game.States
 
             ServiceLocator.ForEach<NavigateMediator>(x => x.Initialize());
 
-            //ServiceLocator.ForEach<IAPShopService>(x => x.Initialize());
+            ServiceLocator.ForEach<IAPShopService>(x => x.Initialize());
             ServiceLocator.ForEach<IAPShopMediator>(x => x.Initialize());
 
 
