@@ -45,9 +45,9 @@ namespace Code.Game.States
             m_PlayerLevelSystem.CompleteLevel();
             m_Reward = m_BattleData.winReward;
 
-            var usService = ServiceLocator.Get<UIController>();
+            var usService = ServiceLocator.Get<UIRoot>();
 
-            m_WinWidget = usService.GetElement<WinWidget>();
+            m_WinWidget = usService.GetWidget<WinWidget>();
             m_PositionCleon = 0;
             m_ActiveCleon = true;
 
@@ -60,7 +60,7 @@ namespace Code.Game.States
 
             ServiceLocator.Get<WalletService>().IncomeValue(m_Reward, "Game", "Win");
 
-            usService.compositionModule.Show<UIWinCompositon>();
+            ServiceLocator.Get<UICompositionController>().Show<UIWinCompositon>();
         }
 
 

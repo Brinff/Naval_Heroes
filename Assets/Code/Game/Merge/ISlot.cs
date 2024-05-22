@@ -16,8 +16,8 @@ public interface ISlot
 
 public interface ISlotRenderer : ISlot
 {
-    public void Show(float duration);
-    public void Hide(float duration);
+    public void Show(bool immediately);
+    public void Hide(bool immediately);
 }
 
 public interface ISlotPopulate : ISlot

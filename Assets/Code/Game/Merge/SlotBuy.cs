@@ -30,7 +30,11 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
     public Category category => m_Category;
 
     [SerializeField]
-    private string m_Key;
+    private CanvasGroup m_Group;
+
+    /*[SerializeField]
+    private string m_Key;*/
+
     [SerializeField]
     private int m_UnlockReachLevel = -1;
     public List<SlotItem> items { get; private set; } = new List<SlotItem>();
@@ -38,9 +42,9 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
     public SlotCollection collection { get; private set; }
 
     [SerializeField]
-    private TextMeshPro m_CostLabel;
+    private TextMeshProUGUI m_CostLabel;
     [SerializeField]
-    private SpriteRenderer[] spriteRenderer;
+    private UnityEngine.UI.Graphic[] spriteRenderer;
     [SerializeField]
     private Color m_LockColor;
     [SerializeField]
@@ -53,7 +57,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
 
     public int id => name.GetDeterministicHashCode();
 
-    private BoxCollider[] colliders;
+    //private BoxCollider[] colliders;
 
     [SerializeField]
     private GameObject m_CostRewardRoot;
@@ -62,11 +66,11 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
     [SerializeField]
     private GameObject m_StashRoot;
     [SerializeField]
-    private TextMeshPro m_StashLabel;
+    private TextMeshProUGUI m_StashLabel;
 
     public enum State
     {
-        CostSoft, CostReward, Stash 
+        CostSoft, CostReward, Stash
     }
 
     private State m_CurrentState;
@@ -122,16 +126,16 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
                 return true;
             }
         }
-/*        int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-        if (enoughMoney.Invoke(money))
-        {
-            if (spendMoney.Invoke(money) && items.Remove(slotItem))
-            {
-                m_PlayerAmountBuyShip.Value++;
-                Spawn();
-                return true;
-            }
-        }*/
+        /*        int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
+                if (enoughMoney.Invoke(money))
+                {
+                    if (spendMoney.Invoke(money) && items.Remove(slotItem))
+                    {
+                        m_PlayerAmountBuyShip.Value++;
+                        Spawn();
+                        return true;
+                    }
+                }*/
         return false;
     }
 
@@ -179,7 +183,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
     }
 
 
-    private PlayerPrefsData<int> m_PlayerAmountBuyShip;
+    //private PlayerPrefsData<int> m_PlayerAmountBuyShip;
 
 
     public void Prepare(SlotCollection collection)
@@ -189,15 +193,15 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
         GridAuhoring grid = gameObject.GetComponent<GridAuhoring>();
 
 
-        m_PlayerAmountBuyShip = new PlayerPrefsData<int>(nameof(m_PlayerAmountBuyShip) + m_Key);
+        //m_PlayerAmountBuyShip = new PlayerPrefsData<int>(nameof(m_PlayerAmountBuyShip) + m_Key);
         //var gridRenderer = GetComponent<GridRendererAuthoring>();
         //gridRenderer.BeginFill(grid.scale, grid.center);
 
-        BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
-        RectTransform rectTransform = transform as RectTransform;
-        boxCollider.size =  new Vector3(rectTransform.sizeDelta.x + 10, rectTransform.sizeDelta.y + 10, 20);
+        /*        BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
+                RectTransform rectTransform = transform as RectTransform;
+                boxCollider.size =  new Vector3(rectTransform.sizeDelta.x + 10, rectTransform.sizeDelta.y + 10, 20);*/
 
-        colliders = new BoxCollider[] { boxCollider };
+        //colliders = new BoxCollider[] { boxCollider };
 
 
         m_BuyCurrencyShipService = ServiceLocator.Get<BuyCurrencyShipService>(x => x.category == m_Category);
@@ -273,22 +277,48 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
         m_Mission = level;
     }
 
-    public void Show(float duration)
+
+    private Tween m_Tween;
+    public void Show(bool immedetely)
     {
         if (m_Mission >= m_UnlockReachLevel)
         {
-
+            this.DOKill();
             gameObject.SetActive(true);
-            UpdateState();
-            item.Show();
-            m_CostLabel.DOFade(1, duration);
-            foreach (var item in spriteRenderer)
+            m_Tween = m_Group.DOFade(1, 0.15f).SetTarget(this);
+            if (immedetely)
             {
-                item.DOFade(1, duration);
+                m_Tween.Complete(true);
             }
+
+            UpdateState();
+            item.Show(immedetely);
         }
-        else Hide(0);
+        else Hide(immedetely);
         //gridRenderer.DoAlpha(1, duration);
+    }
+
+    public void Hide(bool immedetely)
+    {
+        this.DOKill();
+        m_Tween = m_Group.DOFade(0, 0.15f).SetTarget(this).OnComplete(OnCompleteHide);
+        if (immedetely)
+        {
+            m_Tween.Complete(true);
+        }
+        item.Hide(immedetely);
+
+        /*        m_CostLabel.DOFade(0, duration);
+                foreach (var item in spriteRenderer)
+                {
+                    item.DOFade(0, duration);
+                }*/
+        //gridRenderer.DoAlpha(0, duration);
+    }
+
+    private void OnCompleteHide()
+    {
+        gameObject.SetActive(false);
     }
 
     private void AdsDone(bool isDone)
@@ -330,17 +360,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
         }
     }
 
-    public void Hide(float duration)
-    {
-        gameObject.SetActive(false);
-        item.Hide();
-        m_CostLabel.DOFade(0, duration);
-        foreach (var item in spriteRenderer)
-        {
-            item.DOFade(0, duration);
-        }
-        //gridRenderer.DoAlpha(0, duration);
-    }
+
 
     public bool AddItemPossible(SlotItem slotItem, Vector3 position)
     {
@@ -357,7 +377,7 @@ public class SlotBuy : MonoBehaviour, ISlot, IPointerBeginDragHandler, IPointerE
             }
             else return true;
             //int money = (int)m_CostShip.GetResult(m_PlayerAmountBuyShip.Value);
-           
+
         }
         return false;
     }

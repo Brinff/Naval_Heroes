@@ -24,11 +24,11 @@ namespace Code.Game.States
         public void OnPlay(IStateMachine stateMachine)
         {
             var entityManager = ServiceLocator.Get<EntityManager>();
-            var uiService = ServiceLocator.Get<UIController>();
+            var uiService = ServiceLocator.Get<UIRoot>();
         
             m_CommandSystem = entityManager.GetSystem<CommandSystem>();
-            uiService.compositionModule.Show<UILoseComposion>();
-            m_LoseWidget = uiService.GetElement<LoseWidget>();
+            ServiceLocator.Get<UICompositionController>().Show<UILoseComposion>();
+            m_LoseWidget = uiService.GetWidget<LoseWidget>();
             m_LoseWidget.SetReward(m_Reward = m_BattleData.loseReward);
             m_LoseWidget.OnRetry += OnRetry;
 

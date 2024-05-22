@@ -80,7 +80,7 @@ namespace Code.Game.Slots.Buy
             if (IsEnoughCurrency())
             {
                 m_WalletService.SpendValue(cost, AnalyticService.GAME, id);
-                m_AnalyticService.OnCurrencyGiven(m_Category.name, 1, AnalyticService.GAME, id);
+                m_AnalyticService.OnCurrencyGiven(m_Category.name.Replace(" ", ""), 1, AnalyticService.GAME, id);
                 m_TotalCountTransaction.value++;
                 m_IsDirty = true;
             }

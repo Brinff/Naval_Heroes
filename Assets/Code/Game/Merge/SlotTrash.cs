@@ -55,12 +55,12 @@ public class SlotTrash : MonoBehaviour, ISlotPopulate, ISlotRenderer
         gridRenderer.EndFill();
     }
 
-    public void Show(float duration)
+    public void Show(bool immeditely)
     {
         gameObject.SetActive(true);
     }
 
-    public void Hide(float duration)
+    public void Hide(bool immeditely)
     {
         gameObject.SetActive(false);
     }

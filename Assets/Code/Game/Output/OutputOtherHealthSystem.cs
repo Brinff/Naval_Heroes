@@ -42,7 +42,7 @@ public class OutputOtherHealthSystem : MonoBehaviour, IEcsInitSystem, IEcsRunSys
         m_PoolClassification = ecsWorld.GetPool<Classification>();
         m_PoolRare = ecsWorld.GetPool<Rare>();
         m_PoolGradeLevel = ecsWorld.GetPool<GradeLevel>();
-        m_WorldEnemyWidget = ServiceLocator.Get<UIController>().GetElement<WorldEnemyWidget>();
+        m_WorldEnemyWidget = ServiceLocator.Get<UIRoot>().GetWidget<WorldEnemyWidget>();
         m_WorldEnemyWidget.SetWorldCamera(m_Camera);
     }
 

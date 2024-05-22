@@ -5,7 +5,7 @@
 
 #import "MAUnityAdManager.h"
 
-#define VERSION @"6.4.3"
+#define VERSION @"6.5.1"
 
 #define KEY_WINDOW [UIApplication sharedApplication].keyWindow
 #define DEVICE_SPECIFIC_ADVIEW_AD_FORMAT ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) ? MAAdFormat.leader : MAAdFormat.banner
@@ -23,12 +23,6 @@ extern "C" {
     // life cycle management
     void UnityPause(int pause);
     void UnitySendMessage(const char* obj, const char* method, const char* msg);
-    
-    static const char * cStringCopy(NSString *string)
-    {
-        const char *value = string.UTF8String;
-        return value ? strdup(value) : NULL;
-    }
     
     void max_unity_dispatch_on_main_thread(dispatch_block_t block)
     {
@@ -154,6 +148,16 @@ static ALUnityBackgroundCallback backgroundCallback;
                 [self positionAdViewForAdUnitIdentifier: adUnitIdentifier adFormat: self.verticalAdViewFormats[adUnitIdentifier]];
             }
         }];
+        
+        [[NSNotificationCenter defaultCenter] addObserver: self
+                                                 selector: @selector(applicationPaused:)
+                                                     name: UIApplicationDidEnterBackgroundNotification
+                                                   object: nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver: self
+                                                 selector: @selector(applicationResumed:)
+                                                     name: UIApplicationDidBecomeActiveNotification
+                                                   object: nil];
     }
     return self;
 }
@@ -821,6 +825,14 @@ static ALUnityBackgroundCallback backgroundCallback;
     MAAdFormat *adFormat = ad.format;
     if ( ![adFormat isFullscreenAd] ) return;
     
+    extern bool _didResignActive;
+    if( _didResignActive )
+    {
+        // We are in the middle of the shutdown sequence, and at this point unity runtime is already destroyed.
+        // We should not call any Unity APIs, so do nothing here.
+        return;
+    }
+    
     // UnityPause needs to be called on the main thread.
 #if !IS_TEST_APP
     UnityPause(1);
@@ -894,6 +906,14 @@ static ALUnityBackgroundCallback backgroundCallback;
     MAAdFormat *adFormat = ad.format;
     if ( ![adFormat isFullscreenAd] ) return;
     
+    extern bool _didResignActive;
+    if( _didResignActive )
+    {
+        // We are in the middle of the shutdown sequence, and at this point unity runtime is already destroyed.
+        // We should not call any Unity APIs, so do nothing here.
+        return;
+    }
+    
     // UnityPause needs to be called on the main thread.
 #if !IS_TEST_APP
     UnityPause(0);
@@ -933,6 +953,14 @@ static ALUnityBackgroundCallback backgroundCallback;
         return;
     }
     
+    extern bool _didResignActive;
+    if( _didResignActive )
+    {
+        // We are in the middle of the shutdown sequence, and at this point unity runtime is already destroyed.
+        // We should not call any Unity APIs, so do nothing here.
+        return;
+    }
+    
     // UnityPause needs to be called on the main thread.
 #if !IS_TEST_APP
     UnityPause(1);
@@ -961,6 +989,14 @@ static ALUnityBackgroundCallback backgroundCallback;
     if ( ![adFormat isAdViewAd] )
     {
         [self logInvalidAdFormat: adFormat];
+        return;
+    }
+    
+    extern bool _didResignActive;
+    if( _didResignActive )
+    {
+        // We are in the middle of the shutdown sequence, and at this point unity runtime is already destroyed.
+        // We should not call any Unity APIs, so do nothing here.
         return;
     }
     
@@ -1942,20 +1978,16 @@ static ALUnityBackgroundCallback backgroundCallback;
 + (void)forwardUnityEventWithArgs:(NSDictionary<NSString *, id> *)args
 {
 #if !IS_TEST_APP
-    void (^runnable)(void) = ^{
-        const char *serializedParameters = cStringCopy([self serializeParameters: args]);
-        backgroundCallback(serializedParameters);
-    };
+    extern bool _didResignActive;
+    if( _didResignActive )
+    {
+        // We are in the middle of the shutdown sequence, and at this point unity runtime is already destroyed.
+        // We should not call any script callbacks, so do nothing here.
+        return;
+    }
     
-    // Always forward in background - we push it back to the main thread in Unity
-    if ( [NSThread isMainThread] )
-    {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), runnable);
-    }
-    else
-    {
-        runnable();
-    }
+    NSString *serializedParameters = [self serializeParameters: args];
+    backgroundCallback(serializedParameters.UTF8String);
 #endif
 }
 
@@ -2037,6 +2069,26 @@ static ALUnityBackgroundCallback backgroundCallback;
             [MAUnityAdManager forwardUnityEventWithArgs: args];
         });
     }];
+}
+
+#pragma mark - Application
+
+- (void)applicationPaused:(NSNotification *)notification
+{
+    [self notifyApplicationStateChangedEventForPauseState: YES];
+}
+
+- (void)applicationResumed:(NSNotification *)notification
+{
+    [self notifyApplicationStateChangedEventForPauseState: NO];
+}
+
+- (void)notifyApplicationStateChangedEventForPauseState:(BOOL)isPaused
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [MAUnityAdManager forwardUnityEventWithArgs: @{@"name": @"OnApplicationStateChanged",
+                                                       @"isPaused": @(isPaused)}];
+    });
 }
 
 - (MAAd *)adWithAdUnitIdentifier:(NSString *)adUnitIdentifier
