@@ -35,8 +35,8 @@ namespace Code.IAP
 
             IAPConfigurationHelper.PopulateConfigurationBuilder(ref builder, catalog);
             UnityPurchasing.Initialize(this, builder);
-            
-            
+
+
             //var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
             //var catalog = ProductCatalog.LoadDefaultCatalog();
             //IAPConfigurationHelper.PopulateConfigurationBuilder(ref builder, catalog);
@@ -47,25 +47,23 @@ namespace Code.IAP
         {
             m_Controller = controller;
             m_Extensions = extensions;
-            
+
             foreach (var product in controller.products.all)
             {
-                if (m_Processors.Any(x => x.productId == product.definition.id))
-                {
-                    var processor = m_Processors.First(x => x.productId == product.definition.id);
-                    processor.OnInitialize(product, this);
-                }
+                var processor = m_Processors.FirstOrDefault(x => x.productId == product.definition.id);
+                processor?.OnInitialize(product, this);
+                Debug.Log("Initialized product: " + product.definition.id);
             }
         }
 
         public void OnInitializeFailed(InitializationFailureReason error)
         {
-            
+            Debug.Log($"{error}");
         }
 
         public void OnInitializeFailed(InitializationFailureReason error, string message)
         {
-            
+            Debug.Log($"{error}: {message}");
         }
 
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
@@ -73,8 +71,9 @@ namespace Code.IAP
             PurchaseProcessingResult result;
             var consumePurchase = false;
             var resultProcessed = false;
-            
-            foreach (var processor in m_Processors.Where(button => button.productId == purchaseEvent.purchasedProduct.definition.id))
+
+            foreach (var processor in m_Processors.Where(button =>
+                         button.productId == purchaseEvent.purchasedProduct.definition.id))
             {
                 result = processor.ProcessPurchase(purchaseEvent);
 
@@ -82,6 +81,7 @@ namespace Code.IAP
                 {
                     consumePurchase = true;
                 }
+
                 resultProcessed = true;
             }
 
@@ -89,13 +89,12 @@ namespace Code.IAP
             {
                 Debug.Log("Completed processing purchase: " + purchaseEvent.purchasedProduct.definition.id);
             }
-            
-            return consumePurchase ?  PurchaseProcessingResult.Complete : PurchaseProcessingResult.Pending;
+
+            return consumePurchase ? PurchaseProcessingResult.Complete : PurchaseProcessingResult.Pending;
         }
 
         public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
         {
-            
         }
 
         public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
