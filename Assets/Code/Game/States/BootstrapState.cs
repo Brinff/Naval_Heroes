@@ -12,7 +12,6 @@ using Code.Game.Wallet;
 using Code.Services;
 using Code.States;
 using UnityEngine;
-using Voodoo.Tiny.Sauce.Internal.Ads;
 using Assets.Code.Game;
 using Code.IAP;
 using Game.UI;
@@ -29,8 +28,6 @@ namespace Code.Game.States
             //TODO: All initializes, sdk, loads, ect
             Application.targetFrameRate = 60;
             
-            TSAdsManager.SetFSDisplayConditions(30, 30, 3);
-            TSAdsManager.ToggleAds(true);
             
             m_StateMachine = stateMachine;
             

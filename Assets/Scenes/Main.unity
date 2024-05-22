@@ -4251,7 +4251,7 @@ MonoBehaviour:
   m_Id: cd510830b955f189
   m_Placement: battle_interstitial
   m_SecondsCondition: 30
-  m_CountAttemptCondition: 3
+  m_CountAttemptCondition: 9
   m_LevelOffsetCondition: 7
 --- !u!1 &687056182
 GameObject:
