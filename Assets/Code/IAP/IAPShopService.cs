@@ -48,7 +48,7 @@ namespace Code.IAP
             m_Controller = controller;
             m_Extensions = extensions;
 
-            foreach (var product in controller.products.all)
+            foreach (var product in controller.products.all.Where(x=>x.availableToPurchase))
             {
                 var processor = m_Processors.FirstOrDefault(x => x.productId == product.definition.id);
                 processor?.OnInitialize(product, this);
@@ -95,6 +95,7 @@ namespace Code.IAP
 
         public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
         {
+            
         }
 
         public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
