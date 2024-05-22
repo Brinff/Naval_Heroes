@@ -1,7 +1,11 @@
 ﻿using System;
 using Code.Services;
 using Code.States;
+using Unity.Services.Core;
+using Unity.Services.Core.Environments;
 using UnityEngine;
+using UnityEngine.Serialization;
+using IService = Code.Services.IService;
 
 namespace Code.Game.States
 {
@@ -22,10 +26,25 @@ namespace Code.Game.States
             ServiceLocator.Unregister(this);
         }
 
-        private void Start()
+
+        public string m_Environment = "production";
+
+        async void Start()
         {
-            m_StateMachine = new StateMachine(name, GetComponentsInChildren<IState>());
-            m_StateMachine.Play<BootstrapState>();
+            try
+            {
+                var options = new InitializationOptions()
+                    .SetEnvironmentName(m_Environment);
+                
+                await UnityServices.InitializeAsync(options);
+                
+                m_StateMachine = new StateMachine(name, GetComponentsInChildren<IState>());
+                m_StateMachine.Play<BootstrapState>();
+            }
+            catch (Exception exception)
+            {
+                Debug.LogException(exception);
+            }
         }
 
         public void Play<T>(TransitionDelegate<T> transition = null) where T : IState
