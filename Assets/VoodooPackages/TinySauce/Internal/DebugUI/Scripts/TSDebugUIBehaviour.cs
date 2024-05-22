@@ -64,6 +64,9 @@ namespace Voodoo.Tiny.Sauce.Internal
 
             _tsSettings = TinySauceSettings.Load();
             UpdateInfo();
+           
+            abtestTabBtn.gameObject.SetActive(TinySauceBehaviour.ABTestManager != null);
+            
 
             infoScreen.TSSettings = _tsSettings;
         }

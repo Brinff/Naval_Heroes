@@ -139,6 +139,9 @@ namespace Voodoo.Sauce.Internal.Editor
         {
             string sourcePath = Path.Combine(Application.dataPath, SourceLauncherGradlePath);
             string contentLauncher = File.ReadAllText(sourcePath)
+#if !UNITY_2022_2_OR_NEWER
+                .Replace("ndkPath \"**NDKPATH**\"","")
+#endif
                 .Replace("**BUILD_SCRIPT_DEPS**", AndroidBuildToolsGradleClasspath);
 #if UNITY_2020_1_OR_NEWER
         contentLauncher = contentLauncher.Replace("**STREAMING_ASSETS**]", "]+ unityStreamingAssets.tokenize(', ')");
@@ -155,7 +158,11 @@ namespace Voodoo.Sauce.Internal.Editor
             string content = File.ReadAllText(sourcePath)
                                  .Replace("**BUILD_SCRIPT_DEPS**", AndroidBuildToolsGradleClasspath)
                                  .Replace("**APPLY_PLUGINS**", "apply plugin: 'com.android.library'")
+#if !UNITY_2022_2_OR_NEWER
+                                 .Replace("ndkPath \"**NDKPATH**\"","")
+#endif
                                  .Replace("**APPLICATIONID**", string.Empty);
+
 #if UNITY_2020_1_OR_NEWER
         content = content.Replace("**STREAMING_ASSETS**", " + unityStreamingAssets.tokenize(', ')");
 #endif

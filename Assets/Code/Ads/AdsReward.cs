@@ -1,7 +1,4 @@
 ﻿using Code.Services;
-using Sirenix.OdinInspector.Editor.StateUpdaters;
-using System.Collections;
-using System.Threading;
 using UnityEngine;
 
 namespace Code.Ads

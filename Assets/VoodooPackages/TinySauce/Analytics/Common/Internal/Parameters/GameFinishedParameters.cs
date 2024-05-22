@@ -14,8 +14,12 @@ namespace Voodoo.Tiny.Sauce.Internal.Analytics
         /// <summary>
         /// The level identifier, ideally a number.
         /// </summary>
-        public string level = "";
+        public string levelDimension1 = "";
+
+        public string levelDimension2 = null;
         
+        public string levelDimension3 = null;
+
         /// <summary>
         /// Outcome of the game, True if won, else False.
         /// </summary>
