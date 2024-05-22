@@ -3,8 +3,9 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using System.Globalization;
 using Google;
+using Voodoo.Tiny.Sauce.Internal.Editor.ApplePrivacy;
 
-namespace Voodoo.Sauce.Internal.Editor
+namespace Voodoo.Tiny.Sauce.Internal.Editor
 {
     public class TinySaucePrebuildiOS : IPreprocessBuildWithReport
     {
@@ -18,7 +19,7 @@ namespace Voodoo.Sauce.Internal.Editor
             if (report.summary.platform != BuildTarget.iOS) {
                 return;
             }
-
+            ApplePrivacyManifestHelper.ProcessManifest();
             PrepareResolver();
             PreparePlayerSettings();
         }
@@ -29,6 +30,7 @@ namespace Voodoo.Sauce.Internal.Editor
             IOSResolver.PodfileGenerationEnabled = true;
             IOSResolver.PodToolExecutionViaShellEnabled = true;
             IOSResolver.AutoPodToolInstallInEditorEnabled = true;
+            IOSResolver.PodfileStaticLinkFrameworks = false;
             IOSResolver.UseProjectSettings = true;
             IOSResolver.CocoapodsIntegrationMethodPref = IOSResolver.CocoapodsIntegrationMethod.Project;
         }

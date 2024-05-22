@@ -3,7 +3,7 @@ using Leopotam.EcsLite;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Voodoo.Tiny.Sauce.Internal.Ads;
+
 
 public class LoadGameSystem : MonoBehaviour, IEcsInitSystem, IEcsGroup<Update>
 {

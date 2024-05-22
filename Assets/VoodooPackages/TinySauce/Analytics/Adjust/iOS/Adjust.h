@@ -2,7 +2,7 @@
 //  Adjust.h
 //  Adjust SDK
 //
-//  V4.33.2
+//  V4.38.0
 //  Created by Christian Wellenbrock (@wellle) on 23rd July 2013.
 //  Copyright (c) 2012-2021 Adjust GmbH. All rights reserved.
 //
@@ -14,21 +14,24 @@
 #import "ADJThirdPartySharing.h"
 #import "ADJAdRevenue.h"
 #import "ADJLinkResolution.h"
+#import "ADJPurchase.h"
+#import "ADJPurchaseVerificationResult.h"
+
+typedef void(^AdjustResolvedDeeplinkBlock)(NSString * _Nonnull resolvedLink);
 
 @interface AdjustTestOptions : NSObject
 
-@property (nonatomic, copy, nullable) NSString *baseUrl;
-@property (nonatomic, copy, nullable) NSString *gdprUrl;
-@property (nonatomic, copy, nullable) NSString *subscriptionUrl;
+@property (nonatomic, copy, nullable) NSString *urlOverwrite;
 @property (nonatomic, copy, nullable) NSString *extraPath;
 @property (nonatomic, copy, nullable) NSNumber *timerIntervalInMilliseconds;
 @property (nonatomic, copy, nullable) NSNumber *timerStartInMilliseconds;
 @property (nonatomic, copy, nullable) NSNumber *sessionIntervalInMilliseconds;
 @property (nonatomic, copy, nullable) NSNumber *subsessionIntervalInMilliseconds;
+@property (nonatomic, copy, nullable) NSNumber *attStatusInt;
+@property (nonatomic, copy, nullable) NSString *idfa;
 @property (nonatomic, assign) BOOL teardown;
 @property (nonatomic, assign) BOOL deleteState;
 @property (nonatomic, assign) BOOL noBackoffWait;
-@property (nonatomic, assign) BOOL iAdFrameworkEnabled;
 @property (nonatomic, assign) BOOL adServicesFrameworkEnabled;
 @property (nonatomic, assign) BOOL enableSigning;
 @property (nonatomic, assign) BOOL disableSigning;
@@ -52,6 +55,9 @@ extern NSString * __nonnull const ADJAdRevenueSourceAdMost;
 extern NSString * __nonnull const ADJAdRevenueSourceUnity;
 extern NSString * __nonnull const ADJAdRevenueSourceHeliumChartboost;
 extern NSString * __nonnull const ADJAdRevenueSourcePublisher;
+extern NSString * __nonnull const ADJAdRevenueSourceTopOn;
+extern NSString * __nonnull const ADJAdRevenueSourceADX;
+extern NSString * __nonnull const ADJAdRevenueSourceTradplus;
 
 /**
  * Constants for country app's URL strategies.
@@ -59,6 +65,7 @@ extern NSString * __nonnull const ADJAdRevenueSourcePublisher;
 extern NSString * __nonnull const ADJUrlStrategyIndia;
 extern NSString * __nonnull const ADJUrlStrategyChina;
 extern NSString * __nonnull const ADJUrlStrategyCn;
+extern NSString * __nonnull const ADJUrlStrategyCnOnly;
 extern NSString * __nonnull const ADJDataResidencyEU;
 extern NSString * __nonnull const ADJDataResidencyTR;
 extern NSString * __nonnull const ADJDataResidencyUS;
@@ -133,6 +140,15 @@ extern NSString * __nonnull const ADJDataResidencyUS;
 + (void)appWillOpenUrl:(nonnull NSURL *)url;
 
 /**
+ * @brief Process the deep link that has opened an app and potentially get a resolved link.
+ *
+ * @param deeplink URL object which contains info about adjust deep link.
+ * @param completionHandler Completion handler where either resolved or echoed deep link will be sent.
+ */
++ (void)processDeeplink:(nonnull NSURL *)deeplink
+      completionHandler:(void (^_Nonnull)(NSString * _Nonnull resolvedLink))completionHandler;
+
+/**
  * @brief Set the device token used by push notifications.
  *
  * @param deviceToken Apple push notification token for iOS device as NSData.
@@ -161,6 +177,14 @@ extern NSString * __nonnull const ADJDataResidencyUS;
  * @return Device IDFA value.
  */
 + (nullable NSString *)idfa;
+
+/**
+ * @brief Retrieve iOS device IDFV value.
+ *
+ * @return Device IDFV value.
+ */
++ (nullable NSString *)idfv;
+
 
 /**
  * @brief Get current adjust identifier for the user.
@@ -366,6 +390,15 @@ extern NSString * __nonnull const ADJDataResidencyUS;
 + (nullable NSURL *)lastDeeplink;
 
 /**
+ * @brief Verify in-app-purchase.
+ *
+ * @param purchase          Purchase object.
+ * @param completionHandler Callback where verification result will be repoted.
+ */
++ (void)verifyPurchase:(nonnull ADJPurchase *)purchase
+     completionHandler:(void (^_Nonnull)(ADJPurchaseVerificationResult * _Nonnull verificationResult))completionHandler;
+
+/**
  * @brief Method used for internal testing only. Don't use it in production.
  */
 + (void)setTestOptions:(nullable AdjustTestOptions *)testOptions;
@@ -384,6 +417,9 @@ extern NSString * __nonnull const ADJDataResidencyUS;
 - (void)teardown;
 
 - (void)appWillOpenUrl:(nonnull NSURL *)url;
+
+- (void)processDeeplink:(nonnull NSURL *)deeplink
+      completionHandler:(void (^_Nonnull)(NSString * _Nonnull resolvedLink))completionHandler;
 
 - (void)setOfflineMode:(BOOL)enabled;
 
@@ -454,5 +490,8 @@ extern NSString * __nonnull const ADJDataResidencyUS;
 - (void)checkForNewAttStatus;
 
 - (nullable NSURL *)lastDeeplink;
+
+- (void)verifyPurchase:(nonnull ADJPurchase *)purchase
+     completionHandler:(void (^_Nonnull)(ADJPurchaseVerificationResult * _Nonnull verificationResult))completionHandler;
 
 @end

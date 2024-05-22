@@ -110,11 +110,13 @@ namespace Voodoo.Tiny.Sauce.Internal.Analytics
 
         #region ProgressionEvents
             
-        internal static void TrackProgressEvent(GAProgressionStatus status, string progress, int? score)
+       
+        internal static void TrackProgressEvent(GAProgressionStatus status, string progress1, string progress2, string progress3, int? score)
         {
             if (_isDisabled) return;
 
-            var progressEvent = new GAProgressionEvent(status, progress, score: score);
+            GAProgressionEvent progressEvent = null;
+            progressEvent = new GAProgressionEvent(status, progress1, progress2, progress3, score);
             
             if (!_isInitialized) {
                 VoodooLog.Log(TAG, "GameAnalytics NOT initialized queuing event..." + status);

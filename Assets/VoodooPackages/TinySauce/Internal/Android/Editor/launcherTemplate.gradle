@@ -1,9 +1,13 @@
 apply plugin: 'com.android.application'
 
-buildscript {
-    dependencies {
-        **BUILD_SCRIPT_DEPS**
-    }
+buildscript {    
+	repositories {        
+		jcenter()        
+		google()    
+	}    
+	dependencies {        
+		**BUILD_SCRIPT_DEPS**
+	}
 }
 
 dependencies {
@@ -11,6 +15,9 @@ dependencies {
     }
 
 android {
+    ndkPath "**NDKPATH**"
+
+
     compileSdkVersion **APIVERSION**
     buildToolsVersion '**BUILDTOOLS**'
 

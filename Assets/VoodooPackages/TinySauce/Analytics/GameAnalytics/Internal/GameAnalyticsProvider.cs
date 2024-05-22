@@ -53,12 +53,12 @@ namespace Voodoo.Tiny.Sauce.Internal.Analytics
         
         private static void OnGameStarted(GameStartedParameters parameters)
         {
-            GameAnalyticsWrapper.TrackProgressEvent(GAProgressionStatus.Start, parameters.level, null);
+            GameAnalyticsWrapper.TrackProgressEvent(GAProgressionStatus.Start, parameters.levelDimension1, parameters.levelDimension2, parameters.levelDimension3, null);
         }
 
         private static void OnGameFinished(GameFinishedParameters parameters)
         {
-            GameAnalyticsWrapper.TrackProgressEvent(parameters.status ? GAProgressionStatus.Complete : GAProgressionStatus.Fail, parameters.level, (int) parameters.score);
+            GameAnalyticsWrapper.TrackProgressEvent(parameters.status ? GAProgressionStatus.Complete : GAProgressionStatus.Fail, parameters.levelDimension1, parameters.levelDimension2, parameters.levelDimension3, (int) parameters.score);
         }
 
         private static void TrackCustomEvent(string eventName, Dictionary<string, object> eventProperties,
