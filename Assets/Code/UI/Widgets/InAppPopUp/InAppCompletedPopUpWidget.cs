@@ -1,16 +1,20 @@
+using Code.Services;
 using Extensions;
 using Game.UI;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 {
-	[SerializeField] private PopUpItem m_itemPrefab;
 	[SerializeField] private PointerEventsUI m_pointerEventsUI;
 	[SerializeField] private Transform m_spawnParent;
+	[SerializeField] private GameObject m_separatorPrefab;
+	[SerializeField] private SerializedDictionary<PopUpItemType, PopUpItem> m_prefabs;
 
 	private List<PopUpItem> m_activePopUpItems;
+	private List<GameObject> m_seperators;
 
 	private void OnEnable()
 	{
@@ -24,10 +28,25 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 
 	public void Hide(bool immediately)
 	{
+		var incomeAnimation = ServiceLocator.Get<IncomeAnimationService>();
+
 		gameObject.Disable();
 		for (int i = 0; i < m_activePopUpItems.Count; i++)
 		{
+			if (!immediately)
+			{
+				if (m_activePopUpItems is IIAPAnimatedPopUp iAPAnimatedPopUp)
+				{
+					iAPAnimatedPopUp.Animate(incomeAnimation);
+				}
+			}
+
 			Destroy(m_activePopUpItems[i].gameObject);
+		}
+
+		for (int i = 0; i < m_seperators.Count; i++)
+		{
+			Destroy(m_seperators[i]);
 		}
 	}
 
@@ -36,19 +55,29 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 		gameObject.Enable();
 	}
 
-	public void Initialse(List<PopUpItemData> popUpItemDatas)
+	public void Initialise(params PopUpItemData[] popUpItemDatas)
+	{
+		Initialise((IEnumerable<PopUpItemData>)popUpItemDatas);
+	}
+
+	public void Initialise(IEnumerable<PopUpItemData> popUpItemDatas)
 	{
 		m_activePopUpItems ??= new List<PopUpItem>();
 
-		foreach (var popUpData in popUpItemDatas)
+		for (int i = 0; i < popUpItemDatas.Count(); i++)
 		{
-			Add(popUpData);
+			Add(popUpItemDatas.ElementAt(i));
+			if (i % 2 == 1)
+			{
+				AddSeparator();
+			}
 		}
 	}
 
 	public void Add(PopUpItemData popUpItemData)
 	{
-		var popUpItemCopy = Instantiate(m_itemPrefab, m_spawnParent);
+		var prefab = m_prefabs[popUpItemData.PopUpItemType];
+		var popUpItemCopy = Instantiate(prefab, m_spawnParent);
 		popUpItemCopy.Initialise(popUpItemData);
 
 		m_activePopUpItems.Add(popUpItemCopy);
@@ -57,5 +86,11 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 	private void OnPointerClick(UnityEngine.EventSystems.PointerEventData obj)
 	{
 		Hide(true);
+	}
+
+	private void AddSeparator()
+	{
+		var separatorCopy = Instantiate(m_separatorPrefab, m_spawnParent);
+		m_seperators.Add(separatorCopy);
 	}
 }

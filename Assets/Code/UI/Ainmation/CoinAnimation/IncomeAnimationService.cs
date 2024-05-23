@@ -80,17 +80,6 @@ public class IncomeAnimationService : MonoBehaviour, IService
 		yield return transform.DOMove(destination, m_movingSpeed).SetEase(m_movingEase).SetSpeedBased().OnComplete(() => Destroy(transform.gameObject));
 	}
 
-	//private void OnDrawGizmos()
-	//{
-	//	Gizmos.color = Color.blue;
-	//	var pos = m_destionationPoint.rect.center;
-	//	//var pos = m_destionationPoint.anchoredPosition;
-	//	Gizmos.DrawSphere(m_destionationPoint.TransformPoint(pos.x, pos.y, 0), 20);
-	//	Gizmos.color = Color.white;
-	//	var pos2 = m_spawnPoint.rect.center;
-	//	Gizmos.DrawSphere(m_spawnPoint.TransformPoint(pos2.x, pos2.y, 0), 20);
-	//}
-
 	private Vector3 GetUIWorldPoint(RectTransform source)
 	{
 		var rectPos = source.rect.center;

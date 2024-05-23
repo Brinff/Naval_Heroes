@@ -37,6 +37,12 @@ namespace Code.IAP
         public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
         {
             m_WalletService.IncomeValue(m_Amount, AnalyticService.IAP, m_ProductID);
+
+            var inAppPopUpWidget = ServiceLocator.Get<UIRoot>().GetWidget<InAppCompletedPopUpWidget>();
+            inAppPopUpWidget.Initialise(new PopUpItemData(m_Icon, m_Amount.ToString(), m_Currency, PopUpItemType.Coins_soft));
+            ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
+
+
             return PurchaseProcessingResult.Complete;
         }
 

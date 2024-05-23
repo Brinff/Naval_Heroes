@@ -5289,8 +5289,8 @@ MonoBehaviour:
   m_Compositions:
   - {fileID: 792821841}
   - {fileID: 792821846}
-  - {fileID: 792821844}
   - {fileID: 792821843}
+  - {fileID: 792821844}
   - {fileID: 792821842}
 --- !u!114 &792821841
 MonoBehaviour:
@@ -12964,13 +12964,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2040863457}
     m_Modifications:
+    - target: {fileID: 57869333804049775, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57869333804049775, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 57869333804049775, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 384.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 57869333804049775, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 650754494341499382, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -870
+      value: 769.3
       objectReference: {fileID: 0}
     - target: {fileID: 650754494341499382, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1570463570352526791, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -13074,6 +13090,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3174227511981897330, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8316717070640395268, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
+      propertyPath: m_prefabs.m_Keys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8316717070640395268, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
+      propertyPath: m_prefabs.m_Values.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
