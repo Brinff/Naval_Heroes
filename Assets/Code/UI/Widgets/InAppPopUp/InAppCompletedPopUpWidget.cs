@@ -54,6 +54,9 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 		{
 			Destroy(m_seperators[i]);
 		}
+
+		m_activePopUpItems.Clear();
+		m_seperators.Clear();
 	}
 
 	public void Show(bool immediately)
