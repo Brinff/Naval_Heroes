@@ -319,10 +319,10 @@ MonoBehaviour:
   m_spawnParent: {fileID: 650754494341499382}
   m_separatorPrefab: {fileID: 5051921344283381187, guid: bec439b848a32654087ba76c09398392, type: 3}
   m_prefabs:
-    m_Keys: 0100000002000000
-    m_Values:
-    - {fileID: 4429592790539541308, guid: fc81172bdc2363140aaeeb9a8bea30c0, type: 3}
-    - {fileID: 6307669905063902828, guid: 18634744ea37db64ab5b9582cb33b266, type: 3}
+  - m_popUpItemType: 1
+    m_popUpItem: {fileID: 4429592790539541308, guid: fc81172bdc2363140aaeeb9a8bea30c0, type: 3}
+  - m_popUpItemType: 2
+    m_popUpItem: {fileID: 6307669905063902828, guid: 18634744ea37db64ab5b9582cb33b266, type: 3}
 --- !u!1 &5856132126930948943
 GameObject:
   m_ObjectHideFlags: 0

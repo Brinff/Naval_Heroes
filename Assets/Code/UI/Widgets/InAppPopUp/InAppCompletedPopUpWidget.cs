@@ -1,6 +1,7 @@
 using Code.Services;
 using Extensions;
 using Game.UI;
+using Sirenix.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 	[SerializeField] private PointerEventsUI m_pointerEventsUI;
 	[SerializeField] private Transform m_spawnParent;
 	[SerializeField] private GameObject m_separatorPrefab;
-	[SerializeField] private SerializedDictionary<PopUpItemType, PopUpItem> m_prefabs;
+	[SerializeField, OdinSerialize] private List<PopUpPrefab> m_prefabs;
 
 	private List<PopUpItem> m_activePopUpItems;
 	private List<GameObject> m_seperators;
@@ -76,8 +77,8 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 
 	public void Add(PopUpItemData popUpItemData)
 	{
-		var prefab = m_prefabs[popUpItemData.PopUpItemType];
-		var popUpItemCopy = Instantiate(prefab, m_spawnParent);
+		var prefab = m_prefabs.Find(p => p.PopUpItemType == popUpItemData.PopUpItemType);
+		var popUpItemCopy = Instantiate(prefab.PopUpItem, m_spawnParent);
 		popUpItemCopy.Initialise(popUpItemData);
 
 		m_activePopUpItems.Add(popUpItemCopy);
