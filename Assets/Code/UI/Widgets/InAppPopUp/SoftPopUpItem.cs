@@ -1,5 +1,6 @@
 using Code.Services;
 using Game.UI;
+using System.Globalization;
 using UnityEngine;
 
 public class SoftPopUpItem : PopUpItem, IIAPAnimatedPopUp
@@ -10,8 +11,13 @@ public class SoftPopUpItem : PopUpItem, IIAPAnimatedPopUp
 		incomeAnimationService.AnimateScreenSpace(RectTransform, softMoneyRect);
 	}
 
-	public override void SetTitle(string title)
+	public override void SetTitle(object title)
 	{
-		base.SetTitle(title);
+		var nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+		nfi.NumberGroupSeparator = " ";
+		var s = title.ToString();
+
+		var value = int.Parse(title.ToString());
+		m_title.SetText(value.ToString("#, 0.00", nfi));
 	}
 }

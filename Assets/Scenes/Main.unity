@@ -1845,6 +1845,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 302070581}
   m_CullTransparentMesh: 1
+--- !u!1 &302447647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 302447648}
+  m_Layer: 5
+  m_Name: IncomeAnimation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &302447648
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302447647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2040863457}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &313350228 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8869041974813568208, guid: f9a22c6965fcb454f9460123c47f3ed7, type: 3}
@@ -2289,6 +2324,7 @@ Transform:
   - {fileID: 325727169}
   - {fileID: 1794835904}
   - {fileID: 2126418526}
+  - {fileID: 1951393103}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &378751887
@@ -5288,10 +5324,10 @@ MonoBehaviour:
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
   - {fileID: 792821841}
-  - {fileID: 792821846}
-  - {fileID: 792821843}
-  - {fileID: 792821844}
   - {fileID: 792821842}
+  - {fileID: 792821844}
+  - {fileID: 792821843}
+  - {fileID: 792821846}
 --- !u!114 &792821841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10873,6 +10909,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951102760}
   m_CullTransparentMesh: 1
+--- !u!1 &1951393102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1951393103}
+  - component: {fileID: 1951393104}
+  m_Layer: 0
+  m_Name: IncomeAnimationSerivce
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1951393103
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951393102}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 376328407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1951393104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951393102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dd53064bc0a8e541886689b2f1f1a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_coinPrefab: {fileID: 6359249613652032327, guid: c29aebb72e4eb934e8b83c286e1b485f, type: 3}
+  m_spawningParent: {fileID: 302447648}
+  m_spawnCount: 10
+  m_minMaxSpawnDelay: {x: 0.05, y: 0.2}
+  m_randomSpawnPositionOffset: {x: 50, y: 50}
+  m_scaleInDuration: 0.3
+  m_scaleInEase: 27
+  m_delayToMove: 0.2
+  m_movingSpeed: 2000
+  m_movingEase: 26
+  m_spawnPoint: {fileID: 0}
+  m_destionationPoint: {fileID: 0}
 --- !u!1 &1967118260
 GameObject:
   m_ObjectHideFlags: 0
@@ -11266,6 +11358,7 @@ RectTransform:
   - {fileID: 691591782}
   - {fileID: 1339500377}
   - {fileID: 1967695725}
+  - {fileID: 302447648}
   m_Father: {fileID: 792821837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -13091,6 +13184,10 @@ PrefabInstance:
     - target: {fileID: 3174227511981897330, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292999836799688403, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8316717070640395268, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
       propertyPath: m_prefabs.m_Keys.Array.size

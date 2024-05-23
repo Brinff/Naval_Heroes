@@ -4,11 +4,11 @@ using UnityEngine;
 public class PopUpItemData
 {
 	public Sprite Sprite;
-	public string Title;
+	public object Title;
 	public Currency Currency;
 	public PopUpItemType PopUpItemType;
 
-	public PopUpItemData(Sprite sprite, string title, Currency currency, PopUpItemType popUpItemType)
+	public PopUpItemData(Sprite sprite, object title, Currency currency, PopUpItemType popUpItemType)
 	{
 		Sprite = sprite;
 		Title = title;

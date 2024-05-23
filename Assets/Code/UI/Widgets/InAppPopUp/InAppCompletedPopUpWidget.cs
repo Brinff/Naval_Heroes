@@ -1,6 +1,7 @@
 using Code.Services;
 using Extensions;
 using Game.UI;
+using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,10 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 		var incomeAnimation = ServiceLocator.Get<IncomeAnimationService>();
 
 		gameObject.Disable();
+
+		m_activePopUpItems ??= new List<PopUpItem>();
+		m_seperators ??= new List<GameObject>();
+
 		for (int i = 0; i < m_activePopUpItems.Count; i++)
 		{
 			if (!immediately)
@@ -64,11 +69,14 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 	public void Initialise(IEnumerable<PopUpItemData> popUpItemDatas)
 	{
 		m_activePopUpItems ??= new List<PopUpItem>();
+		m_seperators ??= new List<GameObject>();
 
-		for (int i = 0; i < popUpItemDatas.Count(); i++)
+		var length = popUpItemDatas.Count();
+
+		for (int i = 0; i < length; i++)
 		{
 			Add(popUpItemDatas.ElementAt(i));
-			if (i % 2 == 1)
+			if (i < length - 1)
 			{
 				AddSeparator();
 			}
@@ -82,6 +90,20 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 		popUpItemCopy.Initialise(popUpItemData);
 
 		m_activePopUpItems.Add(popUpItemCopy);
+	}
+
+	[Button]
+	public void Test1()
+	{
+		Initialise(new PopUpItemData(null, "999999999", null, PopUpItemType.Coins_soft));
+	}
+
+	[Button]
+	public void Test2()
+	{
+		Initialise(
+			new ShipPopUpData(null, "ship", null, PopUpItemType.Ship, "class"),
+			new PopUpItemData(null, "9000000", null, PopUpItemType.Coins_soft));
 	}
 
 	private void OnPointerClick(UnityEngine.EventSystems.PointerEventData obj)
