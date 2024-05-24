@@ -1,5 +1,6 @@
 ﻿using Code.Services;
 using Code.UI.Components;
+using DG.Tweening;
 using UI.Components;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,7 @@ namespace Code.Game.Slots.Stash
 
         public void Show(bool immediately)
         {
-            m_ShowSequence.Play(immediately);
+            m_ShowSequence.Play(immediately).OnUpdate(slot.UpdatePositions);
         }
 
         public void Hide(bool immediately)

@@ -301,6 +301,7 @@ MonoBehaviour:
       m_Delay: 0
       m_Ease: 1
   m_Button: {fileID: 1568233434570098595}
+  m_Notificator: {fileID: 7217352373236538449}
 --- !u!225 &8565843615650397319
 CanvasGroup:
   m_ObjectHideFlags: 0

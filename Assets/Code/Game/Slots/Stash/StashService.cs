@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.IO;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Code.Game.Slots.Stash
 {
@@ -32,11 +33,15 @@ namespace Code.Game.Slots.Stash
         public void Inspected()
         {
             m_IsNeedInspect.value = false;
+            OnUpdateInspect?.Invoke();
         }
+        
+        public event UnityAction OnUpdateInspect;
         
         public void NeedInspect()
         {
             m_IsNeedInspect.value = true;
+            OnUpdateInspect?.Invoke();
         }
         
         private void OnEnable()
