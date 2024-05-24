@@ -46,13 +46,21 @@ namespace Code.Game.Slots.Stash
 
         public void Initialize()
         {
-            m_Items = new PlayerPrefsProperty<List<StashItem>>(PlayerPrefsProperty.ToKey(nameof(StashService), nameof(m_Items))).Build();
-            m_IsNeedInspect = new PlayerPrefsProperty<bool>(PlayerPrefsProperty.ToKey(nameof(StashService), nameof(m_IsNeedInspect))).Build();
+            m_Items = new PlayerPrefsProperty<List<StashItem>>(PlayerPrefsProperty.ToKey(nameof(StashService), nameof(m_Items)))
+                .OnDefault(()=> new List<StashItem>())
+                .Build();
+            m_IsNeedInspect = new PlayerPrefsProperty<bool>(PlayerPrefsProperty.ToKey(nameof(StashService), nameof(m_IsNeedInspect)))
+                .Build();
         }
 
-        public void AddItem(EntityData entityData)
+        public void AddItem(EntityData entityData, bool isNew = false)
         {
             m_Items.value.Add(new StashItem(entityData.id));
+            m_Items.Save();
+            if (isNew)
+            {
+                m_IsNeedInspect.value = true;
+            }
         }
 
         public bool RemoveItem(EntityData entityData)
@@ -61,6 +69,7 @@ namespace Code.Game.Slots.Stash
            if (index >= 0)
            {
                m_Items.value.RemoveAt(index);
+               m_Items.Save();
                return true;
            }
            return false;
