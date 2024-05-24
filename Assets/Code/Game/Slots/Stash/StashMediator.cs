@@ -1,6 +1,6 @@
 ﻿using System;
 using Assets.UI.Code.Widgets;
-using Assets.UI.Code.Widgets.Stash;
+using Code.UI.Widgets.Stash;
 using Code.Game.Slots.DragAndDrop;
 using Code.Services;
 using Game.UI;

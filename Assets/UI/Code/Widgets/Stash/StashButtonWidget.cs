@@ -7,7 +7,7 @@ using UI.Components;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.UI.Code.Widgets.Stash
+namespace Code.UI.Widgets.Stash
 {
     public class StashButtonWidget : MonoBehaviour, IUIElement
     {
@@ -18,6 +18,9 @@ namespace Assets.UI.Code.Widgets.Stash
         [SerializeField]
         private TweenButton m_Button;
         public TweenButton button => m_Button;
+        [SerializeField]
+        private GameObject m_Notificator;
+        public GameObject notificator => m_Notificator;
 
         public void Hide(bool immediately)
         {

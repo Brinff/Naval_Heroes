@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Code.Game;
 using Code.Game.Analytics;
 using Code.Game.Slots.Stash;
 using Code.Game.Wallet;
@@ -57,6 +58,7 @@ namespace Code.IAP
         {
             m_WalletService.IncomeValue(m_Amount, AnalyticService.IAP, m_ProductID);
             m_StashService.AddItem(m_Ship);
+            m_StashService.NeedInspect();
             
             m_IsPurchased.value = true;
             
@@ -65,7 +67,8 @@ namespace Code.IAP
             
             m_IsInitialized = false;
             
-            ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
+            ServiceLocator.Get<NavigateMediator>().Select("Fleet", false);
+            
             return PurchaseProcessingResult.Complete;
         }
 
@@ -76,7 +79,7 @@ namespace Code.IAP
 
         private void ShowShop()
         {
-            ServiceLocator.Get<UICompositionController>().Show<IAPShopComposition>();
+            ServiceLocator.Get<NavigateMediator>().Select("Shop", false);
         }
 
         private bool m_IsInitialized;

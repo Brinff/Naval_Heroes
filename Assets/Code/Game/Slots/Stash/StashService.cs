@@ -34,6 +34,11 @@ namespace Code.Game.Slots.Stash
             m_IsNeedInspect.value = false;
         }
         
+        public void NeedInspect()
+        {
+            m_IsNeedInspect.value = true;
+        }
+        
         private void OnEnable()
         {
             ServiceLocator.Register(this);
@@ -53,14 +58,10 @@ namespace Code.Game.Slots.Stash
                 .Build();
         }
 
-        public void AddItem(EntityData entityData, bool isNew = false)
+        public void AddItem(EntityData entityData)
         {
             m_Items.value.Add(new StashItem(entityData.id));
             m_Items.Save();
-            if (isNew)
-            {
-                m_IsNeedInspect.value = true;
-            }
         }
 
         public bool RemoveItem(EntityData entityData)
