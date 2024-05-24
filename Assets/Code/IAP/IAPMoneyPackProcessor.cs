@@ -41,8 +41,8 @@ namespace Code.IAP
             var inAppPopUpWidget = ServiceLocator.Get<UIRoot>().GetWidget<InAppCompletedPopUpWidget>();
             inAppPopUpWidget.Initialise(new PopUpItemData(m_Icon, m_Amount, m_Currency, PopUpItemType.Coins_soft));
             ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
-
-
+            inAppPopUpWidget.Show(false);
+    
             return PurchaseProcessingResult.Complete;
         }
 
