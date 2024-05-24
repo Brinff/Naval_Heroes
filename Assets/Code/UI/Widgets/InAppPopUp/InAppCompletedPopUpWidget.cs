@@ -13,7 +13,7 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 	[SerializeField] private PointerEventsUI m_pointerEventsUI;
 	[SerializeField] private Transform m_spawnParent;
 	[SerializeField] private GameObject m_separatorPrefab;
-	[SerializeField, OdinSerialize] private List<PopUpPrefab> m_prefabs;
+	[SerializeField] private List<PopUpPrefab> m_prefabs;
 
 	private List<PopUpItem> m_activePopUpItems;
 	private List<GameObject> m_seperators;
