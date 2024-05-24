@@ -1,11 +1,16 @@
 ﻿using Code.Services;
 using System.Collections.Generic;
+using System.Linq;
+using Code.IO;
 using UnityEngine;
 
 namespace Code.Game.Slots.Stash
 {
     public class StashService : MonoBehaviour, IService, IInitializable
     {
+        [SerializeField]
+        private EntityDatabase m_Database;
+        
         [System.Serializable]
         public class StashItem
         {
@@ -18,10 +23,17 @@ namespace Code.Game.Slots.Stash
             }
             public int id => m_Id;
         }
+        
+        private PlayerPrefsProperty<List<StashItem>> m_Items;
+        private PlayerPrefsProperty<bool> m_IsNeedInspect;
+        public bool isNeedInspect => m_IsNeedInspect.value;
+        public IReadOnlyList<EntityData> items => m_Items.value.Select(x => m_Database.GetById(x.id)).ToList();
 
-        [SerializeField]
-        private List<StashItem> m_StashItems = new List<StashItem>();
-
+        public void Inspected()
+        {
+            m_IsNeedInspect.value = false;
+        }
+        
         private void OnEnable()
         {
             ServiceLocator.Register(this);
@@ -34,12 +46,24 @@ namespace Code.Game.Slots.Stash
 
         public void Initialize()
         {
-            
+            m_Items = new PlayerPrefsProperty<List<StashItem>>(PlayerPrefsProperty.ToKey(nameof(StashService), nameof(m_Items))).Build();
+            m_IsNeedInspect = new PlayerPrefsProperty<bool>(PlayerPrefsProperty.ToKey(nameof(StashService), nameof(m_IsNeedInspect))).Build();
         }
 
-        public void AddItem(EntityData ship)
+        public void AddItem(EntityData entityData)
         {
-            m_StashItems.Add(new StashItem(ship.id));
+            m_Items.value.Add(new StashItem(entityData.id));
+        }
+
+        public bool RemoveItem(EntityData entityData)
+        {
+           var index = m_Items.value.FindIndex(x => x.id == entityData.id);
+           if (index >= 0)
+           {
+               m_Items.value.RemoveAt(index);
+               return true;
+           }
+           return false;
         }
     }
 }
