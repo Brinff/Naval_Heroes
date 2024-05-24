@@ -367,7 +367,6 @@ GameObject:
   - component: {fileID: 8995968681724164118}
   - component: {fileID: 7060558674961909799}
   - component: {fileID: 7260519657959484719}
-  - component: {fileID: 4157727571624126803}
   m_Layer: 0
   m_Name: '[UI]'
   m_TagString: Untagged
@@ -514,47 +513,6 @@ MonoBehaviour:
     element: {fileID: 6720107335768609541}
   - acitve: 1
     element: {fileID: 1579185459060910901}
---- !u!114 &4157727571624126803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5057338856400698886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41344c6f12a1f6343a5ed51ee785967b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 755707584829909155}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: m_Raycasters
-      Entry: 7
-      Data: 0|ITargetRaycaster[], Assembly-CSharp
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-  m_IsOverrideTargetRaycasts: 0
 --- !u!1 &6040341735756433038
 GameObject:
   m_ObjectHideFlags: 0

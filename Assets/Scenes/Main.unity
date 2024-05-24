@@ -5830,6 +5830,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114997486}
   m_CullTransparentMesh: 1
+--- !u!1 &1122862718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1122862720}
+  - component: {fileID: 1122862719}
+  m_Layer: 0
+  m_Name: RaycastMediator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1122862719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122862718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41344c6f12a1f6343a5ed51ee785967b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 2040863459}
+    - {fileID: 987582108}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: m_Raycasters
+      Entry: 7
+      Data: 0|ITargetRaycaster[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  m_IsOverrideTargetRaycasts: 0
+--- !u!4 &1122862720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122862718}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 483.103, y: 1920.4653, z: 0.6407639}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1132094597
 GameObject:
   m_ObjectHideFlags: 0
@@ -9596,6 +9670,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018165272}
   m_CullTransparentMesh: 1
+--- !u!114 &2040863459 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 755707584829909155, guid: 6bbeb724b239f3242b8c6ad8fb16966f, type: 3}
+  m_PrefabInstance: {fileID: 1214852264907793919}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efd42d3f7b6ac9449949dc8cea27959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2062268322
 GameObject:
   m_ObjectHideFlags: 0
@@ -10233,26 +10318,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 987582104}
-    - target: {fileID: 4157727571624126803, guid: 6bbeb724b239f3242b8c6ad8fb16966f, type: 3}
-      propertyPath: serializationData.Prefab
-      value: 
-      objectReference: {fileID: 4157727571624126803, guid: 6bbeb724b239f3242b8c6ad8fb16966f, type: 3}
-    - target: {fileID: 4157727571624126803, guid: 6bbeb724b239f3242b8c6ad8fb16966f, type: 3}
-      propertyPath: serializationData.ReferencedUnityObjects.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4157727571624126803, guid: 6bbeb724b239f3242b8c6ad8fb16966f, type: 3}
-      propertyPath: serializationData.ReferencedUnityObjects.Array.data[1]
-      value: 
-      objectReference: {fileID: 987582108}
-    - target: {fileID: 4157727571624126803, guid: 6bbeb724b239f3242b8c6ad8fb16966f, type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[3].Data
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4157727571624126803, guid: 6bbeb724b239f3242b8c6ad8fb16966f, type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[3].Entry
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 5057338856400698886, guid: 6bbeb724b239f3242b8c6ad8fb16966f, type: 3}
       propertyPath: m_Name
       value: '[UI]'
@@ -12005,3 +12070,4 @@ SceneRoots:
   - {fileID: 1440926685}
   - {fileID: 277739874}
   - {fileID: 1528672844}
+  - {fileID: 1122862720}

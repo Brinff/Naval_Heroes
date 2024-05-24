@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Code.Game.Analytics;
 using Code.Game.Slots.Stash;
 using Code.Game.Wallet;
 using Code.IAP.Attributes;
 using Code.IO;
 using Code.Services;
+using Code.Utility;
 using Game.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Purchasing;
-using UnityEngine.Serialization;
 
 namespace Code.IAP
 {
@@ -98,11 +98,14 @@ namespace Code.IAP
 
         private string GetOldPrice(Product product)
         {
-            //var isoCurrencyCode = product.metadata.isoCurrencyCode;
-            var currentPrice = product.metadata.localizedPrice;
-            var oldPrice = (decimal)((float)currentPrice * m_OldPriceMultiplier);
-            return Regex.Replace(product.metadata.localizedPriceString, @"[0-9\-]", oldPrice.ToString(CultureInfo.InvariantCulture));
+            string localizedPriceString = product.metadata.localizedPriceString;
+            var currentPrice = (float)product.metadata.localizedPrice;
+            var oldPrice = Mathf.Round(currentPrice * m_OldPriceMultiplier) - 0.01f;
+            var regex = new Regex(@"[\d,.]+");
+            return regex.Replace(localizedPriceString, oldPrice.ToString(CultureInfo.InvariantCulture));
         }
+        
+        
 
         private void Update()
         {
