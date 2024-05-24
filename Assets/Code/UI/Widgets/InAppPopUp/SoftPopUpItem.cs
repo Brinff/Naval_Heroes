@@ -5,10 +5,17 @@ using UnityEngine;
 
 public class SoftPopUpItem : PopUpItem, IIAPAnimatedPopUp
 {
+	[SerializeField] private Sprite m_icon;
+
 	public void Animate(IncomeAnimationService incomeAnimationService)
 	{
 		var softMoneyRect = ServiceLocator.Get<UIRoot>().GetWidget<SoftMoneyCounterWidget>().GetComponent<RectTransform>();
 		incomeAnimationService.AnimateScreenSpace(RectTransform, softMoneyRect);
+	}
+
+	public override void SetPreview(Sprite sprite)
+	{
+		base.SetPreview(m_icon);
 	}
 
 	public override void SetTitle(object title)
@@ -18,6 +25,6 @@ public class SoftPopUpItem : PopUpItem, IIAPAnimatedPopUp
 		var s = title.ToString();
 
 		var value = int.Parse(title.ToString());
-		m_title.SetText(value.ToString("#, 0.00", nfi));
+		m_title.SetText(value.ToString("#,#", nfi));
 	}
 }

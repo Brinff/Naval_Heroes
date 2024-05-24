@@ -23,7 +23,7 @@ public class PopUpItem : MonoBehaviour
 	public virtual void SetPreview(Sprite sprite)
 	{
 		m_preview.sprite = sprite;
-		m_preview.SetNativeSize();
+		//m_preview.SetNativeSize();
 	}
 
 	public virtual void SetTitle(object title)

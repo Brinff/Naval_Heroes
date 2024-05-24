@@ -41,7 +41,7 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 		{
 			if (!immediately)
 			{
-				if (m_activePopUpItems is IIAPAnimatedPopUp iAPAnimatedPopUp)
+				if (m_activePopUpItems[i] is IIAPAnimatedPopUp iAPAnimatedPopUp)
 				{
 					iAPAnimatedPopUp.Animate(incomeAnimation);
 				}
@@ -111,7 +111,7 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 
 	private void OnPointerClick(UnityEngine.EventSystems.PointerEventData obj)
 	{
-		Hide(true);
+		Hide(false);
 	}
 
 	private void AddSeparator()
