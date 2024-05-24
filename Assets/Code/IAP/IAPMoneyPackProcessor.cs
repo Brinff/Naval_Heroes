@@ -48,6 +48,7 @@ namespace Code.IAP
             var productView = Instantiate(m_CardPrefab).GetComponent<IAPMoneyPackView>();
             productView.titleLabel.text = product.metadata.localizedTitle;
             productView.costLabel.text = product.metadata.localizedPriceString;
+            productView.valueLabel.gameObject.SetActive(m_ValueBenefit > 0);
             productView.valueLabel.SetValue(m_ValueBenefit, true);
             productView.rewardLabel.SetValue(m_Amount, true);
             productView.iconImage.sprite = m_Icon;

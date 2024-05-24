@@ -9,7 +9,14 @@ namespace Code.Game.Slots.Stash
         [System.Serializable]
         public class StashItem
         {
-            public string Id;
+            [SerializeField]
+            private int m_Id;
+
+            public StashItem(int id)
+            {
+                m_Id = id;
+            }
+            public int id => m_Id;
         }
 
         [SerializeField]
@@ -28,6 +35,11 @@ namespace Code.Game.Slots.Stash
         public void Initialize()
         {
             
+        }
+
+        public void AddItem(EntityData ship)
+        {
+            m_StashItems.Add(new StashItem(ship.id));
         }
     }
 }

@@ -10,7 +10,8 @@ namespace Code.IAP
     {
         private UIRoot m_UIRoot;
         private UICompositionController m_UICompositionController;
-
+        
+        private IAPShopService m_ShopService;
         private IAPShopWidget m_ShopWidget;
         private NavigateMenuWidget m_NavigateMenuWidget;
         private NavigateMenuItem m_NavigateMenuItem;
@@ -29,9 +30,12 @@ namespace Code.IAP
         {
             m_UIRoot = ServiceLocator.Get<UIRoot>();
             m_UICompositionController = ServiceLocator.Get<UICompositionController>();
-
+            m_ShopService = ServiceLocator.Get<IAPShopService>();
+            
             m_NavigateMenuWidget = m_UIRoot.GetWidget<NavigateMenuWidget>();
             m_ShopWidget = m_UIRoot.GetWidget<IAPShopWidget>();
+
+            m_ShopWidget.restoreButton.OnClick += m_ShopService.Restore;
 
             m_NavigateMenuItem = m_NavigateMenuWidget.items.First(x => x.name == "Shop");
             m_NavigateMenuItem.SetLock(false, false);
@@ -40,7 +44,6 @@ namespace Code.IAP
 
         private void Show()
         {
-            Debug.Log("Show");
             m_UICompositionController.Show<IAPShopComposition>();
         }
     }

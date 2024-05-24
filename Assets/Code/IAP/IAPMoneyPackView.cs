@@ -11,7 +11,7 @@ namespace Code.IAP
     {
         [SerializeField] private TextMeshProUGUI m_TitleLabel;
         public TextMeshProUGUI titleLabel => m_TitleLabel;
-        
+
         [SerializeField] private TextMeshProUGUI m_CostLabel;
         [SerializeField] private Image m_IconImage;
         public Image iconImage => m_IconImage;
@@ -22,5 +22,7 @@ namespace Code.IAP
         public ValueLabel valueLabel => m_ValueLabel;
         [SerializeField] private TweenButton m_Button;
         public TweenButton button => m_Button;
+        [SerializeField] private TextMeshProUGUI m_TimeLabel;
+        public TextMeshProUGUI timeLabel => m_TimeLabel;
     }
 }

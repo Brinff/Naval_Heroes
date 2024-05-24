@@ -2,7 +2,7 @@
 
 namespace Code.IAP
 {
-    [CreateAssetMenu(menuName = "MENUNAME", order = 0)]
+    [CreateAssetMenu(menuName = "Data/IAP/Category", order = 0)]
     public class IAPCategory : ScriptableObject
     {
         
