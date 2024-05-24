@@ -342,5 +342,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_preview: {fileID: 5388838310332621973}
-  m_title: {fileID: 3119080244578063671}
   _rectTransform: {fileID: 4626481501575640115}
+  m_title: {fileID: 3119080244578063671}
+  m_icon: {fileID: 21300000, guid: 4f4357ca6f6db4c4a80e9d186b270586, type: 3}
