@@ -59,6 +59,15 @@ namespace Code.IAP
             Destroy(m_ProductView.gameObject);
             m_IsInitialized = false;
             ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
+
+            var popUp = ServiceLocator.Get<UIRoot>().GetWidget<InAppCompletedPopUpWidget>();
+            popUp.Initialise
+                (
+                    new ShipPopUpData("S.DAKOTA", PopUpItemType.Ship, "VIII"),
+                    new PopUpItemData(m_Amount, PopUpItemType.Coins_soft)
+                );
+            popUp.Show(false);
+
             return PurchaseProcessingResult.Complete;
         }
 

@@ -2,11 +2,9 @@ using Code.Services;
 using Extensions;
 using Game.UI;
 using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 {
@@ -66,7 +64,7 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 
 	public void Initialise(params PopUpItemData[] popUpItemDatas)
 	{
-		Initialise((IEnumerable<PopUpItemData>)popUpItemDatas);
+		Initialise(popUpItemDatas.ToList());
 	}
 
 	public void Initialise(IEnumerable<PopUpItemData> popUpItemDatas)
@@ -98,15 +96,15 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 	[Button]
 	public void Test1()
 	{
-		Initialise(new PopUpItemData(null, "999999999", null, PopUpItemType.Coins_soft));
+		Initialise(new PopUpItemData("999999999", PopUpItemType.Coins_soft));
 	}
 
 	[Button]
 	public void Test2()
 	{
 		Initialise(
-			new ShipPopUpData(null, "ship", null, PopUpItemType.Ship, "class"),
-			new PopUpItemData(null, "9000000", null, PopUpItemType.Coins_soft));
+			new ShipPopUpData("ship", PopUpItemType.Ship, "class"),
+			new PopUpItemData("9000000", PopUpItemType.Coins_soft));
 	}
 
 	private void OnPointerClick(UnityEngine.EventSystems.PointerEventData obj)

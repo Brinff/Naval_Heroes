@@ -13,11 +13,6 @@ public class SoftPopUpItem : PopUpItem, IIAPAnimatedPopUp
 		incomeAnimationService.AnimateScreenSpace(RectTransform, softMoneyRect);
 	}
 
-	public override void SetPreview(Sprite sprite)
-	{
-		base.SetPreview(m_icon);
-	}
-
 	public override void SetTitle(object title)
 	{
 		var nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
