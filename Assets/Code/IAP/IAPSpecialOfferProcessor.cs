@@ -3,13 +3,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Code.Game;
 using Code.Game.Analytics;
 using Code.Game.Slots.Stash;
 using Code.Game.Wallet;
 using Code.IAP.Attributes;
 using Code.IO;
 using Code.Services;
-using Code.Utility;
+using Code.UI.Widgets;
 using Game.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -30,6 +31,7 @@ namespace Code.IAP
 
         [SerializeField] private IAPCategory m_Category;
         [SerializeField] private GameObject m_CardPrefab;
+        [SerializeField] private GameObject m_BannerPrefab;
 
         private PlayerPrefsProperty<bool> m_IsPurchased;
         private PlayerPrefsProperty<long> m_StartDateTime;
@@ -37,7 +39,8 @@ namespace Code.IAP
         private IAPShopService m_ShopService;
         private WalletService m_WalletService;
         private StashService m_StashService;
-        private IAPSpecialOfferView m_ProductView;
+        private IAPSpecialOfferView m_CardView;
+        private IAPSpecialOfferView m_BannerView;
 
         [SerializeField] private int m_Hours;
 
@@ -55,10 +58,14 @@ namespace Code.IAP
         {
             m_WalletService.IncomeValue(m_Amount, AnalyticService.IAP, m_ProductID);
             m_StashService.AddItem(m_Ship);
+            m_StashService.NeedInspect();
+            
             m_IsPurchased.value = true;
-            Destroy(m_ProductView.gameObject);
+            
+            Destroy(m_CardView.gameObject);
+            Destroy(m_BannerView.gameObject);
+            
             m_IsInitialized = false;
-            ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
 
             var popUp = ServiceLocator.Get<UIRoot>().GetWidget<InAppCompletedPopUpWidget>();
             popUp.Initialise
@@ -68,12 +75,19 @@ namespace Code.IAP
                 );
             popUp.Show(false);
 
+            ServiceLocator.Get<NavigateMediator>().Select("Fleet", false);
+            
             return PurchaseProcessingResult.Complete;
         }
 
         private void InitiatePurchase()
         {
             m_ShopService.InitiatePurchase(m_ProductID);
+        }
+
+        private void ShowShop()
+        {
+            ServiceLocator.Get<NavigateMediator>().Select("Shop", false);
         }
 
         private bool m_IsInitialized;
@@ -94,24 +108,32 @@ namespace Code.IAP
 
             var categoryView = ServiceLocator.Get<UIRoot>().GetWidget<IAPShopWidget>()
                 .GetCategory<IAPCategoryView>(m_Category);
-            m_ProductView = Instantiate(m_CardPrefab).GetComponent<IAPSpecialOfferView>();
-            m_ProductView.titleLabel.text = product.metadata.localizedTitle;
-            m_ProductView.currentCostLabel.text = product.metadata.localizedPriceString;
-            m_ProductView.oldCostLabel.text = GetOldPrice(product);
-            m_ProductView.rewardLabel.SetValue(m_Amount, true);
-            m_ProductView.button.OnClick += InitiatePurchase;
-            categoryView.AddProductView(m_ProductView);
+            
+            m_CardView = Instantiate(m_CardPrefab).GetComponent<IAPSpecialOfferView>();
+            m_CardView.titleLabel.text = product.metadata.localizedTitle;
+            m_CardView.currentCostLabel.text = product.metadata.localizedPriceString;
+            m_CardView.oldCostLabel.text = GetOldPrice(product);
+            m_CardView.rewardLabel.SetValue(m_Amount, true);
+            m_CardView.button.OnClick += InitiatePurchase;
+            categoryView.AddProductView(m_CardView);
 
+            var bannerView = ServiceLocator.Get<UIRoot>().GetWidget<TopBannerLayoutWidget>();
+            m_BannerView = Instantiate(m_BannerPrefab).GetComponent<IAPSpecialOfferView>();
+            m_BannerView.titleLabel.text = product.metadata.localizedTitle;
+            m_BannerView.currentCostLabel.text = product.metadata.localizedPriceString;
+            m_BannerView.oldCostLabel.text = GetOldPrice(product);
+            m_BannerView.rewardLabel.SetValue(m_Amount, true);
+            m_BannerView.button.OnClick += ShowShop;
+            bannerView.AddBannerView(m_BannerView);
 
             m_StartDateTime = new PlayerPrefsProperty<long>(PlayerPrefsProperty.ToKey(nameof(IAPSpecialOfferProcessor),
                     m_ProductID, nameof(m_StartDateTime)))
                 .OnDefault(() => DateTime.Now.Ticks)
                 .Build();
             m_StartDateTime.Save();
-            //m_DataTime = DateTime.Now.Ticks;
         }
 
-        public TimeSpan GetLeftTime()
+        private TimeSpan GetLeftTime()
         {
             return new TimeSpan(m_Hours, 0, 0) - DateTime.Now.Subtract(new DateTime(m_StartDateTime.value));
         }
@@ -129,13 +151,16 @@ namespace Code.IAP
         private void Update()
         {
             if (!m_IsInitialized) return;
+            
             var timeSpan = GetLeftTime();
             if (timeSpan.TotalSeconds < 0)
             {
                 m_StartDateTime.value = DateTime.Now.Ticks;
             }
-
-            m_ProductView.timeLabel.text = timeSpan.ToString("hh\\:mm\\:ss");
+            string time = timeSpan.ToString("hh\\:mm\\:ss");
+            
+            m_CardView.timeLabel.text = time;
+            m_BannerView.timeLabel.text = time;
         }
     }
 }

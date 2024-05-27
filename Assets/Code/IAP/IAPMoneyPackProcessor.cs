@@ -1,4 +1,5 @@
-﻿using Code.Game.Analytics;
+﻿using Code.Game;
+using Code.Game.Analytics;
 using Code.Game.Wallet;
 using Code.IAP.Attributes;
 using Code.Services;
@@ -40,7 +41,7 @@ namespace Code.IAP
 
             var inAppPopUpWidget = ServiceLocator.Get<UIRoot>().GetWidget<InAppCompletedPopUpWidget>();
             inAppPopUpWidget.Initialise(new PopUpItemData(m_Amount, PopUpItemType.Coins_soft));
-            ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
+            ServiceLocator.Get<NavigateMediator>().Select("Fleet", false);
             inAppPopUpWidget.Show(false);
     
             return PurchaseProcessingResult.Complete;
