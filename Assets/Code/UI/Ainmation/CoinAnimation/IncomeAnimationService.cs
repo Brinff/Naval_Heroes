@@ -27,14 +27,6 @@ public class IncomeAnimationService : MonoBehaviour, IService
 	[SerializeField] private RectTransform m_spawnPoint;
 	[SerializeField] private RectTransform m_destionationPoint;
 
-	private List<RectTransform> _testTransforms = new List<RectTransform>();
-	private Camera m_camera;
-
-	private void Start()
-	{
-		m_camera = Camera.main;
-	}
-
 	private void OnEnable()
 	{
 		ServiceLocator.Register(this);
@@ -45,17 +37,8 @@ public class IncomeAnimationService : MonoBehaviour, IService
 		ServiceLocator.Unregister(this);
 	}
 
-	private void OnDrawGizmos()
-	{
-		for (int i = 0; i < _testTransforms.Count; i++)
-		{
-			Gizmos.DrawSphere(GetUIWorldPoint(_testTransforms[i]), 50);
-		}
-	}
-
 	public async Task AnimateCoinsScreenSpace(RectTransform source, RectTransform destination, Action callback = null)
 	{
-		_testTransforms.Add(destination);
 		await AnimateCoinsScreenSpace(GetUIWorldPoint(source), GetUIWorldPoint(destination), m_coinPrefab, m_spawnCount, callback);
 	}
 
@@ -85,8 +68,6 @@ public class IncomeAnimationService : MonoBehaviour, IService
 
 	public async Task AnimateMovement(RectTransform source, RectTransform destination, bool makeCopyOfSource = false, bool isScalingDown = false)
 	{
-		_testTransforms.Add(destination);
-
 		RectTransform movingObj;
 		if (makeCopyOfSource)
 		{
