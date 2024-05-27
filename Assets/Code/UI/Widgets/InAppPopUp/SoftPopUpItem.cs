@@ -1,16 +1,17 @@
 using Code.Services;
 using Game.UI;
 using System.Globalization;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class SoftPopUpItem : PopUpItem, IIAPAnimatedPopUp
 {
 	[SerializeField] private Sprite m_icon;
 
-	public void Animate(IncomeAnimationService incomeAnimationService)
+	public async Task Animate(IncomeAnimationService incomeAnimationService)
 	{
 		var softMoneyRect = ServiceLocator.Get<UIRoot>().GetWidget<SoftMoneyCounterWidget>().GetComponent<RectTransform>();
-		incomeAnimationService.AnimateScreenSpace(RectTransform, softMoneyRect);
+		await incomeAnimationService.AnimateCoinsScreenSpace(RectTransform, softMoneyRect);
 	}
 
 	public override void SetTitle(object title)

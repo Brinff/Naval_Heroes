@@ -35,6 +35,8 @@ public class InAppCompletedPopUpWidget : MonoBehaviour, IUIElement
 		m_activePopUpItems ??= new List<PopUpItem>();
 		m_seperators ??= new List<GameObject>();
 
+		//m_activePopUpItems.ForEach(popUp => popUp.gameObject.Disable());
+
 		for (int i = 0; i < m_activePopUpItems.Count; i++)
 		{
 			if (!immediately)
