@@ -14,6 +14,7 @@ public class StartGameWidget : MonoBehaviour, IUIElement
     private Button m_Button;
     [SerializeField]
     private CanvasGroup m_Group;
+    
     public void SetBlock(bool isBlock)
     {
         m_Group.alpha = isBlock ? 0.5f : 1;

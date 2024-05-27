@@ -7,7 +7,7 @@ using Voodoo.Tiny.Sauce.Privacy;
 public static class TinySauce
 {
     private const string TAG = "TinySauce";
-    public const string Version = "6.5.1";
+    public const string Version = "7.0.1";
     private const string ABCohortKey = "ABCohort";
     private const string DebugCohortKey = "DebugCohortKey";
 
@@ -27,9 +27,20 @@ public static class TinySauce
     ///  Method to call whenever the user starts a game.
     /// </summary>
     /// <param name="levelName">The game Level, this parameter is optional for game without level</param>
-    public static void OnGameStarted(string levelName = null, Dictionary<string, object> eventProperties = null)
+    public static void OnGameStarted(string levelName, Dictionary<string, object> eventProperties = null)
     {
         AnalyticsManager.TrackGameStarted(levelName, eventProperties);
+    }
+    
+    /// <summary>
+    ///  Method to call whenever the user starts a game using the dim1:dim2:dim3 format.
+    /// </summary>
+    /// <param name="dimension1">The first dimension of the level</param>
+    /// <param name="dimension2">The second dimension of the level</param>
+    /// <param name="dimension3">The third dimension of the level, this parameter is optional</param>
+    public static void OnGameStarted(string dimension1, string dimension2, string dimension3 = null, Dictionary<string, object> eventProperties = null)
+    {
+        AnalyticsManager.TrackGameStarted(dimension1, dimension2, dimension3, eventProperties);
     }
 
     #endregion
@@ -76,6 +87,20 @@ public static class TinySauce
     {
         AnalyticsManager.TrackGameFinished(levelComplete, score, levelName, eventProperties);
     }
+    
+    /// <summary>
+    /// Method to call whenever the user finishes a game, even when leaving a game.
+    /// </summary>
+    /// <param name="levelComplete">Whether the user finished the game</param>
+    /// <param name="score">The score of the game</param>
+    /// <param name="dimension1">The first dimension of the level</param>
+    /// <param name="dimension2">The second dimension of the level</param>
+    /// <param name="dimension3">The third dimension of the level, this parameter is optional</param>
+    public static void OnGameFinished(bool levelComplete, float score, string dimension1, string dimension2, string dimension3 = null, Dictionary<string, object> eventProperties = null)
+    {
+        AnalyticsManager.TrackGameFinished(levelComplete, score, dimension1, dimension2, dimension3, eventProperties);
+    }
+    
 
     #endregion
 
@@ -106,22 +131,17 @@ public static class TinySauce
 
     #endregion
 
-    /// <summary>
-    /// Declare a currency to use Resource events
-    /// </summary>
-    /// <param name="currencyName">The name of the currency</param>
+
+    [Obsolete("This method is deprecated, please check the TinySauce Optional Event documentation")]
     public static void DeclareCurrency(string currencyName)
     {
-        AnalyticsManager.DeclareCurrencyType(currencyName);
-    }    
+        Debug.LogError("DeclareCurrency method is deprecated, please check the \"TinySauce Optional Event\" documentation");
+    }
     
-    /// <summary>
-    /// Declare an itemType to use Resource events
-    /// </summary>
-    /// <param name="itemTypeName">The name of the item Type</param>
+    [Obsolete("This method is deprecated, please check the TinySauce Optional Event documentation")]
     public static void DeclareItemType(string itemTypeName)
     {
-        AnalyticsManager.DeclareItemType(itemTypeName);
+        Debug.LogError("DeclareItemType method is deprecated, please check the \"TinySauce Optional Event\" documentation");
     }
 
     /// <summary>

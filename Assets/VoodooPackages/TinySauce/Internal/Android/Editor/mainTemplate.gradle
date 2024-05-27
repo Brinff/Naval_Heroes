@@ -29,6 +29,7 @@ dependencies {
 }
 
 android {
+    ndkPath "**NDKPATH**"
     compileSdkVersion **APIVERSION**
     buildToolsVersion '**BUILDTOOLS**'
 

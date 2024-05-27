@@ -32,7 +32,7 @@ public class SlotCollection : MonoBehaviour
     public void Prepare()
     {
         UpdateLayout();
-        var slots = GetComponentsInChildren<ISlot>();
+        var slots = GetComponentsInChildren<ISlot>(true);
         foreach (var item in slots)
         {
             RegisterSlot(item);

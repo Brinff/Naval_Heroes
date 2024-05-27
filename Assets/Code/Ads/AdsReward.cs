@@ -1,5 +1,4 @@
 ﻿using Code.Services;
-using System.Collections;
 using UnityEngine;
 
 namespace Code.Ads
@@ -8,9 +7,6 @@ namespace Code.Ads
     {
         [SerializeField]
         private string m_Id;
-        [SerializeField]
-        private string m_Placement;
-
 
         private void OnEnable()
         {
@@ -21,6 +17,9 @@ namespace Code.Ads
         {
             ServiceLocator.Unregister(this);
         }
+
+        public delegate void UpdateDelegate();
+        public event UpdateDelegate OnUpdate;
 
         public void Initialize()
         {
@@ -42,13 +41,18 @@ namespace Code.Ads
 
         private System.Action<bool> m_OnDone;
 
-        public bool Show(System.Action<bool> onDone)
+        public bool IsReady()
+        {
+            return MaxSdk.IsRewardedAdReady(m_Id);
+        }
+
+        public bool Show(string placement, System.Action<bool> onDone)
         {
             
-            if (MaxSdk.IsRewardedAdReady(m_Id))
+            if (IsReady())
             {
                 m_OnDone = onDone;
-                MaxSdk.ShowRewardedAd(m_Id, m_Placement);
+                MaxSdk.ShowRewardedAd(m_Id, placement);
                 return true;
             }
             return false;
@@ -62,7 +66,7 @@ namespace Code.Ads
         private void OnRewardedAdLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
         {
             // Rewarded ad is ready for you to show. MaxSdk.IsRewardedAdReady(adUnitId) now returns 'true'.
-
+            OnUpdate?.Invoke();
             // Reset retry attempt
             m_RetryAttempt = 0;
         }

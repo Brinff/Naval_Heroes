@@ -195,16 +195,16 @@ public class SlotMerge : MonoBehaviour, ISlotPopulate, IBeginDragHandler, IDragH
         item.As<IEndDragHandler>()?.OnEndDrag(eventData);
     }
 
-    public void Show(float duration)
+    public void Show(bool immediately)
     {
-        item?.Show();
-        m_GridRenderer.DOFade(1, duration);
+        item?.Show(immediately);
+        m_GridRenderer.DOFade(1, 0.2f);
     }
 
-    public void Hide(float duration)
+    public void Hide(bool immediately)
     {
-        item?.Hide();
-        m_GridRenderer.DOFade(0, duration);
+        item?.Hide(immediately);
+        m_GridRenderer.DOFade(0, 0.2f);
     }
 
     public bool AddItemPossible(SlotItem slotItem, Vector3 position)

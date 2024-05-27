@@ -1,3 +1,5 @@
+using Code.UI.Components;
+using DG.Tweening;
 using Game.Grid.Auhoring;
 using Game.Utility;
 using System.Collections;
@@ -150,20 +152,33 @@ public class SlotBattleGrid : MonoBehaviour, ISlotPopulate, IItemBeginDrag, IIte
         gridReject.Clear();
     }
 
-    public void Show(float duration)
+    public void Show(bool immediately)
     {
-        gridField.DoAlpha(1, duration);
-        gridCurrent.DoAlpha(1, duration);
-        gridNew.DoAlpha(1, duration);
-        gridReject.DoAlpha(1, duration);
+        var sequence = DOTween.Sequence(this);
+        sequence.Join(gridField.DoAlpha(1, 0.15f));
+        sequence.Join(gridCurrent.DoAlpha(1, 0.15f));
+        sequence.Join(gridNew.DoAlpha(1, 0.15f));
+        sequence.Join(gridReject.DoAlpha(1, 0.15f));
+
+        if (immediately)
+        {
+            sequence.Complete(true);
+        }
     }
 
-    public void Hide(float duration)
+    public void Hide(bool immediately)
     {
-        gridField.DoAlpha(0, duration);
-        gridCurrent.DoAlpha(0, duration);
-        gridNew.DoAlpha(0, duration);
-        gridReject.DoAlpha(0, duration);
+        var sequence = DOTween.Sequence(this);
+
+        sequence.Join(gridField.DoAlpha(0, 0.15f));
+        sequence.Join(gridCurrent.DoAlpha(0, 0.15f));
+        sequence.Join(gridNew.DoAlpha(0, 0.15f));
+        sequence.Join(gridReject.DoAlpha(0, 0.15f));
+
+        if (immediately)
+        {
+            sequence.Complete(true);
+        }
     }
 
     public bool AddItemPossible(SlotItem item, Vector3 position)

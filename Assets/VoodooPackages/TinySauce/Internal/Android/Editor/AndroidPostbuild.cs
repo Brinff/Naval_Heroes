@@ -13,7 +13,7 @@ namespace Voodoo.Sauce.Internal.Editor
             projectPath += "/../";
             var fileInfo = new FileInfo(Path.Combine(projectPath, "gradle.properties"));
             string[] content = { "android.enableR8 = false", "android.useAndroidX=true", "android.enableJetifier = true" };
-            string[] contentNew = { "android.enableR8 = false", "android.useAndroidX=true", "android.enableJetifier = true", "unityStreamingAssets=.unity3d**STREAMING_ASSETS**" };
+            string[] contentNew = {"android.useAndroidX=true", "android.enableJetifier = true", "unityStreamingAssets=.unity3d**STREAMING_ASSETS**" };
 #if UNITY_2020_1_OR_NEWER
             File.WriteAllLines(fileInfo.FullName, contentNew);
 #else

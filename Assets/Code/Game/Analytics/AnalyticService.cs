@@ -45,6 +45,11 @@ namespace Code.Game.Analytics
             TinySauce.OnCurrencyTaken(currency, currencyAmount, itemType, itemId);
         }
 
+        public void OnIAPPurchase(string currency, int amount, string itemType, string itemId, string cartType)
+        {
+            TinySauce.OnIAPPurchase(currency, amount, itemType, itemId, cartType);
+        }
+
         public void Initialize()
         {
 /*            DeclareItemType(SHOP);

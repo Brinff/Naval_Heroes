@@ -90,6 +90,33 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
                     dynamicLibrariesToEmbed.Add("IASDKCore.xcframework");
                 }
 
+                if (AppLovinIntegrationManager.IsAdapterInstalled("InMobi", "10.7.2.0"))
+                {
+                    dynamicLibrariesToEmbed.Add("InMobiSDK.xcframework");
+                }
+
+                if (AppLovinIntegrationManager.IsAdapterInstalled("Smaato", "22.8.3.0"))
+                {
+                    dynamicLibrariesToEmbed.AddRange(new List<string>()
+                    {
+                        "SmaatoSDKBanner.xcframework",
+                        "SmaatoSDKCore.xcframework",
+                        "SmaatoSDKInAppBidding.xcframework",
+                        "SmaatoSDKInterstitial.xcframework",
+                        "SmaatoSDKNative.xcframework",
+                        "SmaatoSDKOpenMeasurement.xcframework",
+                        "SmaatoSDKOutstream.xcframework",
+                        "SmaatoSDKRewardedAds.xcframework",
+                        "SmaatoSDKRichMedia.xcframework",
+                        "SmaatoSDKVideo.xcframework"
+                    });
+                }
+
+                if (AppLovinIntegrationManager.IsAdapterInstalled("Verve", "3.0.0.0"))
+                {
+                    dynamicLibrariesToEmbed.Add("ATOM.xcframework");
+                }
+
                 return dynamicLibrariesToEmbed;
             }
         }

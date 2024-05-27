@@ -17,11 +17,11 @@ using UnityEngine.SceneManagement;
 [ExecuteInEditMode]
 public abstract class UIComposition : MonoBehaviour
 {
-    private UICompositionModule m_CompositionModule;
+    private UICompositionController m_CompositionModule;
 
     private void OnEnable()
     {
-        m_CompositionModule = GetComponentInParent<UICompositionModule>();
+        m_CompositionModule = GetComponentInParent<UICompositionController>();
         m_CompositionModule.Register(this);
     }
 

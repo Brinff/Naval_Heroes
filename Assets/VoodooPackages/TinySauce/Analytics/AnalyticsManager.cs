@@ -123,7 +123,22 @@ namespace Voodoo.Tiny.Sauce.Internal.Analytics
             AnalyticsStorageHelper.IncrementGameCount();
             GameStartedParameters gameStartedParameters = new GameStartedParameters
             {
-                level = level ?? NO_GAME_LEVEL,
+                levelDimension1 = level ?? NO_GAME_LEVEL,
+                eventProperties = eventProperties,
+            };
+            OnGameStartedEvent?.Invoke(gameStartedParameters);
+        }
+        
+        internal static void TrackGameStarted(string dimension1 = null, string dimension2 = null, string dimension3 = null, Dictionary<string, object> eventProperties = null)
+        {
+            HasGameStarted = true;
+            _gameTimer.Start();
+            AnalyticsStorageHelper.IncrementGameCount();
+            GameStartedParameters gameStartedParameters = new GameStartedParameters
+            {
+                levelDimension1 = dimension1 ?? NO_GAME_LEVEL,
+                levelDimension2 = dimension2,
+                levelDimension3 = dimension3,
                 eventProperties = eventProperties,
             };
             OnGameStartedEvent?.Invoke(gameStartedParameters);
@@ -142,7 +157,31 @@ namespace Voodoo.Tiny.Sauce.Internal.Analytics
 
             GameFinishedParameters gameFinishedParameters = new GameFinishedParameters
             {
-                level = level ?? NO_GAME_LEVEL,
+                levelDimension1 = level ?? NO_GAME_LEVEL,
+                status = levelComplete,
+                score = score,
+                eventProperties = eventProperties,
+            };
+            gameFinishedParameters.gameDuration = _gameTimer.GetDuration();
+            OnGamePlayed?.Invoke(AnalyticsStorageHelper.GetGameCount(), AnalyticsStorageHelper.UpdateGameHighestScore(score));
+            OnGameFinishedEvent?.Invoke(gameFinishedParameters);
+        }
+        internal static void TrackGameFinished(bool levelComplete, float score, string dimension1 = null, string dimension2 = null, string dimension3 = null, Dictionary<string, object> eventProperties = null)
+        {
+            HasGameStarted = false;
+            _gameTimer.Stop();
+            AnalyticsStorageHelper.UpdateLevel(dimension1);
+            if (levelComplete)
+            {
+                // used to calculate the win rate (for RemoteConfig)
+                AnalyticsStorageHelper.IncrementSuccessfulGameCount();
+            }
+
+            GameFinishedParameters gameFinishedParameters = new GameFinishedParameters
+            {
+                levelDimension1 = dimension1 ?? NO_GAME_LEVEL,
+                levelDimension2 = dimension2,
+                levelDimension3 = dimension3,
                 status = levelComplete,
                 score = score,
                 eventProperties = eventProperties,

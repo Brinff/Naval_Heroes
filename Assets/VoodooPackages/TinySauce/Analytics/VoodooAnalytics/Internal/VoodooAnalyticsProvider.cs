@@ -79,7 +79,7 @@ namespace Voodoo.Tiny.Sauce.Internal.Analytics
         private static void OnGameStarted(GameStartedParameters parameters)
         {
             var data = new Dictionary<string, object> {
-                {VAC.LEVEL, parameters.level},
+                {VAC.LEVEL, parameters.levelDimension1},
                 {VAC.GAME_COUNT, AnalyticsStorageHelper.GetGameCount()},
                 {VAC.HIGHEST_SCORE, AnalyticsStorageHelper.GetGameHighestScore()},
                 {VAC.GAME_ROUND_ID, AnalyticsStorageHelper.CreateRoundId()},
@@ -95,7 +95,7 @@ namespace Voodoo.Tiny.Sauce.Internal.Analytics
         private static void OnGameFinished(GameFinishedParameters parameters)
         {
             var data = new Dictionary<string, object> {
-                {VAC.LEVEL, parameters.level},
+                {VAC.LEVEL, parameters.levelDimension1},
                 {VAC.GAME_COUNT, AnalyticsStorageHelper.GetGameCount()},
                 {VAC.GAME_LENGTH, parameters.gameDuration},
                 {VAC.STATUS, parameters.status},

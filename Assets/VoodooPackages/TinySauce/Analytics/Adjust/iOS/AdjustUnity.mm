@@ -95,19 +95,20 @@ extern "C"
                           int isDeviceKnown,
                           int eventBuffering,
                           int sendInBackground,
-                          int allowiAdInfoReading,
                           int allowAdServicesInfoReading,
                           int allowIdfaReading,
                           int deactivateSkAdNetworkHandling,
                           int linkMeEnabled,
                           int needsCost,
                           int coppaCompliant,
+                          int readDeviceInfoOnce,
                           int64_t secretId,
                           int64_t info1,
                           int64_t info2,
                           int64_t info3,
                           int64_t info4,
                           double delayStart,
+                          int attConsentWaitingInterval,
                           int launchDeferredDeeplink,
                           int isAttributionCallbackImplemented,
                           int isEventSuccessCallbackImplemented,
@@ -177,11 +178,6 @@ extern "C"
             [adjustConfig setSendInBackground:(BOOL)sendInBackground];
         }
 
-        // Allow iAd info reading.
-        if (allowiAdInfoReading != -1) {
-            [adjustConfig setAllowiAdInfoReading:(BOOL)allowiAdInfoReading];
-        }
-
         // Allow AdServices info reading.
         if (allowAdServicesInfoReading != -1) {
             [adjustConfig setAllowAdServicesInfoReading:(BOOL)allowAdServicesInfoReading];
@@ -212,6 +208,11 @@ extern "C"
             [adjustConfig setDelayStart:delayStart];
         }
 
+        // ATT dialog delay.
+        if (attConsentWaitingInterval != -1) {
+            [adjustConfig setAttConsentWaitingInterval:attConsentWaitingInterval];
+        }
+
         // Cost data in attribution callback.
         if (needsCost != -1) {
             [adjustConfig setNeedsCost:(BOOL)needsCost];
@@ -220,6 +221,11 @@ extern "C"
         // COPPA compliance.
         if (coppaCompliant != -1) {
             [adjustConfig setCoppaCompliantEnabled:(BOOL)coppaCompliant];
+        }
+
+        // Read device info just once.
+        if (readDeviceInfoOnce != -1) {
+            [adjustConfig setReadDeviceInfoOnceEnabled:(BOOL)readDeviceInfoOnce];
         }
 
         // User agent.
@@ -245,6 +251,8 @@ extern "C"
                 [adjustConfig setUrlStrategy:ADJUrlStrategyIndia];
             } else if ([stringUrlStrategy isEqualToString:@"cn"]) {
                 [adjustConfig setUrlStrategy:ADJUrlStrategyCn];
+            } else if ([stringUrlStrategy isEqualToString:@"cn-only"]) {
+                [adjustConfig setUrlStrategy:ADJUrlStrategyCnOnly];
             } else if ([stringUrlStrategy isEqualToString:@"data-residency-eu"]) {
                 [adjustConfig setUrlStrategy:ADJDataResidencyEU];
             } else if ([stringUrlStrategy isEqualToString:@"data-residency-tr"]) {
@@ -268,6 +276,8 @@ extern "C"
                            double revenue,
                            const char* currency,
                            const char* receipt,
+                           const char* receiptBase64,
+                           const char* productId,
                            const char* transactionId,
                            const char* callbackId,
                            int isReceiptSet,
@@ -309,6 +319,26 @@ extern "C"
             [event setTransactionId:stringTransactionId];
         }
 
+        // Product ID.
+        if (productId != NULL) {
+            NSString *stringProductId = [NSString stringWithUTF8String:productId];
+            [event setProductId:stringProductId];
+        }
+
+        // Receipt.
+        if (receipt != NULL) {
+            NSString *stringReceipt = [NSString stringWithUTF8String:receipt];
+            [event setReceipt:[stringReceipt dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+
+        // Base64 encoded receipt.
+        if (receiptBase64 != NULL) {
+            // If both (receipt and receiptBase64) set, receiptBase64 will be used.
+            NSString *stringReceiptBase64 = [NSString stringWithUTF8String:receiptBase64];
+            NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:stringReceiptBase64 options:0];
+            [event setReceipt:decodedData];
+        }
+
         // Callback ID.
         if (callbackId != NULL) {
             NSString *stringCallbackId = [NSString stringWithUTF8String:callbackId];
@@ -316,19 +346,19 @@ extern "C"
         }
 
         // Receipt (legacy).
-        if ([[NSNumber numberWithInt:isReceiptSet] boolValue]) {
-            NSString *stringReceipt = nil;
-            NSString *stringTransactionId = nil;
+        // if ([[NSNumber numberWithInt:isReceiptSet] boolValue]) {
+        //     NSString *stringReceipt = nil;
+        //     NSString *stringTransactionId = nil;
 
-            if (receipt != NULL) {
-                stringReceipt = [NSString stringWithUTF8String:receipt];
-            }
-            if (transactionId != NULL) {
-                stringTransactionId = [NSString stringWithUTF8String:transactionId];
-            }
+        //     if (receipt != NULL) {
+        //         stringReceipt = [NSString stringWithUTF8String:receipt];
+        //     }
+        //     if (transactionId != NULL) {
+        //         stringTransactionId = [NSString stringWithUTF8String:transactionId];
+        //     }
 
-            [event setReceipt:[stringReceipt dataUsingEncoding:NSUTF8StringEncoding] transactionId:stringTransactionId];
-        }
+        //     [event setReceipt:[stringReceipt dataUsingEncoding:NSUTF8StringEncoding] transactionId:stringTransactionId];
+        // }
 
         // Track event.
         [Adjust trackEvent:event];
@@ -395,6 +425,21 @@ extern "C"
 
         char* idfaCStringCopy = strdup(idfaCString);
         return idfaCStringCopy;
+    }
+
+    char* _AdjustGetIdfv() {
+        NSString *idfv = [Adjust idfv];
+        if (nil == idfv) {
+            return NULL;
+        }
+
+        const char* idfvCString = [idfv UTF8String];
+        if (NULL == idfvCString) {
+            return NULL;
+        }
+
+        char* idfvCStringCopy = strdup(idfvCString);
+        return idfvCStringCopy;
     }
 
     char* _AdjustGetAdid() {
@@ -796,9 +841,90 @@ extern "C"
         return lastDeeplinkCStringCopy;
     }
 
-    void _AdjustSetTestOptions(const char* baseUrl,
-                               const char* gdprUrl,
-                               const char* subscriptionUrl,
+    void _AdjustVerifyAppStorePurchase(const char* transactionId,
+                                       const char* productId,
+                                       const char* receipt,
+                                       const char* sceneName) {
+        // Mandatory fields.
+        NSString *strTransactionId;
+        NSString *strProductId;
+        NSData *dataReceipt;
+        NSString *strSceneName;
+
+        // Transaction ID.
+        if (transactionId != NULL) {
+            strTransactionId = [NSString stringWithUTF8String:transactionId];
+        }
+
+        // Product ID.
+        if (productId != NULL) {
+            strProductId = [NSString stringWithUTF8String:productId];
+        }
+
+        // Receipt.
+        if (receipt != NULL) {
+            NSString *stringReceiptBase64 = [NSString stringWithUTF8String:receipt];
+            dataReceipt = [[NSData alloc] initWithBase64EncodedString:stringReceiptBase64 options:0];
+        }
+
+        // Scene name.
+        strSceneName = isStringValid(sceneName) == true ? [NSString stringWithUTF8String:sceneName] : nil;
+
+        // Verify the purchase.
+        ADJPurchase *purchase = [[ADJPurchase alloc] initWithTransactionId:strTransactionId
+                                                                 productId:strProductId
+                                                                andReceipt:dataReceipt];
+        [Adjust verifyPurchase:purchase
+             completionHandler:^(ADJPurchaseVerificationResult * _Nonnull verificationResult) {
+                if (strSceneName == nil) {
+                    return;
+                }
+                if (verificationResult == nil) {
+                    return;
+                }
+                
+                NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+                addValueOrEmpty(dictionary, @"verificationStatus", verificationResult.verificationStatus);
+                addValueOrEmpty(dictionary, @"code", [NSString stringWithFormat:@"%d", verificationResult.code]);
+                addValueOrEmpty(dictionary, @"message", verificationResult.message);
+
+                NSData *dataVerificationInfo = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
+                NSString *strVerificationInfo = [[NSString alloc] initWithBytes:[dataVerificationInfo bytes]
+                                                                         length:[dataVerificationInfo length]
+                                                                       encoding:NSUTF8StringEncoding];
+                const char* verificationInfoCString = [strVerificationInfo UTF8String];
+                UnitySendMessage([strSceneName UTF8String], "GetNativeVerificationInfo", verificationInfoCString);
+        }];
+    }
+
+    void _AdjustProcessDeeplink(const char* url, const char* sceneName) {
+        NSString *strSceneName = isStringValid(sceneName) == true ? [NSString stringWithUTF8String:sceneName] : nil;
+        if (url != NULL) {
+            NSString *stringUrl = [NSString stringWithUTF8String:url];
+            NSURL *nsUrl;
+            if ([NSString instancesRespondToSelector:@selector(stringByAddingPercentEncodingWithAllowedCharacters:)]) {
+                nsUrl = [NSURL URLWithString:[stringUrl stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]]];
+            } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+                nsUrl = [NSURL URLWithString:[stringUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            }
+#pragma clang diagnostic pop
+
+            [Adjust processDeeplink:nsUrl completionHandler:^(NSString * _Nonnull resolvedLink) {
+                if (strSceneName == nil) {
+                    return;
+                }
+                if (resolvedLink == nil) {
+                    return;
+                }
+                const char* resolvedLinkCString = [resolvedLink UTF8String];
+                UnitySendMessage([strSceneName UTF8String], "GetNativeResolvedLink", resolvedLinkCString);
+            }];
+        }
+    }
+
+    void _AdjustSetTestOptions(const char* overwriteUrl,
                                const char* extraPath,
                                long timerIntervalInMilliseconds,
                                long timerStartInMilliseconds,
@@ -807,34 +933,29 @@ extern "C"
                                int teardown,
                                int deleteState,
                                int noBackoffWait,
-                               int iAdFrameworkEnabled,
-                               int adServicesFrameworkEnabled) {
+                               int adServicesFrameworkEnabled,
+                               int attStatus,
+                               const char *idfa) {
         AdjustTestOptions *testOptions = [[AdjustTestOptions alloc] init];
 
-        NSString *stringBaseUrl = isStringValid(baseUrl) == true ? [NSString stringWithUTF8String:baseUrl] : nil;
-        if (stringBaseUrl != nil) {
-            [testOptions setBaseUrl:stringBaseUrl];
+        NSString *stringOverwriteUrl = isStringValid(overwriteUrl) == true ? [NSString stringWithUTF8String:overwriteUrl] : nil;
+        if (stringOverwriteUrl != nil) {
+            [testOptions setUrlOverwrite:stringOverwriteUrl];
         }
-
-        NSString *stringGdprUrl = isStringValid(baseUrl) == true ? [NSString stringWithUTF8String:gdprUrl] : nil;
-        if (stringGdprUrl != nil) {
-            [testOptions setGdprUrl:stringGdprUrl];
-        }
-
-        NSString *stringSubscriptionUrl = isStringValid(baseUrl) == true ? [NSString stringWithUTF8String:subscriptionUrl] : nil;
-        if (stringSubscriptionUrl != nil) {
-            [testOptions setSubscriptionUrl:stringSubscriptionUrl];
-        }
-
         NSString *stringExtraPath = isStringValid(extraPath) == true ? [NSString stringWithUTF8String:extraPath] : nil;
         if (stringExtraPath != nil && [stringExtraPath length] > 0) {
             [testOptions setExtraPath:stringExtraPath];
+        }
+        NSString *stringIdfa = isStringValid(idfa) == true ? [NSString stringWithUTF8String:idfa] : nil;
+        if (stringIdfa != nil && [stringIdfa length] > 0) {
+            [testOptions setIdfa:stringIdfa];
         }
 
         testOptions.timerIntervalInMilliseconds = [NSNumber numberWithLong:timerIntervalInMilliseconds];
         testOptions.timerStartInMilliseconds = [NSNumber numberWithLong:timerStartInMilliseconds];
         testOptions.sessionIntervalInMilliseconds = [NSNumber numberWithLong:sessionIntervalInMilliseconds];
         testOptions.subsessionIntervalInMilliseconds = [NSNumber numberWithLong:subsessionIntervalInMilliseconds];
+        testOptions.attStatusInt = [NSNumber numberWithInt:attStatus];
 
         if (teardown != -1) {
             [AdjustUnityDelegate teardown];
@@ -845,9 +966,6 @@ extern "C"
         }
         if (noBackoffWait != -1) {
             [testOptions setNoBackoffWait:(BOOL)noBackoffWait];
-        }
-        if (iAdFrameworkEnabled != -1) {
-            [testOptions setIAdFrameworkEnabled:(BOOL)iAdFrameworkEnabled];
         }
         if (adServicesFrameworkEnabled != -1) {
             [testOptions setAdServicesFrameworkEnabled:(BOOL)adServicesFrameworkEnabled];

@@ -1,5 +1,5 @@
 ﻿
-using Assets.Code.Game.Ads;
+using Code.Game.Ads;
 using Code.Ads;
 using Code.Diagnostic;
 using Code.Game.Analytics;
@@ -12,7 +12,9 @@ using Code.Game.Wallet;
 using Code.Services;
 using Code.States;
 using UnityEngine;
-using Voodoo.Tiny.Sauce.Internal.Ads;
+using Assets.Code.Game;
+using Code.IAP;
+using Game.UI;
 
 namespace Code.Game.States
 {
@@ -26,10 +28,10 @@ namespace Code.Game.States
             //TODO: All initializes, sdk, loads, ect
             Application.targetFrameRate = 60;
             
-            TSAdsManager.SetFSDisplayConditions(30, 30, 3);
-            TSAdsManager.ToggleAds(true);
             
             m_StateMachine = stateMachine;
+            
+            ServiceLocator.ForEach<UIRoot>(x=>x.Initialize());
             
             ServiceLocator.ForEach<AnalyticService>(x=>x.Initialize());
             ServiceLocator.ForEach<AdsService>(x=>x.Initialize());
@@ -46,15 +48,24 @@ namespace Code.Game.States
             ServiceLocator.ForEach<MergeService>(x=>x.Initialize());
             ServiceLocator.ForEach<MergeMediator>(x=>x.Initialize());
             
-            ServiceLocator.ForEach<StashService>(x=>x.Initialize());
-            ServiceLocator.ForEach<StashMediator>(x=>x.Initialize());
+           
             
             ServiceLocator.ForEach<BattleFieldService>(x=>x.Initialize());
             ServiceLocator.ForEach<BattleFieldMediator>(x=>x.Initialize());
             //ServiceLocator.ForEach<BattleFieldView>(x=>x);
-            
+
+            ServiceLocator.ForEach<NavigateMediator>(x => x.Initialize());
+
+            ServiceLocator.ForEach<IAPShopService>(x => x.Initialize());
+            ServiceLocator.ForEach<IAPShopMediator>(x => x.Initialize());
+
+
+
             ServiceLocator.ForEach<EntityManager>(x=>x.Initialize());
-            
+
+            ServiceLocator.ForEach<StashService>(x => x.Initialize());
+            ServiceLocator.ForEach<StashMediator>(x => x.Initialize());
+
             ServiceLocator.ForEach<DiagnosticService>(x => x.Initialize());
             
             if (m_LaunchGameAtStart) m_StateMachine.Play<LaunchGameState>();

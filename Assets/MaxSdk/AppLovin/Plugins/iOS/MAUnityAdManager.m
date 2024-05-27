@@ -5,7 +5,7 @@
 
 #import "MAUnityAdManager.h"
 
-#define VERSION @"6.4.3"
+#define VERSION @"6.5.2"
 
 #define KEY_WINDOW [UIApplication sharedApplication].keyWindow
 #define DEVICE_SPECIFIC_ADVIEW_AD_FORMAT ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) ? MAAdFormat.leader : MAAdFormat.banner
@@ -21,14 +21,8 @@ extern "C" {
     UIWindow* UnityGetMainWindow(void);
     
     // life cycle management
+    int UnityIsPaused(void);
     void UnityPause(int pause);
-    void UnitySendMessage(const char* obj, const char* method, const char* msg);
-    
-    static const char * cStringCopy(NSString *string)
-    {
-        const char *value = string.UTF8String;
-        return value ? strdup(value) : NULL;
-    }
     
     void max_unity_dispatch_on_main_thread(dispatch_block_t block)
     {
@@ -78,6 +72,9 @@ extern "C" {
 
 @property (nonatomic, strong) NSMutableDictionary<NSString *, MAAd *> *adInfoDict;
 @property (nonatomic, strong) NSObject *adInfoDictLock;
+
+@property (nonatomic, strong) NSOperationQueue *backgroundCallbackEventsQueue;
+@property (nonatomic, assign) BOOL resumeUnityAfterApplicationBecomesActive;
 
 @end
 
@@ -132,6 +129,9 @@ static ALUnityBackgroundCallback backgroundCallback;
         self.adInfoDict = [NSMutableDictionary dictionary];
         self.adInfoDictLock = [[NSObject alloc] init];
         
+        self.backgroundCallbackEventsQueue = [[NSOperationQueue alloc] init];
+        self.backgroundCallbackEventsQueue.maxConcurrentOperationCount = 1;
+        
         max_unity_dispatch_on_main_thread(^{
             self.safeAreaBackground = [[UIView alloc] init];
             self.safeAreaBackground.hidden = YES;
@@ -153,6 +153,31 @@ static ALUnityBackgroundCallback backgroundCallback;
             {
                 [self positionAdViewForAdUnitIdentifier: adUnitIdentifier adFormat: self.verticalAdViewFormats[adUnitIdentifier]];
             }
+        }];
+        
+        [[NSNotificationCenter defaultCenter] addObserver: self
+                                                 selector: @selector(applicationPaused:)
+                                                     name: UIApplicationDidEnterBackgroundNotification
+                                                   object: nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver: self
+                                                 selector: @selector(applicationResumed:)
+                                                     name: UIApplicationDidBecomeActiveNotification
+                                                   object: nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationDidBecomeActiveNotification
+                                                          object: nil
+                                                           queue: [NSOperationQueue mainQueue]
+                                                      usingBlock:^(NSNotification *notification) {
+            
+#if !IS_TEST_APP
+            if ( self.resumeUnityAfterApplicationBecomesActive && UnityIsPaused() )
+            {
+                UnityPause(NO);
+            }
+#endif
+            
+            self.backgroundCallbackEventsQueue.suspended = NO;
         }];
     }
     return self;
@@ -197,13 +222,13 @@ static ALUnityBackgroundCallback backgroundCallback;
             NSString *consentFlowUserGeographyStr = @(configuration.consentFlowUserGeography).stringValue;
             NSString *consentDialogStateStr = @(configuration.consentDialogState).stringValue;
             NSString *appTrackingStatus = @(configuration.appTrackingTransparencyStatus).stringValue; // Deliberately name it `appTrackingStatus` to be a bit more generic (in case Android introduces a similar concept)
-            [MAUnityAdManager forwardUnityEventWithArgs: @{@"name" : @"OnSdkInitializedEvent",
-                                                           @"consentFlowUserGeography" : consentFlowUserGeographyStr,
-                                                           @"consentDialogState" : consentDialogStateStr,
-                                                           @"countryCode" : configuration.countryCode,
-                                                           @"appTrackingStatus" : appTrackingStatus,
-                                                           @"isSuccessfullyInitialized" : @([self.sdk isInitialized]),
-                                                           @"isTestModeEnabled" : @([configuration isTestModeEnabled])}];
+            [self forwardUnityEventWithArgs: @{@"name" : @"OnSdkInitializedEvent",
+                                               @"consentFlowUserGeography" : consentFlowUserGeographyStr,
+                                               @"consentDialogState" : consentDialogStateStr,
+                                               @"countryCode" : configuration.countryCode,
+                                               @"appTrackingStatus" : appTrackingStatus,
+                                               @"isSuccessfullyInitialized" : @([self.sdk isInitialized]),
+                                               @"isTestModeEnabled" : @([configuration isTestModeEnabled])}];
         });
     }];
     
@@ -222,7 +247,7 @@ static ALUnityBackgroundCallback backgroundCallback;
     [self createAdViewWithAdUnitIdentifier: adUnitIdentifier adFormat: [self adViewAdFormatForAdUnitIdentifier: adUnitIdentifier] atPosition: DEFAULT_AD_VIEW_POSITION withOffset: CGPointMake(xOffset, yOffset)];
 }
 
-- (void)loadBannerWithAdUnitIdentifier:(nullable NSString *)adUnitIdentifier 
+- (void)loadBannerWithAdUnitIdentifier:(nullable NSString *)adUnitIdentifier
 {
     [self loadAdViewWithAdUnitIdentifier: adUnitIdentifier adFormat: [self adViewAdFormatForAdUnitIdentifier: adUnitIdentifier]];
 }
@@ -710,7 +735,7 @@ static ALUnityBackgroundCallback backgroundCallback;
         }
         
         NSDictionary<NSString *, id> *args = [self defaultAdEventParametersForName: name withAd: ad];
-        [MAUnityAdManager forwardUnityEventWithArgs: args];
+        [self forwardUnityEventWithArgs: args];
     });
 }
 
@@ -764,13 +789,13 @@ static ALUnityBackgroundCallback backgroundCallback;
             [self.adInfoDict removeObjectForKey: adUnitIdentifier];
         }
         
-        [MAUnityAdManager forwardUnityEventWithArgs: @{@"name" : name,
-                                                       @"adUnitId" : adUnitIdentifier,
-                                                       @"errorCode" : [@(error.code) stringValue],
-                                                       @"errorMessage" : error.message,
-                                                       @"waterfallInfo" : [self createAdWaterfallInfo: error.waterfall],
-                                                       @"adLoadFailureInfo" : error.adLoadFailureInfo ?: @"",
-                                                       @"latencyMillis" : [self requestLatencyMillisFromRequestLatency: error.requestLatency]}];
+        [self forwardUnityEventWithArgs: @{@"name" : name,
+                                           @"adUnitId" : adUnitIdentifier,
+                                           @"errorCode" : [@(error.code) stringValue],
+                                           @"errorMessage" : error.message,
+                                           @"waterfallInfo" : [self createAdWaterfallInfo: error.waterfall],
+                                           @"adLoadFailureInfo" : error.adLoadFailureInfo ?: @"",
+                                           @"latencyMillis" : [self requestLatencyMillisFromRequestLatency: error.requestLatency]}];
     });
 }
 
@@ -811,7 +836,7 @@ static ALUnityBackgroundCallback backgroundCallback;
         }
         
         NSDictionary<NSString *, id> *args = [self defaultAdEventParametersForName: name withAd: ad];
-        [MAUnityAdManager forwardUnityEventWithArgs: args];
+        [self forwardUnityEventWithArgs: args];
     });
 }
 
@@ -821,9 +846,9 @@ static ALUnityBackgroundCallback backgroundCallback;
     MAAdFormat *adFormat = ad.format;
     if ( ![adFormat isFullscreenAd] ) return;
     
-    // UnityPause needs to be called on the main thread.
 #if !IS_TEST_APP
-    UnityPause(1);
+    // UnityPause needs to be called on the main thread.
+    UnityPause(YES);
 #endif
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -847,7 +872,7 @@ static ALUnityBackgroundCallback backgroundCallback;
         }
         
         NSDictionary<NSString *, id> *args = [self defaultAdEventParametersForName: name withAd: ad];
-        [MAUnityAdManager forwardUnityEventWithArgs: args];
+        [self forwardUnityEventWithArgs: args];
     });
 }
 
@@ -884,7 +909,7 @@ static ALUnityBackgroundCallback backgroundCallback;
         args[@"mediatedNetworkErrorMessage"] = error.mediatedNetworkErrorMessage;
         args[@"waterfallInfo"] = [self createAdWaterfallInfo: error.waterfall];
         args[@"latencyMillis"] = [self requestLatencyMillisFromRequestLatency: error.requestLatency];
-        [MAUnityAdManager forwardUnityEventWithArgs: args];
+        [self forwardUnityEventWithArgs: args];
     });
 }
 
@@ -894,9 +919,18 @@ static ALUnityBackgroundCallback backgroundCallback;
     MAAdFormat *adFormat = ad.format;
     if ( ![adFormat isFullscreenAd] ) return;
     
-    // UnityPause needs to be called on the main thread.
 #if !IS_TEST_APP
-    UnityPause(0);
+    extern bool _didResignActive;
+    if ( _didResignActive )
+    {
+        // If the application is not active, we should wait until application becomes active to resume unity.
+        self.resumeUnityAfterApplicationBecomesActive = YES;
+    }
+    else
+    {
+        // UnityPause needs to be called on the main thread.
+        UnityPause(NO);
+    }
 #endif
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -920,7 +954,7 @@ static ALUnityBackgroundCallback backgroundCallback;
         }
         
         NSDictionary<NSString *, id> *args = [self defaultAdEventParametersForName: name withAd: ad];
-        [MAUnityAdManager forwardUnityEventWithArgs: args];
+        [self forwardUnityEventWithArgs: args];
     });
 }
 
@@ -933,9 +967,9 @@ static ALUnityBackgroundCallback backgroundCallback;
         return;
     }
     
-    // UnityPause needs to be called on the main thread.
 #if !IS_TEST_APP
-    UnityPause(1);
+    // UnityPause needs to be called on the main thread.
+    UnityPause(YES);
 #endif
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -951,7 +985,7 @@ static ALUnityBackgroundCallback backgroundCallback;
         }
         
         NSDictionary<NSString *, id> *args = [self defaultAdEventParametersForName: name withAd: ad];
-        [MAUnityAdManager forwardUnityEventWithArgs: args];
+        [self forwardUnityEventWithArgs: args];
     });
 }
 
@@ -964,9 +998,18 @@ static ALUnityBackgroundCallback backgroundCallback;
         return;
     }
     
-    // UnityPause needs to be called on the main thread.
 #if !IS_TEST_APP
-    UnityPause(0);
+    extern bool _didResignActive;
+    if ( _didResignActive )
+    {
+        // If the application is not active, we should wait until application becomes active to resume unity.
+        self.resumeUnityAfterApplicationBecomesActive = YES;
+    }
+    else
+    {
+        // UnityPause needs to be called on the main thread.
+        UnityPause(NO);
+    }
 #endif
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -982,7 +1025,7 @@ static ALUnityBackgroundCallback backgroundCallback;
         }
         
         NSDictionary<NSString *, id> *args = [self defaultAdEventParametersForName: name withAd: ad];
-        [MAUnityAdManager forwardUnityEventWithArgs: args];
+        [self forwardUnityEventWithArgs: args];
     });
 }
 
@@ -1017,7 +1060,7 @@ static ALUnityBackgroundCallback backgroundCallback;
         NSMutableDictionary<NSString *, id> *args = [self defaultAdEventParametersForName: name withAd: ad];
         args[@"rewardLabel"] = rewardLabel;
         args[@"rewardAmount"] = rewardAmount;
-        [MAUnityAdManager forwardUnityEventWithArgs: args];
+        [self forwardUnityEventWithArgs: args];
     });
 }
 
@@ -1059,7 +1102,7 @@ static ALUnityBackgroundCallback backgroundCallback;
         
         NSMutableDictionary<NSString *, id> *args = [self defaultAdEventParametersForName: name withAd: ad];
         args[@"keepInBackground"] = @([adFormat isFullscreenAd]);
-        [MAUnityAdManager forwardUnityEventWithArgs: args];
+        [self forwardUnityEventWithArgs: args];
     });
 }
 
@@ -1098,9 +1141,9 @@ static ALUnityBackgroundCallback backgroundCallback;
         NSMutableDictionary<NSString *, id> *args = [self defaultAdEventParametersForName: name withAd: ad];
         args[@"adReviewCreativeId"] = creativeIdentifier;
         args[@"keepInBackground"] = @([adFormat isFullscreenAd]);
-
+        
         // Forward the event in background for fullscreen ads so that the user gets the callback even while the ad is playing.
-        [MAUnityAdManager forwardUnityEventWithArgs: args];
+        [self forwardUnityEventWithArgs: args];
     });
 }
 
@@ -1939,24 +1982,19 @@ static ALUnityBackgroundCallback backgroundCallback;
     return UnityGetGLViewController() ?: UnityGetMainWindow().rootViewController ?: [KEY_WINDOW rootViewController];
 }
 
-+ (void)forwardUnityEventWithArgs:(NSDictionary<NSString *, id> *)args
+- (void)forwardUnityEventWithArgs:(NSDictionary<NSString *, id> *)args
 {
 #if !IS_TEST_APP
-    void (^runnable)(void) = ^{
-        const char *serializedParameters = cStringCopy([self serializeParameters: args]);
-        backgroundCallback(serializedParameters);
-    };
-    
-    // Always forward in background - we push it back to the main thread in Unity
-    if ( [NSThread isMainThread] )
-    {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), runnable);
-    }
-    else
-    {
-        runnable();
-    }
+    extern bool _didResignActive;
+    // We should not call any script callbacks when application is not active. Suspend the callback queue if resign is active.
+    // We'll resume the queue once the application becomes active again.
+    self.backgroundCallbackEventsQueue.suspended = _didResignActive;
 #endif
+    
+    [self.backgroundCallbackEventsQueue addOperationWithBlock:^{
+        NSString *serializedParameters = [MAUnityAdManager serializeParameters: args];
+        backgroundCallback(serializedParameters.UTF8String);
+    }];
 }
 
 + (NSString *)serializeParameters:(NSDictionary<NSString *, id> *)dict
@@ -2011,7 +2049,7 @@ static ALUnityBackgroundCallback backgroundCallback;
 - (void)didDismissUserConsentDialog
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [MAUnityAdManager forwardUnityEventWithArgs: @{@"name" : @"OnSdkConsentDialogDismissedEvent"}];
+        [self forwardUnityEventWithArgs: @{@"name" : @"OnSdkConsentDialogDismissedEvent"}];
     });
 }
 
@@ -2020,7 +2058,7 @@ static ALUnityBackgroundCallback backgroundCallback;
 - (void)showCMPForExistingUser
 {
     [self.sdk.cmpService showCMPForExistingUserWithCompletion:^(ALCMPError * _Nullable error) {
-    
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSMutableDictionary<NSString *, id> *args = [NSMutableDictionary dictionaryWithCapacity: 2];
             args[@"name"] = @"OnCmpCompletedEvent";
@@ -2034,9 +2072,29 @@ static ALUnityBackgroundCallback backgroundCallback;
                                    @"keepInBackground": @(YES)};
             }
             
-            [MAUnityAdManager forwardUnityEventWithArgs: args];
+            [self forwardUnityEventWithArgs: args];
         });
     }];
+}
+
+#pragma mark - Application
+
+- (void)applicationPaused:(NSNotification *)notification
+{
+    [self notifyApplicationStateChangedEventForPauseState: YES];
+}
+
+- (void)applicationResumed:(NSNotification *)notification
+{
+    [self notifyApplicationStateChangedEventForPauseState: NO];
+}
+
+- (void)notifyApplicationStateChangedEventForPauseState:(BOOL)isPaused
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self forwardUnityEventWithArgs: @{@"name": @"OnApplicationStateChanged",
+                                           @"isPaused": @(isPaused)}];
+    });
 }
 
 - (MAAd *)adWithAdUnitIdentifier:(NSString *)adUnitIdentifier
