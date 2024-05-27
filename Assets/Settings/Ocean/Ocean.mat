@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - CONTACT_FOAM_ENABLED
   - WAVES_FOAM_ENABLED
   - _RECEIVE_SHADOWS_OFF
   m_InvalidKeywords:
@@ -135,11 +136,11 @@ Material:
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
-    - _CONTACT_FOAM_ENABLED: 0
+    - _CONTACT_FOAM_ENABLED: 1
     - _CascadesFadeDist: 1136
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ContactFoam: 0
+    - _ContactFoam: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -234,7 +235,7 @@ Material:
     - _DownwardReflectionsColor: {r: 0.015895328, g: 0.09349897, b: 0.1792453, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamCascadesWeights: {r: 3, g: 1, b: 0.5, a: 0.3}
-    - _FoamTint: {r: 0.49622637, g: 0.8028712, b: 1, a: 1}
+    - _FoamTint: {r: 0.7754717, g: 0.9122936, b: 1, a: 1}
     - _FogColor: {r: 0.0028835847, g: 0.023913046, b: 0.05660379, a: 1}
     - _MurkColor: {r: 0.18867922, g: 0.16357076, b: 0.0950516, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

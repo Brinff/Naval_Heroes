@@ -23,7 +23,6 @@ MonoBehaviour:
     extraAlignment: 0.067
   _referenceWaveHeight: 3
   _chop: 1.26
-  _equalizer: {fileID: 11400000, guid: 1fd9d91ff7b9c9a4c91fe8d00b1d9ef0, type: 2}
   _foam:
     decayRate: 0
     coverage: 0
@@ -35,4 +34,5 @@ MonoBehaviour:
     trailTextureSize: {x: 0, y: 0}
     underwater: 0
     cascadesWeights: {x: 0, y: 0, z: 0, w: 0}
+  _equalizer: {fileID: 11400000, guid: 1fd9d91ff7b9c9a4c91fe8d00b1d9ef0, type: 2}
   _windForce: 0
