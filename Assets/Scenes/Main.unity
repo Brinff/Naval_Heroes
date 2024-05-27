@@ -950,7 +950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ProductID: special_offer_goldship_5000000
-  m_Ship: {fileID: 11400000, guid: 767b01a5b40604085937b2433c351fb6, type: 2}
+  m_Ship: {fileID: 11400000, guid: 3f105c500ef66d14f86a4e9bbfa9dcb0, type: 2}
   m_Amount: 5000000
   m_Currency: {fileID: 11400000, guid: 2a5889c4313302d48a9626d5360ef5ed, type: 2}
   m_Category: {fileID: 11400000, guid: 6b8ba0ff16f7cd843810389508d8afa0, type: 2}
