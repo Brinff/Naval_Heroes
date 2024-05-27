@@ -143,7 +143,7 @@ MonoBehaviour:
   m_text: VIII
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 47aa0b946a42e564abb4283dd1495148, type: 2}
-  m_sharedMaterial: {fileID: -1616450311754691800, guid: 47aa0b946a42e564abb4283dd1495148, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 5f83c75a7ac89f343b574932246946ff, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_text: S.DAKOTA
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 47aa0b946a42e564abb4283dd1495148, type: 2}
-  m_sharedMaterial: {fileID: -1616450311754691800, guid: 47aa0b946a42e564abb4283dd1495148, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 5f83c75a7ac89f343b574932246946ff, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
