@@ -40,8 +40,13 @@ namespace Code.IAP
             m_WalletService.IncomeValue(m_Amount, AnalyticService.IAP, m_ProductID);
 
             var inAppPopUpWidget = ServiceLocator.Get<UIRoot>().GetWidget<InAppCompletedPopUpWidget>();
+<<<<<<< HEAD
             inAppPopUpWidget.Initialise(new PopUpItemData(m_Amount, PopUpItemType.Coins_soft));
+            ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
+=======
+            inAppPopUpWidget.Initialise(new PopUpItemData(m_Icon, m_Amount, m_Currency, PopUpItemType.Coins_soft));
             ServiceLocator.Get<NavigateMediator>().Select("Fleet", false);
+>>>>>>> develop-naval-heroes
             inAppPopUpWidget.Show(false);
     
             return PurchaseProcessingResult.Complete;

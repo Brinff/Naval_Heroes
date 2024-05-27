@@ -1,10 +1,8 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PopUpItem : MonoBehaviour
 {
-	[SerializeField] private Image m_preview;
 	[SerializeField] private RectTransform _rectTransform;
 	[SerializeField] protected TextMeshProUGUI m_title;
 
@@ -15,15 +13,8 @@ public class PopUpItem : MonoBehaviour
 	{
 		PopUpItemData = popUpItemData;
 
-		SetPreview(popUpItemData.Sprite);
 		SetTitle(popUpItemData.Title);
 		gameObject.name += popUpItemData.Title;
-	}
-
-	public virtual void SetPreview(Sprite sprite)
-	{
-		m_preview.sprite = sprite;
-		//m_preview.SetNativeSize();
 	}
 
 	public virtual void SetTitle(object title)
