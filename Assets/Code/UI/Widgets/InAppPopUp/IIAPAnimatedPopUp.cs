@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
+
 public interface IIAPAnimatedPopUp
 {
-	public void Animate(IncomeAnimationService incomeAnimationService);
+	public Task Animate(IncomeAnimationService incomeAnimationService);
 }

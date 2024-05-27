@@ -9514,7 +9514,7 @@ MonoBehaviour:
   m_scaleInDuration: 0.3
   m_scaleInEase: 27
   m_delayToMove: 0.2
-  m_movingSpeed: 2000
+  m_movingDuration: 0.5
   m_movingEase: 26
   m_spawnPoint: {fileID: 0}
   m_destionationPoint: {fileID: 0}
@@ -12014,11 +12014,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
-  - {fileID: 8367276460557338832}
   - {fileID: 6770910564717342734}
   - {fileID: 7783377292173860329}
-  - {fileID: 3427693593195830899}
   - {fileID: 8151551635470953944}
+  - {fileID: 3427693593195830899}
+  - {fileID: 8367276460557338832}
 --- !u!1 &3557967576934273171
 GameObject:
   m_ObjectHideFlags: 0
@@ -12383,14 +12383,6 @@ PrefabInstance:
     - target: {fileID: 57869333804049775, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 650754494341499382, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 769.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 650754494341499382, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1570463570352526791, guid: 855da8a6c58329b4eb09f0f1376ce07b, type: 3}
       propertyPath: m_AnchorMax.y

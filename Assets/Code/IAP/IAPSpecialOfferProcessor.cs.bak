@@ -66,6 +66,8 @@ namespace Code.IAP
             Destroy(m_BannerView.gameObject);
             
             m_IsInitialized = false;
+<<<<<<< HEAD
+            ServiceLocator.Get<UICompositionController>().Show<UIHomeComposition>();
 
             var popUp = ServiceLocator.Get<UIRoot>().GetWidget<InAppCompletedPopUpWidget>();
             popUp.Initialise
@@ -75,8 +77,11 @@ namespace Code.IAP
                 );
             popUp.Show(false);
 
+=======
+            
             ServiceLocator.Get<NavigateMediator>().Select("Fleet", false);
             
+>>>>>>> develop-naval-heroes
             return PurchaseProcessingResult.Complete;
         }
 
