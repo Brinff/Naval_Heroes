@@ -169,7 +169,7 @@ public class SlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
             var singleRect = grid.GetSingleRect(rect);
             boxCollider.center = new Vector3(singleRect.center.x, 0, singleRect.center.y);
-            boxCollider.size = new Vector3(singleRect.size.x, 1, singleRect.size.y);
+            boxCollider.size = new Vector3(singleRect.size.x, 0.0001f, singleRect.size.y);
             boxColliders[i] = boxCollider;
         }
 
