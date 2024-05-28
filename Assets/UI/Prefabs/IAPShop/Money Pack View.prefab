@@ -928,7 +928,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 779dbc98f33cd3f47bb35f83ff6f17c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1e2274017a5ae714fb810870744ccc17, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -956,6 +956,7 @@ MonoBehaviour:
   m_RewardLabel: {fileID: 3663676468487004311}
   m_ValueLabel: {fileID: 5622583951423482801}
   m_Button: {fileID: 7280202964395111939}
+  m_TimeLabel: {fileID: 0}
 --- !u!114 &7280202964395111939
 MonoBehaviour:
   m_ObjectHideFlags: 0
