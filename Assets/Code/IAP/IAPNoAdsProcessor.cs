@@ -32,7 +32,7 @@ public class IAPNoAdsProcessor : MonoBehaviour, IIAPProcessor
 		m_ShopService = shopService;
 
 		_noAdsViewCopy = Instantiate(_noAdsViewPrefab);
-		_noAdsViewCopy.SetPrice(product.metadata.localizedPriceString);
+		_noAdsViewCopy.SetPrice(product.metadata.localizedPriceString).SetTitle(product.metadata.localizedTitle);
 		_noAdsViewCopy.Clicked += InitiatePurchase;
 
 		categoryView.AddProductView(_noAdsViewCopy);
