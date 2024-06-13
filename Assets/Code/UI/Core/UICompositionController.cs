@@ -9,6 +9,15 @@ using UnityEngine;
 
 public class UICompositionController : MonoBehaviour, IService
 {
+    [SerializeField]
+    private UIComposition m_DefaultComposition;
+
+    [SerializeField]
+    private List<UIComposition> m_Compositions = new List<UIComposition>();
+
+    private List<IUIElement> m_Elements = new List<IUIElement>();
+    private List<IUIElement> m_ShowedElements = new List<IUIElement>();
+
     private void OnEnable()
     {
         ServiceLocator.Register(this);
@@ -19,19 +28,17 @@ public class UICompositionController : MonoBehaviour, IService
         ServiceLocator.Unregister(this);
     }
 
+	private void Awake()
+	{
+		m_Compositions.ForEach(c => c.ElementRemoved += OnElementRemoved);
+	}
 
-    [SerializeField]
-    private UIComposition m_DefaultComposition;
+	private void OnDestroy()
+	{
+		m_Compositions.ForEach(c => c.ElementRemoved -= OnElementRemoved);
+	}
 
-    [SerializeField]
-    private List<UIComposition> m_Compositions = new List<UIComposition>();
-
-
-
-    private List<IUIElement> m_Elements = new List<IUIElement>();
-    private List<IUIElement> m_ShowedElements = new List<IUIElement>();
-
-    public void Register(UIComposition composition)
+	public void Register(UIComposition composition)
     {
         if (!m_Compositions.Contains(composition))
         {
@@ -43,12 +50,21 @@ public class UICompositionController : MonoBehaviour, IService
             }
 
             m_Compositions.Add(composition);
+
+			composition.ElementRemoved += OnElementRemoved;
         }
     }
-    public void Unregister(UIComposition composition)
+
+	private void OnElementRemoved(UIComposition.Element element)
+	{
+        print($"removing {element}, result: {m_ShowedElements.Remove(element.element as IUIElement)}");
+	}
+
+	public void Unregister(UIComposition composition)
     {
         m_Compositions.Remove(composition);
-    }
+		composition.ElementRemoved -= OnElementRemoved;
+	}
 
     [Button]
     public void Hide()
@@ -56,7 +72,10 @@ public class UICompositionController : MonoBehaviour, IService
         for (int i = 0; i < m_ShowedElements.Count; i++)
         {
             var se = m_ShowedElements[i];
-            se.Hide(true);
+            if (se != null)
+            {
+                se.Hide(true);
+            }
         }
 
         m_ShowedElements.Clear();
@@ -74,7 +93,10 @@ public class UICompositionController : MonoBehaviour, IService
                 var se = m_ShowedElements[i];
                 if (!elements.Contains(se))
                 {
-                    se.Hide(immediately);
+                    if (se != null)
+                    {
+                        se.Hide(immediately);
+                    }
                     m_ShowedElements.Remove(se);
                     i--;
                 }

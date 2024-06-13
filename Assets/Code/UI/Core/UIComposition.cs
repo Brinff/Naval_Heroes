@@ -22,6 +22,8 @@ public abstract class UIComposition : MonoBehaviour
 	private List<Element> m_Elements = new List<Element>();
 	private UICompositionController m_CompositionModule;
 
+    public event System.Action<Element> ElementRemoved;
+
     private void OnEnable()
     {
         m_CompositionModule = GetComponentInParent<UICompositionController>();
@@ -43,7 +45,9 @@ public abstract class UIComposition : MonoBehaviour
 
     public void Remove(MonoBehaviour monoBehaviour)
     {
-        m_Elements.Remove(m_Elements.Find(element => element.element == monoBehaviour));
+        var item = m_Elements.Find(element => element.element == monoBehaviour);
+        ElementRemoved?.Invoke(item);
+		m_Elements.Remove(item);
     }
 
     public IUIElement[] GetElements()
