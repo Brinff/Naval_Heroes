@@ -13,6 +13,7 @@ namespace Code.IAP
         public void AddProductView(Component product)
         {
             product.transform.SetParent(m_Layout);
+            product.transform.localScale = Vector3.one;
         }
     }
 }
