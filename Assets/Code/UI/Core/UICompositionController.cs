@@ -96,6 +96,11 @@ public class UICompositionController : MonoBehaviour, IService
         Show(typeof(T), immediately);
     }
 
+    public T GetComposition<T>() where T : UIComposition
+    {
+        return (T)m_Compositions.Find(comp =>  comp.GetType() == typeof(T));
+    }
+
     private void Start()
     {
         if (m_DefaultComposition) Show(m_DefaultComposition.GetType(), true);

@@ -17,15 +17,26 @@ public class IAPNoAdsProcessor : MonoBehaviour, IIAPProcessor
 	private PlayerPrefsProperty<bool> _isBoughtNoAds;
 	private IAPShopService m_ShopService;
 	private IAPNoAdsView _noAdsViewCopy;
+	private NoAdsMainWidget _noAdsMainWidget;
+	private UIRoot _uiRoot;
 
 	public string productId => m_ProductID;
 
 	public void OnInitialize(Product product, IAPShopService shopService)
 	{
 		_isBoughtNoAds = new PlayerPrefsProperty<bool>(PlayerPrefsProperty.ToKey(nameof(IAPNoAdsProcessor), nameof(_isBoughtNoAds))).Build();
+		_uiRoot = ServiceLocator.Get<UIRoot>();
+		_noAdsMainWidget = _uiRoot.GetWidget<NoAdsMainWidget>();
 
-		if (_isBoughtNoAds.value) return;
+		if (_isBoughtNoAds.value)
+		{
+			ServiceLocator.Get<UICompositionController>().GetComposition<UIHomeComposition>().Remove(_noAdsMainWidget);
+			ServiceLocator.ForEach<AdsInterstitial>(ads => ads.IsAllowedToShowAds = false);
+			Destroy(_noAdsMainWidget.gameObject);
+			return;
+		}
 		
+
 		var categoryView = ServiceLocator.Get<UIRoot>().GetWidget<IAPShopWidget>()
 	.GetCategory<IAPCategoryView>(_category);
 
@@ -34,15 +45,22 @@ public class IAPNoAdsProcessor : MonoBehaviour, IIAPProcessor
 		_noAdsViewCopy = Instantiate(_noAdsViewPrefab);
 		_noAdsViewCopy.SetPrice(product.metadata.localizedPriceString).SetTitle(product.metadata.localizedTitle);
 		_noAdsViewCopy.Clicked += InitiatePurchase;
-
+		_noAdsMainWidget.Clicked += InitiatePurchase;
 		categoryView.AddProductView(_noAdsViewCopy);
 	}
 
 	public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
 	{
+		_noAdsViewCopy.Clicked -= InitiatePurchase;
+		_noAdsMainWidget.Clicked -= InitiatePurchase;
+
 		ServiceLocator.ForEach<AdsInterstitial>(ads => ads.IsAllowedToShowAds = false);
+		ServiceLocator.Get<UICompositionController>().GetComposition<UIHomeComposition>().Remove(_noAdsMainWidget);
 		_isBoughtNoAds.value = true;
+
 		Destroy(_noAdsViewCopy.gameObject);
+		Destroy(_noAdsMainWidget.gameObject);
+
 		return PurchaseProcessingResult.Complete;
 	}
 
@@ -53,7 +71,6 @@ public class IAPNoAdsProcessor : MonoBehaviour, IIAPProcessor
 
 	private void InitiatePurchase()
 	{
-		_noAdsViewCopy.Clicked -= InitiatePurchase;
 		m_ShopService.InitiatePurchase(m_ProductID);
 	}
 }
