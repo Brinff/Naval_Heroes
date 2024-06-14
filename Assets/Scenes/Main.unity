@@ -12531,11 +12531,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultComposition: {fileID: 0}
   m_Compositions:
-  - {fileID: 8151551635470953944}
-  - {fileID: 6770910564717342734}
   - {fileID: 8367276460557338832}
-  - {fileID: 7783377292173860329}
+  - {fileID: 8151551635470953944}
   - {fileID: 3427693593195830899}
+  - {fileID: 6770910564717342734}
+  - {fileID: 7783377292173860329}
 --- !u!1 &3557967576934273171
 GameObject:
   m_ObjectHideFlags: 0
