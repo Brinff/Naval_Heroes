@@ -3900,7 +3900,7 @@ MonoBehaviour:
   m_Placement: battle_interstitial
   m_SecondsCondition: 30
   m_CountAttemptCondition: 9
-  m_LevelOffsetCondition: 7
+  m_LevelOffsetCondition: 13
 --- !u!1 &687056182
 GameObject:
   m_ObjectHideFlags: 0
