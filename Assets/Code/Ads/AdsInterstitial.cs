@@ -1,17 +1,19 @@
-﻿using System.Collections;
-using UnityEngine;
-using Code.Services;
+﻿using Code.Services;
 using System;
+using UnityEngine;
 
 namespace Code.Ads
 {
-    public abstract class AdsInterstitial : MonoBehaviour, IAdsService, IInitializable
+	public abstract class AdsInterstitial : MonoBehaviour, IAdsService, IInitializable
     {
         [SerializeField]
         private string m_Id;
         [SerializeField]
         private string m_Placement;
 
+        private int m_RetryAttempt;
+
+        public bool IsAllowedToShowAds { get; set; } = true;
 
         private void OnEnable()
         {
@@ -25,21 +27,21 @@ namespace Code.Ads
 
         public virtual void Initialize()
         {
-            MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += OnInterstitialLoadedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnInterstitialLoadFailedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent += OnInterstitialDisplayedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdClickedEvent += OnInterstitialClickedEvent;
-            MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialHiddenEvent;
-            MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += OnInterstitialAdFailedToDisplayEvent;
-            LoadInterstitial();
+            if (IsAllowedToShowAds)
+            {
+                MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += OnInterstitialLoadedEvent;
+                MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnInterstitialLoadFailedEvent;
+                MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent += OnInterstitialDisplayedEvent;
+                MaxSdkCallbacks.Interstitial.OnAdClickedEvent += OnInterstitialClickedEvent;
+                MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialHiddenEvent;
+                MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += OnInterstitialAdFailedToDisplayEvent;
+                LoadInterstitial();
+            }
         }
-
-        private int m_RetryAttempt;
-
 
         public bool IsReady()
         {
-            return MaxSdk.IsInterstitialReady(m_Id);
+            return MaxSdk.IsInterstitialReady(m_Id) && IsAllowedToShowAds;
         }
 
         public virtual void Show()

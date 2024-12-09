@@ -17,7 +17,12 @@ using UnityEngine.SceneManagement;
 [ExecuteInEditMode]
 public abstract class UIComposition : MonoBehaviour
 {
-    private UICompositionController m_CompositionModule;
+
+	[SerializeField, ListDrawerSettings(HideAddButton = true, OnTitleBarGUI = "DrawOnAdd")]
+	private List<Element> m_Elements = new List<Element>();
+	private UICompositionController m_CompositionModule;
+
+    public event System.Action<Element> ElementRemoved;
 
     private void OnEnable()
     {
@@ -38,10 +43,12 @@ public abstract class UIComposition : MonoBehaviour
     }
 #endif
 
-
-
-    [SerializeField, ListDrawerSettings(HideAddButton = true, OnTitleBarGUI = "DrawOnAdd")]
-    private List<Element> m_Elements = new List<Element>();
+    public void Remove(MonoBehaviour monoBehaviour)
+    {
+        var item = m_Elements.Find(element => element.element == monoBehaviour);
+        ElementRemoved?.Invoke(item);
+		m_Elements.Remove(item);
+    }
 
     public IUIElement[] GetElements()
     {
