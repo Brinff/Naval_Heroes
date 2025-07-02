@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.11410343, g: 0.20408526, b: 0.24704742, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3802,7 +3801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac57cfefd33f86478b6f60fa510703c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Id: e9f79f33b08f827b
+  m_Id: 777b0b971df2ec26
 --- !u!1 &653260035
 GameObject:
   m_ObjectHideFlags: 0
@@ -3896,7 +3895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb216b2510bb184eb5ca308f64b2040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Id: cd510830b955f189
+  m_Id: 026db5b820d67d52
   m_Placement: battle_interstitial
   m_SecondsCondition: 30
   m_CountAttemptCondition: 9
@@ -9317,7 +9316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87696c25bcfb3046b315ce893e971f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Key: zH5HRRIbulHA1UHvyhDTt1wKqtLoMhLV7g0WIhV01x7M6eP8pVzsUfsvTbDpTuCuaCBBJfoxUZ7VSNCUyx63gL
+  m_Key: nR3VEu5EEJlq6OmqwXd1lMKHQhg3sEumJpdTgplZ-csu1yq6zIkU1auq9P1sOOoIVLg9tOWSXDaUfRvC9Uv-Ib
 --- !u!1 &1941629110
 GameObject:
   m_ObjectHideFlags: 0
