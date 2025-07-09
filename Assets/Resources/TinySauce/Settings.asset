@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faa11ec82e9746928e211e7f096812ca, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  gameAnalyticsIosGameKey: 092f7ec16d217fd6c4a5f532859848c9
-  gameAnalyticsIosSecretKey: 5d41ad4ac04a7af0e6dc940454e41be63259cd3e
-  gameAnalyticsAndroidGameKey: 092f7ec16d217fd6c4a5f532859848c9
-  gameAnalyticsAndroidSecretKey: 5d41ad4ac04a7af0e6dc940454e41be63259cd3e
+  gameAnalyticsIosGameKey: e488a007785920c32f7a7581c7459afe
+  gameAnalyticsIosSecretKey: 2bd676d8250c74ec7a60c1fc15a0ef11eab9b1c9
+  gameAnalyticsAndroidGameKey: e488a007785920c32f7a7581c7459afe
+  gameAnalyticsAndroidSecretKey: 2bd676d8250c74ec7a60c1fc15a0ef11eab9b1c9
   facebookAppId: 272516132211877
   facebookClientToken: 3798a8618b18920f48b92ef5fd649304
   adjustIOSToken: 576iu5ud622o
@@ -23,6 +23,6 @@ MonoBehaviour:
   EditorIdfa: eff86329-c081-496b-a79d-dc57a5759fc9
   UseRemoteConfig: 0
   UseVoodooAnalytics: 1
-  companyName: KadathStudioCorp
-  privacyPolicyURL: https://docs.google.com/document/d/1GIkBjZZTHRAc5qKGx_NQzDSmVkDgTvsHr6_pYvg5FT4/edit
-  developerContactEmail: mushroomhits@gmail.com
+  companyName: Garden of Dreams
+  privacyPolicyURL: https://gardenofdreams.games/privacy-policy-slide
+  developerContactEmail: feedback@gardenofdreams.games
