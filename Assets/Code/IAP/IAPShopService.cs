@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using Code.Services;
+using com.adjust.sdk;
 using System.Linq;
-using Code.Services;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
@@ -80,6 +79,15 @@ namespace Code.IAP
                 if (result == PurchaseProcessingResult.Complete)
                 {
                     consumePurchase = true;
+
+                    decimal price = purchaseEvent.purchasedProduct.metadata.localizedPrice;
+                    string currency = purchaseEvent.purchasedProduct.metadata.isoCurrencyCode;
+
+                    AdjustEvent adjustEvent = new AdjustEvent("oa1bdn");
+                    adjustEvent.setRevenue((double)price, currency);
+                    adjustEvent.setTransactionId(purchaseEvent.purchasedProduct.transactionID);
+                    adjustEvent.addCallbackParameter("product_id", purchaseEvent.purchasedProduct.definition.id);
+                    Adjust.trackEvent(adjustEvent);
                 }
 
                 resultProcessed = true;

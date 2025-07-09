@@ -18,11 +18,11 @@ MonoBehaviour:
   gameAnalyticsAndroidSecretKey: 5d41ad4ac04a7af0e6dc940454e41be63259cd3e
   facebookAppId: 272516132211877
   facebookClientToken: 3798a8618b18920f48b92ef5fd649304
-  adjustIOSToken: xbs7j2u6h4ow
-  adjustAndroidToken: xbs7j2u6h4ow
-  EditorIdfa: 200850bf-bccc-4c69-99b6-74f6fb907256
+  adjustIOSToken: 576iu5ud622o
+  adjustAndroidToken: 576iu5ud622o
+  EditorIdfa: eff86329-c081-496b-a79d-dc57a5759fc9
   UseRemoteConfig: 0
   UseVoodooAnalytics: 1
-  companyName: Mooshroom Games
+  companyName: KadathStudioCorp
   privacyPolicyURL: https://docs.google.com/document/d/1GIkBjZZTHRAc5qKGx_NQzDSmVkDgTvsHr6_pYvg5FT4/edit
   developerContactEmail: mushroomhits@gmail.com
