@@ -11961,12 +11961,32 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6825329722975041146}
     m_Modifications:
+    - target: {fileID: 326077692071775409, guid: 1fa8cc742380aea4aa13ef66799eaef0, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 966519968915850437, guid: 1fa8cc742380aea4aa13ef66799eaef0, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638410563355166852, guid: 1fa8cc742380aea4aa13ef66799eaef0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311272206039386768, guid: 1fa8cc742380aea4aa13ef66799eaef0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3841468639197112173, guid: 1fa8cc742380aea4aa13ef66799eaef0, type: 3}
       propertyPath: m_Name
       value: NoAdsWidget
       objectReference: {fileID: 0}
     - target: {fileID: 3841468639197112173, guid: 1fa8cc742380aea4aa13ef66799eaef0, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3941827417687985218, guid: 1fa8cc742380aea4aa13ef66799eaef0, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8419098865205301856, guid: 1fa8cc742380aea4aa13ef66799eaef0, type: 3}
